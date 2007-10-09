@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<strings>
+
+	<str id="site_name">GNUtube</str>
+	<str id="site_motto">WebTV free as in Speech</str>
+
+</strings>
+
+</xsl:stylesheet>

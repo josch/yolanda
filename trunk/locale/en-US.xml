@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<strings>
+
+	<str id="separator">|</str>
+
+	<!-- header -->
+	<str id="login_to_upload">to upload videos, log in first.</str>
+
+	<str id="register">register</str>
+	<str id="login">login</str>
+	<str id="login_openid">login with OpenID</str>
+
+	<str id="upload_video">upload video</str>
+	<str id="bookmarks">bookmarks</str>
+	<str id="account_details">account details</str>
+
+	<str id="logged_in_as">logged in as</str>
+	<str id="logout">logout</str>
+
+	<!-- footer -->
+	<str id="gnutube_authors">&#169; 2007 GNUtube team</str>
+	<str id="gnutube_license">license</str>
+	<str id="gnutube_source_code">download source code</str>
+
+	<!-- front page -->
+	<str id="button_find">Find</str>
+	<str id="button_lucky">Instant Access</str>
+
+	<str id="query_latestadditions">latest additions</str>
+	<str id="query_mostdownloads">most downloads</str>
+	<str id="query_bestrated">best rated</str>
+
+	<!-- results page-->
+	<str id="results_for_query">results for</str>
+	
+	<!-- search bar-->
+	<str id="search">search: </str>
+
+	<!-- dublin core entities -->
+	<str id="DC.title">title</str>
+
+</strings>
+
+</xsl:stylesheet>

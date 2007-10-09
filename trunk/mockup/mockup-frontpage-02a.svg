@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600"
+   height="600"
+   id="svg1882"
+   sodipodi:version="0.32"
+   inkscape:version="0.44.1"
+   version="1.0"
+   sodipodi:docbase="/home/nils/GNUtube/mockup"
+   sodipodi:docname="mockup-frontpage-02a.svg"
+   inkscape:export-filename="/home/nils/GNUtube/mockup/mockup-frontpage-02a.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs1884">
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="-249.27681"
+       x2="380.50079"
+       y1="-199.73473"
+       x1="380.50079"
+       id="linearGradient9917"
+       xlink:href="#linearGradient9911"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="-249.26573"
+       x2="229.89062"
+       y1="-199.20602"
+       x1="229.89062"
+       id="linearGradient9909"
+       xlink:href="#linearGradient9903"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient9903">
+      <stop
+         id="stop9905"
+         offset="0"
+         style="stop-color:#ff0101;stop-opacity:0.50196081;" />
+      <stop
+         id="stop9907"
+         offset="1"
+         style="stop-color:#ff0101;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient9911">
+      <stop
+         id="stop9913"
+         offset="0"
+         style="stop-color:black;stop-opacity:0.50196081;" />
+      <stop
+         id="stop9915"
+         offset="1"
+         style="stop-color:black;stop-opacity:0;" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="8"
+     inkscape:cx="565.12632"
+     inkscape:cy="551.44292"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     width="600px"
+     height="600px"
+     inkscape:window-width="1014"
+     inkscape:window-height="690"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     showgrid="true"
+     objecttolerance="10000"
+     gridtolerance="10000"
+     inkscape:grid-points="true"
+     gridspacingx="20px"
+     gridspacingy="20px"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="vertical"
+       position="-168.85309"
+       id="guide2824" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1887">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:blue;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+       x="475.60727"
+       y="35.212002"
+       id="text1908"><tspan
+         sodipodi:role="line"
+         id="tspan1910"
+         x="475.60727"
+         y="35.212002"
+         style="font-size:12px;fill:blue;fill-opacity:1">register | login | login with openID</tspan></text>
+    <g
+       transform="translate(-15.375,-84.26855)"
+       id="g2919"
+       inkscape:label="Ebene 1">
+      <text
+         xml:space="preserve"
+         style="font-size:144px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#ff0101;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         x="152.1875"
+         y="198.36224"
+         id="text3680"><tspan
+           sodipodi:role="line"
+           x="152.1875"
+           y="198.36224"
+           id="tspan3682"
+           style="font-size:64px;font-weight:bold;text-align:start;text-anchor:start;fill:#ff0101;fill-opacity:1">GNU</tspan></text>
+      <text
+         id="text1872"
+         y="197.89349"
+         x="312.9375"
+         style="font-size:144px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-size:64px;font-weight:bold;text-align:start;text-anchor:start"
+           id="tspan1876"
+           y="197.89349"
+           x="312.9375"
+           sodipodi:role="line">tube</tspan></text>
+      <path
+         transform="matrix(1.3125,0,0,0.999996,105.375,149.7372)"
+         d="M 320 -0.46875 A 160 25 0 1 1  0,-0.46875 A 160 25 0 1 1  320 -0.46875 z"
+         sodipodi:ry="25"
+         sodipodi:rx="160"
+         sodipodi:cy="-0.46875"
+         sodipodi:cx="160"
+         id="path2775"
+         style="fill:white;fill-opacity:0.19607843;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="arc" />
+      <text
+         transform="scale(1,-1)"
+         id="text8125"
+         y="-200.17474"
+         x="152.1875"
+         style="font-size:144px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:url(#linearGradient9909);fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-size:64px;font-weight:bold;text-align:start;text-anchor:start;fill:url(#linearGradient9909);fill-opacity:1"
+           id="tspan8127"
+           y="-200.17474"
+           x="152.1875"
+           sodipodi:role="line">GNU</tspan></text>
+      <text
+         transform="scale(1,-1)"
+         xml:space="preserve"
+         style="font-size:144px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:url(#linearGradient9917);fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         x="312.9375"
+         y="-200.64349"
+         id="text8129"><tspan
+           sodipodi:role="line"
+           x="312.9375"
+           y="-200.64349"
+           id="tspan8131"
+           style="font-size:64px;font-weight:bold;text-align:start;text-anchor:start;fill:url(#linearGradient9917);fill-opacity:1">tube</tspan></text>
+      <path
+         sodipodi:type="arc"
+         style="fill:white;fill-opacity:0.19607843;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2812"
+         sodipodi:cx="160"
+         sodipodi:cy="-0.46875"
+         sodipodi:rx="160"
+         sodipodi:ry="25"
+         d="M 320 -0.46875 A 160 25 0 1 1  0,-0.46875 A 160 25 0 1 1  320 -0.46875 z"
+         transform="matrix(1.3125,0,0,0.999996,105.375,249.7371)" />
+    </g>
+    <rect
+       style="fill:silver;fill-opacity:0.75294119;fill-rule:evenodd;stroke:black;stroke-width:1.17553675px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3816"
+       width="278.82446"
+       height="19.824463"
+       x="160.58777"
+       y="180.08777" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:blue;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+       x="299.99597"
+       y="269.69601"
+       id="text5592"><tspan
+         sodipodi:role="line"
+         id="tspan5594"
+         x="299.99597"
+         y="269.69601"
+         style="fill:blue;fill-opacity:1">latest additions | most downloads | best rated</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:black;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+       x="300.39984"
+       y="576.35199"
+       id="text8251"><tspan
+         sodipodi:role="line"
+         id="tspan8253"
+         x="302.0639"
+         y="576.35199"
+         style="fill:blue;fill-opacity:1">(c) 2007 GNUtube team | license | download source </tspan></text>
+    <g
+       id="g4563"
+       transform="translate(-19.75,0)">
+      <rect
+         y="220"
+         x="220"
+         height="20"
+         width="80"
+         id="rect1895"
+         style="fill:silver;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text2783"
+         y="233.216"
+         x="261.33395"
+         style="font-size:12px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:silver;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="fill:black;fill-opacity:1"
+           y="233.216"
+           x="261.33395"
+           id="tspan2785"
+           sodipodi:role="line">find</tspan></text>
+      <rect
+         style="fill:silver;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:1.11420071px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="rect4557"
+         width="99.885796"
+         height="19.885799"
+         x="319.5571"
+         y="220.5571" />
+      <text
+         id="text4559"
+         y="233.716"
+         x="368.20782"
+         style="font-size:12px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:black;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           y="233.716"
+           x="368.20782"
+           id="tspan4561"
+           sodipodi:role="line">instant access</tspan></text>
+    </g>
+    <g
+       id="g1942"
+       transform="translate(12.80944,0)">
+      <text
+         id="text5456"
+         y="347.57047"
+         x="383.09595"
+         style="font-size:29px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:blue;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:29px;fill:blue;fill-opacity:0.75294118"
+           y="347.57047"
+           x="383.09595"
+           id="tspan5458"
+           sodipodi:role="line">web tv (58)</tspan></text>
+      <text
+         id="text6345"
+         y="453.49118"
+         x="220.98177"
+         style="font-size:29px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:blue;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:14px;fill:blue;fill-opacity:0.75294118"
+           y="453.49118"
+           x="220.98177"
+           id="tspan6347"
+           sodipodi:role="line">youtube fake (8)</tspan></text>
+      <text
+         id="text6349"
+         y="344.64664"
+         x="182.9579"
+         style="font-size:14px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:blue;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:22px;fill:blue;fill-opacity:0.75294118"
+           y="344.64664"
+           x="182.9579"
+           id="tspan6351"
+           sodipodi:role="line">free software (44)</tspan></text>
+      <text
+         id="text6353"
+         y="424.9407"
+         x="478.32242"
+         style="font-size:22px;font-weight:bold;text-align:center;text-anchor:middle;opacity:1;fill:blue;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:14px;fill:blue;fill-opacity:0.75294118"
+           y="424.9407"
+           x="478.32242"
+           id="tspan6355"
+           sodipodi:role="line">GNU (21)</tspan></text>
+      <text
+         id="text1910"
+         y="423.97815"
+         x="120.66216"
+         style="font-size:14px;fill:blue;fill-opacity:0.75294118"
+         xml:space="preserve"><tspan
+           style="font-size:17px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+           y="423.97815"
+           x="120.66216"
+           id="tspan1912"
+           sodipodi:role="line">video CMS (34)</tspan></text>
+      <text
+         id="text2801"
+         y="368.11905"
+         x="111.13351"
+         style="font-size:17px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118"
+         xml:space="preserve"><tspan
+           style="font-size:14px;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+           y="368.11905"
+           x="111.13351"
+           id="tspan2803"
+           sodipodi:role="line">mockup (11)</tspan></text>
+      <text
+         id="text2805"
+         y="459.36945"
+         x="408.68021"
+         style="font-size:14px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           y="459.36945"
+           x="408.68021"
+           id="tspan2807"
+           sodipodi:role="line">videoblogging (17)</tspan></text>
+      <text
+         id="text2809"
+         y="392.74313"
+         x="217.19492"
+         style="font-size:14px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:26px;fill:blue;fill-opacity:0.75294118"
+           y="392.74313"
+           x="217.19492"
+           id="tspan2811"
+           sodipodi:role="line">untagged (51)</tspan></text>
+      <text
+         id="text4583"
+         y="491.41956"
+         x="311.05978"
+         style="font-size:26px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:32px"
+           y="491.41956"
+           x="311.05978"
+           id="tspan4585"
+           sodipodi:role="line">tagcloud (64)</tspan></text>
+      <text
+         id="text5472"
+         y="415.50726"
+         x="282.10928"
+         style="font-size:32px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:14px"
+           y="415.50726"
+           x="282.10928"
+           id="tspan5474"
+           sodipodi:role="line">open source (13)</tspan></text>
+      <text
+         id="text1922"
+         y="367.58759"
+         x="307.21347"
+         style="font-size:14px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           y="367.58759"
+           x="307.21347"
+           id="tspan1924"
+           sodipodi:role="line">openID enabled (3)</tspan></text>
+      <text
+         id="text1926"
+         y="472.55728"
+         x="136.2317"
+         style="font-size:14px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:16px"
+           y="472.55728"
+           x="136.2317"
+           id="tspan1928"
+           sodipodi:role="line">max font size (32)</tspan></text>
+      <text
+         id="text1930"
+         y="380.43692"
+         x="455.39316"
+         style="font-size:16px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:14px"
+           y="380.43692"
+           x="455.39316"
+           id="tspan1932"
+           sodipodi:role="line">min font size (14)</tspan></text>
+      <text
+         id="text1934"
+         y="442.30734"
+         x="345.82233"
+         style="font-size:14px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:25px"
+           y="442.30734"
+           x="345.82233"
+           id="tspan1936"
+           sodipodi:role="line">itsatrap (49)</tspan></text>
+      <text
+         id="text1938"
+         y="410.3779"
+         x="395.44836"
+         style="font-size:25px;font-weight:bold;text-align:center;text-anchor:middle;fill:blue;fill-opacity:0.75294118;font-family:Nimbus Sans L"
+         xml:space="preserve"><tspan
+           style="font-size:20px"
+           y="410.3779"
+           x="395.44836"
+           id="tspan1940"
+           sodipodi:role="line">tv 2.0 (39)</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-weight:bold;text-align:start;text-anchor:start;opacity:0.9;fill:black;fill-opacity:0.75294119;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:Nimbus Sans L"
+       x="19.195999"
+       y="35.212002"
+       id="text1933"><tspan
+         sodipodi:role="line"
+         id="tspan1935"
+         x="19.195999"
+         y="35.212002">to upload videos, log in first.</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:silver;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:0.68650794"
+       d="M 20.75,43.25 C 114.08333,43.25 487.41667,43.25 580.75,43.25"
+       id="path1936"
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>
