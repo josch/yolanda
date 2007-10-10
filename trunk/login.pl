@@ -1,8 +1,8 @@
 require "/var/www/perl/include.pl";
 
 CGI::Session->name($session_name);
-$session = new CGI::Session;
 $query = new CGI;
+$session = new CGI::Session;
 
 if($query->param('action')) {
 	$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
@@ -49,5 +49,4 @@ if($query->param('action')) {
 <input name="pass" type="password" size="30" maxlength="30">
 <input type="submit" name="login" value=" login ">
 </p></form>';
-	print STDIN;
 }

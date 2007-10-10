@@ -1,8 +1,8 @@
 require "/var/www/perl/include.pl";
 
 CGI::Session->name($session_name);
-$session = new CGI::Session;
 $query = new CGI;
+$session = new CGI::Session;
 
 if($query->param('user') and $query->param('pass')) {
 	$dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass);

@@ -73,7 +73,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<div class="header1">
-						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='upload_video']" /></a>
+						<a href="upload.pl"><xsl:value-of select="$locale_strings/str[@id='upload_video']" /></a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
 						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='bookmarks']" /></a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />

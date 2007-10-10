@@ -1,5 +1,5 @@
+use CGI qw(:standard);
 use CGI::Session;
-use CGI;
 use DBI;
 use XML::Simple qw(:strict);
 
