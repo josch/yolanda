@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+require "/var/www/perl/include.pl";
+require "/var/www/perl/functions.pl";
+
+#create or resume session
+CGI::Session->name("SID");
+my $session = new CGI::Session;
+
+#store session param
+$session->param('auth', 'true');
+
+#read xml
+$page = XMLin('/var/www/perl/index.xml', ForceArray => 1, KeyAttr => {} );
+
+#fill tags
+$page->{sid} = [$session->id];
+$page->{loggedin} = [$session->param('auth')];
+
+fill_tagcloud;
+
+#print xml http header along with session cookie
+print $session->header(-type=>'text/xml');
+
+#print xml
+print XMLout($page, KeyAttr => {}, XMLDecl => '<?xml version="1.0" encoding="ISO-8859-1" ?><?xml-stylesheet type="text/xsl" href="./xsl/xhtml.xsl" ?>', RootName => 'page');
