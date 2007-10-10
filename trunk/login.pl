@@ -5,8 +5,9 @@ $session = new CGI::Session;
 $query = new CGI;
 
 if($query->param('action')) {
+	$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
+
 	if($query->param('action') eq "login") {
-		$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 		my $user = $query->param('user');
 		my $pass = $query->param('pass');
 		my $sth = $dbh->prepare(qq{select username from users
@@ -16,25 +17,30 @@ if($query->param('action')) {
 		$sth->execute();
 		
 		if($sth->fetchrow_array()) {
-			$session->param('auth', 'true');
+			my $sid = $session->id;
+			$sth = $dbh->prepare(qq{update users set sid = '$sid' where username = '$user'}); 
+			$sth->execute();
+			$sth->finish();
 			print $session->header();
 			print "logged in";
 		} else {
 			print $session->header();
-			print $query->param('action');
+			print "could not log you in";
 		}
 		
-		$sth->finish();
-		$dbh->disconnect();
-		
 	} elsif($query->param('action') eq "logout") {
-		$session->param('auth', 'false');
+		$sth = $dbh->prepare(qq{update users set sid = '' where username = '$user'}); 
+		$sth->execute();
+		$sth->finish();
+		$session->delete();
 		print $session->header();
 		print "logged out";
 	} else {
 		print $session->header();
 		print "wtf?";
 	}
+
+	$dbh->disconnect();
 } else {
 	print $session->header();
 	print '<form action="" method="POST"><p>

@@ -9,8 +9,7 @@ my $session = new CGI::Session;
 $page = XMLin('/var/www/perl/index.xml', ForceArray => 1, KeyAttr => {} );
 
 #fill tags
-$page->{sid} = [$session->id];
-$page->{loggedin} = [$session->param('auth')];
+$page->{username} = get_username_from_sid($session->id);
 
 fill_tagcloud;
 
