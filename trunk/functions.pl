@@ -1,6 +1,7 @@
 require "/var/www/perl/include.pl";
 
 sub fill_tagcloud {
+	$dbh = DBI->connect("DBI:mysql:$database:$host", $user, $pass);
 	my $sth = $dbh->prepare(qq{select text, count from tagcloud });
 	$sth->execute();
 	while (my ($text, $count) = $sth->fetchrow_array())
