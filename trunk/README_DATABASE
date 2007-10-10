@@ -1,0 +1,8 @@
+to get a database execute the following mysql statements:
+
+create database gnutube;
+use gnutube;
+create table tagcloud (text char(255) not null, count int not null);
+
+fill with some data:
+eg.: insert into tagcloud values ('web tv', 68);
