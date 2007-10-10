@@ -1,4 +1,4 @@
-require "/var/www/perl/include.pl";
+require "/var/www/perl/include";
 
 #get tags from database and fill $page with xml
 sub fill_tagcloud {

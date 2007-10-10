@@ -1,5 +1,5 @@
-require "/var/www/perl/include.pl";
-require "/var/www/perl/functions.pl";
+require "/var/www/perl/include";
+require "/var/www/perl/functions";
 
 #create or resume session
 CGI::Session->name($session_name);
