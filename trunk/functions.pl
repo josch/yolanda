@@ -1,3 +1,5 @@
+require "/var/www/perl/include.pl";
+
 sub fill_tagcloud {
 	my $sth = $dbh->prepare(qq{select text, count from tagcloud });
 	$sth->execute();
@@ -8,5 +10,3 @@ sub fill_tagcloud {
 	$sth->finish();
 	$dbh->disconnect();
 }
-
-1;
