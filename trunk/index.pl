@@ -1,13 +1,9 @@
-#!/usr/bin/perl
 require "/var/www/perl/include.pl";
 require "/var/www/perl/functions.pl";
 
 #create or resume session
-CGI::Session->name("SID");
+CGI::Session->name($session_name);
 my $session = new CGI::Session;
-
-#store session param
-$session->param('auth', 'true');
 
 #read xml
 $page = XMLin('/var/www/perl/index.xml', ForceArray => 1, KeyAttr => {} );

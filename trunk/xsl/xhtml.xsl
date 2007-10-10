@@ -65,7 +65,9 @@
 					<div class="header2">
 						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='register']" /></a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
-						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='login']" /></a>
+						<a href="login.pl?action=login"><xsl:value-of select="$locale_strings/str[@id='login']" /></a>
+						<xsl:value-of select="$locale_strings/str[@id='separator']" />
+						<a href="login.pl?action=logout"><xsl:value-of select="$locale_strings/str[@id='logout']" /></a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
 						<img class="openid-icon" src="./images/openid-icon.png" alt="open id logo" />
 						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='login_openid']" /></a>

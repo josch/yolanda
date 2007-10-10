@@ -6,3 +6,5 @@ $database = 'gnutube';
 $host = 'localhost';
 $user = 'root';
 $pass = '';
+$session_name = 'sid';
+1;
