@@ -1,10 +1,11 @@
 use CGI::Session;
+use CGI;
 use DBI;
 use XML::Simple qw(:strict);
 
 $database = 'gnutube';
-$host = 'localhost';
-$user = 'root';
-$pass = '';
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
 $session_name = 'sid';
 1;

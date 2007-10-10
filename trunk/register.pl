@@ -1,24 +1,19 @@
 require "/var/www/perl/include.pl";
 
-#fill %querystring with everything that was passed via POST
-read( STDIN, $tmpStr, $ENV{ "CONTENT_LENGTH" } );
-@parts = split( /\&/, $tmpStr );
-foreach $part (@parts) {
-	( $name, $value ) = split( /\=/, $part );
-	$queryString{ $name } = $value;
-}
-
 CGI::Session->name($session_name);
-my $session = new CGI::Session;
+$session = new CGI::Session;
+$query = new CGI;
 
-if($queryString{ "user" } and $queryString{ "pass" }) {
-	$dbh = DBI->connect("DBI:mysql:$database:$host", $user, $pass);
-	$sth = $dbh->prepare(qq{insert into users (username, password) values ('user', password('pass'))}); 
+if($query->param('user') and $query->param('pass')) {
+	$dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass);
+	my $user = $query->param("user");
+	my $pass = $query->param("pass");
+	$sth = $dbh->prepare(qq{insert into users (username, password) values ('$user', password('$pass'))}); 
 	$sth->execute();
 	$sth->finish();
 	$dbh->disconnect();
 	print $session->header();
-	print "done";
+	print "done" . $query->param('pass');
 } else {
 	print $session->header();
 	print '<form action="" method="POST"><p>

@@ -1,29 +1,17 @@
 require "/var/www/perl/include.pl";
 
-#fill %querystring with everything that was passed via GET
-@parts = split( /\&/, $ENV{ "QUERY_STRING" } );
-foreach $part (@parts) {
-	( $name, $value ) = split( /\=/, $part );
-	$queryString{ $name } = $value;
-}
-
-#fill %querystring with everything that was passed via POST
-read( STDIN, $tmpStr, $ENV{ "CONTENT_LENGTH" } );
-@parts = split( /\&/, $tmpStr );
-foreach $part (@parts) {
-	( $name, $value ) = split( /\=/, $part );
-	$queryString{ $name } = $value;
-}
-
 CGI::Session->name($session_name);
-my $session = new CGI::Session;
+$session = new CGI::Session;
+$query = new CGI;
 
-if($queryString{ "action" }) {
-	if($queryString{ "action" } eq "login") {
-		$dbh = DBI->connect("DBI:mysql:$database:$host", $user, $pass);
+if($query->param('action')) {
+	if($query->param('action') eq "login") {
+		$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
+		my $user = $query->param('user');
+		my $pass = $query->param('pass');
 		my $sth = $dbh->prepare(qq{select username from users
-				where password = password('$queryString{ "pass" }')
-				and username = '$queryString{ "user" }'
+				where password = password('$pass')
+				and username = '$user'
 				limit 1 });
 		$sth->execute();
 		
@@ -33,13 +21,13 @@ if($queryString{ "action" }) {
 			print "logged in";
 		} else {
 			print $session->header();
-			print $queryString{ "action" };
+			print $query->param('action');
 		}
 		
 		$sth->finish();
 		$dbh->disconnect();
 		
-	} elsif($queryString{ "action" } eq "logout") {
+	} elsif($query->param('action') eq "logout") {
 		$session->param('auth', 'false');
 		print $session->header();
 		print "logged out";
