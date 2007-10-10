@@ -8,7 +8,7 @@ my $session = new CGI::Session;
 #read xml
 $page = XMLin('/var/www/perl/index.xml', ForceArray => 1, KeyAttr => {} );
 
-#fill tags
+#if a username is associated with session id, username is nonempty
 $page->{username} = get_username_from_sid($session->id);
 
 fill_tagcloud;

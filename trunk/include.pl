@@ -3,6 +3,7 @@ use CGI::Session;
 use DBI;
 use XML::Simple qw(:strict);
 
+#set global variables
 $database = 'gnutube';
 $dbhost = 'localhost';
 $dbuser = 'root';
