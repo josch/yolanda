@@ -39,7 +39,7 @@ if($query->param('query'))
 				'cc:Work' =>
 				{
 					'rdf:about' => './videos/1050x700/4chan_city_mashup.ogg',
-					'dc:title' => [$title]
+					'dc:title' => [$title],
 					'dc:date' => [$timestamp]
 				},
 				'cc:License' =>
