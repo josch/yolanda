@@ -51,3 +51,30 @@ sub get_username_from_sid {
 	#return 
 	return $username;
 }
+
+#return a username from passed session id
+sub get_userid_from_sid {
+	#get parameters
+	my ($sid) = @_;
+	
+	#connect to db
+	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
+	
+	#prepare query
+	my $sth = $dbh->prepare(qq{select id from users where sid = '$sid'}) or die $dbh->errstr;
+	
+	#execute it
+	$sth->execute() or die $dbh->errstr;
+	
+	#save the resulting username
+	my ($username) = $sth->fetchrow_array() or die $dbh->errstr;
+	
+	#finish query
+	$sth->finish() or die $dbh->errstr;
+	
+	#close db
+	$dbh->disconnect() or die $dbh->errstr;
+	
+	#return 
+	return $username;
+}
