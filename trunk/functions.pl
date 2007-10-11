@@ -43,7 +43,7 @@ sub get_username_from_sid
 	$sth->execute() or die $dbh->errstr;
 	
 	#save the resulting username
-	my ($username) = $sth->fetchrow_array() or die $dbh->errstr;
+	my ($username) = $sth->fetchrow_array();
 	
 	#finish query
 	$sth->finish() or die $dbh->errstr;
@@ -71,7 +71,7 @@ sub get_userid_from_sid
 	$sth->execute() or die $dbh->errstr;
 	
 	#save the resulting username
-	my ($username) = $sth->fetchrow_array() or die $dbh->errstr;
+	my ($username) = $sth->fetchrow_array();
 	
 	#finish query
 	$sth->finish() or die $dbh->errstr;
