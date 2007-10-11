@@ -16,6 +16,8 @@ Upload: <input type="file" name="file">
 <br><br>
 Title: <input type="text" name="title">
 <br><br>
+Beschreibung: <input type="text" name="caption">
+<br><br>
 <input type="submit" name="submit" value=" upload ">
 </form>';
 }
