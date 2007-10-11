@@ -20,7 +20,7 @@
 <xsl:variable name="site_strings" select="document('../site/gnutube.xml')//strings" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings" />
 
-<xsl:variable name="resultspage">results.pl?query=</xsl:variable>
+<xsl:variable name="resultspage">search.pl?query=</xsl:variable>
 
 <xsl:template match="/">
 	<html xmlns="http://www.w3.org/1999/xhtml">

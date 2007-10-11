@@ -23,14 +23,16 @@ if($userid) {
 	
 	#save POST data in local variables
 	my $title = $query->param("title");
+	my $caption = $query->param("caption");
 	
 	#video status:
-	# 0 - fresh upload - needs conversion
-	# 1 - successfully converted
-	# 2 - error: was not a valid video/format
-	# 3 - error: video is a duplicate
+	# 0 - new entry - nothing done yet
+	# 1 - successfully uploaded
+	# 2 - successfully converted
+	# 3 - error: was not a valid video/format
+	# 4 - error: video is a duplicate
 	#do query
-	$dbh->do(qq{insert into videos (title, userid, status) values ('$title', '$userid', 0)}) or die $dbh->errstr;
+	$dbh->do(qq{insert into videos (title, caption, userid, status) values ('$title', '$caption', '$userid', 0)}) or die $dbh->errstr;
 
 	#prepare query
 	my $sth = $dbh->prepare(qq{select last_insert_id() }) or die $dbh->errstr;
