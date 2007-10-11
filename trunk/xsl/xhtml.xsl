@@ -223,13 +223,29 @@
 					</a>
 				</td>
 				<td>
-					title: <xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
+					<xsl:value-of select="$locale_strings/str[@id='title']" />:<xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
 					created by: <xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
 					uploaded by: <xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
 				</td>
 			</tr>
 		</xsl:for-each>
 	</table>
+
+</xsl:template>
+
+<xsl:template match="registerform">
+
+	<div class="registerform">
+
+		<form action="" method="post">
+			<fieldset>
+				<input name="user" type="text" size="30" maxlength="30" />
+				<input name="pass" type="password" size="30" maxlength="30" />
+				<input type="submit" name="register" value=" register " />
+			</fieldset>
+		</form>
+
+	<div>
 
 </xsl:template>
 

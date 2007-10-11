@@ -24,15 +24,13 @@ if($query->param('user') and $query->param('pass'))
 	
 	#print a little confirmation
 	print $session->header();
-	print "done";
+	print 'done';
 }
 else
 {
 	#if not, print register form
 	print $session->header();
-	print '<form action="" method="POST"><p>
-<input name="user" type="text" size="30" maxlength="30">
-<input name="pass" type="password" size="30" maxlength="30">
-<input type="submit" name="register" value=" register ">
-</p></form>';
+	print '<page locale="en-US" stylesheet="./style/gnutube.css" username="">';				# josch, sanitize this
+	print '<registerform />';
+	print '</page>';				# josch, sanitize this
 }
