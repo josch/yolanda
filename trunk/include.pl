@@ -7,7 +7,7 @@ use Digest::SHA;
 
 $gnutube_root = '/var/www/perl';
 
-use lib qw($gnutube_root);
+use lib qw(/var/www/perl);
 #use Digest::SHA qw(sha256_hex);
 
 #set global variables
