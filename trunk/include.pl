@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+@#!/usr/bin/perl
 use CGI qw(:standard);
 use CGI::Session;
 use DBI;
@@ -7,7 +7,7 @@ use Digest::SHA;
 
 $gnutube_root = '/var/www/gnutube';
 
-use lib qw(/var/www/perl);
+use lib qw(/var/www/gnutube);
 #use Digest::SHA qw(sha256_hex);
 
 #set global variables
