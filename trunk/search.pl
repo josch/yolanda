@@ -11,7 +11,7 @@ if($query->param('query'))
 {
 	my $search_query = $query->param('query');
 
-	$page = XMLin('$gnutube_root/search.xml', ForceArray => 1, KeyAttr => {} );
+	$page = XMLin("$gnutube_root/search.xml", ForceArray => 1, KeyAttr => {} );
 	
 	#if a username is associated with session id, username is nonempty
 	$page->{username} = get_username_from_sid($session->id);
