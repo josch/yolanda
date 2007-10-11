@@ -30,14 +30,22 @@ if($query->param('query')) {
 	while (my ($title, $caption) = $sth->fetchrow_array())
 	{
 		#really obfuscated array/hash creation
-		push @{ $page->{'results'}->{'result'} }, {	'thumbnail' => ['./video-stills/225x150/4chan_city_mashup.png'],
-						'rdf:RDF' => {	'cc:Work' => {		'rdf:about' => './videos/1050x700/4chan_city_mashup.ogg',
-											'dc:title' => [$title]
-											},
-								'cc:License' => {	'rdf:about' => 'http://creativecommons.org/licenses/GPL/2.0/'
-											}
-								}
-						};
+		push @{ $page->{'results'}->{'result'} },
+		{
+		'thumbnail' => ['./video-stills/225x150/4chan_city_mashup.png'],
+		'rdf:RDF' =>
+			{
+			'cc:Work' =>
+				{
+				'rdf:about' => './videos/1050x700/4chan_city_mashup.ogg',
+				'dc:title' => [$title]
+				},
+			'cc:License' =>
+				{
+				'rdf:about' => 'http://creativecommons.org/licenses/GPL/2.0/'
+				}
+			}
+		};
 	}
 	
 	#finish query
