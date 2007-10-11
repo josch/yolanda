@@ -7,6 +7,8 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
 
+IRGENDWAS DUMMES WAS DA NICHT INGEHÖRT
+
 <xsl:output
 	doctype-public="-//W3C//DTD XHTML 1.1//EN"
 	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
