@@ -8,5 +8,4 @@ fill with some data:
 eg.: insert into tagcloud values ('web tv', 68);
 
 create table users (id int auto_increment not null, username varchar(255) not null, password char(41) not null, primary key (id));
-
 insert into users (username, password) values ('user', password('pass'));

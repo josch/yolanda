@@ -10,5 +10,4 @@ $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
 $session_name = 'sid';
-$cwd = $ENV{PWD};
 1;

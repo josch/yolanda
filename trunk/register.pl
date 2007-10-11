@@ -8,23 +8,17 @@ $session = new CGI::Session;
 #if username and password are passed put them into the database
 if($query->param('user') and $query->param('pass')) {
 	#connect to db
-	$dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass);
+	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#save POST data in local variables
 	my $user = $query->param("user");
 	my $pass = $query->param("pass");
 	
-	#prepare query
-	$sth = $dbh->prepare(qq{insert into users (username, password) values ('$user', password('$pass'))});
-	
-	#execute query
-	$sth->execute();
-	
-	#finish query
-	$sth->finish();
-	
+	#do query
+	$dbh->do(qq{insert into users (username, password) values ('$user', password('$pass'))}) or die $dbh->errstr;
+
 	#disconnect db
-	$dbh->disconnect();
+	$dbh->disconnect() or die $dbh->errstr;
 	
 	#print a little confirmation
 	print $session->header();
