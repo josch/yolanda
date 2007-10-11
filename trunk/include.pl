@@ -5,7 +5,7 @@ use DBI;
 use XML::Simple qw(:strict);
 use Digest::SHA;
 
-$gnutube_root = '/var/www/perl';
+$gnutube_root = '/var/www/gnutube';
 
 use lib qw(/var/www/perl);
 #use Digest::SHA qw(sha256_hex);
