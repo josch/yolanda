@@ -7,8 +7,6 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
 
-IRGENDWAS DUMMES WAS DA NICHT INGEHÖRT
-
 <xsl:output
 	doctype-public="-//W3C//DTD XHTML 1.1//EN"
 	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
@@ -225,9 +223,9 @@ IRGENDWAS DUMMES WAS DA NICHT INGEHÖRT
 					</a>
 				</td>
 				<td>
-					<xsl:value-of select="$locale_strings/str[@id='title']" />:<xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
-					created by: <xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
-					uploaded by: <xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
+					<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:<xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
+					<xsl:value-of select="$locale_strings/str[@id='DC.creator']" /><xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
+					<xsl:value-of select="$locale_strings/str[@id='DC.publisher']" /><xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
 				</td>
 			</tr>
 		</xsl:for-each>

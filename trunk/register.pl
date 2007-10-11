@@ -30,6 +30,8 @@ else
 {
 	#if not, print register form
 	print $session->header();
+	print '<?xml version="1.0" encoding="ISO-8859-1" ?>';			# josch, sanitize this
+	print '<?xml-stylesheet type="text/xsl" href="./xsl/xhtml.xsl" ?>';			# josch, sanitize this
 	print '<page locale="en-US" stylesheet="./style/gnutube.css" username="">';				# josch, sanitize this
 	print '<registerform />';
 	print '</page>';				# josch, sanitize this

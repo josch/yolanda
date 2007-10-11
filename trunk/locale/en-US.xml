@@ -40,6 +40,8 @@
 
 	<!-- dublin core entities -->
 	<str id="DC.title">title</str>
+	<str id="DC.creator">author</str>
+	<str id="DC.publisher">uploader</str>
 
 </strings>
 
