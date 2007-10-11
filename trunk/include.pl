@@ -17,4 +17,5 @@ $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
 $session_name = 'sid';
+$XMLDecl = '<?xml version="1.0" encoding="UTF-8" ?><?xml-stylesheet type="text/xsl" href="./xsl/xhtml.xsl" ?>';
 1;

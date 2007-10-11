@@ -60,7 +60,7 @@ if($query->param('query'))
 	print $session->header(-type=>'text/xml');
 
 	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => '<?xml version="1.0" encoding="ISO-8859-1" ?><?xml-stylesheet type="text/xsl" href="./xsl/xhtml.xsl" ?>', RootName => 'page');
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
 else
 {

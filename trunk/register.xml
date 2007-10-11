@@ -2,6 +2,6 @@
 	locale="en-US"
 	stylesheet="./style/gnutube.css"
 	username=""
->
-	<frontpage />
+	>
+	<registerform />
 </page>

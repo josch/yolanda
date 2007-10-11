@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 require "include.pl";
+require "functions.pl";
 
 #initialize session data
 CGI::Session->name($session_name);
@@ -29,10 +30,14 @@ if($query->param('user') and $query->param('pass'))
 else
 {
 	#if not, print register form
-	print $session->header();
-	print '<?xml version="1.0" encoding="ISO-8859-1" ?>';			# josch, sanitize this
-	print '<?xml-stylesheet type="text/xsl" href="./xsl/xhtml.xsl" ?>';			# josch, sanitize this
-	print '<page locale="en-US" stylesheet="./style/gnutube.css" username="">';				# josch, sanitize this
-	print '<registerform />';
-	print '</page>';				# josch, sanitize this
+
+	$page = XMLin("$gnutube_root/register.xml", ForceArray => 1, KeyAttr => {} );
+
+	#if a username is associated with session id, username is nonempty
+	$page->{username} = get_username_from_sid($session->id);
+
+	#print xml http header along with session cookie
+	print $session->header(-type=>'text/xml');
+
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }

@@ -245,7 +245,7 @@
 			</fieldset>
 		</form>
 
-	<div>
+	</div>
 
 </xsl:template>
 
