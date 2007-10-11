@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-require "/var/www/perl/include.pl";
+require "include.pl";
 
 #initialize session data
 CGI::Session->name($session_name);

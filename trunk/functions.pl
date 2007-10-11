@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-require "/var/www/perl/include.pl";
+require "include.pl";
 
 #get tags from database and fill $page with xml
 sub fill_tagcloud {

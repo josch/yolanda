@@ -1,5 +1,5 @@
-require "/var/www/perl/include.pl";
-require "/var/www/perl/functions.pl";
+require "include.pl";
+require "functions.pl";
 
 #initialize session data
 CGI::Session->name($session_name);
@@ -10,7 +10,7 @@ $session = new CGI::Session;
 if($query->param('query')) {
 	my $search_query = $query->param('query');
 
-	$page = XMLin('/var/www/perl/search.xml', ForceArray => 1, KeyAttr => {} );
+	$page = XMLin('$gnutube_root/search.xml', ForceArray => 1, KeyAttr => {} );
 	
 	#if a username is associated with session id, username is nonempty
 	$page->{username} = get_username_from_sid($session->id);

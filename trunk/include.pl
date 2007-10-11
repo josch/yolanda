@@ -4,6 +4,10 @@ use CGI::Session;
 use DBI;
 use XML::Simple qw(:strict);
 use Digest::SHA;
+
+$gnutube_root = '/var/www/perl';
+
+use lib qw($gnutube_root);
 #use Digest::SHA qw(sha256_hex);
 
 #set global variables

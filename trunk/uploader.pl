@@ -1,6 +1,6 @@
 #!/usr/bin/perl
-require "/var/www/perl/include.pl";
-require "/var/www/perl/functions.pl";
+require "include.pl";
+require "functions.pl";
 
 CGI::Session->name($session_name);
 $query = CGI->new(\&hook);
