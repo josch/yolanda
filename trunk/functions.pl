@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 require "/var/www/perl/include.pl";
 
 #get tags from database and fill $page with xml

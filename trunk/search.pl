@@ -29,7 +29,7 @@ if($query->param('query')) {
 	#get every returned value
 	while (my ($title, $caption) = $sth->fetchrow_array())
 	{
-		#really ofuscated array/hash creation
+		#really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} }, {	'thumbnail' => ['./video-stills/225x150/4chan_city_mashup.png'],
 						'rdf:RDF' => {	'cc:Work' => {		'rdf:about' => './videos/1050x700/4chan_city_mashup.ogg',
 											'dc:title' => [$title]

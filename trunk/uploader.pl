@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 require "/var/www/perl/include.pl";
 require "/var/www/perl/functions.pl";
 

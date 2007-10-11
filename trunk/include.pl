@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 use CGI qw(:standard);
 use CGI::Session;
 use DBI;
