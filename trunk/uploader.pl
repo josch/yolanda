@@ -6,7 +6,8 @@ CGI::Session->name($session_name);
 $query = CGI->new(\&hook);
 $session = new CGI::Session;
 
-sub hook {
+sub hook
+{
 	#this is going to become an ajax progress bar
 	my ($filename, $buffer, $bytes_read, $data) = @_;
 	#print $ENV{'CONTENT_LENGTH'};
@@ -18,7 +19,8 @@ sub hook {
  
 my $userid = get_userid_from_sid($session->id);
 
-if($userid) {
+if($userid)
+{
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
@@ -62,7 +64,9 @@ if($userid) {
 	
 	#disconnect db
 	$dbh->disconnect() or die $dbh->errstr;
-} else {
+}
+else
+{
 	print $session->header();
 	print "nope...";
 }

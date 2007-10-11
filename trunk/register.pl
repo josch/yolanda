@@ -7,7 +7,8 @@ $query = new CGI;
 $session = new CGI::Session;
 
 #if username and password are passed put them into the database
-if($query->param('user') and $query->param('pass')) {
+if($query->param('user') and $query->param('pass'))
+{
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
@@ -24,7 +25,9 @@ if($query->param('user') and $query->param('pass')) {
 	#print a little confirmation
 	print $session->header();
 	print "done";
-} else {
+}
+else
+{
 	#if not, print register form
 	print $session->header();
 	print '<form action="" method="POST"><p>

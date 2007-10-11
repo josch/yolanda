@@ -2,7 +2,8 @@
 require "include.pl";
 
 #get tags from database and fill $page with xml
-sub fill_tagcloud {
+sub fill_tagcloud
+{
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
@@ -27,7 +28,8 @@ sub fill_tagcloud {
 }
 
 #return a username from passed session id
-sub get_username_from_sid {
+sub get_username_from_sid
+{
 	#get parameters
 	my ($sid) = @_;
 	
@@ -54,7 +56,8 @@ sub get_username_from_sid {
 }
 
 #return a username from passed session id
-sub get_userid_from_sid {
+sub get_userid_from_sid
+{
 	#get parameters
 	my ($sid) = @_;
 	

@@ -7,12 +7,14 @@ $query = new CGI;
 $session = new CGI::Session;
 
 #check if action is set
-if($query->param('action')) {
+if($query->param('action'))
+{
 	#connect to db
 	$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 	
 	#if login is requested
-	if($query->param('action') eq "login") {
+	if($query->param('action') eq "login")
+	{
 		#save POST data in local variables
 		my $user = $query->param('user');
 		my $pass = $query->param('pass');
@@ -27,7 +29,8 @@ if($query->param('action')) {
 		$sth->execute();
 		
 		#if something was returned username and password match
-		if($sth->fetchrow_array()) {
+		if($sth->fetchrow_array())
+		{
 			#store session id in local variable
 			my $sid = $session->id;
 			
@@ -37,13 +40,17 @@ if($query->param('action')) {
 			$sth->finish();
 			print $session->header();
 			print "logged in";
-		} else {
+		}
+		else
+		{
 			#if not, print error
 			print $session->header();
 			print "could not log you in";
 		}
 		
-	} elsif($query->param('action') eq "logout") {
+	}
+	elsif($query->param('action') eq "logout")
+	{
 		#if logout is requested
 		#remove sid from database
 		$sth = $dbh->prepare(qq{update users set sid = '' where username = '$user'}); 
@@ -52,7 +59,9 @@ if($query->param('action')) {
 		$session->delete();
 		print $session->header();
 		print "logged out";
-	} else {
+	}
+	else
+	{
 		#something ugly was passed
 		print $session->header();
 		print "wtf?";
@@ -60,7 +69,9 @@ if($query->param('action')) {
 
 	#disconnect db
 	$dbh->disconnect();
-} else {
+}
+else
+{
 	#print login form
 	print $session->header();
 	print '<form action="" method="POST"><p>

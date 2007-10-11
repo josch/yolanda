@@ -7,7 +7,8 @@ $query = new CGI;
 $session = new CGI::Session;
 
 #check if query is set
-if($query->param('query')) {
+if($query->param('query'))
+{
 	my $search_query = $query->param('query');
 
 	$page = XMLin('$gnutube_root/search.xml', ForceArray => 1, KeyAttr => {} );
@@ -32,17 +33,17 @@ if($query->param('query')) {
 		#really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
 		{
-		'thumbnail' => ['./video-stills/225x150/4chan_city_mashup.png'],
-		'rdf:RDF' =>
+			'thumbnail' => ['./video-stills/225x150/4chan_city_mashup.png'],
+			'rdf:RDF' =>
 			{
-			'cc:Work' =>
+				'cc:Work' =>
 				{
-				'rdf:about' => './videos/1050x700/4chan_city_mashup.ogg',
-				'dc:title' => [$title]
+					'rdf:about' => './videos/1050x700/4chan_city_mashup.ogg',
+					'dc:title' => [$title]
 				},
-			'cc:License' =>
+				'cc:License' =>
 				{
-				'rdf:about' => 'http://creativecommons.org/licenses/GPL/2.0/'
+					'rdf:about' => 'http://creativecommons.org/licenses/GPL/2.0/'
 				}
 			}
 		};
@@ -59,7 +60,9 @@ if($query->param('query')) {
 
 	#print xml
 	print XMLout($page, KeyAttr => {}, XMLDecl => '<?xml version="1.0" encoding="ISO-8859-1" ?><?xml-stylesheet type="text/xsl" href="./xsl/xhtml.xsl" ?>', RootName => 'page');
-} else {
+}
+else
+{
 	print $session->header();
 	print "no query passed";
 }

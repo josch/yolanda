@@ -8,7 +8,8 @@ my $session = new CGI::Session;
 
 my $username = get_username_from_sid($session->id);
 
-if($username) {
+if($username)
+{
 	print $session->header();
 	print '<form action="uploader.pl" method="post" enctype="multipart/form-data">
 Upload: <input type="file" name="file">
@@ -17,7 +18,9 @@ Title: <input type="text" name="title">
 <br><br>
 <input type="submit" name="submit" value=" upload ">
 </form>';
-} else {
+}
+else
+{
 	print $session->header();
 	print "nope...";
 }
