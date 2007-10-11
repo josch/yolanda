@@ -63,7 +63,7 @@
 						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='login_to_upload']" /></a>
 					</div>
 					<div class="header2">
-						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='register']" /></a>
+						<a href="register.pl"><xsl:value-of select="$locale_strings/str[@id='register']" /></a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
 						<a href="login.pl"><xsl:value-of select="$locale_strings/str[@id='login']" /></a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
