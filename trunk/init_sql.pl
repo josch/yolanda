@@ -19,7 +19,7 @@ $dbh->do(qq{insert into tagcloud values ('web tv', 68)});
 
 $dbh->do(qq{create table users (id int auto_increment not null, username varchar(255) not null, password char(41) not null, sid char(32) not null, primary key (id))});
 
-$dbh->do(qq{create table videos (id int auto_increment not null, title varchar(255) not null, caption text, userid varchar(255) not null, hash char(64) not null, status int not null, primary key (id), fulltext (title, caption))});
+$dbh->do(qq{create table videos (id int auto_increment not null, title varchar(255) not null, caption text not null, userid varchar(255) not null, hash char(64) not null, status int not null, timestamp datetime not null, primary key (id), fulltext (title, caption))});
 
 $dbh->disconnect() or die $dbh->errstr;
 

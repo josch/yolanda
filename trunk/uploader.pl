@@ -35,7 +35,7 @@ if($userid)
 	# 3 - error: was not a valid video/format
 	# 4 - error: video is a duplicate
 	#do query
-	$dbh->do(qq{insert into videos (title, caption, userid, status) values ('$title', '$caption', '$userid', 0)}) or die $dbh->errstr;
+	$dbh->do(qq{insert into videos (title, caption, userid, status, timestamp) values ('$title', '$caption', '$userid', 0, now())}) or die $dbh->errstr;
 
 	#prepare query
 	my $sth = $dbh->prepare(qq{select last_insert_id() }) or die $dbh->errstr;
