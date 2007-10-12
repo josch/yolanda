@@ -9,10 +9,15 @@ $session = new CGI::Session;
 #check if query is set
 if($query->param('query'))
 {
-	$page = XMLin("$gnutube_root/search.xml", ForceArray => 1, KeyAttr => {} );
+	%page = ();
 	
 	#if a username is associated with session id, username is nonempty
-	$page->{username} = get_username_from_sid($session->id);
+	$page->{'username'} = get_username_from_sid($session->id);
+	$page->{'locale'} = $locale;
+	$page->{'stylesheet'} = $stylesheet;
+	$page->{'xmlns:dc'} = $xmlns_dc;
+	$page->{'xmlns:cc'} = $xmlns_cc;
+	$page->{'xmlns:rdf'} = $xmlns_rdf;
 	
 	$page->{results}->{query} = decode_utf8($query->param('query'));
 	

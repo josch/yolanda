@@ -147,7 +147,7 @@
 
 </xsl:template>
 
-<xsl:template match="searchbar">
+<xsl:template name="searchbar">
 
 	<div class="logo-small-top">
 		<img src="./images/logo-small-top.png" alt="GNUtube logo top (160x25)" />
@@ -198,7 +198,7 @@
 </xsl:template>
 
 <xsl:template match="results">
-
+	<xsl:call-template name="searchbar"/>
 	<div>
 		THE SEARCH FOR
 		"<xsl:value-of select="@query" />"
