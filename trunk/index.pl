@@ -10,8 +10,8 @@ my $session = new CGI::Session;
 
 #if a username is associated with session id, username is nonempty
 $page->{username} = get_username_from_sid($session->id);
-$page->{locale} = "en-US";
-$page->{stylesheet} = "./style/gnutube.css";
+$page->{locale} = $locale;
+$page->{stylesheet} = $stylesheet;
 $page->{frontpage} = [''];
 
 fill_tagcloud;

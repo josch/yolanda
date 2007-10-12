@@ -68,10 +68,13 @@ else
 {
 	#if not, print login form
 
-	$page = XMLin("$gnutube_root/login.xml", ForceArray => 1, KeyAttr => {} );
+	%page = ();
 
 	#if a username is associated with session id, username is nonempty
 	$page->{username} = get_username_from_sid($session->id);
+	$page->{locale} = $locale;
+	$page->{stylesheet} = $stylesheet;
+	$page->{loginform} = [''];
 
 	#print xml http header along with session cookie
 	print $session->header(-type=>'text/xml');
