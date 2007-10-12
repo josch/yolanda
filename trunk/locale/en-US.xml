@@ -33,10 +33,13 @@
 	<str id="query_bestrated">best rated</str>
 
 	<!-- results page-->
-	<str id="results_for_query">results for</str>
+	<str id="results_for_query">results for query</str>
 	
 	<!-- search bar-->
-	<str id="search">search: </str>
+	<str id="search">search</str>
+	
+	<!-- -->
+	<str id=""></str>
 
 	<!-- dublin core entities -->
 	<str id="DC.title">title</str>

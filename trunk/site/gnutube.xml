@@ -3,8 +3,13 @@
 
 <strings>
 
+	<!-- visible -->
 	<str id="site_name">GNUtube</str>
 	<str id="site_motto">WebTV free as in Speech</str>
+
+	<!-- invisible -->
+	<str id="registerpage">search.pl?query=</str>
+	<str id="resultspage">search.pl?query=</str>
 
 </strings>
 

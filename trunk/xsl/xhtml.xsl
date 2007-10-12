@@ -20,8 +20,6 @@
 <xsl:variable name="site_strings" select="document('../site/gnutube.xml')//strings" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings" />
 
-<xsl:variable name="resultspage">search.pl?query=</xsl:variable>
-
 <xsl:template match="/">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -119,7 +117,7 @@
 	<div class="search">
 		<form method="get" enctype="text/plain">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$resultspage" />
+				<xsl:value-of select="$site_strings/str[@id='resultspage']" />
 			</xsl:attribute>
 			<fieldset>
 				<input type="text" name="query" size="40" /><br />
@@ -159,7 +157,7 @@
 				<xsl:value-of select="$resultspage" />
 			</xsl:attribute>
 			<fieldset>
-				<xsl:value-of select="$locale_strings/str[@id='search']" />
+				<xsl:value-of select="$locale_strings/str[@id='search']" />:
 				<input type="text" name="query" size="auto" />
 			</fieldset>
 		</form>
@@ -200,9 +198,8 @@
 <xsl:template match="results">
 	<xsl:call-template name="searchbar"/>
 	<div>
-		THE SEARCH FOR
+		<xsl:value-of select="$locale_strings/str[@id='results_for_query']" />:
 		"<xsl:value-of select="@query" />"
-		BROUGHT US TEH FOLLOWING <del>OBJECTIONS</del><ins>OBJECTS</ins>.
 	</div>
 	<table class="results">
 		<xsl:for-each select="result">
