@@ -330,6 +330,7 @@
 				<xsl:value-of select="$site_strings/str[@id='page_login']" />
 			</xsl:attribute>
 			<fieldset>
+				<input name="action" type="hidden" value="login" />
 				<xsl:value-of select="$locale_strings/str[@id='username']" />:
 				<br />				
 				<input name="user" type="text" size="30" maxlength="30" />
