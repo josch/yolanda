@@ -58,7 +58,12 @@
 			<xsl:choose>
 				<xsl:when test="string-length(//@username)=0">
 					<div class="header1">
-						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='login_to_upload']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_login']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='login_to_upload']" />
+						</a>
 					</div>
 					<div class="header2">
 						<a href="register.pl"><xsl:value-of select="$locale_strings/str[@id='register']" /></a>
@@ -71,9 +76,19 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<div class="header1">
-						<a href="upload.pl"><xsl:value-of select="$locale_strings/str[@id='upload_video']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_upload']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='upload_video']" />
+						</a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
-						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='bookmarks']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_bookmarks']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='bookmarks']" />
+						</a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
 						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='account_details']" /></a>
 					</div>
@@ -117,7 +132,7 @@
 	<div class="search">
 		<form method="get" enctype="text/plain">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings/str[@id='resultspage']" />
+				<xsl:value-of select="$site_strings/str[@id='page_results']" />
 			</xsl:attribute>
 			<fieldset>
 				<input type="text" name="query" size="40" /><br />
@@ -154,7 +169,7 @@
 	<div class="search-small">
 		<form method="get" enctype="text/plain">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$resultspage" />
+				<xsl:value-of select="$site_strings/str[@id='page_results']" />
 			</xsl:attribute>
 			<fieldset>
 				<xsl:value-of select="$locale_strings/str[@id='search']" />:
@@ -185,7 +200,9 @@
 					</xsl:choose>
 				</xsl:attribute>
 				<xsl:attribute name="href">
-					<xsl:value-of select="$resultspage" />tag:<xsl:value-of select="text" />
+					<xsl:value-of select="$site_strings/str[@id='page_results']" />
+					tag:
+					<xsl:value-of select="text" />
 				</xsl:attribute>
 				<xsl:value-of select="text" />
 				(<xsl:value-of select="count" />)

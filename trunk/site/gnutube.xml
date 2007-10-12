@@ -8,8 +8,14 @@
 	<str id="site_motto">WebTV free as in Speech</str>
 
 	<!-- invisible -->
-	<str id="registerpage">search.pl?query=</str>
-	<str id="resultspage">search.pl?query=</str>
+<!--	<str id=""></str>
+	<str id=""></str>
+	<str id=""></str>-->
+	<str id="page_bookmarks"></str>
+	<str id="page_login">login.pl</str>
+	<str id="page_register">register.pl</str>
+	<str id="page_results">search.pl?query=</str>
+	<str id="page_upload">upload.pl</str>
 
 </strings>
 
