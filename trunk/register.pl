@@ -13,12 +13,14 @@ if($query->param('user') and $query->param('pass'))
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
-	#save POST data in local variables
-	my $user = $query->param("user");
-	my $pass = $query->param("pass");
-	
 	#do query
-	$dbh->do(qq{insert into users (username, password) values ('$user', password('$pass'))}) or die $dbh->errstr;
+	$sth = $dbh->prepare(qq{insert into users (username, password) values ( ?, password( ? ))}) or die $dbh->errstr;
+	
+	#execute it
+	$sth->execute($query->param("user"), $query->param("pass")) or die $dbh->errstr;
+	
+	#finish query
+	$sth->finish() or die $dbh->errstr;
 
 	#disconnect db
 	$dbh->disconnect() or die $dbh->errstr;

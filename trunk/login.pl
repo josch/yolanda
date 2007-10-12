@@ -15,28 +15,21 @@ if($query->param('action'))
 	#if login is requested
 	if($query->param('action') eq "login")
 	{
-		#save POST data in local variables
-		my $user = $query->param('user');
-		my $pass = $query->param('pass');
-		
 		#prepare query
 		my $sth = $dbh->prepare(qq{select username from users
-				where password = password('$pass')
-				and username = '$user'
+				where password = password( ? )
+				and username = ?
 				limit 1 });
 				
 		#execute query
-		$sth->execute();
+		$sth->execute($query->param('pass'), $query->param('user'));
 		
 		#if something was returned username and password match
 		if($sth->fetchrow_array())
 		{
-			#store session id in local variable
-			my $sid = $session->id;
-			
 			#store session id in database
-			$sth = $dbh->prepare(qq{update users set sid = '$sid' where username = '$user'}); 
-			$sth->execute();
+			$sth = $dbh->prepare(qq{update users set sid = ? where username = ? }); 
+			$sth->execute($session->id, $query->param('user'));
 			$sth->finish();
 			print $session->header();
 			print "logged in";
@@ -53,8 +46,8 @@ if($query->param('action'))
 	{
 		#if logout is requested
 		#remove sid from database
-		$sth = $dbh->prepare(qq{update users set sid = '' where username = '$user'}); 
-		$sth->execute();
+		$sth = $dbh->prepare(qq{update users set sid = '' where username = ?});
+		$sth->execute(get_username_from_sid($session->id));
 		$sth->finish();
 		$session->delete();
 		print $session->header();

@@ -22,10 +22,10 @@ if($query->param('query'))
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select title, caption, timestamp from videos where match(title, caption) against('$search_query') }) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select title, caption, timestamp from videos where match(title, caption) against( ? ) }) or die $dbh->errstr;
 	
 	#execute it
-	$sth->execute() or die $dbh->errstr;
+	$sth->execute($search_query) or die $dbh->errstr;
 	
 	#get every returned value
 	while (my ($title, $caption, $timestamp) = $sth->fetchrow_array())

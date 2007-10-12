@@ -37,10 +37,10 @@ sub get_username_from_sid
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select username from users where sid = '$sid'}) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select username from users where sid = ?}) or die $dbh->errstr;
 	
 	#execute it
-	$sth->execute() or die $dbh->errstr;
+	$sth->execute($sid) or die $dbh->errstr;
 	
 	#save the resulting username
 	my ($username) = $sth->fetchrow_array();
@@ -65,10 +65,10 @@ sub get_userid_from_sid
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select id from users where sid = '$sid'}) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select id from users where sid = ?}) or die $dbh->errstr;
 	
 	#execute it
-	$sth->execute() or die $dbh->errstr;
+	$sth->execute($sid) or die $dbh->errstr;
 	
 	#save the resulting username
 	my ($username) = $sth->fetchrow_array();

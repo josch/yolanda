@@ -24,10 +24,6 @@ if($userid)
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
-	#save POST data in local variables
-	my $title = $query->param("title");
-	my $caption = $query->param("caption");
-	
 	#video status:
 	# 0 - new entry - nothing done yet
 	# 1 - successfully uploaded
@@ -35,10 +31,16 @@ if($userid)
 	# 3 - error: was not a valid video/format
 	# 4 - error: video is a duplicate
 	#do query
-	$dbh->do(qq{insert into videos (title, caption, userid, status, timestamp) values ('$title', '$caption', '$userid', 0, now())}) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{insert into videos (title, caption, userid, status, timestamp) values ( ?, ?, ?, 0, now())}) or die $dbh->errstr;
+	
+	#execute it
+	$sth->execute($query->param("title"), $query->param("caption"), $userid) or die $dbh->errstr;
 
+	#finish query
+	$sth->finish() or die $dbh->errstr;
+	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select last_insert_id() }) or die $dbh->errstr;
+	$sth = $dbh->prepare(qq{select last_insert_id() }) or die $dbh->errstr;
 	
 	#execute it
 	$sth->execute() or die $dbh->errstr;
