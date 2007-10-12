@@ -44,8 +44,13 @@
 	<str id="button_register">register</str>
 	<str id="button_login">login</str>
 
+	<!-- upload page -->
+	<str id="file">file</str>
+	<str id="button_upload">upload</str>
+
 	<!-- dublin core entities -->
 	<str id="DC.title">title</str>
+	<str id="DC.description">description</str>
 	<str id="DC.creator">author</str>
 	<str id="DC.publisher">uploader</str>
 

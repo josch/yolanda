@@ -22,6 +22,7 @@
 	<str id="page_register">register.pl</str>
 	<str id="page_results">search.pl?query=</str>
 	<str id="page_upload">upload.pl</str>
+	<str id="page_uploader">uploader.pl</str>
 
 </strings>
 

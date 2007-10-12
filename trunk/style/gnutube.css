@@ -61,13 +61,13 @@ div
 			vertical-align:		text-top;
 		}
 
-	div.loginform, div.registerform
+	div.loginform, div.registerform, div.uploadform
 	{
 		padding:		1.5em;
 		text-align:		center;
 	}
 	
-	div.loginform form, div.registerform form
+	div.loginform form, div.registerform form, div.uploadform form
 	{
 		margin:			1.5em;
 	}

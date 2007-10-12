@@ -290,7 +290,7 @@
 		</xsl:for-each>
 	</table>
 
-</xsl:template>v
+</xsl:template>
 
 <xsl:template match="registerform">
 
@@ -342,6 +342,39 @@
 				<input type="submit" name="login" >
 					<xsl:attribute name="value">
 						<xsl:value-of select="$locale_strings/str[@id='button_login']" />
+					</xsl:attribute>
+				</input>
+			</fieldset>
+		</form>
+
+	</div>
+
+</xsl:template>
+
+<xsl:template match="uploadform">
+
+	<div class="uploadform">
+
+		<form method="post" enctype="multipart/from-data">
+			<xsl:attribute name="action">
+				<xsl:value-of select="$site_strings/str[@id='page_uploader']" />
+			</xsl:attribute>
+			<fieldset>
+				<xsl:value-of select="$locale_strings/str[@id='file']" />:
+				<br />				
+				<input name="file" type="file" size="15" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:
+				<br />
+				<input name="title" type="text" size="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='DC.description']" />:
+				<br />
+				<input name="caption" type="text" size="30" />
+				<br />
+				<input type="submit" name="submit" >
+					<xsl:attribute name="value">
+						<xsl:value-of select="$locale_strings/str[@id='button_upload']" />
 					</xsl:attribute>
 				</input>
 			</fieldset>
