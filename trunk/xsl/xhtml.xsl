@@ -237,11 +237,28 @@
 
 	<div class="registerform">
 
-		<form action="" method="post">
+		<form action="register.pl" method="post">
 			<fieldset>
 				<input name="user" type="text" size="30" maxlength="30" />
 				<input name="pass" type="password" size="30" maxlength="30" />
 				<input type="submit" name="register" value=" register " />
+			</fieldset>
+		</form>
+
+	</div>
+
+</xsl:template>
+
+<xsl:template match="loginform">
+
+	<div class="loginform">
+
+		<form action="login.pl" method="POST">
+			<fieldset>
+				<input name="action" type="hidden" value="login" />
+				<input name="user" type="text" size="30" maxlength="30" />
+				<input name="pass" type="password" size="30" maxlength="30" />
+				<input type="submit" name="login" value=" login " />
 			</fieldset>
 		</form>
 

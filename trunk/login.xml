@@ -1,0 +1,7 @@
+<page
+	locale="en-US"
+	stylesheet="./style/gnutube.css"
+	username=""
+	>
+	<loginform />
+</page>

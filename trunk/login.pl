@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 require "include.pl";
+require "functions.pl";
 
 #initialize session data
 CGI::Session->name($session_name);
@@ -65,12 +66,15 @@ if($query->param('action'))
 }
 else
 {
-	#print login form
-	print $session->header();
-	print '<form action="" method="POST"><p>
-<input name="action" type="hidden" value="login">
-<input name="user" type="text" size="30" maxlength="30">
-<input name="pass" type="password" size="30" maxlength="30">
-<input type="submit" name="login" value=" login ">
-</p></form>';
+	#if not, print login form
+
+	$page = XMLin("$gnutube_root/login.xml", ForceArray => 1, KeyAttr => {} );
+
+	#if a username is associated with session id, username is nonempty
+	$page->{username} = get_username_from_sid($session->id);
+
+	#print xml http header along with session cookie
+	print $session->header(-type=>'text/xml');
+
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
