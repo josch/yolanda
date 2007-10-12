@@ -61,6 +61,17 @@ div
 			vertical-align:		text-top;
 		}
 
+	div.loginform, div.registerform
+	{
+		padding:		1.5em;
+		text-align:		center;
+	}
+	
+	div.loginform form, div.registerform form
+	{
+		margin:			1.5em;
+	}
+
 	div.logo-big
 	{
 		padding-top:	1.5em;

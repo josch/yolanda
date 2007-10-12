@@ -38,8 +38,11 @@
 	<!-- search bar-->
 	<str id="search">search</str>
 	
-	<!-- -->
-	<str id=""></str>
+	<!-- login / register page -->
+	<str id="username">username</str>
+	<str id="password">password</str>
+	<str id="button_register">register</str>
+	<str id="button_login">login</str>
 
 	<!-- dublin core entities -->
 	<str id="DC.title">title</str>

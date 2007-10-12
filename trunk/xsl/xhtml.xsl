@@ -290,17 +290,30 @@
 		</xsl:for-each>
 	</table>
 
-</xsl:template>
+</xsl:template>v
 
 <xsl:template match="registerform">
 
 	<div class="registerform">
 
-		<form action="register.pl" method="post">
+		<form method="post">
+			<xsl:attribute name="action">
+				<xsl:value-of select="$site_strings/str[@id='page_register']" />
+			</xsl:attribute>
 			<fieldset>
+				<xsl:value-of select="$locale_strings/str[@id='username']" />:
+				<br />				
 				<input name="user" type="text" size="30" maxlength="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='password']" />:
+				<br />
 				<input name="pass" type="password" size="30" maxlength="30" />
-				<input type="submit" name="register" value=" register " />
+				<br />
+				<input type="submit" name="register" >
+					<xsl:attribute name="value">
+						<xsl:value-of select="$locale_strings/str[@id='button_register']" />
+					</xsl:attribute>
+				</input>
 			</fieldset>
 		</form>
 
@@ -312,12 +325,24 @@
 
 	<div class="loginform">
 
-		<form action="login.pl" method="POST">
+		<form method="post">
+			<xsl:attribute name="action">
+				<xsl:value-of select="$site_strings/str[@id='page_login']" />
+			</xsl:attribute>
 			<fieldset>
-				<input name="action" type="hidden" value="login" />
+				<xsl:value-of select="$locale_strings/str[@id='username']" />:
+				<br />				
 				<input name="user" type="text" size="30" maxlength="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='password']" />:
+				<br />
 				<input name="pass" type="password" size="30" maxlength="30" />
-				<input type="submit" name="login" value=" login " />
+				<br />
+				<input type="submit" name="login" >
+					<xsl:attribute name="value">
+						<xsl:value-of select="$locale_strings/str[@id='button_login']" />
+					</xsl:attribute>
+				</input>
 			</fieldset>
 		</form>
 
