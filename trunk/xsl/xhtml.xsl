@@ -66,12 +66,27 @@
 						</a>
 					</div>
 					<div class="header2">
-						<a href="register.pl"><xsl:value-of select="$locale_strings/str[@id='register']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_register']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='register']" />
+						</a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
-						<a href="login.pl"><xsl:value-of select="$locale_strings/str[@id='login']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_login']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='login']" />
+						</a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
 						<img class="openid-icon" src="./images/openid-icon.png" alt="open id logo" />
-						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='login_openid']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_login-openid']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='login_openid']" />
+						</a>
 					</div>
 				</xsl:when>
 				<xsl:otherwise>
@@ -90,7 +105,12 @@
 							<xsl:value-of select="$locale_strings/str[@id='bookmarks']" />
 						</a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
-						<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='account_details']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_account']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='account_details']" />
+						</a>
 					</div>
 					<div class="header2">
 						<xsl:value-of select="$locale_strings/str[@id='logged_in_as']" />
@@ -101,7 +121,12 @@
 							<xsl:value-of select="//@username" />
 						</a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
-						<a href="login.pl?action=logout"><xsl:value-of select="$locale_strings/str[@id='logout']" /></a>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="$site_strings/str[@id='page_logout']" />
+							</xsl:attribute>
+							<xsl:value-of select="$locale_strings/str[@id='logout']" />
+						</a>
 					</div>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -111,11 +136,26 @@
 			<xsl:apply-templates />
 
 			<div class="footer">
-				<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='gnutube_authors']" /></a>
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$site_strings/str[@id='page_gnutube-authors']" />
+					</xsl:attribute>
+					<xsl:value-of select="$locale_strings/str[@id='gnutube_authors']" />
+				</a>
 				<xsl:value-of select="$locale_strings/str[@id='separator']" />
-				<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='gnutube_license']" /></a>
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$site_strings/str[@id='page_gnutube-license']" />
+					</xsl:attribute>
+					<xsl:value-of select="$locale_strings/str[@id='gnutube_license']" />
+				</a>
 				<xsl:value-of select="$locale_strings/str[@id='separator']" />
-				<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='gnutube_source_code']" /></a>
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$site_strings/str[@id='page_gnutube-source-code']" />
+					</xsl:attribute>
+				<xsl:value-of select="$locale_strings/str[@id='gnutube_source_code']" />
+				</a>
 			</div>
 
 		</body>
@@ -151,7 +191,12 @@
 	</div>
 
 	<div class="toplists">
-		<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='query_latestadditions']" /></a>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="$site_strings/str[@id='page_query_latestadditions']" />
+			</xsl:attribute>
+			<xsl:value-of select="$locale_strings/str[@id='query_latestadditions']" />
+		</a>
 		<xsl:value-of select="$locale_strings/str[@id='separator']" />
 		<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='query_mostdownloads']" /></a>
 		<xsl:value-of select="$locale_strings/str[@id='separator']" />
