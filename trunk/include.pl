@@ -5,6 +5,7 @@ use CGI::Session;
 use DBI;
 use XML::Simple qw(:strict);
 use Digest::SHA;
+use Encode;
 
 $gnutube_root = '/var/www/gnutube';
 

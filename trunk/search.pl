@@ -9,14 +9,12 @@ $session = new CGI::Session;
 #check if query is set
 if($query->param('query'))
 {
-	my $search_query = $query->param('query');
-
 	$page = XMLin("$gnutube_root/search.xml", ForceArray => 1, KeyAttr => {} );
 	
 	#if a username is associated with session id, username is nonempty
 	$page->{username} = get_username_from_sid($session->id);
 	
-	$page->{results}->{query} = $query->param('query');
+	$page->{results}->{query} = decode_utf8($query->param('query'));
 	
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
@@ -25,7 +23,7 @@ if($query->param('query'))
 	my $sth = $dbh->prepare(qq{select title, caption, timestamp from videos where match(title, caption) against( ? ) }) or die $dbh->errstr;
 	
 	#execute it
-	$sth->execute($search_query) or die $dbh->errstr;
+	$sth->execute($query->param('query')) or die $dbh->errstr;
 	
 	#get every returned value
 	while (my ($title, $caption, $timestamp) = $sth->fetchrow_array())

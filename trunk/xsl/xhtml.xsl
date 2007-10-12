@@ -10,7 +10,7 @@
 <xsl:output
 	doctype-public="-//W3C//DTD XHTML 1.1//EN"
 	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-	encoding="us-ascii"
+	encoding="utf8"
 	indent="yes"
 	method="xml"
 	media-type="application/xhtml+xml"
