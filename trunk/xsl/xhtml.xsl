@@ -223,9 +223,9 @@
 					</a>
 				</td>
 				<td>
-					<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:<xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
-					<xsl:value-of select="$locale_strings/str[@id='DC.creator']" /><xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
-					<xsl:value-of select="$locale_strings/str[@id='DC.publisher']" /><xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
+					<xsl:value-of select="$locale_strings/str[@id='DC.title']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
+					<xsl:value-of select="$locale_strings/str[@id='DC.creator']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
+					<xsl:value-of select="$locale_strings/str[@id='DC.publisher']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
 				</td>
 			</tr>
 		</xsl:for-each>
