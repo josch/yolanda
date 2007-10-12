@@ -10,16 +10,18 @@ my $username = get_username_from_sid($session->id);
 
 if($username)
 {
-	print $session->header();
-	print '<form action="uploader.pl" method="post" enctype="multipart/form-data">
-Upload: <input type="file" name="file">
-<br><br>
-Title: <input type="text" name="title">
-<br><br>
-Beschreibung: <input type="text" name="caption">
-<br><br>
-<input type="submit" name="submit" value=" upload ">
-</form>';
+	%page = ();
+
+	#if a username is associated with session id, username is nonempty
+	$page->{username} = get_username_from_sid($session->id);
+	$page->{locale} = $locale;
+	$page->{stylesheet} = $stylesheet;
+	$page->{uploadform} = [''];
+
+	#print xml http header along with session cookie
+	print $session->header(-type=>'text/xml');
+
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
 else
 {
