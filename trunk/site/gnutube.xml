@@ -18,7 +18,7 @@
 	<str id="page_logout">login.pl?action=logout</str>
 	<str id="page_gnutube-authors">INSERT LINK TO GNUTUBE AUTHORS HERE</str>
 	<str id="page_gnutube-license">INSERT LINK TO GNUTUBE LICENSE HERE</str>
-	<str id="page_gnutube-source-code">USE THE SOURCE</str>
+	<str id="page_gnutube-source-code">http://mister-muffin.de/proj/browser</str>
 	<str id="page_register">register.pl</str>
 	<str id="page_results">search.pl?query=</str>
 	<str id="page_upload">upload.pl</str>
