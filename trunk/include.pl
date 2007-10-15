@@ -7,6 +7,7 @@ use XML::Simple qw(:strict);
 use Digest::SHA qw(sha256_hex);
 use Encode qw(decode_utf8);
 
+# change this as you install it somewhere else
 $gnutube_root = '/var/www/gnutube';
 
 use lib qw(/var/www/gnutube);

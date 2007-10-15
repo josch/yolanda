@@ -33,22 +33,22 @@ if($query->param('query'))
 	#get every returned value
 	while (my ($title, $caption, $userid, $timestamp) = $sth->fetchrow_array())
 	{
-		#really obfuscated array/hash creation
+		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
 		{
-			'thumbnail' => ['./video-stills/225x150/4chan_city_mashup.png'],
-			'rdf:RDF' =>
+			'thumbnail'		=> ['./video-stills/225x150/4chan_city_mashup.png'],
+			'rdf:RDF'		=>
 			{
-				'cc:Work' =>
+				'cc:Work'		=>
 				{
-					'rdf:about' => './videos/1050x700/4chan_city_mashup.ogg',
-					'dc:title' => [$title],
-					'dc:date' => [$timestamp],
-					'dc:publisher' => [get_username_from_id($userid)]
+					'rdf:about'		=> './videos/1050x700/4chan_city_mashup.ogg',
+					'dc:title'		=> [$title],
+					'dc:date'		=> [$timestamp],
+					'dc:publisher'	=> [get_username_from_id($userid)]
 				},
-				'cc:License' =>
+				'cc:License'	=>
 				{
-					'rdf:about' => 'http://creativecommons.org/licenses/GPL/2.0/'
+					'rdf:about' 	=> 'http://creativecommons.org/licenses/GPL/2.0/'
 				}
 			}
 		};

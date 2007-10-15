@@ -9,6 +9,7 @@ $session = new CGI::Session;
 sub hook
 {
 	#this is going to become an ajax progress bar
+	#alternatively, reloading every N seconds (mozilla doesn't flicker)
 	my ($filename, $buffer, $bytes_read, $data) = @_;
 	#print $ENV{'CONTENT_LENGTH'};
 	#print sha256_hex($buffer);
