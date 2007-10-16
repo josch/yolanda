@@ -7,7 +7,7 @@ $query = CGI->new(\&hook);
 $session = new CGI::Session;
 
 sub hook
-{
+{hj
 	#this is going to become an ajax progress bar
 	#alternatively, reloading every N seconds (mozilla doesn't flicker)
 	my ($filename, $buffer, $bytes_read, $data) = @_;
