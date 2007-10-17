@@ -48,11 +48,19 @@
 	<str id="file">file</str>
 	<str id="button_upload">upload</str>
 
+	<!-- video page -->
+	<str id="download">download</str>
+
 	<!-- dublin core entities -->
 	<str id="DC.title">title</str>
-	<str id="DC.description">description</str>
 	<str id="DC.creator">author</str>
+	<str id="DC.subject">subject</str>
+	<str id="DC.description">description</str>
 	<str id="DC.publisher">uploader</str>
+	<str id="DC.contributor">contributor</str>
+	<str id="DC.date">date</str>
+	<str id="DC.source">source</str>
+	<str id="DC.rights">righs holder</str>
 
 </strings>
 

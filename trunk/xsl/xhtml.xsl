@@ -292,6 +292,61 @@
 
 </xsl:template>
 
+<xsl:template match="video">
+	<xsl:call-template name="searchbar"/>
+	<div class="video">
+		<applet
+			code="com.fluendo.player.Cortado.class"
+			archive="./java/cortado-ovt-stripped-0.2.2.jar"
+			width="350"
+			height="250"
+		>
+			<param name="url">
+				<xsl:attribute name="value">
+					<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
+				</xsl:attribute>
+			</param>
+			<param name="seekable" value="true"/>
+			<param name="duration" value="8"/>
+			<param name="keepAspect" value="true"/>
+			<param name="video" value="true"/>
+			<param name="audio" value="true"/>
+			<param name="statusHeight" value="24"/>
+			<param name="autoPlay" value="true"/>
+			<param name="showStatus" value="show"/>
+			<param name="bufferSize" value="200"/>
+		</applet>
+		<br />
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
+				</xsl:attribute>
+			<xsl:value-of select="$locale_strings/str[@id='download']" />
+			<br />
+			<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+		</a>
+	</div>
+	<div class="videometadata">
+		<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br /><br />
+		<xsl:value-of select="$locale_strings/str[@id='DC.creator']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br /><br />
+		<xsl:value-of select="$locale_strings/str[@id='DC.subject']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:subject" /><br /><br />
+		<xsl:value-of select="$locale_strings/str[@id='DC.description']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:description" /><br /><br />
+		<xsl:value-of select="$locale_strings/str[@id='DC.publisher']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" /><br /><br />
+		<xsl:value-of select="$locale_strings/str[@id='DC.date']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:date" /><br /><br />
+		<xsl:value-of select="$locale_strings/str[@id='DC.source']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:source" /><br /><br />
+		<xsl:value-of select="$locale_strings/str[@id='DC.rights']" />:<br />
+		<xsl:value-of select="rdf:RDF/cc:Work/dc:rights" /><br /><br />
+	</div>
+
+</xsl:template>
+
 <xsl:template match="registerform">
 
 	<div class="registerform">

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href="./xsl/xhtml.xsl" ?>
+
+<page
+	locale="en-US"
+	stylesheet="./style/gnutube.css"
+	username="pedobear@myopenid.net"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:cc="http://web.resource.org/cc/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+	<video>
+		<rdf:RDF>
+			<cc:Work rdf:about="./videos/zwobot-01-test.ogg">
+				<dc:title>Zwobot "Test Test"</dc:title>
+				<dc:creator>Anonymous</dc:creator>
+				<dc:subject>zwobot</dc:subject>
+				<dc:description>Die Zwobot Show ist toll.</dc:description>
+				<dc:publisher>Anonymous</dc:publisher>
+				<dc:contributor>Anonymous</dc:contributor>
+				<dc:contributor>Anonymous</dc:contributor>
+				<dc:date>2022-02-22T13:34:56+7:00</dc:date>
+				<dc:type>Video</dc:type>
+				<dc:format>video/x-theora+ogg</dc:format>
+				<dc:identifier>http://gnutube.org/videos/zwobot-01-test.ogg</dc:identifier>
+				<dc:source>http://www.zwobotsgeist.de/downloads.htm</dc:source>
+				<dc:language>de-DE</dc:language>
+				<dc:relation>video publishing website</dc:relation>
+				<dc:coverage>Monaco di Baviera</dc:coverage>
+				<dc:rights>VIVA 2</dc:rights>
+			</cc:Work>
+			<cc:License rdf:about="http://creativecommons.org/licenses/GPL/2.0/">
+				<cc:permits rdf:resource="http://web.resource.org/cc/Reproduction" />
+				<cc:permits rdf:resource="http://web.resource.org/cc/Distribution" />
+				<cc:requires rdf:resource="http://web.resource.org/cc/Notice" />
+				<cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+				<cc:requires rdf:resource="http://web.resource.org/cc/ShareAlike" />
+				<cc:requires rdf:resource="http://web.resource.org/cc/SourceCode" />
+			</cc:License>
+		</rdf:RDF>
+	</video>
+</page>
