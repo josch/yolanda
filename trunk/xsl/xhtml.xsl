@@ -355,7 +355,7 @@
 
 	<div class="uploadform">
 
-		<form method="post" enctype="multipart/from-data">
+		<form method="post" enctype="multipart/form-data">
 			<xsl:attribute name="action">
 				<xsl:value-of select="$site_strings/str[@id='page_uploader']" />
 			</xsl:attribute>

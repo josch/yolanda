@@ -45,10 +45,15 @@ $dbh->do(qq{create table
 		id			int auto_increment	not null,
 		title		varchar(255)		not null,
 		caption		text				not null,
-		userid		varchar(255)		not null,
+		userid		int					not null,
 		hash		char(64)			not null,
 		status		int					not null,
 		timestamp	datetime			not null,
+		filesize	int					not null,
+		duration	float				not null,
+		width		smallint			not null,
+		height		smallint			not null,
+		fps			float				not null,
 		primary key	(id),
 		fulltext	(title, caption)
 	)
