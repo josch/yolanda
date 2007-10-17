@@ -120,11 +120,12 @@ while(1)
 				}
 				else
 				{
+					$filesize = -s "$gnutube_root/tmp/$id";
+					
 					#check if the upload already is in the right format
 					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis')
 					{
 						appendlog $id, "file already is ogg-theora/vorbis";
-						$filesize = -s "$gnutube_root/tmp/$id";
 						
 						#fill database
 						$sth = $dbh->prepare(qq{update videos set
