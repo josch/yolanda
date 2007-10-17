@@ -1,8 +1,9 @@
-GNUtube Interface XML + XSL
+GNUtube - a free software video CMS
 
+Interface XML + XSL
 (c) 2007 Nils Moskopp
-License is the Affero General Public License version 3 or (at your option) any later version published by the Free Software Foundation.
 
-== Issues ==
-* Sometimes the corresponding html code is simply wrong b/c XSLTPROC(1) is retarded (the tagcloud being an example).
-* Sometimes there are additional spaces we DO NOT WANT (is this due to XSLTPROC(1) or due to coding stupidity ?)
+Background Perl
+(c) 2007 Johannes Schauer
+
+License is the Affero General Public License version 3 or (at your option) any later version published by the Free Software Foundation.
