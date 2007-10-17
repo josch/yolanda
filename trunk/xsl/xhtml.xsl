@@ -344,6 +344,9 @@
 		<xsl:value-of select="$locale_strings/str[@id='DC.rights']" />:<br />
 		<xsl:value-of select="rdf:RDF/cc:Work/dc:rights" /><br /><br />
 	</div>
+	<div class="videocreativecommonsdata">
+		<!-- here be dragons -->
+	</div>
 
 </xsl:template>
 
