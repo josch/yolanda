@@ -11,6 +11,7 @@ $dbuser = 'root';
 $dbpass = '';
 $gnutube_root = '/var/www/gnutube';
 
+#TODO: deamonize by uncommenting this line
 #Proc::Daemon::Init;
 
 $LOG = "/var/www/gnutube/daemon.log";
@@ -126,6 +127,7 @@ while(1)
 				}
 				else
 				{
+					#TODO: maybe delete entry from uploaded table after successful upload?
 					$filesize = -s "$gnutube_root/tmp/$id";
 					
 					#check if the upload already is in the right format
@@ -150,6 +152,7 @@ while(1)
 					}
 					else #encode video
 					{
+						#FIXME: remove endtime - this is for testing only
 						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --endtime 10 --output $gnutube_root/videos/$id $gnutube_root/tmp/$id 2>&1";
 						appendlog $id, $audio, $video, $width, $height, $fps, $duration, $sha;
 
