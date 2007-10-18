@@ -25,13 +25,13 @@ if($query->param('query'))
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where match(title, caption) against( ? ) }) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from videos where match(title, description) against( ? ) }) or die $dbh->errstr;
 	
 	#execute it
 	$sth->execute($query->param('query')) or die $dbh->errstr;
 	
 	#get every returned value
-	while (my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array())
+	while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },

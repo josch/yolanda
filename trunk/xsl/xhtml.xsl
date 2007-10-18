@@ -453,7 +453,7 @@
 				<br />
 				<xsl:value-of select="$locale_strings/str[@id='DC.description']" />:
 				<br />
-				<input name="caption" type="text" size="30" />
+				<input name="description" type="text" size="30" />
 				<br />
 				<input type="submit" name="submit" >
 					<xsl:attribute name="value">

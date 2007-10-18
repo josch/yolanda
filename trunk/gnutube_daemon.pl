@@ -44,9 +44,9 @@ $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or interrup
 while(1)
 {
 	#get fresh video id from db
-	my $sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from uploaded where status = 0 limit 1}) or interrupt $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from uploaded where status = 0 limit 1}) or interrupt $dbh->errstr;
 	$sth->execute() or interrupt $dbh->errstr;
-	my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array();
+	my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array();
 	$sth->finish() or interrupt $dbh->errstr;
 	
 	if($id)
@@ -139,10 +139,10 @@ while(1)
 						$sth->finish() or interrupt $dbh->errstr;
 						
 						#add video to videos table
-						$sth = $dbh->prepare(qq{insert into videos (id, title, caption, userid, timestamp,
+						$sth = $dbh->prepare(qq{insert into videos (id, title, description, userid, timestamp,
 												hash, filesize, duration, width, height, fps)
 												values (?, ?, ?, ?, ?, ?, ?, time_to_sec( ? ), ?,  ?,  ?)}) or interrupt $dbh->errstr;
-						$sth->execute($id, $title, $caption, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
+						$sth->execute($id, $title, $description, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
 						
 						#move video
@@ -159,10 +159,10 @@ while(1)
 						$sth->finish() or interrupt $dbh->errstr;
 						
 						#add video to videos table
-						$sth = $dbh->prepare(qq{insert into videos (id, title, caption, userid, timestamp,
+						$sth = $dbh->prepare(qq{insert into videos (id, title, description, userid, timestamp,
 												hash, filesize, duration, width, height, fps)
 												values (?, ?, ?, ?, ?, ?, ?, time_to_sec( ? ), ?,  ?,  ?)}) or interrupt $dbh->errstr;
-						$sth->execute($id, $title, $caption, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
+						$sth->execute($id, $title, $description, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
 						
 						#delete temp file

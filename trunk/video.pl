@@ -25,21 +25,21 @@ if($query->param('title') or $query->param('id'))
 	if($query->param('id'))
 	{
 		#prepare query
-		$sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where id = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from videos where id = ? }) or die $dbh->errstr;
 		#execute it
 		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
 	}
 	else
 	{
 		#prepare query
-		$sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where title = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from videos where title = ? }) or die $dbh->errstr;
 		#execute it
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
 	}
 	
 	if($rowcount == 1)
 	{
-		my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array();
+		my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array();
 
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'video'} },
@@ -53,7 +53,7 @@ if($query->param('title') or $query->param('id'))
 					'dc:title'		=> [$title],
 					'dc:date'		=> [$timestamp],
 					'dc:publisher'	=> [get_username_from_id($userid)],
-					'dc:description'=> [$caption]
+					'dc:description'=> [$description]
 				},
 				'cc:License'	=>
 				{
@@ -66,7 +66,7 @@ if($query->param('title') or $query->param('id'))
 	{
 		$page->{results}->{query} = decode_utf8($query->param('title'));
 		#get every returned value
-		while (my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array())
+		while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
 		{
 			#before code cleanup, this was a really obfuscated array/hash creation
 			push @{ $page->{'results'}->{'result'} },
@@ -80,7 +80,7 @@ if($query->param('title') or $query->param('id'))
 						'dc:title'		=> [$title],
 						'dc:date'		=> [$timestamp],
 						'dc:publisher'	=> [get_username_from_id($userid)],
-						'dc:description'=> [$caption]
+						'dc:description'=> [$description]
 					},
 					'cc:License'	=>
 					{
