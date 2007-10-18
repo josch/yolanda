@@ -131,6 +131,12 @@ div
 		text-align:	center;
 	}
 
+	div.videoccdata
+	{
+		text-align: center;
+		margin:		4em;
+	}
+
 	div.videometadata
 	{
 		text-align:	center;

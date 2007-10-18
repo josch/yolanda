@@ -326,6 +326,34 @@
 			<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
 		</a>
 	</div>
+	<div class="videoccdata">
+		<!-- unfinished bizness -->
+		Permits:<br />
+		<xsl:for-each select="rdf:RDF/cc:License/cc:permits">
+			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Reproduction'">
+			REPRODUCTION
+			</xsl:if>
+			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Distribution'">
+			DISTRIBUTION
+			</xsl:if>
+			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
+			DERIVATES
+			</xsl:if>
+		</xsl:for-each>
+		<br />
+		Requires:<br />
+		<xsl:for-each select="rdf:RDF/cc:License/cc:requires">
+			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Notice'">
+				<img src="./images/cc/cc-by.png" />
+			</xsl:if>
+			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/ShareAlike'">
+				<img src="./images/cc/cc-sa.png" />
+			</xsl:if>
+			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/SourceCode'">
+			SOURCE
+			</xsl:if>
+		</xsl:for-each>
+	</div>
 	<div class="videometadata">
 		<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:<br />
 		<xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br /><br />
@@ -343,9 +371,6 @@
 		<xsl:value-of select="rdf:RDF/cc:Work/dc:source" /><br /><br />
 		<xsl:value-of select="$locale_strings/str[@id='DC.rights']" />:<br />
 		<xsl:value-of select="rdf:RDF/cc:Work/dc:rights" /><br /><br />
-	</div>
-	<div class="videocreativecommonsdata">
-		<!-- here be dragons -->
 	</div>
 
 </xsl:template>
