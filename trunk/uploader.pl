@@ -26,7 +26,7 @@ if($userid)
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#make new entry for video into the databse
-	my $sth = $dbh->prepare(qq{insert into videos (title, caption, userid, status, timestamp) values ( ?, ?, ?, 0, now())}) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{insert into uploaded (title, caption, userid, status, timestamp) values ( ?, ?, ?, 0, now())}) or die $dbh->errstr;
 	$sth->execute($query->param("title"), $query->param("caption"), $userid) or die $dbh->errstr;
 	$sth->finish() or die $dbh->errstr;
 	

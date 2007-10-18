@@ -11,6 +11,8 @@ $dbh->do(qq{drop table users});
 
 $dbh->do(qq{drop table videos});
 
+$dbh->do(qq{drop table uploaded});
+
 $dbh->do(qq{drop table tagcloud});
 
 $dbh->do(qq{create table
@@ -19,14 +21,14 @@ $dbh->do(qq{create table
 		text		varchar(255)		not null,
 		count		int					not null
 	)
-});
+}) or die $dbh->errstr;
 
 $dbh->do(qq{insert into
 	tagcloud values
 	(
 	'web tv', 68
 	)
-});
+}) or die $dbh->errstr;
 
 $dbh->do(qq{create table
 	users
@@ -37,7 +39,20 @@ $dbh->do(qq{create table
 		sid			char(32)			not null,
 		primary key	(id)
 	)
-});
+}) or die $dbh->errstr;
+
+$dbh->do(qq{create table
+	uploaded
+	(
+		id			int auto_increment	not null,
+		title		varchar(255)		not null,
+		caption		text				not null,
+		userid		int					not null,
+		status		int					not null,
+		timestamp	datetime			not null,
+		primary key	(id)
+	)
+}) or die $dbh->errstr;
 
 $dbh->do(qq{create table
 	videos
@@ -47,7 +62,6 @@ $dbh->do(qq{create table
 		caption		text				not null,
 		userid		int					not null,
 		hash		char(64)			not null,
-		status		int					not null,
 		timestamp	datetime			not null,
 		filesize	int					not null,
 		duration	float				not null,
@@ -57,7 +71,7 @@ $dbh->do(qq{create table
 		primary key	(id),
 		fulltext	(title, caption)
 	)
-});
+}) or die $dbh->errstr;
 
 $dbh->disconnect() or die $dbh->errstr;
 

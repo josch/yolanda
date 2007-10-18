@@ -3,6 +3,7 @@
 use Proc::Daemon;
 use DBI;
 use Digest::SHA;
+use File::Copy;
 
 $database = 'gnutube';
 $dbhost = 'localhost';
@@ -43,9 +44,9 @@ $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or interrup
 while(1)
 {
 	#get fresh video id from db
-	my $sth = $dbh->prepare(qq{select id from videos where status = 0 limit 1}) or interrupt $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from uploaded where status = 0 limit 1}) or interrupt $dbh->errstr;
 	$sth->execute() or interrupt $dbh->errstr;
-	my ($id) = $sth->fetchrow_array();
+	my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array();
 	$sth->finish() or interrupt $dbh->errstr;
 	
 	if($id)
@@ -56,28 +57,31 @@ while(1)
 		{
 			appendlog $id, "invalid stream";
 			
-			#write status 2 to database
-			$sth = $dbh->prepare(qq{update videos set status = ? where id = ?}) or interrupt $dbh->errstr;
+			#write status 2 to uploaded table
+			$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
 			$sth->execute(2, $id) or interrupt $dbh->errstr;
 			$sth->finish() or interrupt $dbh->errstr;
+			unlink "$gnutube_root/tmp/$id";
 		}
 		elsif ($info =~ /I\/O error occured/)
 		{
 			appendlog $id, "file not found";
 			
-			#write status 3 to database
-			$sth = $dbh->prepare(qq{update videos set status = ? where id = ?}) or interrupt $dbh->errstr;
+			#write status 3 to uploaded table
+			$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
 			$sth->execute(3, $id) or interrupt $dbh->errstr;
 			$sth->finish() or interrupt $dbh->errstr;
+			unlink "$gnutube_root/tmp/$id";
 		}
 		elsif ($info =~ /Unknown format/ or $info =~ /could not find codec parameters/)
 		{
 			appendlog $id, "file is no video";
 			
-			#write status 4 to database
-			$sth = $dbh->prepare(qq{update videos set status = ? where id = ?}) or interrupt $dbh->errstr;
+			#write status 4 to uploaded table
+			$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
 			$sth->execute(4, $id) or interrupt $dbh->errstr;
 			$sth->finish() or interrupt $dbh->errstr;
+			unlink "$gnutube_root/tmp/$id";
 		}
 		else
 		{
@@ -96,10 +100,11 @@ while(1)
 			{
 				appendlog "$id, video already uploaded: $resultid";
 				
-				#write status 5 to database
-				$sth = $dbh->prepare(qq{update videos set status = ? where id = ?}) or interrupt $dbh->errstr;
+				#write status 5 to uploaded table
+				$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
 				$sth->execute(5, $id) or interrupt $dbh->errstr;
 				$sth->finish() or interrupt $dbh->errstr;
+				unlink "$gnutube_root/tmp/$id";
 			}
 			else
 			{
@@ -113,10 +118,11 @@ while(1)
 				{
 					appendlog $id, "a stream is missing or video is corrupt";
 					
-					#write status 2 to database
-					$sth = $dbh->prepare(qq{update videos set status = ? where id = ?}) or interrupt $dbh->errstr;
+					#write status 2 to uploaded table
+					$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
 					$sth->execute(2, $id) or interrupt $dbh->errstr;
 					$sth->finish() or interrupt $dbh->errstr;
+					unlink "$gnutube_root/tmp/$id";
 				}
 				else
 				{
@@ -127,40 +133,40 @@ while(1)
 					{
 						appendlog $id, "file already is ogg-theora/vorbis";
 						
-						#fill database
-						$sth = $dbh->prepare(qq{update videos set
-												status = ?,
-												hash = ?,
-												filesize = ?,
-												duration = time_to_sec( ? ),
-												width = ?,
-												height = ?,
-												fps = ?
-												where id = ?}) or interrupt $dbh->errstr;
-						$sth->execute(1, $sha, $filesize, $duration, $width, $height, $fps, $id) or interrupt $dbh->errstr;
+						#write status 1 to uploaded table
+						$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
+						$sth->execute(1, $id) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
-						#TODO move video
+						
+						#add video to videos table
+						$sth = $dbh->prepare(qq{insert into videos (id, title, caption, userid, timestamp,
+												hash, filesize, duration, width, height, fps)
+												values (?, ?, ?, ?, ?, ?, ?, time_to_sec( ? ), ?,  ?,  ?)}) or interrupt $dbh->errstr;
+						$sth->execute($id, $title, $caption, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
+						$sth->finish() or interrupt $dbh->errstr;
+						
+						#move video
+						move "$gnutube_root/tmp/$id", "$gnutube_root/videos/$id";
 					}
 					else #encode video
 					{
-					
-						#TODO uncomment the following line
-						#exec "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --endtime 10 --output $gnutube_root/videos/$id $gnutube_root/tmp/$id 2>&1";
+						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --endtime 10 --output $gnutube_root/videos/$id $gnutube_root/tmp/$id 2>&1";
 						appendlog $id, $audio, $video, $width, $height, $fps, $duration, $sha;
-						
-						#fill database
-						$sth = $dbh->prepare(qq{update videos set
-												status = ?,
-												hash = ?,
-												filesize = ?,
-												duration = time_to_sec( ? ),
-												width = ?,
-												height = ?,
-												fps = ?
-												where id = ?}) or interrupt $dbh->errstr;
-						$sth->execute(1, $sha, $filesize, $duration, $width, $height, $fps, $id) or interrupt $dbh->errstr;
+
+						#write status 1 to uploaded table
+						$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
+						$sth->execute(1, $id) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
-						#TODO delete temp file
+						
+						#add video to videos table
+						$sth = $dbh->prepare(qq{insert into videos (id, title, caption, userid, timestamp,
+												hash, filesize, duration, width, height, fps)
+												values (?, ?, ?, ?, ?, ?, ?, time_to_sec( ? ), ?,  ?,  ?)}) or interrupt $dbh->errstr;
+						$sth->execute($id, $title, $caption, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
+						$sth->finish() or interrupt $dbh->errstr;
+						
+						#delete temp file
+						unlink "$gnutube_root/tmp/$id";
 					}
 				}
 			}

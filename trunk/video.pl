@@ -32,7 +32,7 @@ if($query->param('title') or $query->param('id'))
 	else
 	{
 		#prepare query
-		$sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where title = ? and status = 1 }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where title = ? }) or die $dbh->errstr;
 		#execute it
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
 	}
@@ -49,7 +49,7 @@ if($query->param('title') or $query->param('id'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'		=> "./videos/".$query->param('id'),
+					'rdf:about'		=> "./videos/$id",
 					'dc:title'		=> [$title],
 					'dc:date'		=> [$timestamp],
 					'dc:publisher'	=> [get_username_from_id($userid)],
