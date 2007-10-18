@@ -25,13 +25,13 @@ if($query->param('query'))
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select title, caption, userid, timestamp from videos where match(title, caption) against( ? ) }) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where match(title, caption) against( ? ) }) or die $dbh->errstr;
 	
 	#execute it
 	$sth->execute($query->param('query')) or die $dbh->errstr;
 	
 	#get every returned value
-	while (my ($title, $caption, $userid, $timestamp) = $sth->fetchrow_array())
+	while (my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
@@ -41,7 +41,7 @@ if($query->param('query'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'		=> './videos/1050x700/4chan_city_mashup.ogg',
+					'rdf:about'		=> "./video.pl?title=$title&id=$id",
 					'dc:title'		=> [$title],
 					'dc:date'		=> [$timestamp],
 					'dc:publisher'	=> [get_username_from_id($userid)]

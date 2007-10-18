@@ -7,7 +7,7 @@ $query = new CGI;
 $session = new CGI::Session;
 
 #check if query is set
-if($query->param('id'))
+if($query->param('title') or $query->param('id'))
 {
 	%page = ();
 	
@@ -22,15 +22,25 @@ if($query->param('id'))
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
-	#prepare query
-	my $sth = $dbh->prepare(qq{select title, caption, userid, timestamp from videos where id = ? }) or die $dbh->errstr;
-	
-	#execute it
-	$sth->execute($query->param('id')) or die $dbh->errstr;
-	
-	#get every returned value
-	while (my ($title, $caption, $userid, $timestamp) = $sth->fetchrow_array())
+	if($query->param('id'))
 	{
+		#prepare query
+		$sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where id = ? }) or die $dbh->errstr;
+		#execute it
+		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
+	}
+	else
+	{
+		#prepare query
+		$sth = $dbh->prepare(qq{select id, title, caption, userid, timestamp from videos where title = ? and status = 1 }) or die $dbh->errstr;
+		#execute it
+		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
+	}
+	
+	if($rowcount == 1)
+	{
+		my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array();
+
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'video'} },
 		{
@@ -42,7 +52,8 @@ if($query->param('id'))
 					'rdf:about'		=> "./videos/".$query->param('id'),
 					'dc:title'		=> [$title],
 					'dc:date'		=> [$timestamp],
-					'dc:publisher'	=> [get_username_from_id($userid)]
+					'dc:publisher'	=> [get_username_from_id($userid)],
+					'dc:description'=> [$caption]
 				},
 				'cc:License'	=>
 				{
@@ -50,6 +61,34 @@ if($query->param('id'))
 				}
 			}
 		};
+	}
+	else
+	{
+		$page->{results}->{query} = decode_utf8($query->param('title'));
+		#get every returned value
+		while (my ($id, $title, $caption, $userid, $timestamp) = $sth->fetchrow_array())
+		{
+			#before code cleanup, this was a really obfuscated array/hash creation
+			push @{ $page->{'results'}->{'result'} },
+			{
+				'thumbnail'		=> ['./video-stills/225x150/4chan_city_mashup.png'],
+				'rdf:RDF'		=>
+				{
+					'cc:Work'		=>
+					{
+						'rdf:about'		=> "./video.pl?title=$title&id=$id",
+						'dc:title'		=> [$title],
+						'dc:date'		=> [$timestamp],
+						'dc:publisher'	=> [get_username_from_id($userid)],
+						'dc:description'=> [$caption]
+					},
+					'cc:License'	=>
+					{
+						'rdf:about' 	=> 'http://creativecommons.org/licenses/GPL/2.0/'
+					}
+				}
+			};
+		}
 	}
 	
 	#finish query
