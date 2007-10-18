@@ -334,10 +334,10 @@
 			REPRODUCTION
 			</xsl:if>
 			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Distribution'">
-			DISTRIBUTION
+				<img src="./images/cc/cc-share.png" />
 			</xsl:if>
 			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
-			DERIVATES
+				<img src="./images/cc/cc-remix.png" />
 			</xsl:if>
 		</xsl:for-each>
 		<br />
@@ -347,10 +347,15 @@
 				<img src="./images/cc/cc-by.png" />
 			</xsl:if>
 			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/ShareAlike'">
-				<img src="./images/cc/cc-sa.png" />
+				<img src="./images/cc/cc-sharealike.png" />
 			</xsl:if>
 			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/SourceCode'">
 			SOURCE
+			</xsl:if>
+		</xsl:for-each>
+		<xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">		
+			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
+				<img src="./images/cc/cc-nc.png" />
 			</xsl:if>
 		</xsl:for-each>
 	</div>

@@ -128,19 +128,24 @@ div
 
 	div.video
 	{
-		text-align:	center;
+		text-align:		center;
 	}
 
 	div.videoccdata
 	{
-		text-align: center;
-		margin:		4em;
+		text-align: 	center;
+		margin:			4em;
 	}
+
+		div.videoccdata img
+		{
+			margin:			0.5em;
+		}
 
 	div.videometadata
 	{
-		text-align:	center;
-		margin:		4em;
+		text-align:		center;
+		margin:			4em;
 	}
 
 	div.toplists
