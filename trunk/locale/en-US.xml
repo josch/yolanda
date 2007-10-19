@@ -49,8 +49,8 @@
 	<str id="button_upload">upload</str>
 
 	<!-- video page -->
-	<str id="download">download</str>
-	<str id="video_license">License</str>
+	<str id="download_video">download video</str>
+	<str id="license_conditions">license conditions</str>
 
 	<!-- dublin core entities -->
 	<str id="DC.title">title</str>

@@ -131,10 +131,22 @@ div
 		text-align:		center;
 	}
 
+	div.videodownload
+	{
+		margin:			0.5em;
+		text-align:		center;
+	}
+
+		div.videodownload img
+		{
+			border-width:		0px;	
+			margin:				0.5em;
+		}
+
 	div.videoccdata
 	{
+		margin:			2em;
 		text-align: 	center;
-		margin:			4em;
 	}
 
 		div.videoccdata img

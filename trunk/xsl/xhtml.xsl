@@ -318,14 +318,21 @@
 			<param name="showStatus" value="show"/>
 			<param name="bufferSize" value="200"/>
 		</applet>
-		<br />
+	</div>
+
+	<div class="videodownload">
 		<a>
 			<xsl:attribute name="href">
-				<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
-				</xsl:attribute>
-			<xsl:value-of select="$locale_strings/str[@id='download']" />
+			<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
+			</xsl:attribute>
+			<img src="./images/tango/document-save.png" />
+		</a>
+		<a>
+			<xsl:attribute name="href">
+			<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
+			</xsl:attribute>
 			<br />
-			<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+			<xsl:value-of select="$locale_strings/str[@id='download_video']" />
 		</a>
 	</div>
 
@@ -334,7 +341,7 @@
 			<xsl:attribute name="href">
 				<xsl:value-of select="rdf:RDF/cc:License/@rdf:about" />
 			</xsl:attribute>
-			Lizenzbedingungen:
+			<xsl:value-of select="$locale_strings/str[@id='license_conditions']" />:
 		</a>
 		<br />
 <!--
