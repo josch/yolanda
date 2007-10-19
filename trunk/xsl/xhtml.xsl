@@ -293,7 +293,9 @@
 </xsl:template>
 
 <xsl:template match="video">
+
 	<xsl:call-template name="searchbar"/>
+
 	<div class="video">
 		<applet
 			code="com.fluendo.player.Cortado.class"
@@ -326,7 +328,15 @@
 			<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
 		</a>
 	</div>
+
 	<div class="videoccdata">
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="rdf:RDF/cc:License/@rdf:about" />
+			</xsl:attribute>
+			Lizenzbedingungen:
+		</a>
+		<br />
 <!--
 		unfinished bizness
 		<xsl:value-of select="@rdf:about" />
@@ -370,6 +380,7 @@
 			</xsl:if>
 		</xsl:for-each>
 	</div>
+
 	<div class="videometadata">
 		<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:<br />
 		<xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br /><br />
