@@ -50,6 +50,7 @@
 
 	<!-- video page -->
 	<str id="download">download</str>
+	<str id="video_license">License</str>
 
 	<!-- dublin core entities -->
 	<str id="DC.title">title</str>

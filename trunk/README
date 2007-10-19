@@ -1,9 +1,9 @@
 GNUtube - a free software video CMS
 
-Interface XML + XSL
+Frontend: XML + XSL + CSS
 (c) 2007 Nils Moskopp
 
-Background Perl
+Backend: Perl
 (c) 2007 Johannes Schauer
 
 License is the Affero General Public License version 3 or (at your option) any later version published by the Free Software Foundation.
