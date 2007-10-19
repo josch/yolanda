@@ -130,6 +130,16 @@ while(1)
 					#TODO: maybe delete entry from uploaded table after successful upload?
 					$filesize = -s "$gnutube_root/tmp/$id";
 					
+					#convert hh:mm:ss.s duration to full seconds - lazy method by using mysql
+					$sth = $dbh->prepare(qq{select time_to_sec( ? )});
+					$sth->execute($duration);
+					($duration) = $sth->fetchrow_array();
+					$sth->finish();
+					
+					#create thumbnail
+					$thumbnailsec = int($duration/3 + .5);
+					system "ffmpeg -i $gnutube_root/tmp/$id -vcodec png -vframes 1 -an -f rawvideo -ss $thumbnailsec -s 320x240 $gnutube_root/video-stills/$id";
+					
 					#check if the upload already is in the right format
 					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis')
 					{
@@ -143,7 +153,7 @@ while(1)
 						#add video to videos table
 						$sth = $dbh->prepare(qq{insert into videos (id, title, description, userid, timestamp,
 												hash, filesize, duration, width, height, fps)
-												values (?, ?, ?, ?, ?, ?, ?, time_to_sec( ? ), ?,  ?,  ?)}) or interrupt $dbh->errstr;
+												values (?, ?, ?, ?, ?, ?, ?, ?, ?,  ?,  ?)}) or interrupt $dbh->errstr;
 						$sth->execute($id, $title, $description, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
 						
@@ -164,7 +174,7 @@ while(1)
 						#add video to videos table
 						$sth = $dbh->prepare(qq{insert into videos (id, title, description, userid, timestamp,
 												hash, filesize, duration, width, height, fps)
-												values (?, ?, ?, ?, ?, ?, ?, time_to_sec( ? ), ?,  ?,  ?)}) or interrupt $dbh->errstr;
+												values (?, ?, ?, ?, ?, ?, ?, ?, ?,  ?,  ?)}) or interrupt $dbh->errstr;
 						$sth->execute($id, $title, $description, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
 						
