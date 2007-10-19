@@ -26,7 +26,7 @@ $dbh->do(qq{create table
 $dbh->do(qq{insert into
 	tagcloud values
 	(
-	'web tv', 68
+		'web tv', 68
 	)
 }) or die $dbh->errstr;
 

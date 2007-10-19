@@ -36,7 +36,7 @@ if($query->param('query'))
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
 		{
-			'thumbnail'		=> ['./video-stills/225x150/4chan_city_mashup.png'],
+			'thumbnail'		=> ["./video-stills/$id"],
 			'rdf:RDF'		=>
 			{
 				'cc:Work'		=>
@@ -66,7 +66,7 @@ if($query->param('query'))
 	#print xml
 	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
-if($query->param('sort'))
+elsif($query->param('sort'))
 {
 		%page = ();
 	
@@ -95,7 +95,7 @@ if($query->param('sort'))
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
 		{
-			'thumbnail'		=> ['./video-stills/225x150/4chan_city_mashup.png'],
+			'thumbnail'		=> ["./video-stills/$id"],
 			'rdf:RDF'		=>
 			{
 				'cc:Work'		=>
