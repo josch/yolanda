@@ -130,15 +130,14 @@ while(1)
 					#TODO: maybe delete entry from uploaded table after successful upload?
 					$filesize = -s "$gnutube_root/tmp/$id";
 					
-					#convert hh:mm:ss.s duration to full seconds - lazy method by using mysql
-					$sth = $dbh->prepare(qq{select time_to_sec( ? )});
-					$sth->execute($duration);
-					($duration) = $sth->fetchrow_array();
-					$sth->finish();
+					#convert hh:mm:ss.s duration to full seconds - thanks perl for making this so damn easy!
+					#don't want to know how this would look in python or php... hell I don't even have to create extra variables!
+					$duration =~ /^(\d{2}):(\d{2}):(\d{2})\.(\d)$/;
+					$duration = int($1*3600 + $2*60 + $3 + $4/10 + .5);
 					
 					#create thumbnail
 					$thumbnailsec = int($duration/3 + .5);
-					system "ffmpeg -i $gnutube_root/tmp/$id -vcodec png -vframes 1 -an -f rawvideo -ss $thumbnailsec -s 320x240 $gnutube_root/video-stills/$id";
+					system "ffmpeg -i $gnutube_root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s 320x240 $gnutube_root/video-stills/$id";
 					
 					#check if the upload already is in the right format
 					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis')
