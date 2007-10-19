@@ -30,6 +30,7 @@
 				<dc:rights>VIVA 2</dc:rights>
 			</cc:Work>
 			<cc:License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+				<!-- this is entirely inconsistent, i just try out everything that's available -->
 				<cc:permits rdf:resource="http://web.resource.org/cc/Reproduction" />
 				<cc:permits rdf:resource="http://web.resource.org/cc/Distribution" />
 				<cc:requires rdf:resource="http://web.resource.org/cc/Notice" />
@@ -37,6 +38,7 @@
 				<cc:requires rdf:resource="http://web.resource.org/cc/ShareAlike" />
 				<cc:requires rdf:resource="http://web.resource.org/cc/SourceCode" />
 				<cc:prohibits rdf:resource="http://web.resource.org/cc/CommercialUse" />
+				<cc:prohibits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
 			</cc:License>
 		</rdf:RDF>
 	</video>

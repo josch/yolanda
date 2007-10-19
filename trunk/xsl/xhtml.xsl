@@ -344,48 +344,56 @@
 			<xsl:value-of select="$locale_strings/str[@id='license_conditions']" />:
 		</a>
 		<br />
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="rdf:RDF/cc:License/@rdf:about" />
+			</xsl:attribute>
 <!--
-		unfinished bizness
-		<xsl:value-of select="@rdf:about" />
-		<xsl:if test="true()">
-			<img src="./images/cc/somerights.png" />
-		</xsl:if>
--->
-		<xsl:for-each select="rdf:RDF/cc:License/cc:permits">
-<!--
-			since we are talking about digital media here, distribution actually /is/ reproduction
-			(also, i was too stupid to figure out how to test for both conditions).
-			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Reproduction'">
-				<img src="./images/cc/cc-share.png" />
+			unfinished bizness
+			<xsl:value-of select="@rdf:about" />
+			<xsl:if test="true()">
+				<img src="./images/cc/somerights.png" />
 			</xsl:if>
 -->
-			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Distribution'">
-				<img src="./images/cc/cc-share.png" />
-			</xsl:if>
-			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
-				<img src="./images/cc/cc-remix.png" />
-			</xsl:if>
-		</xsl:for-each>
-		<xsl:for-each select="rdf:RDF/cc:License/cc:requires">
-			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Notice'">
-				<img src="./images/cc/cc-by.png" />
-			</xsl:if>
-			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/ShareAlike'">
-				<img src="./images/cc/cc-sharealike.png" />
-			</xsl:if>
+			<xsl:for-each select="rdf:RDF/cc:License/cc:permits">
 <!--
-			source code doesn't make much sense in video context.
-			still, this is preserved for potential future use.
-			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/SourceCode'">
-			SOURCE
-			</xsl:if>
+				since we are talking about digital media here, distribution actually /is/ reproduction
+				(also, i was too stupid to figure out how to test for both conditions).
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Reproduction'">
+					<img src="./images/cc/cc-share.png" />
+				</xsl:if>
 -->
-		</xsl:for-each>
-		<xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">		
-			<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
-				<img src="./images/cc/cc-noncommercial.png" />
-			</xsl:if>
-		</xsl:for-each>
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Distribution'">
+					<img src="./images/cc/cc-share.png" />
+				</xsl:if>
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
+					<img src="./images/cc/cc-remix.png" />
+				</xsl:if>
+			</xsl:for-each>
+			<xsl:for-each select="rdf:RDF/cc:License/cc:requires">
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Notice'">
+					<img src="./images/cc/cc-by.png" />
+				</xsl:if>
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/ShareAlike'">
+					<img src="./images/cc/cc-sharealike.png" />
+				</xsl:if>
+<!--
+				source code doesn't make much sense in video context.
+				still, this is preserved for potential future use.
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/SourceCode'">
+				SOURCE
+				</xsl:if>
+-->
+			</xsl:for-each>
+			<xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">		
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
+					<img src="./images/cc/cc-noncommercial.png" />
+				</xsl:if>
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
+					<img src="./images/cc/cc-noderivatives.png" />
+				</xsl:if>
+			</xsl:for-each>
+		</a>
 	</div>
 
 	<div class="videometadata">

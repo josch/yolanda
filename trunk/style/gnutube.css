@@ -151,7 +151,8 @@ div
 
 		div.videoccdata img
 		{
-			margin:			0.5em;
+			border-width:		0px;
+			margin:				0.5em;
 		}
 
 	div.videometadata
