@@ -25,14 +25,14 @@ if($query->param('title') or $query->param('id'))
 	if($query->param('id'))
 	{
 		#prepare query
-		$sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from videos where id = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ) from videos where id = ? }) or die $dbh->errstr;
 		#execute it
 		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
 	}
 	else
 	{
 		#prepare query
-		$sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from videos where title = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ) from videos where title = ? }) or die $dbh->errstr;
 		#execute it
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
 	}
