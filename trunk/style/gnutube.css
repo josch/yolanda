@@ -155,25 +155,40 @@ div
 			margin:				0.5em;
 		}
 
-	div.videometadata
+	table.videometadata
+	{
+		border-width:	0px;
+		width:			100%;
+	}
+
+		table.videometadata tr td.leftcell
+		{
+			color:			#606060;
+			text-align:		right;
+			width:			50%;
+		}
+
+		table.videometadata tr td.rightcell
+		{
+			text-align:		left;
+			width:			50%;
+		}
+
+	div.toplists
 	{
 		text-align:		center;
 	}
 
-	div.toplists
-	{
-		text-align:	center;
-	}
-
 	div.tagcloud
 	{
-		text-align:	center;
-		margin:		4em;
+		text-align:		center;
+		margin:			4em;
 	}
 
 	div.footer
 	{
-		text-align:			center;
+		margin:			1.5em;
+		text-align:		center;
 	}
 
 
