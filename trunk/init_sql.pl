@@ -44,32 +44,56 @@ $dbh->do(qq{create table
 $dbh->do(qq{create table
 	uploaded
 	(
-		id			int auto_increment	not null,
-		title		varchar(255)		not null,
-		description	text				not null,
-		userid		int					not null,
-		status		int					not null,
-		timestamp	datetime			not null,
-		primary key	(id)
+		id				int auto_increment	not null,
+		title			varchar(255)		not null,
+		description		varchar(255)		not null,
+		userid			int					not null,
+		status			int					not null,
+		timestamp		datetime			not null,
+		creator			varchar(255)		not null,
+		subject			varchar(255)		not null,
+		contributor		varchar(255)		not null,
+		source			varchar(255)		not null,
+		language		varchar(255)		not null,
+		coverage		varchar(255)		not null,
+		rights			varchar(255)		not null,
+		license			varchar(255)		not null,
+		notice			bool				not null,
+		derivativeworks	bool				not null,
+		sharealike		bool				not null,
+		commercialuse	bool				not null,
+		primary key		(id)
 	)
 }) or die $dbh->errstr;
 
 $dbh->do(qq{create table
 	videos
 	(
-		id			int auto_increment	not null,
-		title		varchar(255)		not null,
-		description	text				not null,
-		userid		int					not null,
-		hash		char(64)			not null,
-		timestamp	datetime			not null,
-		filesize	int					not null,
-		duration	float				not null,
-		width		smallint			not null,
-		height		smallint			not null,
-		fps			float				not null,
-		primary key	(id),
-		fulltext	(title, description)
+		id				int auto_increment	not null,
+		title			varchar(255)		not null,
+		description		varchar(255)		not null,
+		userid			int					not null,
+		hash			char(64)			not null,
+		timestamp		datetime			not null,
+		creator			varchar(255)		not null,
+		subject			varchar(255)		not null,
+		contributor		varchar(255)		not null,
+		source			varchar(255)		not null,
+		language		varchar(255)		not null,
+		coverage		varchar(255)		not null,
+		rights			varchar(255)		not null,
+		license			varchar(255)		not null,
+		notice			bool				not null,
+		derivativeworks	bool				not null,
+		sharealike		bool				not null,
+		commercialuse	bool				not null,
+		filesize		int					not null,
+		duration		float				not null,
+		width			smallint			not null,
+		height			smallint			not null,
+		fps				float				not null,
+		primary key		(id),
+		fulltext		(title, description, subject)
 	)
 }) or die $dbh->errstr;
 
