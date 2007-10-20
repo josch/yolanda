@@ -138,7 +138,16 @@ while(1)
 					
 					#create thumbnail
 					$thumbnailsec = int($duration/3 + .5);
-					system "ffmpeg -i $gnutube_root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s 320x240 $gnutube_root/video-stills/$id";
+					
+					#the width/height calculation could of course be much shorter but less readable then
+					$tnwidth = 160;
+					$tnheight = int(160*($height/$width) + .5);
+					if($tnheight > 120)
+					{
+						$tnheight = 120;
+						$tnwidth = int(120*($width/$height) + .5);
+					}
+					system "ffmpeg -i $gnutube_root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $gnutube_root/video-stills/$id";
 					
 					#check if the upload already is in the right format
 					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis')
