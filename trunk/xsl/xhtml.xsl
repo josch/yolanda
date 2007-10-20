@@ -519,7 +519,23 @@
 				</input>
 			</fieldset>
 		</form>
-
+		<form method="post">
+			<xsl:attribute name="action">
+				<xsl:value-of select="$site_strings/str[@id='page_login']" />
+			</xsl:attribute>
+			<fieldset>
+				<input name="action" type="hidden" value="openid" />
+				<xsl:value-of select="$locale_strings/str[@id='username']" />:
+				<br />				
+				<input name="user" type="text" size="30" maxlength="30" />
+				<br />
+				<input type="submit" name="login" >
+					<xsl:attribute name="value">
+						<xsl:value-of select="$locale_strings/str[@id='button_login']" />
+					</xsl:attribute>
+				</input>
+			</fieldset>
+		</form>
 	</div>
 
 </xsl:template>

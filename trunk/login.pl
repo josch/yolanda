@@ -16,11 +16,9 @@ if($query->param('action'))
 	#if login is requested
 	if($query->param('action') eq "login")
 	{
-		#prepare query
-		my $sth = $dbh->prepare(qq{select username from users
-				where password = password( ? )
-				and username = ?
-				limit 1 });
+		#prepare query - empty password are openid users so omit those entries
+		my $sth = $dbh->prepare(qq{select id from users
+				where password = password( ? ) and username = ? and not password = '' limit 1 });
 				
 		#execute query
 		$sth->execute($query->param('pass'), $query->param('user'));
@@ -42,6 +40,86 @@ if($query->param('action'))
 			print "could not log you in";
 		}
 		
+	}
+	elsif($query->param('action') eq "openid")
+	{
+		#create our openid consumer object
+		$con = Net::OpenID::Consumer->new(
+		ua => LWP::UserAgent->new, # FIXME - use LWPx::ParanoidAgent
+		cache => undef, # or File::Cache->new,
+		args => $query,
+		consumer_secret => $session->id, #is this save? don't know...
+		required_root => "http://localhost/" );
+		
+		#is an openid passed?
+		if($query->param('user'))
+		{
+			#claim identity
+			$claimed = $con->claimed_identity($query->param('user'));
+			if(!defined($claimed))
+			{
+				print $session->header();
+				print "claim failed: ", $con->err;
+			}
+			$check_url = $claimed->check_url(
+					return_to  => "http://localhost/gnutube/login.pl?action=openid&ret=true", #on success return to this address
+					trust_root => "http://localhost/"); #this is the string the user will be asked to trust
+					
+			#redirect to openid server to check claim
+			print $query->redirect($check_url);
+		}
+		#we return from an identity check
+		elsif($query->param('ret'))
+		{
+			if($setup_url = $con->user_setup_url)
+			{
+				#redirect to setup url - user will give confirmation there
+				print $query->redirect($setup_url);
+			}
+			elsif ($con->user_cancel)
+			{
+				#cancelled - redirect to login form
+				print $session->header();
+				print "cancelled";
+			}
+			elsif ($vident = $con->verified_identity)
+			{
+				#we are verified!!
+				my $verified_url = $vident->url;
+				print $session->header();
+				print "success $verified_url";
+				
+				#check if this openid user already is in database
+				my $sth = $dbh->prepare(qq{select id from users where username = ? limit 1 });
+				$sth->execute($verified_url);
+				if($sth->fetchrow_array())
+				{
+					#store session id in database
+					$sth = $dbh->prepare(qq{update users set sid = ? where username = ? }); 
+					$sth->execute($session->id, $verified_url);
+					$sth->finish();
+				}
+				else
+				{
+					#add openid user to dabase
+					$sth = $dbh->prepare(qq{insert into users (username, sid) values ( ?, ? ) }); 
+					$sth->execute($verified_url, $session->id);
+					$sth->finish();
+				}
+			}
+			else
+			{
+				#an error occured
+				print $session->header();
+				print "error validating identity: ", $con->err;
+			}
+		}
+		else
+		{
+			#someone is messing with the args
+			print $session->header();
+			print "hmm, openid action but no ret or user";
+		}
 	}
 	elsif($query->param('action') eq "logout")
 	{
