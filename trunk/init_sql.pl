@@ -48,7 +48,6 @@ $dbh->do(qq{create table
 		title			varchar(255)		not null,
 		description		varchar(255)		not null,
 		userid			int					not null,
-		status			int					not null,
 		timestamp		bigint				not null,
 		creator			varchar(255)		not null,
 		subject			varchar(255)		not null,
@@ -62,6 +61,7 @@ $dbh->do(qq{create table
 		derivativeworks	bool				not null,
 		sharealike		bool				not null,
 		commercialuse	bool				not null,
+		status			int					not null,
 		primary key		(id)
 	)
 }) or die $dbh->errstr;
@@ -73,7 +73,6 @@ $dbh->do(qq{create table
 		title			varchar(255)		not null,
 		description		varchar(255)		not null,
 		userid			int					not null,
-		hash			char(64)			not null,
 		timestamp		bigint				not null,
 		creator			varchar(255)		not null,
 		subject			varchar(255)		not null,
@@ -92,6 +91,7 @@ $dbh->do(qq{create table
 		width			smallint			not null,
 		height			smallint			not null,
 		fps				float				not null,
+		hash			char(64)			not null,
 		primary key		(id),
 		fulltext		(title, description, subject)
 	)

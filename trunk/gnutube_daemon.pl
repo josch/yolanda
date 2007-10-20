@@ -45,9 +45,10 @@ $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or interrup
 while(1)
 {
 	#get fresh video id from db
-	my $sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from uploaded where status = 0 limit 1}) or interrupt $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select id from uploaded where status = 0 limit 1}) or interrupt $dbh->errstr;
+		
 	$sth->execute() or interrupt $dbh->errstr;
-	my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array();
+	my ($id) = $sth->fetchrow_array();
 	$sth->finish() or interrupt $dbh->errstr;
 	
 	if($id)
@@ -144,16 +145,12 @@ while(1)
 					{
 						appendlog $id, "file already is ogg-theora/vorbis";
 						
-						#write status 1 to uploaded table
-						$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
-						$sth->execute(1, $id) or interrupt $dbh->errstr;
-						$sth->finish() or interrupt $dbh->errstr;
-						
 						#add video to videos table
-						$sth = $dbh->prepare(qq{insert into videos (id, title, description, userid, timestamp,
-												hash, filesize, duration, width, height, fps)
-												values (?, ?, ?, ?, ?, ?, ?, ?, ?,  ?,  ?)}) or interrupt $dbh->errstr;
-						$sth->execute($id, $title, $description, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
+						$sth = $dbh->prepare(qq{insert into videos select id, title, description, userid, timestamp, creator,
+												subject, contributor, source, language, coverage, rights, license, notice,
+												derivativeworks, sharealike, commercialuse, ?, ?, ?, ?, ?, ?
+												from uploaded where id = ?}) or interrupt $dbh->errstr;
+						$sth->execute($filesize, $duration, $width,	$height, $fps, $sha, $id) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
 						
 						#move video
@@ -162,24 +159,26 @@ while(1)
 					else #encode video
 					{
 						#FIXME: remove endtime - this is for testing only
+						#TODO: addmetadata information
 						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --endtime 10 --output $gnutube_root/videos/$id $gnutube_root/tmp/$id 2>&1";
 						appendlog $id, $audio, $video, $width, $height, $fps, $duration, $sha;
-
-						#write status 1 to uploaded table
-						$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
-						$sth->execute(1, $id) or interrupt $dbh->errstr;
-						$sth->finish() or interrupt $dbh->errstr;
 						
 						#add video to videos table
-						$sth = $dbh->prepare(qq{insert into videos (id, title, description, userid, timestamp,
-												hash, filesize, duration, width, height, fps)
-												values (?, ?, ?, ?, ?, ?, ?, ?, ?,  ?,  ?)}) or interrupt $dbh->errstr;
-						$sth->execute($id, $title, $description, $userid, $timestamp, $sha, $filesize, $duration, $width, $height, $fps) or interrupt $dbh->errstr;
+						$sth = $dbh->prepare(qq{insert into videos select id, title, description, userid, timestamp, creator,
+												subject, contributor, source, language, coverage, rights, license, notice,
+												derivativeworks, sharealike, commercialuse, ?, ?, ?, ?, ?, ?
+												from uploaded where id = ?}) or interrupt $dbh->errstr;
+						$sth->execute($filesize, $duration, $width,	$height, $fps, $sha, $id) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
 						
 						#delete temp file
 						unlink "$gnutube_root/tmp/$id";
 					}
+					
+					#write status 1 to uploaded table
+					$sth = $dbh->prepare(qq{update uploaded set status = ? where id = ?}) or interrupt $dbh->errstr;
+					$sth->execute(1, $id) or interrupt $dbh->errstr;
+					$sth->finish() or interrupt $dbh->errstr;
 				}
 			}
 		}
