@@ -90,7 +90,7 @@ if($query->param('action'))
 				print "success $verified_url";
 				
 				#check if this openid user already is in database
-				my $sth = $dbh->prepare(qq{select id from users where username = ? limit 1 });
+				my $sth = $dbh->prepare(qq{select 1 from users where username = ? limit 1 });
 				$sth->execute($verified_url);
 				if($sth->fetchrow_array())
 				{
