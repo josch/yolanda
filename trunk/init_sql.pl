@@ -61,7 +61,7 @@ $dbh->do(qq{create table
 		derivativeworks	bool				not null,
 		sharealike		bool				not null,
 		commercialuse	bool				not null,
-		status			int					not null,
+		status			int					default 0,
 		primary key		(id)
 	)
 }) or die $dbh->errstr;
@@ -92,6 +92,8 @@ $dbh->do(qq{create table
 		height			smallint			not null,
 		fps				float				not null,
 		hash			char(64)			not null,
+		viewcount		int					default 0,
+		downloadcount	int					default 0,
 		primary key		(id),
 		fulltext		(title, description, subject)
 	)
