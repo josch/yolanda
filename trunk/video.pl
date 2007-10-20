@@ -25,21 +25,26 @@ if($query->param('title') or $query->param('id'))
 	if($query->param('id'))
 	{
 		#prepare query
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ) from videos where id = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
+							creator, subject, contributor, source, language, coverage, rights, license
+							from videos where id = ? }) or die $dbh->errstr;
 		#execute it
 		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
 	}
 	else
 	{
 		#prepare query
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ) from videos where title = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
+							creator, subject, contributor, source, language, coverage, rights, license
+							from videos where title = ? }) or die $dbh->errstr;
 		#execute it
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
 	}
 	
 	if($rowcount == 1)
 	{
-		my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array();
+		my ($id, $title, $description, $userid, $timestamp, $creator, $subject,
+			$contributor, $source, $language, $coverage, $rights, $license,) = $sth->fetchrow_array();
 
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'video'} },
@@ -49,15 +54,23 @@ if($query->param('title') or $query->param('id'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'		=> "./videos/$id",
-					'dc:title'		=> [$title],
-					'dc:date'		=> [$timestamp],
-					'dc:publisher'	=> [get_username_from_id($userid)],
-					'dc:description'=> [$description]
+					'rdf:about'			=> "./videos/$id",
+					'dc:title'			=> [$title],
+					'dc:creator'		=> [$creator],
+					'dc:subject'		=> [$subject],
+					'dc:description'	=> [$description],
+					'dc:publisher'		=> [get_username_from_id($userid)],
+					'dc:contributor'	=> [$contributor],
+					'dc:date'			=> [$timestamp],
+					'dc:identifier'		=> ["./videos/$id"],
+					'dc:source'			=> [$source],
+					'dc:language'		=> [$language],
+					'dc:coverage'		=> [$coverage],
+					'dc:rights'			=> [$rights]
 				},
 				'cc:License'	=>
 				{
-					'rdf:about' 	=> 'http://creativecommons.org/licenses/GPL/2.0/'
+					'rdf:about' 	=> $license
 				}
 			}
 		};
