@@ -132,7 +132,8 @@
 			</xsl:choose>
 
 			<hr />
-	
+
+			<xsl:call-template name="messagebox"/>
 			<xsl:apply-templates />
 
 			<div class="footer">
@@ -225,6 +226,15 @@
 
 	<div class="logo-small-bottom">
 		<img src="./images/logo-small-bottom.png" alt="GNUtube logo top (160x25)" />
+	</div>
+
+</xsl:template>
+
+<xsl:template name="messagebox">
+
+	<div class="messagebox">
+		<img src="./images/tango/dialog-information.png" />
+		<span style="information">You are now logged in as "pedobear".</span>
 	</div>
 
 </xsl:template>

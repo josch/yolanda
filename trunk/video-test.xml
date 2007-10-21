@@ -3,6 +3,7 @@
 
 <page
 	locale="en-US"
+	message="error_http_404"
 	stylesheet="./style/gnutube.css"
 	username="pedobear@myopenid.net"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
