@@ -6,7 +6,7 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
-#check if query is set
+#check if id or title is passed
 if($query->param('title') or $query->param('id'))
 {
 	%page = ();
@@ -24,25 +24,40 @@ if($query->param('title') or $query->param('id'))
 	
 	if($query->param('id'))
 	{
-		#prepare query
+		#if id is passed ignore title and check for the id
 		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where id = ? }) or die $dbh->errstr;
-		#execute it
 		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
 	}
 	else
 	{
-		#prepare query
+		#if no id was passed there has to be a title we search for
 		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where title = ? }) or die $dbh->errstr;
-		#execute it
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
 	}
 	
-	if($rowcount == 1)
+	#if the args are wrong there my be zero results
+	#if there was a title passed, then perform a search
+	if($rowcount == 0 and $query->param('title'))
 	{
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
+							creator, subject, contributor, source, language, coverage, rights, license
+							from videos where match(title, description, subject) against( ? ) }) or die $dbh->errstr;
+		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
+	}
+	
+	if($rowcount == 0)
+	{
+		#still no results
+		#there is nothing we can do now - this video doesn't exist...
+		#TODO: insert error output
+	}
+	elsif($rowcount == 1)
+	{
+		#if there was a single result, display the video
 		my ($id, $title, $description, $userid, $timestamp, $creator, $subject,
 			$contributor, $source, $language, $coverage, $rights, $license,) = $sth->fetchrow_array();
 
@@ -77,6 +92,7 @@ if($query->param('title') or $query->param('id'))
 	}
 	else
 	{
+		#when an ambigous title was passed there may me many results - display them like search.pl does
 		$page->{results}->{query} = decode_utf8($query->param('title'));
 		#get every returned value
 		while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
