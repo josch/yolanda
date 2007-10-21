@@ -32,6 +32,15 @@
 	<str id="query_mostdownloads">most downloads</str>
 	<str id="query_bestrated">best rated</str>
 
+	<!-- errors -->
+	<str id="error_202c">Error 202c - Access forbidden by government.</str>
+
+	<!-- information -->
+	<str id="information_logged_in">You are now logged in.</str>
+	<str id="information_logged_out">You are now logged out.</str>
+
+	<!-- warnings -->
+
 	<!-- results page-->
 	<str id="results_for_query">results for query</str>
 	

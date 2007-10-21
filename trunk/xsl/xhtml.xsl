@@ -133,7 +133,6 @@
 
 			<hr />
 
-			<xsl:call-template name="messagebox"/>
 			<xsl:apply-templates />
 
 			<div class="footer">
@@ -230,11 +229,26 @@
 
 </xsl:template>
 
-<xsl:template name="messagebox">
+<xsl:template match="message">
 
 	<div class="messagebox">
-		<img src="./images/tango/dialog-information.png" />
-		<span style="information">You are now logged in as "pedobear".</span>
+		<xsl:attribute name="id">
+			<xsl:value-of select="@type" />
+		</xsl:attribute>
+		<xsl:choose>
+			<xsl:when test="@type='error'">
+				<img src="./images/tango/dialog-error.png" />
+			</xsl:when>
+			<xsl:when test="@type='information'">
+				<img src="./images/tango/dialog-information.png" />
+			</xsl:when>
+			<xsl:when test="@type='warning'">
+				<img src="./images/tango/dialog-warning.png" />
+			</xsl:when>
+		</xsl:choose>
+		<xsl:variable name="messagetext" select="@text" />
+		<xsl:value-of select="$locale_strings/str[@id=$messagetext]" />
+		<!-- probably one can do this on one line, dunno how -->
 	</div>
 
 </xsl:template>
