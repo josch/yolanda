@@ -141,11 +141,11 @@ while(1)
 					
 					#the width/height calculation could of course be much shorter but less readable then
 					$tnwidth = 160;
-					$tnheight = int(160*($height/$width) + .5);
+					$tnheight = int(160*($height/$width)/2 + .5)*2;
 					if($tnheight > 120)
 					{
 						$tnheight = 120;
-						$tnwidth = int(120*($width/$height) + .5);
+						$tnwidth = int(120*($width/$height)/2 + .5)*2;
 					}
 					system "ffmpeg -i $gnutube_root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $gnutube_root/video-stills/$id";
 					
