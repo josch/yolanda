@@ -41,6 +41,19 @@ $dbh->do(qq{create table
 	)
 }) or die $dbh->errstr;
 
+$dbh->do(qq{insert into
+	users
+	(
+		username,
+		password
+	)
+	values
+	(
+		'test',
+		password( 'test' )
+	)
+}) or die $dbh->errstr;
+
 $dbh->do(qq{create table
 	uploaded
 	(
@@ -96,6 +109,15 @@ $dbh->do(qq{create table
 		downloadcount	int					default 0,
 		primary key		(id),
 		fulltext		(title, description, subject)
+	)
+}) or die $dbh->errstr;
+
+$dbh->do(qq{create table
+	referer
+	(
+		videoid			int					not null,
+		referer			varchar(255)		not null,
+		count			int					default 1
 	)
 }) or die $dbh->errstr;
 
