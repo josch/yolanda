@@ -15,6 +15,8 @@ $dbh->do(qq{drop table uploaded});
 
 $dbh->do(qq{drop table tagcloud});
 
+$dbh->do(qq{drop table referer});
+
 $dbh->do(qq{create table
 	tagcloud
 	(
