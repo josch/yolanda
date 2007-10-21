@@ -157,7 +157,7 @@ while(1)
 						#add video to videos table
 						$sth = $dbh->prepare(qq{insert into videos select id, title, description, userid, timestamp, creator,
 												subject, contributor, source, language, coverage, rights, license, notice,
-												derivativeworks, sharealike, commercialuse, ?, ?, ?, ?, ?, ?
+												derivativeworks, sharealike, commercialuse, ?, ?, ?, ?, ?, ?, 0, 0
 												from uploaded where id = ?}) or interrupt $dbh->errstr;
 						$sth->execute($filesize, $duration, $width,	$height, $fps, $sha, $id) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
@@ -175,7 +175,7 @@ while(1)
 						#add video to videos table
 						$sth = $dbh->prepare(qq{insert into videos select id, title, description, userid, timestamp, creator,
 												subject, contributor, source, language, coverage, rights, license, notice,
-												derivativeworks, sharealike, commercialuse, ?, ?, ?, ?, ?, ?
+												derivativeworks, sharealike, commercialuse, ?, ?, ?, ?, ?, ?, 0, 0
 												from uploaded where id = ?}) or interrupt $dbh->errstr;
 						$sth->execute($filesize, $duration, $width,	$height, $fps, $sha, $id) or interrupt $dbh->errstr;
 						$sth->finish() or interrupt $dbh->errstr;
