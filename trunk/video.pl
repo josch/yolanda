@@ -52,8 +52,9 @@ if($query->param('title') or $query->param('id'))
 	if($rowcount == 0)
 	{
 		#still no results
-		#there is nothing we can do now - this video doesn't exist...
-		#TODO: insert error output
+		#there is nothing we can do now - this video doesn't exist...	
+		$page->{'message'}->{'type'} = "error";
+		$page->{'message'}->{'text'} = "error_202c";
 	}
 	elsif($rowcount == 1)
 	{
@@ -162,6 +163,22 @@ if($query->param('title') or $query->param('id'))
 }
 else
 {
-	print $session->header();
-	print "no query passed";
+	%page = ();
+	
+	#if a username is associated with session id, username is nonempty
+	$page->{'username'} = get_username_from_sid($session->id);
+	$page->{'locale'} = $locale;
+	$page->{'stylesheet'} = $stylesheet;
+	$page->{'xmlns:dc'} = $xmlns_dc;
+	$page->{'xmlns:cc'} = $xmlns_cc;
+	$page->{'xmlns:rdf'} = $xmlns_rdf;
+	
+	$page->{'message'}->{'type'} = "error";
+	$page->{'message'}->{'text'} = "error_202c";
+	
+	#print xml http header along with session cookie
+	print $session->header(-type=>'text/xml');
+
+	#print xml
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }

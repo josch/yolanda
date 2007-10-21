@@ -13,9 +13,12 @@ if($username)
 	%page = ();
 
 	#if a username is associated with session id, username is nonempty
-	$page->{username} = get_username_from_sid($session->id);
-	$page->{locale} = $locale;
-	$page->{stylesheet} = $stylesheet;
+	$page->{'username'} = get_username_from_sid($session->id);
+	$page->{'locale'} = $locale;
+	$page->{'stylesheet'} = $stylesheet;
+	$page->{'xmlns:dc'} = $xmlns_dc;
+	$page->{'xmlns:cc'} = $xmlns_cc;
+	$page->{'xmlns:rdf'} = $xmlns_rdf;
 	$page->{uploadform} = [''];
 
 	#print xml http header along with session cookie
@@ -25,6 +28,22 @@ if($username)
 }
 else
 {
-	print $session->header();
-	print "nope...";
+	%page = ();
+	
+	#if a username is associated with session id, username is nonempty
+	$page->{'username'} = get_username_from_sid($session->id);
+	$page->{'locale'} = $locale;
+	$page->{'stylesheet'} = $stylesheet;
+	$page->{'xmlns:dc'} = $xmlns_dc;
+	$page->{'xmlns:cc'} = $xmlns_cc;
+	$page->{'xmlns:rdf'} = $xmlns_rdf;
+	
+	$page->{'message'}->{'type'} = "error";
+	$page->{'message'}->{'text'} = "error_202c";
+	
+	#print xml http header along with session cookie
+	print $session->header(-type=>'text/xml');
+
+	#print xml
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
