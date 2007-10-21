@@ -58,9 +58,38 @@ if($query->param('title') or $query->param('id'))
 	elsif($rowcount == 1)
 	{
 		#if there was a single result, display the video
-		my ($id, $title, $description, $userid, $timestamp, $creator, $subject,
+		my ($title, $description, $userid, $timestamp, $creator, $subject,
 			$contributor, $source, $language, $coverage, $rights, $license,) = $sth->fetchrow_array();
-
+		
+		#finish query
+		$sth->finish() or die $dbh->errstr;
+		
+		#if referer is not the local site update referer table
+		$referer = $query->referer() or $referer = '';
+		$server_name = $query->server_name();
+		if($referer !~ /^\w+:\/\/$server_name/)
+		{
+			#check if already in database
+			$sth = $dbh->prepare(qq{select 1 from referer where videoid = ? and referer = ? }) or die $dbh->errstr;
+			my $rowcount = $sth->execute($query->param('id'), $referer) or die $dbh->errstr;
+			$sth->finish() or die $dbh->errstr;
+			
+			if($rowcount > 0)
+			{
+				#video is in database - increase referercount
+				$sth = $dbh->prepare(qq{update referer set count=count+1 where videoid = ? and referer = ? }) or die $dbh->errstr;
+				$sth->execute($query->param('id'), $referer) or die $dbh->errstr;
+				$sth->finish();
+			}
+			else
+			{
+				#add new referer
+				$sth = $dbh->prepare(qq{insert into referer (videoid, referer) values (?, ?) }) or die $dbh->errstr;
+				$sth->execute($query->param('id'), $referer) or die $dbh->errstr;
+				$sth->finish();
+			}
+		}
+		
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'video'} },
 		{
@@ -69,7 +98,7 @@ if($query->param('title') or $query->param('id'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'			=> "./videos/$id",
+					'rdf:about'			=> "./videos/".$query->param('id'),
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
@@ -77,7 +106,7 @@ if($query->param('title') or $query->param('id'))
 					'dc:publisher'		=> [get_username_from_id($userid)],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["./videos/$id"],
+					'dc:identifier'		=> ["./videos/".$query->param('id')],
 					'dc:source'			=> [$source],
 					'dc:language'		=> [$language],
 					'dc:coverage'		=> [$coverage],
@@ -95,7 +124,7 @@ if($query->param('title') or $query->param('id'))
 		#when an ambigous title was passed there may me many results - display them like search.pl does
 		$page->{results}->{query} = decode_utf8($query->param('title'));
 		#get every returned value
-		while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
+		while (my ($title, $description, $userid, $timestamp) = $sth->fetchrow_array())
 		{
 			#before code cleanup, this was a really obfuscated array/hash creation
 			push @{ $page->{'results'}->{'result'} },
@@ -105,7 +134,7 @@ if($query->param('title') or $query->param('id'))
 				{
 					'cc:Work'		=>
 					{
-						'rdf:about'		=> "./video.pl?title=$title&id=$id",
+						'rdf:about'		=> "./video.pl?title=$title&id=".$query->param('id'),
 						'dc:title'		=> [$title],
 						'dc:date'		=> [$timestamp],
 						'dc:publisher'	=> [get_username_from_id($userid)],
@@ -118,10 +147,9 @@ if($query->param('title') or $query->param('id'))
 				}
 			};
 		}
+		#finish query
+		$sth->finish() or die $dbh->errstr;
 	}
-	
-	#finish query
-	$sth->finish() or die $dbh->errstr;
 	
 	#close db
 	$dbh->disconnect() or die $dbh->errstr;
