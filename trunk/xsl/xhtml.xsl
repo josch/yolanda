@@ -282,9 +282,9 @@
 					</a>
 				</td>
 				<td>
-					<xsl:value-of select="$locale_strings/str[@id='DC.title']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
-					<xsl:value-of select="$locale_strings/str[@id='DC.creator']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
-					<xsl:value-of select="$locale_strings/str[@id='DC.publisher']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
+					<xsl:value-of select="$locale_strings/str[@id='DC.Title']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
+					<xsl:value-of select="$locale_strings/str[@id='DC.Creator']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
+					<xsl:value-of select="$locale_strings/str[@id='DC.Publisher']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
 				</td>
 			</tr>
 		</xsl:for-each>
@@ -399,7 +399,7 @@
 	<table class="videometadata">
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Title']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
@@ -407,7 +407,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.creator']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Creator']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:creator" />
@@ -415,7 +415,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.subject']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Subject']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:subject" />
@@ -423,7 +423,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.description']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Description']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:description" />
@@ -431,7 +431,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.publisher']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Publisher']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
@@ -439,7 +439,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.date']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Date']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:date" />
@@ -447,7 +447,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.source']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Source']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:source" />
@@ -455,7 +455,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.rights']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Rights']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:rights" />
@@ -551,15 +551,35 @@
 			<fieldset>
 				<xsl:value-of select="$locale_strings/str[@id='file']" />:
 				<br />				
-				<input name="file" type="file" size="15" />
+				<input name="file" type="file" size="13" />
 				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.title']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Title']" />:
 				<br />
-				<input name="title" type="text" size="30" />
+				<input name="DC.Title" type="text" size="30" />
 				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.description']" />:
+				<xsl:value-of select="$locale_strings/str[@id='DC.Creator']" />:
 				<br />
-				<input name="description" type="text" size="30" />
+				<input name="DC.Creator" type="text" size="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='DC.Subject']" />:
+				<br />
+				<input name="DC.Subject" type="text" size="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='DC.Description']" />:
+				<br />
+				<input name="DC.Description" type="text" size="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='DC.Source']" />:
+				<br />
+				<input name="DC.Source" type="text" size="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='DC.Language']" />:
+				<br />
+				<input name="DC.Language" type="text" size="30" />
+				<br />
+				<xsl:value-of select="$locale_strings/str[@id='DC.Coverage']" />:
+				<br />
+				<input name="DC.Coverage" type="text" size="30" />
 				<br />
 				<input type="submit" name="submit" >
 					<xsl:attribute name="value">

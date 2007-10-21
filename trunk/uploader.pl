@@ -27,7 +27,7 @@ if($userid)
 	
 	#make new entry for video into the databse
 	my $sth = $dbh->prepare(qq{insert into uploaded (title, description, userid, timestamp) values ( ?, ?, ?, unix_timestamp())}) or die $dbh->errstr;
-	$sth->execute($query->param("title"), $query->param("description"), $userid) or die $dbh->errstr;
+	$sth->execute($query->param("DC.Title"), $query->param("DC.Description"), $userid) or die $dbh->errstr;
 	$sth->finish() or die $dbh->errstr;
 	
 	#get the id of the inserted db entry

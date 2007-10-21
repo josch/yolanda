@@ -53,15 +53,17 @@
 	<str id="license_conditions">license conditions</str>
 
 	<!-- dublin core entities -->
-	<str id="DC.title">title</str>
-	<str id="DC.creator">author</str>
-	<str id="DC.subject">subject</str>
-	<str id="DC.description">description</str>
-	<str id="DC.publisher">uploader</str>
-	<str id="DC.contributor">contributor</str>
-	<str id="DC.date">date</str>
-	<str id="DC.source">source</str>
-	<str id="DC.rights">righs holder</str>
+	<str id="DC.Title">title</str>
+	<str id="DC.Creator">author</str>
+	<str id="DC.Subject">subject</str>
+	<str id="DC.Description">description</str>
+	<str id="DC.Publisher">uploader</str>
+	<str id="DC.Contributor">contributor</str>
+	<str id="DC.Date">date</str>
+	<str id="DC.Source">source</str>
+	<str id="DC.Language">language</str>
+	<str id="DC.Coverage">coverage</str>
+	<str id="DC.Rights">righs holder</str>
 
 </strings>
 

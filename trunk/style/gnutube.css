@@ -152,7 +152,9 @@ div
 		div.videoccdata img
 		{
 			border-width:		0px;
-			margin:				0.5em;
+			margin-left:		0.5em;
+			margin-right:		0.5em;
+			margin-top:			0.5em;
 		}
 
 	table.videometadata
