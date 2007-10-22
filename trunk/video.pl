@@ -25,7 +25,7 @@ if($query->param('title') or $query->param('id'))
 	if($query->param('id'))
 	{
 		#if id is passed ignore title and check for the id
-		$sth = $dbh->prepare(qq{select title, description, userid, from_unixtime( timestamp ),
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where id = ? }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
@@ -33,7 +33,7 @@ if($query->param('title') or $query->param('id'))
 	else
 	{
 		#if no id was passed there has to be a title we search for
-		$sth = $dbh->prepare(qq{select title, description, userid, from_unixtime( timestamp ),
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where title = ? }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
@@ -43,12 +43,13 @@ if($query->param('title') or $query->param('id'))
 	#if there was a title passed, then perform a search
 	if($rowcount == 0 and $query->param('title'))
 	{
-		$sth = $dbh->prepare(qq{select title, description, userid, from_unixtime( timestamp ),
+		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where match(title, description, subject) against( ? ) }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
 	}
 	
+	#from this point on, do not use $query->param('id') anymore - we do not know what was given
 	if($rowcount == 0)
 	{
 		#still no results
@@ -59,11 +60,18 @@ if($query->param('title') or $query->param('id'))
 	elsif($rowcount == 1)
 	{
 		#if there was a single result, display the video
-		my ($title, $description, $userid, $timestamp, $creator, $subject,
+		my ($id, $title, $description, $userid, $timestamp, $creator, $subject,
 			$contributor, $source, $language, $coverage, $rights, $license,) = $sth->fetchrow_array();
 		
 		#finish query
 		$sth->finish() or die $dbh->errstr;
+		
+		
+		#check if a comment is about to be created and the user is logged in
+		if($query->param('comment') and $userid = get_userid_from_sid($session->id))
+		{
+			$dbh->do(qq{insert into comments (userid, videoid, message) values (?, ?, ?)}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
+		}
 		
 		#if referer is not the local site update referer table
 		$referer = $query->referer() or $referer = '';
@@ -72,21 +80,21 @@ if($query->param('title') or $query->param('id'))
 		{
 			#check if already in database
 			$sth = $dbh->prepare(qq{select 1 from referer where videoid = ? and referer = ? }) or die $dbh->errstr;
-			my $rowcount = $sth->execute($query->param('id'), $referer) or die $dbh->errstr;
+			my $rowcount = $sth->execute($id, $referer) or die $dbh->errstr;
 			$sth->finish() or die $dbh->errstr;
 			
 			if($rowcount > 0)
 			{
 				#video is in database - increase referercount
 				$sth = $dbh->prepare(qq{update referer set count=count+1 where videoid = ? and referer = ? }) or die $dbh->errstr;
-				$sth->execute($query->param('id'), $referer) or die $dbh->errstr;
+				$sth->execute($id, $referer) or die $dbh->errstr;
 				$sth->finish();
 			}
 			else
 			{
 				#add new referer
 				$sth = $dbh->prepare(qq{insert into referer (videoid, referer) values (?, ?) }) or die $dbh->errstr;
-				$sth->execute($query->param('id'), $referer) or die $dbh->errstr;
+				$sth->execute($id, $referer) or die $dbh->errstr;
 				$sth->finish();
 			}
 		}
@@ -99,7 +107,7 @@ if($query->param('title') or $query->param('id'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'			=> "./videos/".$query->param('id'),
+					'rdf:about'			=> "./videos/$id",
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
@@ -107,7 +115,7 @@ if($query->param('title') or $query->param('id'))
 					'dc:publisher'		=> [get_username_from_id($userid)],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["./videos/".$query->param('id')],
+					'dc:identifier'		=> [$id],
 					'dc:source'			=> [$source],
 					'dc:language'		=> [$language],
 					'dc:coverage'		=> [$coverage],

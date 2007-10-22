@@ -486,6 +486,21 @@
 			</td>
 		</tr>
 	</table>
+	
+	<form method="post" action="video.pl">
+		<fieldset>
+			<input name="id" type="hidden">
+				<xsl:attribute name="value">
+					<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+				</xsl:attribute>
+			</input>
+			Leave Comment:
+			<br />
+			<textarea name="comment" cols="50" rows="5"></textarea>
+			<br />
+			<input type="submit" name="send" />
+		</fieldset>
+	</form>
 
 </xsl:template>
 

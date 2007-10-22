@@ -19,7 +19,7 @@ $dbh->do(qq{drop table referer});
 
 $dbh->do(qq{drop table ratings});
 
-$dbh->do(qq{drop table messages});
+$dbh->do(qq{drop table comments});
 
 $dbh->do(qq{create table
 	tagcloud
@@ -137,14 +137,13 @@ $dbh->do(qq{create table
 }) or die $dbh->errstr;
 
 $dbh->do(qq{create table
-	messages
+	comments
 	(
 		id				int auto_increment	not null,
 		userid			int					not null,
 		videoid			int					not null,
-		replyto			int					default 0,
 		message			varchar(255)		not null,
-		primary key		(id),
+		primary key		(id)
 	)
 }) or die $dbh->errstr;
 
