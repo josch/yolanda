@@ -58,7 +58,7 @@ if($query->param('id'))
 			$sth->execute($query->param('id'));
 			
 			print $query->header(-type=>'application/x-download',
-						-attachment=>$title.".ogg");
+						-attachment=>$title.".ogv");
 		}
 		
 		#in both cases - do some slurp-eaze to the browser
