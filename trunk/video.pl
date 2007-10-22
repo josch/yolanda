@@ -70,7 +70,7 @@ if($query->param('title') or $query->param('id'))
 		#check if a comment is about to be created and the user is logged in
 		if($query->param('comment') and $userid = get_userid_from_sid($session->id))
 		{
-			$dbh->do(qq{insert into comments (userid, videoid, message) values (?, ?, ?)}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
+			$dbh->do(qq{insert into comments (userid, videoid, text) values (?, ?, ?)}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
 		}
 		
 		#if referer is not the local site update referer table
@@ -127,6 +127,18 @@ if($query->param('title') or $query->param('id'))
 				}
 			}
 		};
+		
+		#get comments
+		$sth = $dbh->prepare(qq{select comments.text, users.username from comments, users where
+								comments.videoid=? and users.id=comments.userid});
+		$sth->execute($id);
+		while (my ($text, $username) = $sth->fetchrow_array())
+		{
+			push @{ $page->{'comments'}->{'comment'} }, {
+				'text'	=> decode_utf8($text),
+				'user'	=> $username
+			};
+		}
 	}
 	else
 	{

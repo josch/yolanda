@@ -501,6 +501,19 @@
 			<input type="submit" name="send" />
 		</fieldset>
 	</form>
+	
+	<table class="videometadata">
+		<xsl:for-each select="/page/comments/comment">
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="@user" />
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="@text" />
+				</td>
+			</tr>
+		</xsl:for-each>
+	</table>
 
 </xsl:template>
 

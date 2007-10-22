@@ -142,7 +142,7 @@ $dbh->do(qq{create table
 		id				int auto_increment	not null,
 		userid			int					not null,
 		videoid			int					not null,
-		message			varchar(255)		not null,
+		text			varchar(255)		not null,
 		primary key		(id)
 	)
 }) or die $dbh->errstr;
