@@ -40,6 +40,16 @@
 	<str id="information_logged_out">You are now logged out.</str>
 
 	<!-- warnings -->
+	<str id="warning_missing_DC.Title">You did not supply a title.</str>
+	<str id="warning_missing_DC.Creator">You did not supply a creator.</str>
+	<str id="warning_missing_DC.Subject">You did not supply a subject.</str>
+	<str id="warning_missing_DC.Description">You did not supply a description.</str>
+	<str id="warning_missing_DC.Publisher">You did not supply a publisher.</str>
+	<str id="warning_missing_DC.Title">You did not supply a title.</str>
+	<str id="warning_missing_DC.Source">You did not supply a source.</str>
+	<str id="warning_missing_DC.Language">You did not supply a language.</str>
+	<str id="warning_missing_DC.Coverage">You did not supply a coverage.</str>
+	<str id="warning_missing_DC.Rights">You did not supply a rights holder.</str>
 
 	<!-- results page-->
 	<str id="results_for_query">results for query</str>
