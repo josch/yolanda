@@ -25,7 +25,7 @@ if($query->param('title') or $query->param('id'))
 	if($query->param('id'))
 	{
 		#if id is passed ignore title and check for the id
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
+		$sth = $dbh->prepare(qq{select title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where id = ? }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
@@ -33,7 +33,7 @@ if($query->param('title') or $query->param('id'))
 	else
 	{
 		#if no id was passed there has to be a title we search for
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
+		$sth = $dbh->prepare(qq{select title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where title = ? }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
@@ -43,7 +43,7 @@ if($query->param('title') or $query->param('id'))
 	#if there was a title passed, then perform a search
 	if($rowcount == 0 and $query->param('title'))
 	{
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
+		$sth = $dbh->prepare(qq{select title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where match(title, description, subject) against( ? ) }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
