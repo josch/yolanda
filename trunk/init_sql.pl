@@ -17,6 +17,10 @@ $dbh->do(qq{drop table tagcloud});
 
 $dbh->do(qq{drop table referer});
 
+$dbh->do(qq{drop table ratings});
+
+$dbh->do(qq{drop table messages});
+
 $dbh->do(qq{create table
 	tagcloud
 	(
@@ -120,6 +124,27 @@ $dbh->do(qq{create table
 		videoid			int					not null,
 		referer			varchar(255)		not null,
 		count			int					default 1
+	)
+}) or die $dbh->errstr;
+
+$dbh->do(qq{create table
+	ratings
+	(
+		videoid			int					not null,
+		userid			int					not null,
+		rating			tinyint				not null
+	)
+}) or die $dbh->errstr;
+
+$dbh->do(qq{create table
+	messages
+	(
+		id				int auto_increment	not null,
+		userid			int					not null,
+		videoid			int					not null,
+		replyto			int					default 0,
+		message			varchar(255)		not null,
+		primary key		(id),
 	)
 }) or die $dbh->errstr;
 
