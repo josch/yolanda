@@ -488,6 +488,19 @@
 	</table>
 	
 	<table class="videometadata">
+		<xsl:for-each select="/page/referers/referer">
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="@count" />
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="@referer" />
+				</td>
+			</tr>
+		</xsl:for-each>
+	</table>
+	
+	<table class="videometadata">
 		<xsl:for-each select="/page/comments/comment">
 			<tr>
 				<td class="leftcell">

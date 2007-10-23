@@ -139,6 +139,18 @@ if($query->param('title') or $query->param('id'))
 				'user'	=> $username
 			};
 		}
+		
+		#get referers
+		$sth = $dbh->prepare(qq{select count, referer from referer where videoid=?});
+		$sth->execute($id);
+		while (my ($count, $referer) = $sth->fetchrow_array())
+		{
+			$referer or $referer = 'no referer (refreshed, manually entered url or bookmark)';
+			push @{ $page->{'referers'}->{'referer'} }, {
+				'count'		=> $count,
+				'referer'	=> $referer
+			};
+		}		
 	}
 	else
 	{
