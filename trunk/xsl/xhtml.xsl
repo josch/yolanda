@@ -514,13 +514,11 @@
 	</table>
 
 	<div class="">
-		<form method="post" action="video.pl">
+		<form method="post">
+			<xsl:attribute name="action">
+				<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+			</xsl:attribute>
 			<fieldset>
-				<input name="id" type="hidden">
-					<xsl:attribute name="value">
-						<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-					</xsl:attribute>
-				</input>
 				<xsl:value-of select="$locale_strings/str[@id='DC.Date']" />
 				<br />
 				<textarea name="comment" cols="50" rows="5"></textarea>

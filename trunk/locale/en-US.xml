@@ -51,6 +51,7 @@
 	<str id="information_logged_out">You are now logged out.</str>
 	<str id="information_metainformation_needed">To put the video into context, additional metainformation is needed.</str>
 	<str id="information_metainformation_rights"></str>
+	<str id="information_comment_created">Your comment has been created.</str>
 
 	<!-- warnings -->
 

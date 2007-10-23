@@ -7,7 +7,7 @@ $query = new CGI;
 $session = new CGI::Session;
 
 #check if id or title is passed
-if($query->param('title') or $query->param('id'))
+if($query->url_param('title') or $query->url_param('id'))
 {
 	%page = ();
 	
@@ -22,13 +22,13 @@ if($query->param('title') or $query->param('id'))
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
-	if($query->param('id'))
+	if($query->url_param('id'))
 	{
 		#if id is passed ignore title and check for the id
 		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where id = ? }) or die $dbh->errstr;
-		$rowcount = $sth->execute($query->param('id')) or die $dbh->errstr;
+		$rowcount = $sth->execute($query->url_param('id')) or die $dbh->errstr;
 	}
 	else
 	{
@@ -36,17 +36,17 @@ if($query->param('title') or $query->param('id'))
 		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where title = ? }) or die $dbh->errstr;
-		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
+		$rowcount = $sth->execute($query->url_param('title')) or die $dbh->errstr;
 	}
 	
 	#if the args are wrong there my be zero results
 	#if there was a title passed, then perform a search
-	if($rowcount == 0 and $query->param('title'))
+	if($rowcount == 0 and $query->url_param('title'))
 	{
 		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
 							creator, subject, contributor, source, language, coverage, rights, license
 							from videos where match(title, description, subject) against( ? ) }) or die $dbh->errstr;
-		$rowcount = $sth->execute($query->param('title')) or die $dbh->errstr;
+		$rowcount = $sth->execute($query->url_param('title')) or die $dbh->errstr;
 	}
 	
 	#from this point on, do not use $query->param('id') anymore - we do not know what was given
@@ -66,11 +66,24 @@ if($query->param('title') or $query->param('id'))
 		#finish query
 		$sth->finish() or die $dbh->errstr;
 		
-		
-		#check if a comment is about to be created and the user is logged in
-		if($query->param('comment') and $userid = get_userid_from_sid($session->id))
+		#if user is logged in
+		if($userid = get_userid_from_sid($session->id)
 		{
-			$dbh->do(qq{insert into comments (userid, videoid, text) values (?, ?, ?)}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
+			#check if a comment is about to be created
+			if($query->param('comment'))
+			{
+				#output infobox
+				$page->{'message'}->{'type'} = "information";
+				$page->{'message'}->{'text'} = "information_comment_created";
+			
+				#add to database
+				$dbh->do(qq{insert into comments (userid, videoid, text) values (?, ?, ?)}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
+			}
+			#check if user is about to rate video
+			elsif($query->param('rating'))
+			{
+				$dbh->do(qq{insert into ratings (userid, videoid, rating) values (?, ?, ?)}, undef, $userid, $id, $query->param('rating')) or die $dbh->errstr;
+			}
 		}
 		
 		#if referer is not the local site update referer table
@@ -107,7 +120,7 @@ if($query->param('title') or $query->param('id'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'			=> "./videos/$id",
+					'rdf:about'			=> "download.pl?id=$id&view=true",
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
@@ -115,7 +128,7 @@ if($query->param('title') or $query->param('id'))
 					'dc:publisher'		=> [get_username_from_id($userid)],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> [$id],
+					'dc:identifier'		=> ["video.pl?title=$title&id=$id"],
 					'dc:source'			=> [$source],
 					'dc:language'		=> [$language],
 					'dc:coverage'		=> [$coverage],
@@ -155,9 +168,9 @@ if($query->param('title') or $query->param('id'))
 	else
 	{
 		#when an ambigous title was passed there may me many results - display them like search.pl does
-		$page->{results}->{query} = decode_utf8($query->param('title'));
+		$page->{results}->{query} = decode_utf8($query->url_param('title'));
 		#get every returned value
-		while (my ($title, $description, $userid, $timestamp) = $sth->fetchrow_array())
+		while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
 		{
 			#before code cleanup, this was a really obfuscated array/hash creation
 			push @{ $page->{'results'}->{'result'} },
@@ -167,7 +180,7 @@ if($query->param('title') or $query->param('id'))
 				{
 					'cc:Work'		=>
 					{
-						'rdf:about'		=> "./video.pl?title=$title&id=".$query->param('id'),
+						'rdf:about'		=> "./video.pl?title=$title&id=".$id,
 						'dc:title'		=> [$title],
 						'dc:date'		=> [$timestamp],
 						'dc:publisher'	=> [get_username_from_id($userid)],
