@@ -89,13 +89,9 @@ div
 
 	div.loginform, div.registerform, div.uploadform
 	{
-		padding:		1.5em;
-		text-align:		center;
-	}
-	
-	div.loginform form, div.registerform form, div.uploadform form
-	{
+		line-height:	2.5em;
 		margin:			1.5em;
+		text-align:		center;
 	}
 
 	div.logo-big
@@ -225,4 +221,9 @@ hr
 	background-color:	#c0c0c0;
 	position:			relative;
 	top:				0.25em;
+}
+
+span.protip
+{
+	color:				#606060;
 }

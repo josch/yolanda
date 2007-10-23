@@ -487,21 +487,6 @@
 		</tr>
 	</table>
 	
-	<form method="post" action="video.pl">
-		<fieldset>
-			<input name="id" type="hidden">
-				<xsl:attribute name="value">
-					<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-				</xsl:attribute>
-			</input>
-			Leave Comment:
-			<br />
-			<textarea name="comment" cols="50" rows="5"></textarea>
-			<br />
-			<input type="submit" name="send" />
-		</fieldset>
-	</form>
-	
 	<table class="videometadata">
 		<xsl:for-each select="/page/comments/comment">
 			<tr>
@@ -514,6 +499,23 @@
 			</tr>
 		</xsl:for-each>
 	</table>
+
+	<div class="">
+		<form method="post" action="video.pl">
+			<fieldset>
+				<input name="id" type="hidden">
+					<xsl:attribute name="value">
+						<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+					</xsl:attribute>
+				</input>
+				<xsl:value-of select="$locale_strings/str[@id='DC.Date']" />
+				<br />
+				<textarea name="comment" cols="50" rows="5"></textarea>
+				<br />
+				<input type="submit" name="send" />
+			</fieldset>
+		</form>
+	</div>
 
 </xsl:template>
 
@@ -595,52 +597,79 @@
 <xsl:template match="uploadform">
 
 	<div class="uploadform">
+		<xsl:choose>
 
-		<form method="post" enctype="multipart/form-data">
-			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings/str[@id='page_uploader']" />
-			</xsl:attribute>
-			<fieldset>
-				<xsl:value-of select="$locale_strings/str[@id='file']" />:
-				<br />				
-				<input name="file" type="file" size="13" />
-				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.Title']" />:
-				<br />
-				<input name="DC.Title" type="text" size="30" />
-				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.Creator']" />:
-				<br />
-				<input name="DC.Creator" type="text" size="30" />
-				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.Subject']" />:
-				<br />
-				<input name="DC.Subject" type="text" size="30" />
-				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.Description']" />:
-				<br />
-				<input name="DC.Description" type="text" size="30" />
-				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.Source']" />:
-				<br />
-				<input name="DC.Source" type="text" size="30" />
-				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.Language']" />:
-				<br />
-				<input name="DC.Language" type="text" size="30" />
-				<br />
-				<xsl:value-of select="$locale_strings/str[@id='DC.Coverage']" />:
-				<br />
-				<input name="DC.Coverage" type="text" size="30" />
-				<br />
-				<input type="submit" name="submit" >
-					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings/str[@id='button_upload']" />
+			<xsl:when test="@page=1">
+				<form method="post" enctype="multipart/form-data">
+					<xsl:attribute name="action">
+						<xsl:value-of select="$site_strings/str[@id='page_uploader']" />
 					</xsl:attribute>
-				</input>
-			</fieldset>
-		</form>
+					<fieldset>
+						<xsl:value-of select="$locale_strings/str[@id='instruction_file']" />
+						<br />
+						<input name="file" type="file" size="13" />
+						<br />
+						<xsl:value-of select="$locale_strings/str[@id='instruction_title']" />
+						<br />
+						<input name="DC.Title" type="text" size="30" />
+						<br />
+						<xsl:value-of select="$locale_strings/str[@id='instruction_description']" />
+						<br />
+						<input name="DC.Description" type="text" size="30" />
+						<br /><br />
+						<input type="submit" name="page2" >
+							<xsl:attribute name="value">
+								<xsl:value-of select="$locale_strings/str[@id='button_next_page']" />
+							</xsl:attribute>
+						</input>
+						<br />
+						<span class="protip">
+							<xsl:value-of select="$locale_strings/str[@id='this_is_page_1']" />
+						</span>
+					</fieldset>
+				</form>
+			</xsl:when>
 
+			<xsl:when test="@page=2">
+				<form method="post" enctype="multipart/form-data">
+					<xsl:attribute name="action">
+						<xsl:value-of select="$site_strings/str[@id='page_uploader']" />
+					</xsl:attribute>
+					<fieldset>
+						<xsl:value-of select="$locale_strings/str[@id='instruction_creator']" />
+						<br />
+						<input name="DC.Creator" type="text" size="30" />
+						<br />
+						<xsl:value-of select="$locale_strings/str[@id='instruction_subject']" />
+						<br />
+						<input name="DC.Subject" type="text" size="30" />
+						<br />
+						<xsl:value-of select="$locale_strings/str[@id='instruction_source']" />
+						<br />
+						<input name="DC.Source" type="text" size="30" />
+						<br />
+						<xsl:value-of select="$locale_strings/str[@id='instruction_language']" />
+						<br />
+						<input name="DC.Language" type="text" size="30" />
+						<br />
+						<xsl:value-of select="$locale_strings/str[@id='instruction_coverage']" />
+						<br />
+						<input name="DC.Coverage" type="text" size="30" />
+						<br />
+						<input type="submit" name="page2" >
+							<xsl:attribute name="value">
+								<xsl:value-of select="$locale_strings/str[@id='button_next_page']" />
+							</xsl:attribute>
+						</input>
+						<br />
+						<span class="protip">
+							<xsl:value-of select="$locale_strings/str[@id='this_is_page_2']" />
+						</span>
+					</fieldset>
+				</form>
+			</xsl:when>
+
+		</xsl:choose>
 	</div>
 
 </xsl:template>

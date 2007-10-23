@@ -34,22 +34,25 @@
 
 	<!-- errors -->
 	<str id="error_202c">Error 202c - Access forbidden by government.</str>
+	<str id="error_missing_file">You did not supply a file.</str>
+	<str id="error_missing_DC.Title">You did not supply a title.</str>
+	<str id="error_missing_DC.Creator">You did not supply a creator.</str>
+	<str id="error_missing_DC.Subject">You did not supply a subject.</str>
+	<str id="error_missing_DC.Description">You did not supply a description.</str>
+	<str id="error_missing_DC.Publisher">You did not supply a publisher.</str>
+	<str id="error_missing_DC.Title">You did not supply a title.</str>
+	<str id="error_missing_DC.Source">You did not supply a source.</str>
+	<str id="error_missing_DC.Language">You did not supply a language.</str>
+	<str id="error_missing_DC.Coverage">You did not supply a coverage.</str>
+	<str id="error_missing_DC.Rights">You did not supply a rights holder.</str>
 
 	<!-- information -->
 	<str id="information_logged_in">You are now logged in.</str>
 	<str id="information_logged_out">You are now logged out.</str>
+	<str id="information_metainformation_needed">To put the video into context, additional metainformation is needed.</str>
+	<str id="information_metainformation_rights"></str>
 
 	<!-- warnings -->
-	<str id="warning_missing_DC.Title">You did not supply a title.</str>
-	<str id="warning_missing_DC.Creator">You did not supply a creator.</str>
-	<str id="warning_missing_DC.Subject">You did not supply a subject.</str>
-	<str id="warning_missing_DC.Description">You did not supply a description.</str>
-	<str id="warning_missing_DC.Publisher">You did not supply a publisher.</str>
-	<str id="warning_missing_DC.Title">You did not supply a title.</str>
-	<str id="warning_missing_DC.Source">You did not supply a source.</str>
-	<str id="warning_missing_DC.Language">You did not supply a language.</str>
-	<str id="warning_missing_DC.Coverage">You did not supply a coverage.</str>
-	<str id="warning_missing_DC.Rights">You did not supply a rights holder.</str>
 
 	<!-- results page-->
 	<str id="results_for_query">results for query</str>
@@ -65,7 +68,19 @@
 
 	<!-- upload page -->
 	<str id="file">file</str>
+	<str id="button_next_page">next page</str>
 	<str id="button_upload">upload</str>
+	<str id="instruction_file">Specify the file you want to upload.</str>
+	<str id="instruction_title">State the title of the video.</str>
+	<str id="instruction_creator">Specify the creator of the video.</str>
+	<str id="instruction_subject">State the overall subject of the video.</str>
+	<str id="instruction_description">Describe the video in natural language.</str>
+	<str id="instruction_source">Specify the source, preferably by URL.</str>
+	<str id="instruction_language">State the language of the video.</str>
+	<str id="instruction_coverage">Specify the time and location covered.</str>
+	<str id="this_is_page_1">(This is page 1 of 3.)</str>
+	<str id="this_is_page_2">(This is page 2 of 3.)</str>
+	<str id="this_is_page_2">(This is page 3 of 3.)</str>
 
 	<!-- video page -->
 	<str id="download_video">download video</str>
