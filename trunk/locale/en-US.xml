@@ -37,7 +37,7 @@
 	<str id="error_missing_file">You did not supply a file.</str>
 	<str id="error_missing_DC.Title">You did not supply a title.</str>
 	<str id="error_missing_DC.Creator">You did not supply a creator.</str>
-	<str id="error_missing_DC.Subject">You did not supply a subject.</str>
+	<str id="error_missing_DC.Subject">You did not supply any keywords.</str>
 	<str id="error_missing_DC.Description">You did not supply a description.</str>
 	<str id="error_missing_DC.Publisher">You did not supply a publisher.</str>
 	<str id="error_missing_DC.Title">You did not supply a title.</str>
@@ -74,18 +74,20 @@
 	<str id="instruction_file">Specify the file you want to upload.</str>
 	<str id="instruction_title">State the title of the video.</str>
 	<str id="instruction_creator">Specify the creator of the video.</str>
-	<str id="instruction_subject">State the overall subject of the video.</str>
+	<str id="instruction_subject">State some keywords, separated by commas.</str>
 	<str id="instruction_description">Describe the video in natural language.</str>
 	<str id="instruction_source">Specify the source, preferably by URL.</str>
 	<str id="instruction_language">State the language of the video.</str>
 	<str id="instruction_coverage">Specify the time and location covered.</str>
-	<str id="this_is_page_1">(This is page 1 of 3.)</str>
-	<str id="this_is_page_2">(This is page 2 of 3.)</str>
-	<str id="this_is_page_2">(This is page 3 of 3.)</str>
+	<str id="this_is_page_1">This is page 1 of 3.</str>
+	<str id="this_is_page_2">This is page 2 of 3.</str>
+	<str id="this_is_page_2">This is page 3 of 3.</str>
 
 	<!-- video page -->
 	<str id="download_video">download video</str>
 	<str id="license_conditions">license conditions</str>
+	<str id="comment_on_video">Flamewar area below. Proceed with Caution.</str>
+	<str id="comment_post">post comment</str>
 
 	<!-- dublin core entities -->
 	<str id="DC.Title">title</str>

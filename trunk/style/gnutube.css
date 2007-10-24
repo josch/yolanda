@@ -198,6 +198,30 @@ div
 			width:			50%;
 		}
 
+	div.comments
+	{
+		line-height:	2.5em;
+		margin:			1.5em;
+		text-align:		center;
+	}
+
+	div.comments div.comment
+		{
+			margin:			0.75em;
+			line-height:	1.5em;
+		}
+
+	div.commentform
+	{
+		text-align:		center;
+	}
+
+		div.commentform form
+		{
+			line-height:	2.5em;
+			text-align:		center;
+		}
+
 	div.toplists
 	{
 		text-align:		center;
@@ -226,4 +250,14 @@ hr
 span.protip
 {
 	color:				#606060;
+}
+
+span.protip:after
+{
+	content:			" )";
+}
+
+span.protip:before
+{
+	content:			"( ";
 }

@@ -410,7 +410,7 @@
 -->
 			</xsl:for-each>
 			<xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">		
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/			CommercialUse'">
 					<img src="./images/cc/cc-noncommercial.png" />
 				</xsl:if>
 				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
@@ -487,7 +487,7 @@
 		</tr>
 	</table>
 	
-	<table class="videometadata">
+	<table class="referer">
 		<xsl:for-each select="/page/referers/referer">
 			<tr>
 				<td class="leftcell">
@@ -499,31 +499,46 @@
 			</tr>
 		</xsl:for-each>
 	</table>
-	
-	<table class="videometadata">
-		<xsl:for-each select="/page/comments/comment">
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="@user" />
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="@text" />
-				</td>
-			</tr>
-		</xsl:for-each>
-	</table>
 
-	<div class="">
+</xsl:template>
+
+<xsl:template match="comments">
+
+	<div class="comments">
+		<span class="protip">
+			<xsl:value-of select="$locale_strings/str[@id='comment_on_video']" />
+		</span>
+		<br />
+		<xsl:for-each select="comment">
+			<div class="comment">
+				<a>
+					<xsl:attribute name="href">
+						./user/<xsl:value-of select="@username" />
+					</xsl:attribute>
+					<xsl:value-of select="@username" />
+				</a>:
+				<br />
+				<xsl:value-of select="." />
+			</div>
+		</xsl:for-each>
+	</div>
+
+	<div class="commentform">
 		<form method="post">
 			<xsl:attribute name="action">
-				<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+<!--
+			a bit of action, please
+-->
 			</xsl:attribute>
 			<fieldset>
-				<xsl:value-of select="$locale_strings/str[@id='DC.Date']" />
 				<br />
-				<textarea name="comment" cols="50" rows="5"></textarea>
+				<textarea name="comment" cols="30" rows="3" />
 				<br />
-				<input type="submit" name="send" />
+				<input type="submit" name="send">
+					<xsl:attribute name="value">
+						<xsl:value-of select="$locale_strings/str[@id='comment_post']" />
+					</xsl:attribute>
+				</input>
 			</fieldset>
 		</form>
 	</div>

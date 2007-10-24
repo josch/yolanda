@@ -9,7 +9,6 @@
 	xmlns:cc="http://web.resource.org/cc/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-	<message type="information" text="information_logged_in" />
 	<video>
 		<rdf:RDF>
 			<cc:Work rdf:about="./videos/zwobot-01-test.ogg">
@@ -43,4 +42,9 @@
 			</cc:License>
 		</rdf:RDF>
 	</video>
+	<comments>
+		<comment username="longcat">gnol si tacgnol.</comment>
+		<comment username="tallpet">tallpet is tall, tall, tall.</comment>
+		<comment username="long">LUNGCAT !!! ITZ LUNGER !!1</comment>
+	</comments>
 </page>
