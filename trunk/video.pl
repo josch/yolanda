@@ -114,7 +114,7 @@ if($query->url_param('title') or $query->url_param('id'))
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'video'} },
 		{
-			'thumbnail'		=> "./video-stills/$id",
+			'thumbnail'		=> "$domain/video-stills/$id",
 			'filesize'		=> $filesize,
 			'duration'		=> $duration,
 			'width'			=> $width,
@@ -126,7 +126,7 @@ if($query->url_param('title') or $query->url_param('id'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'			=> "download.pl?id=$id&view=true",
+					'rdf:about'			=> "$domain/download/$id",
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
@@ -134,7 +134,7 @@ if($query->url_param('title') or $query->url_param('id'))
 					'dc:publisher'		=> [$username],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["video.pl?title=$title&id=$id"],
+					'dc:identifier'		=> ["$domain/video/$title/$id"],
 					'dc:source'			=> [$source],
 					'dc:language'		=> [$language],
 					'dc:coverage'		=> [$coverage],
@@ -148,16 +148,17 @@ if($query->url_param('title') or $query->url_param('id'))
 		};
 		
 		#get comments
-		$sth = $dbh->prepare(qq{select comments.text, users.username, from_unixtime( comments.timestamp )
+		$sth = $dbh->prepare(qq{select comments.id, comments.text, users.username, from_unixtime( comments.timestamp )
 								from comments, users where
 								comments.videoid=? and users.id=comments.userid}) or die $dbh->errstr;
 		$sth->execute($id) or die $dbh->errstr;
-		while (my ($text, $username, $timestamp) = $sth->fetchrow_array())
+		while (my ($commentid, $text, $username, $timestamp) = $sth->fetchrow_array())
 		{
 			push @{ $page->{'comments'}->{'comment'} }, {
 				'text'	=> [decode_utf8($text)],
-				'username'	=> [$username],
-				'timestamp' => [$timestamp]
+				'username'	=> $username,
+				'timestamp' => $timestamp,
+				'id'		=> $commentid
 			};
 		}
 		
@@ -212,10 +213,12 @@ if($query->url_param('title') or $query->url_param('id'))
 	print $session->header(-type=>'text/xml');
 
 	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => 1);
 }
 else
-{
+{  foreach $key (sort keys(%ENV)) {
+      print "$key = $ENV{$key}<p>";
+   } 
 	%page = ();
 	
 	#if a username is associated with session id, username is nonempty

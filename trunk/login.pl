@@ -46,7 +46,7 @@ if($query->param('action'))
 		cache => undef, # or File::Cache->new,
 		args => $query,
 		consumer_secret => $session->id, #is this save? don't know...
-		required_root => "http://localhost/" );
+		required_root => $domain );
 		
 		#is an openid passed?
 		if($query->param('user'))
@@ -60,7 +60,7 @@ if($query->param('action'))
 			}
 			$check_url = $claimed->check_url(
 					return_to  => "http://localhost/gnutube/login.pl?action=openid&ret=true", #on success return to this address
-					trust_root => "http://localhost/"); #this is the string the user will be asked to trust
+					trust_root => $domain); #this is the string the user will be asked to trust
 					
 			#redirect to openid server to check claim
 			print $query->redirect($check_url);

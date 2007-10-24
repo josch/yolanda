@@ -25,7 +25,7 @@
 
 		<head>
 			<meta http-equiv="Content-Type" content="application/xhtml+xml" />
-			<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
+			<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 			<link rel="stylesheet" type="text/css">
 				<xsl:attribute name="href">
 					<xsl:value-of select="//@stylesheet" />
@@ -80,7 +80,7 @@
 							<xsl:value-of select="$locale_strings/str[@id='login']" />
 						</a>
 						<xsl:value-of select="$locale_strings/str[@id='separator']" />
-						<img class="openid-icon" src="./images/openid-icon.png" alt="open id logo" />
+						<img class="openid-icon" src="/images/openid-icon.png" alt="open id logo" />
 						<a>
 							<xsl:attribute name="href">
 								<xsl:value-of select="$site_strings/str[@id='page_login-openid']" />
@@ -166,7 +166,7 @@
 <xsl:template match="frontpage">
 
 	<div class="logo-big">
-		<img src="./images/logo-big.png" alt="GNUtube logo (320x100)" />
+		<img src="/images/logo-big.png" alt="GNUtube logo (320x100)" />
 	</div>
 
 	<div class="search">
@@ -208,7 +208,7 @@
 <xsl:template name="searchbar">
 
 	<div class="logo-small-top">
-		<img src="./images/logo-small-top.png" alt="GNUtube logo top (160x25)" />
+		<img src="/images/logo-small-top.png" alt="GNUtube logo top (160x25)" />
 	</div>
 
 	<div class="search-small">
@@ -224,7 +224,7 @@
 	</div>
 
 	<div class="logo-small-bottom">
-		<img src="./images/logo-small-bottom.png" alt="GNUtube logo top (160x25)" />
+		<img src="/images/logo-small-bottom.png" alt="GNUtube logo top (160x25)" />
 	</div>
 
 </xsl:template>
@@ -237,13 +237,13 @@
 		</xsl:attribute>
 		<xsl:choose>
 			<xsl:when test="@type='error'">
-				<img src="./images/tango/dialog-error.png" />
+				<img src="/images/tango/dialog-error.png" />
 			</xsl:when>
 			<xsl:when test="@type='information'">
-				<img src="./images/tango/dialog-information.png" />
+				<img src="/images/tango/dialog-information.png" />
 			</xsl:when>
 			<xsl:when test="@type='warning'">
-				<img src="./images/tango/dialog-warning.png" />
+				<img src="/images/tango/dialog-warning.png" />
 			</xsl:when>
 		</xsl:choose>
 		<xsl:variable name="messagetext" select="@text" />
@@ -323,13 +323,13 @@
 	<div class="video">
 		<applet
 			code="com.fluendo.player.Cortado.class"
-			archive="./java/cortado-ovt-stripped-0.2.2.jar"
+			archive="/java/cortado-ovt-stripped-0.2.2.jar"
 			width="350"
 			height="250"
 		>
 			<param name="url">
 				<xsl:attribute name="value">
-					<xsl:value-of select="concat(rdf:RDF/cc:Work/@rdf:about,'&amp;view=true')" />
+					<xsl:value-of select="concat(rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
 				</xsl:attribute>
 			</param>
 			<param name="seekable" value="true"/>
@@ -349,7 +349,7 @@
 			<xsl:attribute name="href">
 			<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
 			</xsl:attribute>
-			<img src="./images/tango/document-save.png" />
+			<img src="/images/tango/document-save.png" />
 		</a>
 		<a>
 			<xsl:attribute name="href">
