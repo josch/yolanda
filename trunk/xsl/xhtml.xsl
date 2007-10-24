@@ -329,7 +329,7 @@
 		>
 			<param name="url">
 				<xsl:attribute name="value">
-					<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
+					<xsl:value-of select="concat(rdf:RDF/cc:Work/@rdf:about,'&amp;view=true')" />
 				</xsl:attribute>
 			</param>
 			<param name="seekable" value="true"/>
