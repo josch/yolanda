@@ -25,13 +25,16 @@ if($query->param('query'))
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select id, title, description, userid, timestamp from videos where match(title, description, subject) against( ? ) }) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp )
+						from videos as v, users as u
+						where match(v.title, v.description, v.subject) against( ? )
+						and u.id = v.userid }) or die $dbh->errstr;
 	
 	#execute it
 	$sth->execute($query->param('query')) or die $dbh->errstr;
 	
 	#get every returned value
-	while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
+	while (my ($id, $title, $description, $username, $timestamp) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
@@ -44,7 +47,7 @@ if($query->param('query'))
 					'rdf:about'		=> "./video.pl?title=$title&id=$id",
 					'dc:title'		=> [$title],
 					'dc:date'		=> [$timestamp],
-					'dc:publisher'	=> [get_username_from_id($userid)]
+					'dc:publisher'	=> [$username]
 				},
 				'cc:License'	=>
 				{
@@ -84,13 +87,15 @@ elsif($query->param('sort'))
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ) from videos order by timestamp desc }) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp )
+						from videos as v, users as u
+						where u.id = v.userid order by v.timestamp desc}) or die $dbh->errstr;
 	
 	#execute it
 	$sth->execute($query->param('query')) or die $dbh->errstr;
 	
 	#get every returned value
-	while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
+	while (my ($id, $title, $description, $username, $timestamp) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
@@ -103,7 +108,7 @@ elsif($query->param('sort'))
 					'rdf:about'		=> "./video.pl?title=$title&id=$id",
 					'dc:title'		=> [$title],
 					'dc:date'		=> [$timestamp],
-					'dc:publisher'	=> [get_username_from_id($userid)]
+					'dc:publisher'	=> [$username]
 				},
 				'cc:License'	=>
 				{

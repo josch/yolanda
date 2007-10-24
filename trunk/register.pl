@@ -14,13 +14,8 @@ if($query->param('user') and $query->param('pass'))
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#do query
-	$sth = $dbh->prepare(qq{insert into users (username, password) values ( ?, password( ? ))}) or die $dbh->errstr;
-	
-	#execute it
-	$sth->execute($query->param("user"), $query->param("pass")) or die $dbh->errstr;
-	
-	#finish query
-	$sth->finish() or die $dbh->errstr;
+	$dbh->de(qq{insert into users (username, password) values ( ?, password( ? ))}, undef,
+			$query->param("user"), $query->param("pass")) or die $dbh->errstr;
 
 	#disconnect db
 	$dbh->disconnect() or die $dbh->errstr;

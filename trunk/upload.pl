@@ -19,7 +19,7 @@ if($username)
 	$page->{'xmlns:dc'} = $xmlns_dc;
 	$page->{'xmlns:cc'} = $xmlns_cc;
 	$page->{'xmlns:rdf'} = $xmlns_rdf;
-	$page->{uploadform} = [''];
+	$page->{uploadform} = {'page' => '2'};
 
 	#print xml http header along with session cookie
 	print $session->header(-type=>'text/xml');
@@ -30,7 +30,6 @@ else
 {
 	%page = ();
 	
-	#if a username is associated with session id, username is nonempty
 	$page->{'username'} = get_username_from_sid($session->id);
 	$page->{'locale'} = $locale;
 	$page->{'stylesheet'} = $stylesheet;

@@ -35,9 +35,11 @@ if($query->url_param('title') or $query->url_param('id'))
 	else
 	{
 		#if no id was passed there has to be a title we search for
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
-							creator, subject, contributor, source, language, coverage, rights, license
-							from videos where title = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
+							v.license, filesize, duration, width, height, fps, viewcount,
+							downloadcount
+							from videos as v, users as u where v.title = ? and u.id=v.userid }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->url_param('title')) or die $dbh->errstr;
 	}
 	
@@ -45,9 +47,12 @@ if($query->url_param('title') or $query->url_param('id'))
 	#if there was a title passed, then perform a search
 	if($rowcount == 0 and $query->url_param('title'))
 	{
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
-							creator, subject, contributor, source, language, coverage, rights, license
-							from videos where match(title, description, subject) against( ? ) }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
+							v.license, filesize, duration, width, height, fps, viewcount,
+							downloadcount
+							from videos as v, users as u where match(v.title, v.description, v.subject) against( ? )
+							and u.id=v.userid }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->url_param('title')) or die $dbh->errstr;
 	}
 	
@@ -97,16 +102,12 @@ if($query->url_param('title') or $query->url_param('id'))
 			if($rowcount > 0)
 			{
 				#video is in database - increase referercount
-				$sth = $dbh->prepare(qq{update referer set count=count+1 where videoid = ? and referer = ? }) or die $dbh->errstr;
-				$sth->execute($id, $referer) or die $dbh->errstr;
-				$sth->finish();
+				$dbh->do(qq{update referer set count=count+1 where videoid = ? and referer = ? }, undef, $id, $referer) or die $dbh->errstr;
 			}
 			else
 			{
 				#add new referer
-				$sth = $dbh->prepare(qq{insert into referer (videoid, referer) values (?, ?) }) or die $dbh->errstr;
-				$sth->execute($id, $referer) or die $dbh->errstr;
-				$sth->finish();
+				$dbh->do(qq{insert into referer (videoid, referer) values (?, ?) }, undef, $id, $referer) or die $dbh->errstr;
 			}
 		}
 		

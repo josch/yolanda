@@ -27,9 +27,7 @@ if($query->param('action'))
 		if($sth->fetchrow_array())
 		{
 			#store session id in database
-			$sth = $dbh->prepare(qq{update users set sid = ? where username = ? }); 
-			$sth->execute($session->id, $query->param('user'));
-			$sth->finish();
+			$dbh->do(qq{update users set sid = ? where username = ? }, undef, $session->id, $query->param('user')) or die $dbh->errstr;
 			print $query->redirect("index.pl?information=information_logged_in");
 		}
 		else
@@ -92,16 +90,12 @@ if($query->param('action'))
 				if($sth->fetchrow_array())
 				{
 					#store session id in database
-					$sth = $dbh->prepare(qq{update users set sid = ? where username = ? }); 
-					$sth->execute($session->id, $verified_url);
-					$sth->finish();
+					$dbh->do(qq{update users set sid = ? where username = ? }, undef, $session->id, $verified_url) or die $dbh->errstr;
 				}
 				else
 				{
 					#add openid user to dabase
-					$sth = $dbh->prepare(qq{insert into users (username, sid) values ( ?, ? ) }); 
-					$sth->execute($verified_url, $session->id);
-					$sth->finish();
+					$dbh->do(qq{insert into users (username, sid) values ( ?, ? ) }, undef, $verified_url, $session->id) or die $dbh->errstr;
 				}
 				
 				print $query->redirect("index.pl?information=information_logged_in");
@@ -124,9 +118,7 @@ if($query->param('action'))
 	{
 		#if logout is requested
 		#remove sid from database
-		$sth = $dbh->prepare(qq{update users set sid = '' where username = ?});
-		$sth->execute(get_username_from_sid($session->id));
-		$sth->finish();
+		$dbh->do(qq{update users set sid = '' where username = ?}, undef, get_username_from_sid($session->id)) or die $dbh->errstr;
 		$session->delete();
 		print $session->header();
 		print "logged out";

@@ -27,13 +27,12 @@ if($userid)
 	
 	#make new entry for video into the databse
 	#FIXME: contributor, rights
-	my $sth = $dbh->prepare(qq{insert into uploaded (title, description, userid, timestamp,
-							creator, subject, contributor, source, language, coverage, rights)
-							values ( ?, ?, ?, unix_timestamp(), ?, ?, ?, ?, ?, ?, ? )}) or die $dbh->errstr;
-	$sth->execute($query->param("DC.Title"), $query->param("DC.Description"), $userid,
-				$query->param("DC.Creator"), $query->param("DC.Subject"), '', $query->param("DC.Source"),
-				$query->param("DC.Language"), $query->param("DC.Coverage"), '') or die $dbh->errstr;
-	$sth->finish() or die $dbh->errstr;
+	$dbh->do(qq{insert into uploaded (title, description, userid, timestamp,
+			creator, subject, contributor, source, language, coverage, rights)
+			values ( ?, ?, ?, unix_timestamp(), ?, ?, ?, ?, ?, ?, ? )}, undef,
+			$query->param("DC.Title"), $query->param("DC.Description"), $userid,
+			$query->param("DC.Creator"), $query->param("DC.Subject"), '', $query->param("DC.Source"),
+			$query->param("DC.Language"), $query->param("DC.Coverage"), '') or die $dbh->errstr;
 	
 	#get the id of the inserted db entry
 	$sth = $dbh->prepare(qq{select last_insert_id() }) or die $dbh->errstr;

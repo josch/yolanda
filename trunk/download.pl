@@ -29,16 +29,14 @@ if($query->param('id'))
 			if($rowcount > 0)
 			{
 				#video is in database - increase referercount
-				$sth = $dbh->prepare(qq{update referer set count=count+1 where videoid = ? and referer = ? }) or die $dbh->errstr;
-				$sth->execute($query->param('id'), $referer) or die $dbh->errstr;
-				$sth->finish();
+				$dbh->do(qq{update referer set count=count+1 where videoid = ? and referer = ? },
+						undef, $query->param('id'), $referer) or die $dbh->errstr;
 			}
 			else
 			{
 				#add new referer
-				$sth = $dbh->prepare(qq{insert into referer (videoid, referer) values (?, ?) }) or die $dbh->errstr;
-				$sth->execute($query->param('id'), $referer) or die $dbh->errstr;
-				$sth->finish();
+				$dbh->do(qq{insert into referer (videoid, referer) values (?, ?) },
+						undef, $query->param('id'), $referer) or die $dbh->errstr;
 			}
 		}
 		
@@ -46,16 +44,14 @@ if($query->param('id'))
 		if($query->param('view'))
 		{
 			#seems we only want to watch it - update viewcount
-			$sth = $dbh->prepare(qq{update videos set viewcount=viewcount+1 where id = ? });
-			$sth->execute($query->param('id'));
+			$dbh->do(qq{update videos set viewcount=viewcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
 			
 			print $query->header(-type=>'application/ogg');
 		}
 		else
 		{
 			#video is being downloaded - update downloadcount
-			$sth = $dbh->prepare(qq{update videos set downloadcount=downloadcount+1 where id = ? });
-			$sth->execute($query->param('id'));
+			$dbh->do(qq{update videos set downloadcount=downloadcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
 			
 			print $query->header(-type=>'application/x-download',
 						-attachment=>$title.".ogv");
@@ -68,9 +64,9 @@ if($query->param('id'))
 	}
 	else
 	{
+		#there is no video with this id
 		%page = ();
 	
-		#if a username is associated with session id, username is nonempty
 		$page->{'username'} = get_username_from_sid($session->id);
 		$page->{'locale'} = $locale;
 		$page->{'stylesheet'} = $stylesheet;
