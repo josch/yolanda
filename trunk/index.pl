@@ -4,6 +4,7 @@ require "functions.pl";
 
 #create or resume session
 CGI::Session->name($session_name);
+$query = new CGI;
 my $session = new CGI::Session;
 
 %page = ();
@@ -13,6 +14,19 @@ $page->{username} = get_username_from_sid($session->id);
 $page->{locale} = $locale;
 $page->{stylesheet} = $stylesheet;
 $page->{frontpage} = [''];
+
+if($query->param('information'))
+{
+	
+	$page->{'message'}->{'type'} = "information";
+	$page->{'message'}->{'text'} = $query->param('information');
+}
+elsif($query->param('error'))
+{
+	
+	$page->{'message'}->{'type'} = "error";
+	$page->{'message'}->{'text'} = $query->param('error');
+}
 
 fill_tagcloud;
 

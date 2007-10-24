@@ -30,8 +30,7 @@ if($query->param('action'))
 			$sth = $dbh->prepare(qq{update users set sid = ? where username = ? }); 
 			$sth->execute($session->id, $query->param('user'));
 			$sth->finish();
-			print $session->header();
-			print "logged in";
+			print $query->redirect("index.pl?information=information_logged_in");
 		}
 		else
 		{
@@ -86,8 +85,6 @@ if($query->param('action'))
 			{
 				#we are verified!!
 				my $verified_url = $vident->url;
-				print $session->header();
-				print "success $verified_url";
 				
 				#check if this openid user already is in database
 				my $sth = $dbh->prepare(qq{select 1 from users where username = ? limit 1 });
@@ -106,6 +103,8 @@ if($query->param('action'))
 					$sth->execute($verified_url, $session->id);
 					$sth->finish();
 				}
+				
+				print $query->redirect("index.pl?information=information_logged_in");
 			}
 			else
 			{
