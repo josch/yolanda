@@ -410,7 +410,7 @@
 -->
 			</xsl:for-each>
 			<xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">		
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/			CommercialUse'">
+				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
 					<img src="./images/cc/cc-noncommercial.png" />
 				</xsl:if>
 				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
