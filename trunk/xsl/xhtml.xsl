@@ -293,7 +293,7 @@
 				<td>
 					<a>
 						<xsl:attribute name="href">
-							<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
+							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 						</xsl:attribute>
 						<img>
 							<xsl:attribute name="src">
@@ -324,16 +324,24 @@
 		<applet
 			code="com.fluendo.player.Cortado.class"
 			archive="/java/cortado-ovt-stripped-0.2.2.jar"
-			width="350"
-			height="250"
 		>
+			<xsl:attribute name="width">
+				<xsl:value-of select="@width" />
+			</xsl:attribute>
+			<xsl:attribute name="height">
+				<xsl:value-of select="@height" />
+			</xsl:attribute>
 			<param name="url">
 				<xsl:attribute name="value">
 					<xsl:value-of select="concat(rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
 				</xsl:attribute>
 			</param>
 			<param name="seekable" value="true"/>
-			<param name="duration" value="8"/>
+			<param name="duration">
+				<xsl:attribute name="value">
+					<xsl:value-of select="@duration" />
+				</xsl:attribute>
+			</param>
 			<param name="keepAspect" value="true"/>
 			<param name="video" value="true"/>
 			<param name="audio" value="true"/>

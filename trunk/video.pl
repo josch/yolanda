@@ -216,9 +216,7 @@ if($query->url_param('title') or $query->url_param('id'))
 	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => 1);
 }
 else
-{  foreach $key (sort keys(%ENV)) {
-      print "$key = $ENV{$key}<p>";
-   } 
+{
 	%page = ();
 	
 	#if a username is associated with session id, username is nonempty

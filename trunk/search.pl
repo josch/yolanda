@@ -105,9 +105,10 @@ elsif($query->param('sort'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'		=> "./video.pl?title=$title&id=$id",
+					'rdf:about'		=> "$domain/download/$id",
 					'dc:title'		=> [$title],
 					'dc:date'		=> [$timestamp],
+					'dc:identifier'	=> ["$domain/video/$title/$id"],
 					'dc:publisher'	=> [$username]
 				},
 				'cc:License'	=>

@@ -2,7 +2,10 @@
 require "include.pl";
 require "functions.pl";
 
+#initialize session data
+CGI::Session->name($session_name);
 $query = new CGI;
+$session = new CGI::Session;
 
 #do we have an id?
 if($query->param('id'))
