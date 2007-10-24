@@ -17,8 +17,6 @@ $dbh->do(qq{drop table tagcloud});
 
 $dbh->do(qq{drop table referer});
 
-$dbh->do(qq{drop table ratings});
-
 $dbh->do(qq{drop table comments});
 
 $dbh->do(qq{create table
@@ -128,21 +126,13 @@ $dbh->do(qq{create table
 }) or die $dbh->errstr;
 
 $dbh->do(qq{create table
-	ratings
-	(
-		videoid			int					not null,
-		userid			int					not null,
-		rating			tinyint				not null
-	)
-}) or die $dbh->errstr;
-
-$dbh->do(qq{create table
 	comments
 	(
 		id				int auto_increment	not null,
 		userid			int					not null,
 		videoid			int					not null,
 		text			varchar(255)		not null,
+		timestamp		bigint				not null,
 		primary key		(id)
 	)
 }) or die $dbh->errstr;

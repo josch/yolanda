@@ -25,9 +25,11 @@ if($query->url_param('title') or $query->url_param('id'))
 	if($query->url_param('id'))
 	{
 		#if id is passed ignore title and check for the id
-		$sth = $dbh->prepare(qq{select id, title, description, userid, from_unixtime( timestamp ),
-							creator, subject, contributor, source, language, coverage, rights, license
-							from videos where id = ? }) or die $dbh->errstr;
+		$sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
+							v.license, filesize, duration, width, height, fps, viewcount,
+							downloadcount
+							from videos as v, users as u where v.id = ? and u.id=v.userid }) or die $dbh->errstr;
 		$rowcount = $sth->execute($query->url_param('id')) or die $dbh->errstr;
 	}
 	else
@@ -60,14 +62,15 @@ if($query->url_param('title') or $query->url_param('id'))
 	elsif($rowcount == 1)
 	{
 		#if there was a single result, display the video
-		my ($id, $title, $description, $userid, $timestamp, $creator, $subject,
-			$contributor, $source, $language, $coverage, $rights, $license,) = $sth->fetchrow_array();
+		my ($id, $title, $description, $username, $timestamp, $creator, $subject,
+			$contributor, $source, $language, $coverage, $rights, $license,
+			$filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array();
 		
 		#finish query
 		$sth->finish() or die $dbh->errstr;
 		
 		#if user is logged in
-		if($userid = get_userid_from_sid($session->id)
+		if($userid = get_userid_from_sid($session->id))
 		{
 			#check if a comment is about to be created
 			if($query->param('comment'))
@@ -77,12 +80,7 @@ if($query->url_param('title') or $query->url_param('id'))
 				$page->{'message'}->{'text'} = "information_comment_created";
 			
 				#add to database
-				$dbh->do(qq{insert into comments (userid, videoid, text) values (?, ?, ?)}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
-			}
-			#check if user is about to rate video
-			elsif($query->param('rating'))
-			{
-				$dbh->do(qq{insert into ratings (userid, videoid, rating) values (?, ?, ?)}, undef, $userid, $id, $query->param('rating')) or die $dbh->errstr;
+				$dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
 			}
 		}
 		
@@ -115,7 +113,14 @@ if($query->url_param('title') or $query->url_param('id'))
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'video'} },
 		{
-			'thumbnail'		=> ['./video-stills/225x150/4chan_city_mashup.png'],
+			'thumbnail'		=> "./video-stills/$id",
+			'filesize'		=> $filesize,
+			'duration'		=> $duration,
+			'width'			=> $width,
+			'height'		=> $height,
+			'fps'			=> $fps,
+			'viewcount'		=> $viewcount,
+			'downloadcount'	=> $downloadcount,
 			'rdf:RDF'		=>
 			{
 				'cc:Work'		=>
@@ -125,7 +130,7 @@ if($query->url_param('title') or $query->url_param('id'))
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
 					'dc:description'	=> [$description],
-					'dc:publisher'		=> [get_username_from_id($userid)],
+					'dc:publisher'		=> [$username],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
 					'dc:identifier'		=> ["video.pl?title=$title&id=$id"],
@@ -142,20 +147,22 @@ if($query->url_param('title') or $query->url_param('id'))
 		};
 		
 		#get comments
-		$sth = $dbh->prepare(qq{select comments.text, users.username from comments, users where
-								comments.videoid=? and users.id=comments.userid});
-		$sth->execute($id);
-		while (my ($text, $username) = $sth->fetchrow_array())
+		$sth = $dbh->prepare(qq{select comments.text, users.username, from_unixtime( comments.timestamp )
+								from comments, users where
+								comments.videoid=? and users.id=comments.userid}) or die $dbh->errstr;
+		$sth->execute($id) or die $dbh->errstr;
+		while (my ($text, $username, $timestamp) = $sth->fetchrow_array())
 		{
 			push @{ $page->{'comments'}->{'comment'} }, {
-				'text'	=> decode_utf8($text),
-				'user'	=> $username
+				'text'	=> [decode_utf8($text)],
+				'username'	=> [$username],
+				'timestamp' => [$timestamp]
 			};
 		}
 		
 		#get referers
-		$sth = $dbh->prepare(qq{select count, referer from referer where videoid=?});
-		$sth->execute($id);
+		$sth = $dbh->prepare(qq{select count, referer from referer where videoid=?}) or die $dbh->errstr;
+		$sth->execute($id) or die $dbh->errstr;
 		while (my ($count, $referer) = $sth->fetchrow_array())
 		{
 			$referer or $referer = 'no referer (refreshed, manually entered url or bookmark)';
@@ -163,7 +170,7 @@ if($query->url_param('title') or $query->url_param('id'))
 				'count'		=> $count,
 				'referer'	=> $referer
 			};
-		}		
+		}
 	}
 	else
 	{
