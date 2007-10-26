@@ -115,6 +115,7 @@ if($query->url_param('title') or $query->url_param('id'))
 		push @{ $page->{'video'} },
 		{
 			'thumbnail'		=> "$domain/video-stills/$id",
+			'cortado'		=> $query->param('cortado') eq 'false' ? "false" : "true",
 			'filesize'		=> $filesize,
 			'duration'		=> $duration,
 			'width'			=> $width,

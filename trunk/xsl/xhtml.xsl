@@ -588,35 +588,68 @@
 	<xsl:call-template name="searchbar"/>
 
 	<div class="video">
-		<applet
-			code="com.fluendo.player.Cortado.class"
-			archive="/java/cortado-ovt-stripped-0.2.2.jar"
-		>
-			<xsl:attribute name="width">
-				<xsl:value-of select="@width" />
-			</xsl:attribute>
-			<xsl:attribute name="height">
-				<xsl:value-of select="@height" />
-			</xsl:attribute>
-			<param name="url">
-				<xsl:attribute name="value">
-					<xsl:value-of select="concat(rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
-				</xsl:attribute>
-			</param>
-			<param name="seekable" value="true"/>
-			<param name="duration">
-				<xsl:attribute name="value">
-					<xsl:value-of select="@duration" />
-				</xsl:attribute>
-			</param>
-			<param name="keepAspect" value="true"/>
-			<param name="video" value="true"/>
-			<param name="audio" value="true"/>
-			<param name="statusHeight" value="24"/>
-			<param name="autoPlay" value="true"/>
-			<param name="showStatus" value="show"/>
-			<param name="bufferSize" value="200"/>
-		</applet>
+		<xsl:choose>
+			<xsl:when test="@cortado='true'">
+				<applet
+					code="com.fluendo.player.Cortado.class"
+					archive="/java/cortado-ovt-stripped-0.2.2.jar"
+				>
+					<xsl:attribute name="width">
+						<xsl:value-of select="@width" />
+					</xsl:attribute>
+					<xsl:attribute name="height">
+						<xsl:value-of select="@height" />
+					</xsl:attribute>
+					<param name="url">
+						<xsl:attribute name="value">
+							<xsl:value-of select="concat(rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
+						</xsl:attribute>
+					</param>
+					<param name="seekable" value="true"/>
+					<param name="duration">
+						<xsl:attribute name="value">
+							<xsl:value-of select="@duration" />
+						</xsl:attribute>
+					</param>
+					<param name="keepAspect" value="true"/>
+					<param name="video" value="true"/>
+					<param name="audio" value="true"/>
+					<param name="statusHeight" value="24"/>
+					<param name="autoPlay" value="true"/>
+					<param name="showStatus" value="show"/>
+					<param name="bufferSize" value="200"/>
+				</applet>
+				<div>
+					<a>
+						<xsl:attribute name="href">
+						<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, '/cortado=false')" />
+						</xsl:attribute>
+						Watch using Browser Video Plugin
+					</a>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+				<object>
+					<xsl:attribute name="width">
+						<xsl:value-of select="@width" />
+					</xsl:attribute>
+					<xsl:attribute name="height">
+						<xsl:value-of select="@height + 16" />
+					</xsl:attribute>
+					<xsl:attribute name="data">
+						<xsl:value-of select="concat(rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
+					</xsl:attribute>
+				</object>
+				<div>
+					<a>
+						<xsl:attribute name="href">
+						<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+						</xsl:attribute>
+						Watch using Cortado Java Applet
+					</a>
+				</div>
+			</xsl:otherwise>
+		</xsl:choose>
 	</div>
 
 	<div class="videodownload">
