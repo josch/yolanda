@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf8" ?>
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -283,6 +283,82 @@
 
 <xsl:template match="results">
 	<xsl:call-template name="searchbar"/>
+	
+	<div>
+		<xsl:choose>
+			<xsl:when test="@currentpage&lt;=1">
+				&lt;&lt; &lt;
+			</xsl:when>
+			<xsl:otherwise>
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=1')" />
+					</xsl:attribute>
+					&lt;&lt;
+				</a>
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage - 1)" />
+					</xsl:attribute>
+					&lt;
+				</a>
+			</xsl:otherwise>
+		</xsl:choose>
+		<xsl:if test="@currentpage > 2">
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage - 2)" />
+				</xsl:attribute>
+				<xsl:value-of select="@currentpage - 2" />
+			</a>
+		</xsl:if>
+		<xsl:if test="@currentpage > 1">
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage - 1)" />
+				</xsl:attribute>
+				<xsl:value-of select="@currentpage - 1" />
+			</a>
+		</xsl:if>
+		<xsl:value-of select="@currentpage" />
+		<xsl:variable name="temp" select="@lastpage - @currentpage" />
+		<xsl:if test="$temp > 0">
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage + 1)" />
+				</xsl:attribute>
+				<xsl:value-of select="@currentpage + 1" />
+			</a>
+		</xsl:if>
+		<xsl:if test="$temp > 1">
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage + 2)" />
+				</xsl:attribute>
+				<xsl:value-of select="@currentpage + 2" />
+			</a>
+		</xsl:if>
+		<xsl:choose>
+			<xsl:when test="@lastpage&lt;=@currentpage">
+				&gt; &gt;&gt;
+			</xsl:when>
+			<xsl:otherwise>
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage + 1)" />
+					</xsl:attribute>
+					&gt;
+				</a>
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @lastpage)" />
+					</xsl:attribute>
+					&gt;&gt;
+				</a>
+			</xsl:otherwise>
+		</xsl:choose>
+	</div>
+	<div>_</div>
 	<div>
 		<xsl:value-of select="$locale_strings/str[@id='results_for_query']" />:
 		"<xsl:value-of select="@query" />"

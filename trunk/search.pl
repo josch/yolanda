@@ -6,35 +6,108 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
+%page = ();
+	
+#if a username is associated with session id, username is nonempty
+$page->{'username'} = get_username_from_sid($session->id);
+$page->{'locale'} = $locale;
+$page->{'stylesheet'} = $stylesheet;
+$page->{'xmlns:dc'} = $xmlns_dc;
+$page->{'xmlns:cc'} = $xmlns_cc;
+$page->{'xmlns:rdf'} = $xmlns_rdf;
+
 #check if query is set
-if($query->param('query'))
+if($query->param('query') or $query->param('orderby'))
 {
-	%page = ();
-	
-	#if a username is associated with session id, username is nonempty
-	$page->{'username'} = get_username_from_sid($session->id);
-	$page->{'locale'} = $locale;
-	$page->{'stylesheet'} = $stylesheet;
-	$page->{'xmlns:dc'} = $xmlns_dc;
-	$page->{'xmlns:cc'} = $xmlns_cc;
-	$page->{'xmlns:rdf'} = $xmlns_rdf;
-	
-	$page->{results}->{query} = decode_utf8($query->param('query'));
+	$page->{results}->{query} = $query->param('query');
+	$page->{results}->{orderby} = $query->param('orderby');
 	
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
+	my @args = ();
+	
+	#build mysql query
+	$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp )";
+	
+	if($query->param('query'))
+	{
+		$dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
+		$dbquery .= " from videos as v, users as u where u.id = v.userid";
+		$dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
+		push @args, $query->param('query'), $query->param('query');
+	}
+	else
+	{
+		$dbquery .= " from videos as v, users as u where u.id = v.userid";
+	}
+	
+	if($query->param('orderby'))
+	{
+		if($query->param('orderby') eq 'filesize')
+		{
+			$dbquery .= " order by v.filesize";
+		}
+		elsif($query->param('orderby') eq 'duration')
+		{
+			$dbquery .= " order by v.duration";
+		}
+		elsif($query->param('orderby') eq 'viewcount')
+		{
+			$dbquery .= " order by v.viewcount";
+		}
+		elsif($query->param('orderby') eq 'downloadcount')
+		{
+			$dbquery .= " order by v.downloadcount";
+		}
+		elsif($query->param('orderby') eq 'timestamp')
+		{
+			$dbquery .= " order by v.timestamp";
+		}
+		elsif($query->param('orderby') eq 'relevance' and $query->param('query'))
+		{
+			$dbquery .= " order by relevance";
+		}
+		else
+		{
+			$dbquery .= " order by v.id";
+		}
+		
+		if($query->param('sort') eq "asc")
+		{
+			$dbquery .= " asc"
+		}
+		else
+		{
+			$dbquery .= " desc"
+		}
+	}
+	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp )
-						from videos as v, users as u
-						where match(v.title, v.description, v.subject) against( ? )
-						and u.id = v.userid }) or die $dbh->errstr;
+	my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
 	
 	#execute it
-	$sth->execute($query->param('query')) or die $dbh->errstr;
+	$resultcount = $sth->execute(@args) or die $dbquery;
+	
+	$rowsperpage = 2;
+	
+	$lastpage = int($resultcount/2);
+	
+	$currentpage = $query->param('page') or $currentpage = 1;
+	
+	$dbquery .= " limit ".($currentpage-1)*$rowsperpage.", ".$rowsperpage;
+	
+	#prepare query
+	$sth = $dbh->prepare($dbquery) or die $dbh->errstr;
+	
+	#execute it
+	$sth->execute(@args) or die $dbquery;
+	
+	$page->{'results'}->{'lastpage'} = $lastpage;
+	$page->{'results'}->{'currentpage'} = $currentpage;
 	
 	#get every returned value
-	while (my ($id, $title, $description, $username, $timestamp) = $sth->fetchrow_array())
+	while (my ($id, $title, $description, $username, $timestamp, $relevance) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
@@ -69,79 +142,8 @@ if($query->param('query'))
 	#print xml
 	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
-elsif($query->param('sort'))
-{
-		%page = ();
-	
-	#if a username is associated with session id, username is nonempty
-	$page->{'username'} = get_username_from_sid($session->id);
-	$page->{'locale'} = $locale;
-	$page->{'stylesheet'} = $stylesheet;
-	$page->{'xmlns:dc'} = $xmlns_dc;
-	$page->{'xmlns:cc'} = $xmlns_cc;
-	$page->{'xmlns:rdf'} = $xmlns_rdf;
-	
-	$page->{results}->{query} = decode_utf8($query->param('query'));
-	
-	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
-	
-	#prepare query
-	my $sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp )
-						from videos as v, users as u
-						where u.id = v.userid order by v.timestamp desc}) or die $dbh->errstr;
-	
-	#execute it
-	$sth->execute($query->param('query')) or die $dbh->errstr;
-	
-	#get every returned value
-	while (my ($id, $title, $description, $username, $timestamp) = $sth->fetchrow_array())
-	{
-		#before code cleanup, this was a really obfuscated array/hash creation
-		push @{ $page->{'results'}->{'result'} },
-		{
-			'thumbnail'		=> ["./video-stills/$id"],
-			'rdf:RDF'		=>
-			{
-				'cc:Work'		=>
-				{
-					'rdf:about'		=> "$domain/download/$id",
-					'dc:title'		=> [$title],
-					'dc:date'		=> [$timestamp],
-					'dc:identifier'	=> ["$domain/video/$title/$id"],
-					'dc:publisher'	=> [$username]
-				},
-				'cc:License'	=>
-				{
-					'rdf:about' 	=> 'http://creativecommons.org/licenses/GPL/2.0/'
-				}
-			}
-		};
-	}
-	
-	#finish query
-	$sth->finish() or die $dbh->errstr;
-	
-	#close db
-	$dbh->disconnect() or die $dbh->errstr;
-	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml');
-
-	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
-}
 else
 {
-	%page = ();
-	
-	#if a username is associated with session id, username is nonempty
-	$page->{'username'} = get_username_from_sid($session->id);
-	$page->{'locale'} = $locale;
-	$page->{'stylesheet'} = $stylesheet;
-	$page->{'xmlns:dc'} = $xmlns_dc;
-	$page->{'xmlns:cc'} = $xmlns_cc;
-	$page->{'xmlns:rdf'} = $xmlns_rdf;
 	
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_202c";

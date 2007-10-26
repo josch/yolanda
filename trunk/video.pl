@@ -155,7 +155,7 @@ if($query->url_param('title') or $query->url_param('id'))
 		while (my ($commentid, $text, $username, $timestamp) = $sth->fetchrow_array())
 		{
 			push @{ $page->{'comments'}->{'comment'} }, {
-				'text'	=> [decode_utf8($text)],
+				'text'	=> [$text],
 				'username'	=> $username,
 				'timestamp' => $timestamp,
 				'id'		=> $commentid
@@ -177,7 +177,7 @@ if($query->url_param('title') or $query->url_param('id'))
 	else
 	{
 		#when an ambigous title was passed there may me many results - display them like search.pl does
-		$page->{results}->{query} = decode_utf8($query->url_param('title'));
+		$page->{results}->{query} = $query->url_param('title');
 		#get every returned value
 		while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
 		{
