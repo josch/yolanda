@@ -37,7 +37,7 @@ else
 	$page->{registerform} = [''];
 
 	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml');
+	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
 
 	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }

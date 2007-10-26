@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -10,7 +10,7 @@
 <xsl:output
 	doctype-public="-//W3C//DTD XHTML 1.1//EN"
 	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-	encoding="utf8"
+	encoding="UTF-8"
 	indent="yes"
 	method="xml"
 	media-type="application/xhtml+xml"
@@ -807,6 +807,24 @@
 			</tr>
 		</xsl:for-each>
 	</table>
+	
+	<div class="commentform">
+		<form method="post">
+			<xsl:attribute name="action">
+				<xsl:value-of select="/page/video/rdf:RDF/cc:Work/dc:identifier" />
+			</xsl:attribute>
+			<fieldset>
+				<br />
+				<textarea name="comment" cols="30" rows="3" />
+				<br />
+				<input type="submit" name="send">
+					<xsl:attribute name="value">
+						<xsl:value-of select="$locale_strings[@id='comment_post']" />
+					</xsl:attribute>
+				</input>
+			</fieldset>
+		</form>
+	</div>
 
 </xsl:template>
 
@@ -829,26 +847,6 @@
 				<xsl:value-of select="." />
 			</div>
 		</xsl:for-each>
-	</div>
-
-	<div class="commentform">
-		<form method="post">
-			<xsl:attribute name="action">
-<!--
-			a bit of action, please
--->
-			</xsl:attribute>
-			<fieldset>
-				<br />
-				<textarea name="comment" cols="30" rows="3" />
-				<br />
-				<input type="submit" name="send">
-					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings[@id='comment_post']" />
-					</xsl:attribute>
-				</input>
-			</fieldset>
-		</form>
 	</div>
 
 </xsl:template>
