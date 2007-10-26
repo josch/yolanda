@@ -21,6 +21,7 @@ if($query->param('query') or $query->param('orderby'))
 {
 	$page->{results}->{query} = $query->param('query');
 	$page->{results}->{orderby} = $query->param('orderby');
+	$page->{results}->{sort} = $query->param('sort');
 	
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
@@ -28,7 +29,7 @@ if($query->param('query') or $query->param('orderby'))
 	my @args = ();
 	
 	#build mysql query
-	$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp )";
+	$dbquery = "select v.id, v.title, v.creator, v.description, u.username, from_unixtime( v.timestamp ), v.duration, v.viewcount";
 	
 	if($query->param('query'))
 	{
@@ -91,7 +92,9 @@ if($query->param('query') or $query->param('orderby'))
 	
 	$rowsperpage = 2;
 	
-	$lastpage = int($resultcount/2);
+	#rediculous but funny round up, will fail with 1000000000000000 results per page
+	#on 0.00000000000001% of all queries - this is a risk we can handle
+	$lastpage = int($resultcount/$rowsperpage+0.999999999999999);
 	
 	$currentpage = $query->param('page') or $currentpage = 1;
 	
@@ -105,22 +108,27 @@ if($query->param('query') or $query->param('orderby'))
 	
 	$page->{'results'}->{'lastpage'} = $lastpage;
 	$page->{'results'}->{'currentpage'} = $currentpage;
+	$page->{'results'}->{'resultcount'} = $resultcount;
 	
 	#get every returned value
-	while (my ($id, $title, $description, $username, $timestamp, $relevance) = $sth->fetchrow_array())
+	while (my ($id, $title, $creator, $description, $username, $timestamp, $duration, $viewcount, $relevance) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
 		{
-			'thumbnail'		=> ["./video-stills/$id"],
+			'thumbnail'		=> "./video-stills/$id",
+			'duration'		=> $duration,
+			'viewcount'		=> $viewcount,
 			'rdf:RDF'		=>
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'		=> "./video.pl?title=$title&id=$id",
-					'dc:title'		=> [$title],
-					'dc:date'		=> [$timestamp],
-					'dc:publisher'	=> [$username]
+					'rdf:about'			=> "$domain/download/$id",
+					'dc:title'			=> [$title],
+					'dc:creator'		=> [$creator],
+					'dc:date'			=> [$timestamp],
+					'dc:identifier'		=> ["$domain/video/$title/$id"],
+					'dc:publisher'		=> [$username]
 				},
 				'cc:License'	=>
 				{

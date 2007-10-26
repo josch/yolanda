@@ -23,7 +23,7 @@
 	<str id="page_results">search.pl?query=</str>
 	<str id="page_upload">upload.pl</str>
 	<str id="page_uploader">uploader.pl</str>
-	<str id="page_query_latestadditions">search.pl?sort=desc</str>
+	<str id="page_query_latestadditions">search.pl?query=&amp;orderby=timestamp&amp;sort=desc</str>
 
 </strings>
 

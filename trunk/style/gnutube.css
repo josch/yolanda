@@ -261,3 +261,8 @@ span.protip:before
 {
 	content:			"( ";
 }
+
+td
+{
+	vertical-align:		top;
+}

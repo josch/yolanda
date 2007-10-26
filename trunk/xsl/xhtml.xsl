@@ -17,8 +17,8 @@
 	omit-xml-declaration="no"
 />
 
-<xsl:variable name="site_strings" select="document('../site/gnutube.xml')//strings" />
-<xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings" />
+<xsl:variable name="site_strings" select="document('../site/gnutube.xml')//strings/str" />
+<xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings/str" />
 
 <xsl:template match="/">
 	<html xmlns="http://www.w3.org/1999/xhtml">
@@ -34,20 +34,20 @@
 			<title>
 				<xsl:choose>
 					<xsl:when test="boolean(//frontpage)">
-						<xsl:value-of select="$site_strings/str[@id='site_name']" />
+						<xsl:value-of select="$site_strings[@id='site_name']" />
 						-
-						<xsl:value-of select="$site_strings/str[@id='site_motto']" />
+						<xsl:value-of select="$site_strings[@id='site_motto']" />
 					</xsl:when>
 					<xsl:when test="boolean(//resultspage)">
-						<xsl:value-of select="$site_strings/str[@id='site_name']" />
+						<xsl:value-of select="$site_strings[@id='site_name']" />
 						-
-						<xsl:value-of select="$locale_strings/str[@id='results_for_query']" />
+						<xsl:value-of select="$locale_strings[@id='results_for_query']" />
 						"<xsl:value-of select="//resultspage/@query" />"
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="$site_strings/str[@id='site_name']" />
+						<xsl:value-of select="$site_strings[@id='site_name']" />
 						-
-						<xsl:value-of select="$site_strings/str[@id='site_motto']" />
+						<xsl:value-of select="$site_strings[@id='site_motto']" />
 					</xsl:otherwise>
 				</xsl:choose>
 			</title>
@@ -60,32 +60,32 @@
 					<div class="header1">
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_login']" />
+								<xsl:value-of select="$site_strings[@id='page_login']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='login_to_upload']" />
+							<xsl:value-of select="$locale_strings[@id='login_to_upload']" />
 						</a>
 					</div>
 					<div class="header2">
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_register']" />
+								<xsl:value-of select="$site_strings[@id='page_register']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='register']" />
+							<xsl:value-of select="$locale_strings[@id='register']" />
 						</a>
-						<xsl:value-of select="$locale_strings/str[@id='separator']" />
+						<xsl:value-of select="$locale_strings[@id='separator']" />
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_login']" />
+								<xsl:value-of select="$site_strings[@id='page_login']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='login']" />
+							<xsl:value-of select="$locale_strings[@id='login']" />
 						</a>
-						<xsl:value-of select="$locale_strings/str[@id='separator']" />
+						<xsl:value-of select="$locale_strings[@id='separator']" />
 						<img class="openid-icon" src="/images/openid-icon.png" alt="open id logo" />
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_login-openid']" />
+								<xsl:value-of select="$site_strings[@id='page_login-openid']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='login_openid']" />
+							<xsl:value-of select="$locale_strings[@id='login_openid']" />
 						</a>
 					</div>
 				</xsl:when>
@@ -93,39 +93,39 @@
 					<div class="header1">
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_upload']" />
+								<xsl:value-of select="$site_strings[@id='page_upload']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='upload_video']" />
+							<xsl:value-of select="$locale_strings[@id='upload_video']" />
 						</a>
-						<xsl:value-of select="$locale_strings/str[@id='separator']" />
+						<xsl:value-of select="$locale_strings[@id='separator']" />
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_bookmarks']" />
+								<xsl:value-of select="$site_strings[@id='page_bookmarks']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='bookmarks']" />
+							<xsl:value-of select="$locale_strings[@id='bookmarks']" />
 						</a>
-						<xsl:value-of select="$locale_strings/str[@id='separator']" />
+						<xsl:value-of select="$locale_strings[@id='separator']" />
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_account']" />
+								<xsl:value-of select="$site_strings[@id='page_account']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='account_details']" />
+							<xsl:value-of select="$locale_strings[@id='account_details']" />
 						</a>
 					</div>
 					<div class="header2">
-						<xsl:value-of select="$locale_strings/str[@id='logged_in_as']" />
+						<xsl:value-of select="$locale_strings[@id='logged_in_as']" />
 						<a>
 							<xsl:attribute name="href">
 								user/<xsl:value-of select="//@username" />
 							</xsl:attribute>
 							<xsl:value-of select="//@username" />
 						</a>
-						<xsl:value-of select="$locale_strings/str[@id='separator']" />
+						<xsl:value-of select="$locale_strings[@id='separator']" />
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings/str[@id='page_logout']" />
+								<xsl:value-of select="$site_strings[@id='page_logout']" />
 							</xsl:attribute>
-							<xsl:value-of select="$locale_strings/str[@id='logout']" />
+							<xsl:value-of select="$locale_strings[@id='logout']" />
 						</a>
 					</div>
 				</xsl:otherwise>
@@ -138,23 +138,23 @@
 			<div class="footer">
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings/str[@id='page_gnutube-authors']" />
+						<xsl:value-of select="$site_strings[@id='page_gnutube-authors']" />
 					</xsl:attribute>
-					<xsl:value-of select="$locale_strings/str[@id='gnutube_authors']" />
+					<xsl:value-of select="$locale_strings[@id='gnutube_authors']" />
 				</a>
-				<xsl:value-of select="$locale_strings/str[@id='separator']" />
+				<xsl:value-of select="$locale_strings[@id='separator']" />
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings/str[@id='page_gnutube-license']" />
+						<xsl:value-of select="$site_strings[@id='page_gnutube-license']" />
 					</xsl:attribute>
-					<xsl:value-of select="$locale_strings/str[@id='gnutube_license']" />
+					<xsl:value-of select="$locale_strings[@id='gnutube_license']" />
 				</a>
-				<xsl:value-of select="$locale_strings/str[@id='separator']" />
+				<xsl:value-of select="$locale_strings[@id='separator']" />
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings/str[@id='page_gnutube-source-code']" />
+						<xsl:value-of select="$site_strings[@id='page_gnutube-source-code']" />
 					</xsl:attribute>
-				<xsl:value-of select="$locale_strings/str[@id='gnutube_source_code']" />
+				<xsl:value-of select="$locale_strings[@id='gnutube_source_code']" />
 				</a>
 			</div>
 
@@ -172,18 +172,18 @@
 	<div class="search">
 		<form method="get" enctype="text/plain">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings/str[@id='page_results']" />
+				<xsl:value-of select="$site_strings[@id='page_results']" />
 			</xsl:attribute>
 			<fieldset>
 				<input type="text" name="query" size="40" /><br />
 				<input type="submit">
 					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings/str[@id='button_find']" />
+						<xsl:value-of select="$locale_strings[@id='button_find']" />
 					</xsl:attribute>
 				</input>&#160;
 				<input type="submit" name="lucky">
 					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings/str[@id='button_lucky']" />
+						<xsl:value-of select="$locale_strings[@id='button_lucky']" />
 					</xsl:attribute>
 				</input>
 			</fieldset>
@@ -193,14 +193,14 @@
 	<div class="toplists">
 		<a>
 			<xsl:attribute name="href">
-				<xsl:value-of select="$site_strings/str[@id='page_query_latestadditions']" />
+				<xsl:value-of select="$site_strings[@id='page_query_latestadditions']" />
 			</xsl:attribute>
-			<xsl:value-of select="$locale_strings/str[@id='query_latestadditions']" />
+			<xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
 		</a>
-		<xsl:value-of select="$locale_strings/str[@id='separator']" />
-		<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='query_mostdownloads']" /></a>
-		<xsl:value-of select="$locale_strings/str[@id='separator']" />
-		<a href="about:blank"><xsl:value-of select="$locale_strings/str[@id='query_bestrated']" /></a>
+		<xsl:value-of select="$locale_strings[@id='separator']" />
+		<a href="about:blank"><xsl:value-of select="$locale_strings[@id='query_mostdownloads']" /></a>
+		<xsl:value-of select="$locale_strings[@id='separator']" />
+		<a href="about:blank"><xsl:value-of select="$locale_strings[@id='query_bestrated']" /></a>
 	</div>
 
 </xsl:template>
@@ -214,10 +214,10 @@
 	<div class="search-small">
 		<form method="get" enctype="text/plain">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings/str[@id='page_results']" />
+				<xsl:value-of select="$site_strings[@id='page_results']" />
 			</xsl:attribute>
 			<fieldset>
-				<xsl:value-of select="$locale_strings/str[@id='search']" />:
+				<xsl:value-of select="$locale_strings[@id='search']" />:
 				<input type="text" name="query" size="auto" />
 			</fieldset>
 		</form>
@@ -247,7 +247,7 @@
 			</xsl:when>
 		</xsl:choose>
 		<xsl:variable name="messagetext" select="@text" />
-		<xsl:value-of select="$locale_strings/str[@id=$messagetext]" />
+		<xsl:value-of select="$locale_strings[@id=$messagetext]" />
 		<!-- probably one can do this on one line, dunno how -->
 	</div>
 
@@ -269,7 +269,7 @@
 					</xsl:choose>
 				</xsl:attribute>
 				<xsl:attribute name="href">
-					<xsl:value-of select="$site_strings/str[@id='page_results']" />
+					<xsl:value-of select="$site_strings[@id='page_results']" />
 					tag:
 					<xsl:value-of select="text" />
 				</xsl:attribute>
@@ -281,9 +281,7 @@
 
 </xsl:template>
 
-<xsl:template match="results">
-	<xsl:call-template name="searchbar"/>
-	
+<xsl:template name="pagination">
 	<div>
 		<xsl:choose>
 			<xsl:when test="@currentpage&lt;=1">
@@ -292,13 +290,13 @@
 			<xsl:otherwise>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=1')" />
+						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=1')" />
 					</xsl:attribute>
 					&lt;&lt;
 				</a>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage - 1)" />
+						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 1)" />
 					</xsl:attribute>
 					&lt;
 				</a>
@@ -307,7 +305,7 @@
 		<xsl:if test="@currentpage > 2">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage - 2)" />
+					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 2)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage - 2" />
 			</a>
@@ -315,7 +313,7 @@
 		<xsl:if test="@currentpage > 1">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage - 1)" />
+					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 1)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage - 1" />
 			</a>
@@ -325,7 +323,7 @@
 		<xsl:if test="$temp > 0">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage + 1)" />
+					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 1)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage + 1" />
 			</a>
@@ -333,7 +331,7 @@
 		<xsl:if test="$temp > 1">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage + 2)" />
+					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 2)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage + 2" />
 			</a>
@@ -345,25 +343,124 @@
 			<xsl:otherwise>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @currentpage + 1)" />
+						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 1)" />
 					</xsl:attribute>
 					&gt;
 				</a>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat('search.pl?query=', @query, '&amp;orderby=', @orderby, '&amp;page=', @lastpage)" />
+						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @lastpage)" />
 					</xsl:attribute>
 					&gt;&gt;
 				</a>
 			</xsl:otherwise>
 		</xsl:choose>
 	</div>
-	<div>_</div>
+</xsl:template>
+
+<xsl:template match="results">
+	<xsl:call-template name="searchbar"/>
+	
 	<div>
-		<xsl:value-of select="$locale_strings/str[@id='results_for_query']" />:
-		"<xsl:value-of select="@query" />"
+		<xsl:choose>
+			<xsl:when test="@query!=''">
+				<xsl:value-of select="$locale_strings[@id='results_for_query']" />
+				"<xsl:value-of select="@query" />"
+				<xsl:if test="@orderby!=''">
+					<xsl:value-of select="$locale_strings[@id='ordered_by']" />
+					<xsl:choose>
+						<xsl:when test="@orderby='relevance'">
+							<xsl:value-of select="$locale_strings[@id='relevance']" />
+						</xsl:when>
+						<xsl:when test="@orderby='duration'">
+							<xsl:value-of select="$locale_strings[@id='duration']" />
+						</xsl:when>
+						<xsl:when test="@orderby='filesize'">
+							<xsl:value-of select="$locale_strings[@id='filesize']" />
+						</xsl:when>
+						<xsl:when test="@orderby='viewcount'">
+							<xsl:value-of select="$locale_strings[@id='viewcount']" />
+						</xsl:when>
+						<xsl:when test="@orderby='downloadcount'">
+							<xsl:value-of select="$locale_strings[@id='downloadcount']" />
+						</xsl:when>
+						<xsl:when test="@orderby='timestamp'">
+							<xsl:value-of select="$locale_strings[@id='timestamp']" />
+						</xsl:when>
+					</xsl:choose>
+					<xsl:choose>
+						<xsl:when test="@sort='asc'">
+							<xsl:value-of select="$locale_strings[@id='ascending']" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$locale_strings[@id='descending']" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:if>
+			</xsl:when>
+			<xsl:when test="@orderby!=''">
+				<xsl:choose>
+					<xsl:when test="@orderby='timestamp'">
+						<xsl:choose>
+							<xsl:when test="@sort='asc'">
+								the oldest videos
+							</xsl:when>
+							<xsl:otherwise>
+								the newest videos
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:when test="@orderby='downloadcount'">
+						<xsl:choose>
+							<xsl:when test="@sort='asc'">
+								the least downloaded videos
+							</xsl:when>
+							<xsl:otherwise>
+								the most downloaded videos
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:when test="@orderby='viewcount'">
+						<xsl:choose>
+							<xsl:when test="@sort='asc'">
+								the least viewed videos
+							</xsl:when>
+							<xsl:otherwise>
+								the most viewed videos
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:when test="@orderby='duration'">
+						<xsl:choose>
+							<xsl:when test="@sort='asc'">
+								the shortest videos
+							</xsl:when>
+							<xsl:otherwise>
+								the lengthest videos
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:when test="@orderby='filesize'">
+						<xsl:choose>
+							<xsl:when test="@sort='asc'">
+								the smallest videos
+							</xsl:when>
+							<xsl:otherwise>
+								the biggest videos
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+				</xsl:choose>
+			</xsl:when>
+		</xsl:choose>
 	</div>
-	<table class="results">
+	<div>
+		<xsl:value-of select="@resultcount" /> results on <xsl:value-of select="@lastpage" /> pages
+	</div>
+	
+	<xsl:call-template name="pagination"/>
+	
+	<table class="results" align="center">
 		<xsl:for-each select="result">
 			<tr class="result">
 				<td>
@@ -373,7 +470,7 @@
 						</xsl:attribute>
 						<img>
 							<xsl:attribute name="src">
-								<xsl:value-of select="thumbnail" />
+								<xsl:value-of select="@thumbnail" />
 							</xsl:attribute>
 							<xsl:attribute name="alt">
 								<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
@@ -381,14 +478,108 @@
 						</img>
 					</a>
 				</td>
-				<td>
-					<xsl:value-of select="$locale_strings/str[@id='DC.Title']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:title" /><br />
-					<xsl:value-of select="$locale_strings/str[@id='DC.Creator']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:creator" /><br />
-					<xsl:value-of select="$locale_strings/str[@id='DC.Publisher']" />: <xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
+				<td><h2>
+					<a>
+						<xsl:attribute name="href">
+							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+						</xsl:attribute>
+						<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+					</a></h2>
+					<table class="videometadata">
+						<tr>
+							<td class="leftcell">
+								<xsl:value-of select="$locale_strings[@id='duration']" />:
+							</td>
+							<td class="rightcell">
+								<xsl:variable name="minutes" select="floor(@duration div 60)" />
+								<xsl:variable name="hours" select="floor(@duration div 3600)" />
+								<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
+								<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
+							</td>
+						</tr>
+						<tr>
+							<td class="leftcell">
+								<xsl:value-of select="$locale_strings[@id='viewcount']" />:
+							</td>
+							<td class="rightcell">
+								<xsl:value-of select="@viewcount" />
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</xsl:for-each>
 	</table>
+	
+	<xsl:call-template name="pagination"/>
+	
+	<div>
+		<form method="get" action="search.pl">
+			<fieldset>
+				<input type="hidden" name="query">
+					<xsl:attribute name="value">
+						<xsl:value-of select="@query" />
+					</xsl:attribute>
+				</input>
+				order by: 
+				<select name="orderby">
+				<xsl:if test="@query!=''">
+					<option value="relevance">
+						<xsl:if test="@orderby='relevance'">
+							<xsl:attribute name="selected">selected</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of select="$locale_strings[@id='relevance']" />
+					</option>
+				</xsl:if>
+				<option value="filesize">
+					<xsl:if test="@orderby='filesize'">
+						<xsl:attribute name="selected">selected</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$locale_strings[@id='filesize']" />
+				</option>
+				<option value="duration">
+					<xsl:if test="@orderby='duration'">
+						<xsl:attribute name="selected">selected</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$locale_strings[@id='duration']" />
+				</option>
+				<option value="viewcount">
+					<xsl:if test="@orderby='viewcount'">
+						<xsl:attribute name="selected">selected</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$locale_strings[@id='viewcount']" />
+				</option>
+				<option value="downloadcount">
+					<xsl:if test="@orderby='downloadcount'">
+						<xsl:attribute name="selected">selected</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$locale_strings[@id='downloadcount']" />
+				</option>
+				<option value="timestamp">
+					<xsl:if test="@orderby='timestamp'">
+						<xsl:attribute name="selected">selected</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$locale_strings[@id='timestamp']" />
+				</option>
+				</select>
+				<select name="sort">
+				<option value="desc">
+					<xsl:if test="@sort='desc'">
+						<xsl:attribute name="selected">selected</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$locale_strings[@id='descending']" />
+				</option>
+				<option value="asc">
+					<xsl:if test="@sort='asc'">
+						<xsl:attribute name="selected">selected</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$locale_strings[@id='ascending']" />
+				</option>
+				</select>
+				<input type="submit" />
+			</fieldset>
+		</form>
+	</div>
 
 </xsl:template>
 
@@ -440,7 +631,7 @@
 			<xsl:value-of select="rdf:RDF/cc:Work/@rdf:about" />
 			</xsl:attribute>
 			<br />
-			<xsl:value-of select="$locale_strings/str[@id='download_video']" />
+			<xsl:value-of select="$locale_strings[@id='download_video']" />
 		</a>
 	</div>
 
@@ -449,7 +640,7 @@
 			<xsl:attribute name="href">
 				<xsl:value-of select="rdf:RDF/cc:License/@rdf:about" />
 			</xsl:attribute>
-			<xsl:value-of select="$locale_strings/str[@id='license_conditions']" />:
+			<xsl:value-of select="$locale_strings[@id='license_conditions']" />:
 		</a>
 		<br />
 		<a>
@@ -507,7 +698,7 @@
 	<table class="videometadata">
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Title']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Title']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
@@ -515,7 +706,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Creator']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:creator" />
@@ -523,7 +714,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Subject']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Subject']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:subject" />
@@ -531,7 +722,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Description']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Description']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:description" />
@@ -539,7 +730,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Publisher']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Publisher']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:publisher" />
@@ -547,7 +738,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Date']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Date']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:date" />
@@ -555,7 +746,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Source']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Source']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:source" />
@@ -563,7 +754,7 @@
 		</tr>
 		<tr>
 			<td class="leftcell">
-				<xsl:value-of select="$locale_strings/str[@id='DC.Rights']" />:
+				<xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
 			</td>
 			<td class="rightcell">
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:rights" />
@@ -590,7 +781,7 @@
 
 	<div class="comments">
 		<span class="protip">
-			<xsl:value-of select="$locale_strings/str[@id='comment_on_video']" />
+			<xsl:value-of select="$locale_strings[@id='comment_on_video']" />
 		</span>
 		<br />
 		<xsl:for-each select="comment">
@@ -620,7 +811,7 @@
 				<br />
 				<input type="submit" name="send">
 					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings/str[@id='comment_post']" />
+						<xsl:value-of select="$locale_strings[@id='comment_post']" />
 					</xsl:attribute>
 				</input>
 			</fieldset>
@@ -635,20 +826,20 @@
 
 		<form method="post">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings/str[@id='page_register']" />
+				<xsl:value-of select="$site_strings[@id='page_register']" />
 			</xsl:attribute>
 			<fieldset>
-				<xsl:value-of select="$locale_strings/str[@id='username']" />:
+				<xsl:value-of select="$locale_strings[@id='username']" />:
 				<br />				
 				<input name="user" type="text" size="30" maxlength="30" />
 				<br />
-				<xsl:value-of select="$locale_strings/str[@id='password']" />:
+				<xsl:value-of select="$locale_strings[@id='password']" />:
 				<br />
 				<input name="pass" type="password" size="30" maxlength="30" />
 				<br />
 				<input type="submit" name="register" >
 					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings/str[@id='button_register']" />
+						<xsl:value-of select="$locale_strings[@id='button_register']" />
 					</xsl:attribute>
 				</input>
 			</fieldset>
@@ -664,38 +855,38 @@
 
 		<form method="post">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings/str[@id='page_login']" />
+				<xsl:value-of select="$site_strings[@id='page_login']" />
 			</xsl:attribute>
 			<fieldset>
 				<input name="action" type="hidden" value="login" />
-				<xsl:value-of select="$locale_strings/str[@id='username']" />:
+				<xsl:value-of select="$locale_strings[@id='username']" />:
 				<br />				
 				<input name="user" type="text" size="30" maxlength="30" />
 				<br />
-				<xsl:value-of select="$locale_strings/str[@id='password']" />:
+				<xsl:value-of select="$locale_strings[@id='password']" />:
 				<br />
 				<input name="pass" type="password" size="30" maxlength="30" />
 				<br />
 				<input type="submit" name="login" >
 					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings/str[@id='button_login']" />
+						<xsl:value-of select="$locale_strings[@id='button_login']" />
 					</xsl:attribute>
 				</input>
 			</fieldset>
 		</form>
 		<form method="post">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings/str[@id='page_login']" />
+				<xsl:value-of select="$site_strings[@id='page_login']" />
 			</xsl:attribute>
 			<fieldset>
 				<input name="action" type="hidden" value="openid" />
-				<xsl:value-of select="$locale_strings/str[@id='username']" />:
+				<xsl:value-of select="$locale_strings[@id='username']" />:
 				<br />				
 				<input name="user" type="text" size="30" maxlength="30" />
 				<br />
 				<input type="submit" name="login" >
 					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings/str[@id='button_login']" />
+						<xsl:value-of select="$locale_strings[@id='button_login']" />
 					</xsl:attribute>
 				</input>
 			</fieldset>
@@ -712,29 +903,29 @@
 			<xsl:when test="@page=1">
 				<form method="post" enctype="multipart/form-data">
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings/str[@id='page_uploader']" />
+						<xsl:value-of select="$site_strings[@id='page_uploader']" />
 					</xsl:attribute>
 					<fieldset>
-						<xsl:value-of select="$locale_strings/str[@id='instruction_file']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_file']" />
 						<br />
 						<input name="file" type="file" size="13" />
 						<br />
-						<xsl:value-of select="$locale_strings/str[@id='instruction_title']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_title']" />
 						<br />
 						<input name="DC.Title" type="text" size="30" />
 						<br />
-						<xsl:value-of select="$locale_strings/str[@id='instruction_description']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_description']" />
 						<br />
 						<input name="DC.Description" type="text" size="30" />
 						<br /><br />
 						<input type="submit" name="page2" >
 							<xsl:attribute name="value">
-								<xsl:value-of select="$locale_strings/str[@id='button_next_page']" />
+								<xsl:value-of select="$locale_strings[@id='button_next_page']" />
 							</xsl:attribute>
 						</input>
 						<br />
 						<span class="protip">
-							<xsl:value-of select="$locale_strings/str[@id='this_is_page_1']" />
+							<xsl:value-of select="$locale_strings[@id='this_is_page_1']" />
 						</span>
 					</fieldset>
 				</form>
@@ -743,37 +934,37 @@
 			<xsl:when test="@page=2">
 				<form method="post" enctype="multipart/form-data">
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings/str[@id='page_uploader']" />
+						<xsl:value-of select="$site_strings[@id='page_uploader']" />
 					</xsl:attribute>
 					<fieldset>
-						<xsl:value-of select="$locale_strings/str[@id='instruction_creator']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_creator']" />
 						<br />
 						<input name="DC.Creator" type="text" size="30" />
 						<br />
-						<xsl:value-of select="$locale_strings/str[@id='instruction_subject']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_subject']" />
 						<br />
 						<input name="DC.Subject" type="text" size="30" />
 						<br />
-						<xsl:value-of select="$locale_strings/str[@id='instruction_source']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_source']" />
 						<br />
 						<input name="DC.Source" type="text" size="30" />
 						<br />
-						<xsl:value-of select="$locale_strings/str[@id='instruction_language']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_language']" />
 						<br />
 						<input name="DC.Language" type="text" size="30" />
 						<br />
-						<xsl:value-of select="$locale_strings/str[@id='instruction_coverage']" />
+						<xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
 						<br />
 						<input name="DC.Coverage" type="text" size="30" />
 						<br />
 						<input type="submit" name="page2" >
 							<xsl:attribute name="value">
-								<xsl:value-of select="$locale_strings/str[@id='button_next_page']" />
+								<xsl:value-of select="$locale_strings[@id='button_next_page']" />
 							</xsl:attribute>
 						</input>
 						<br />
 						<span class="protip">
-							<xsl:value-of select="$locale_strings/str[@id='this_is_page_2']" />
+							<xsl:value-of select="$locale_strings[@id='this_is_page_2']" />
 						</span>
 					</fieldset>
 				</form>

@@ -57,6 +57,17 @@
 
 	<!-- results page-->
 	<str id="results_for_query">results for query</str>
+	<str id="ordered_by">ordered by</str>
+	<str id="ascending">ascending</str>
+	<str id="descending">descending</str>
+	<str id="results_on">results on</str>
+	<str id="pages">pages</str>
+	<str id="relevance">relevance</str>
+	<str id="duration">duration</str>
+	<str id="filesize">filesize</str>
+	<str id="viewcount">viewcount</str>
+	<str id="downloadcount">downloadcount</str>
+	<str id="timestamp">timestamp</str>
 	
 	<!-- search bar-->
 	<str id="search">search</str>
@@ -101,6 +112,9 @@
 	<str id="DC.Language">language</str>
 	<str id="DC.Coverage">coverage</str>
 	<str id="DC.Rights">righs holder</str>
+	
+	<str id="duration">duration</str>
+	<str id="viewcount">viewcount</str>
 
 </strings>
 
