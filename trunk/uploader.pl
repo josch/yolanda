@@ -20,6 +20,16 @@ sub hook
  
 my $userid = get_userid_from_sid($session->id);
 
+%page = ();
+	
+#if a username is associated with session id, username is nonempty
+$page->{'username'} = get_username_from_sid($session->id);
+$page->{'locale'} = $locale;
+$page->{'stylesheet'} = $stylesheet;
+$page->{'xmlns:dc'} = $xmlns_dc;
+$page->{'xmlns:cc'} = $xmlns_cc;
+$page->{'xmlns:rdf'} = $xmlns_rdf;
+
 if($userid)
 {
 	#connect to db
@@ -49,31 +59,19 @@ if($userid)
 	}
 	close TEMPFILE;
 	
-	print $session->header();
-	print "passt";
-	print $id;
+	$page->{'message'}->{'type'} = "information";
+	$page->{'message'}->{'text'} = "information_uploaded";
 	
 	#disconnect db
 	$dbh->disconnect() or die $dbh->errstr;
 }
 else
 {
-	%page = ();
-	
-	#if a username is associated with session id, username is nonempty
-	$page->{'username'} = get_username_from_sid($session->id);
-	$page->{'locale'} = $locale;
-	$page->{'stylesheet'} = $stylesheet;
-	$page->{'xmlns:dc'} = $xmlns_dc;
-	$page->{'xmlns:cc'} = $xmlns_cc;
-	$page->{'xmlns:rdf'} = $xmlns_rdf;
-	
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_202c";
-	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
+#print xml http header along with session cookie
+print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+#print xml
+print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');

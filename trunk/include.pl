@@ -5,6 +5,8 @@ use CGI::Session;
 use DBI;
 use XML::Simple qw(:strict);
 use Digest::SHA qw(sha256_hex);
+use LWPx::ParanoidAgent;
+use Net::OpenID::Consumer;
 
 # change this as you install it somewhere else
 $gnutube_root = '/var/www/gnutube';

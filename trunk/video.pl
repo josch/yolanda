@@ -6,19 +6,19 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
+%page = ();
+
+#if a username is associated with session id, username is nonempty
+$page->{'username'} = get_username_from_sid($session->id);
+$page->{'locale'} = $locale;
+$page->{'stylesheet'} = $stylesheet;
+$page->{'xmlns:dc'} = $xmlns_dc;
+$page->{'xmlns:cc'} = $xmlns_cc;
+$page->{'xmlns:rdf'} = $xmlns_rdf;
+
 #check if id or title is passed
 if($query->url_param('title') or $query->url_param('id'))
 {
-	%page = ();
-	
-	#if a username is associated with session id, username is nonempty
-	$page->{'username'} = get_username_from_sid($session->id);
-	$page->{'locale'} = $locale;
-	$page->{'stylesheet'} = $stylesheet;
-	$page->{'xmlns:dc'} = $xmlns_dc;
-	$page->{'xmlns:cc'} = $xmlns_cc;
-	$page->{'xmlns:rdf'} = $xmlns_rdf;
-	
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
@@ -209,31 +209,15 @@ if($query->url_param('title') or $query->url_param('id'))
 	
 	#close db
 	$dbh->disconnect() or die $dbh->errstr;
-	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => 1);
 }
 else
 {
-	%page = ();
-	
-	#if a username is associated with session id, username is nonempty
-	$page->{'username'} = get_username_from_sid($session->id);
-	$page->{'locale'} = $locale;
-	$page->{'stylesheet'} = $stylesheet;
-	$page->{'xmlns:dc'} = $xmlns_dc;
-	$page->{'xmlns:cc'} = $xmlns_cc;
-	$page->{'xmlns:rdf'} = $xmlns_rdf;
-	
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_202c";
-	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
+
+#print xml http header along with session cookie
+print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+#print xml
+print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');

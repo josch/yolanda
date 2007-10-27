@@ -143,22 +143,15 @@ if($query->param('query') or $query->param('orderby'))
 	
 	#close db
 	$dbh->disconnect() or die $dbh->errstr;
-	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
 else
 {
-	
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_202c";
-	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	#print xml
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 }
+
+#print xml http header along with session cookie
+print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+#print xml
+print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');

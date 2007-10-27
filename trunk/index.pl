@@ -34,5 +34,5 @@ fill_tagcloud;
 print $session->header(-type=>'text/xml', -charset=>'UTF-8');
 
 #print xml
-print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
+print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
 

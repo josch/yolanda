@@ -45,6 +45,12 @@
 	<str id="error_missing_DC.Language">You did not supply a language.</str>
 	<str id="error_missing_DC.Coverage">You did not supply a coverage.</str>
 	<str id="error_missing_DC.Rights">You did not supply a rights holder.</str>
+	<str id="error_already_registered">You seem to be already registered. Please log out to create a new account.</str>
+	<str id="error_already_logged_in">You seem to be already logged in. Please log out to log in again.</str>
+	<str id="error_username_password_do_not_match">Username and password do not match.</str>
+	<str id=""></str>
+	<str id=""></str>
+	<str id=""></str>
 
 	<!-- information -->
 	<str id="information_logged_in">You are now logged in.</str>
@@ -52,6 +58,8 @@
 	<str id="information_metainformation_needed">To put the video into context, additional metainformation is needed.</str>
 	<str id="information_metainformation_rights"></str>
 	<str id="information_comment_created">Your comment has been created.</str>
+	<str id="information_registered">You successfully created yourself an account</str>
+	<str id="information_uploaded">You succcessfully uploaded your file</str>
 
 	<!-- warnings -->
 

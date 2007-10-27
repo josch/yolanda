@@ -7,8 +7,25 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
+$username = get_username_from_sid($session->id);
+
+%page = ();
+
+$page->{'username'} = $username;
+$page->{'locale'} = $locale;
+$page->{'stylesheet'} = $stylesheet;
+$page->{'xmlns:dc'} = $xmlns_dc;
+$page->{'xmlns:cc'} = $xmlns_cc;
+$page->{'xmlns:rdf'} = $xmlns_rdf;
+
+#check if user is logged in
+if($username)
+{
+	$page->{'message'}->{'type'} = "error";
+	$page->{'message'}->{'text'} = "error_already_registered";
+}
 #if username and password are passed put them into the database
-if($query->param('user') and $query->param('pass'))
+elsif($query->param('user') and $query->param('pass'))
 {
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
@@ -21,23 +38,15 @@ if($query->param('user') and $query->param('pass'))
 	$dbh->disconnect() or die $dbh->errstr;
 	
 	#print a little confirmation
-	print $session->header();
-	print 'done';
+	$page->{'message'}->{'type'} = "information";
+	$page->{'message'}->{'text'} = "information_registered";
 }
 else
 {
-	#if not, print register form
-
-	%page = ();
-
-	#if a username is associated with session id, username is nonempty
-	$page->{username} = get_username_from_sid($session->id);
-	$page->{locale} = $locale;
-	$page->{stylesheet} = $stylesheet;
-	$page->{registerform} = [''];
-
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
+	$page->{'registerform'} = [''];
 }
+
+#print xml http header along with session cookie
+print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');

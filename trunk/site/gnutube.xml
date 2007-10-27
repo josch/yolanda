@@ -11,7 +11,7 @@
 <!--	<str id=""></str>
 	<str id=""></str>
 	<str id=""></str>-->
-	<str id="page_account">account</str>
+	<str id="page_account">/account.pl</str>
 	<str id="page_bookmarks"></str>
 	<str id="page_login">login.pl</str>
 	<str id="page_login-openid">login-openid.pl</str>
@@ -21,7 +21,7 @@
 	<str id="page_gnutube-source-code">http://mister-muffin.de/proj/browser</str>
 	<str id="page_register">register.pl</str>
 	<str id="page_results">search.pl?query=</str>
-	<str id="page_upload">upload.pl</str>
+	<str id="page_upload">/upload.pl</str>
 	<str id="page_uploader">uploader.pl</str>
 	<str id="page_query_latestadditions">search.pl?query=&amp;orderby=timestamp&amp;sort=desc</str>
 

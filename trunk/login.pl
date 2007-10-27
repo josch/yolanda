@@ -7,14 +7,44 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
+$username = get_username_from_sid($session->id);
+
+%page = ();
+
+$page->{'username'} = $username;
+$page->{'locale'} = $locale;
+$page->{'stylesheet'} = $stylesheet;
+$page->{'xmlns:dc'} = $xmlns_dc;
+$page->{'xmlns:cc'} = $xmlns_cc;
+$page->{'xmlns:rdf'} = $xmlns_rdf;
+
 #check if action is set
 if($query->param('action'))
 {
 	#connect to db
 	$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 	
+	if($query->param('action') eq "logout")
+	{
+		#if logout is requested
+		#remove sid from database
+		$dbh->do(qq{update users set sid = '' where username = ?}, undef, get_username_from_sid($session->id)) or die $dbh->errstr;
+		$session->delete();
+		print $query->redirect("index.pl?information=information_logged_out");
+	}
+	#check if user is logged in
+	elsif($username)
+	{
+		$page->{'message'}->{'type'} = "error";
+		$page->{'message'}->{'text'} = "error_already_logged_in";
+		
+		#print xml http header along with session cookie
+		print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+		print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	}
 	#if login is requested
-	if($query->param('action') eq "login")
+	elsif($query->param('action') eq "login")
 	{
 		#prepare query - empty password are openid users so omit those entries
 		my $sth = $dbh->prepare(qq{select id from users
@@ -33,8 +63,13 @@ if($query->param('action'))
 		else
 		{
 			#if not, print error
-			print $session->header();
-			print "could not log you in";
+			$page->{'message'}->{'type'} = "error";
+			$page->{'message'}->{'text'} = "error_username_password_do_not_match";
+			
+			#print xml http header along with session cookie
+			print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+			print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
 		}
 		
 	}
@@ -42,7 +77,7 @@ if($query->param('action'))
 	{
 		#create our openid consumer object
 		$con = Net::OpenID::Consumer->new(
-		ua => LWP::UserAgent->new, # FIXME - use LWPx::ParanoidAgent
+		ua => LWPx::ParanoidAgent->new, # FIXME - use LWPx::ParanoidAgent
 		cache => undef, # or File::Cache->new,
 		args => $query,
 		consumer_secret => $session->id, #is this save? don't know...
@@ -59,7 +94,7 @@ if($query->param('action'))
 				print "claim failed: ", $con->err;
 			}
 			$check_url = $claimed->check_url(
-					return_to  => "http://localhost/gnutube/login.pl?action=openid&ret=true", #on success return to this address
+					return_to  => "$domain/login.pl?action=openid&ret=true", #on success return to this address
 					trust_root => $domain); #this is the string the user will be asked to trust
 					
 			#redirect to openid server to check claim
@@ -110,43 +145,48 @@ if($query->param('action'))
 		else
 		{
 			#someone is messing with the args
-			print $session->header();
-			print "hmm, openid action but no ret or user";
+			$page->{'message'}->{'type'} = "error";
+			$page->{'message'}->{'text'} = "error_202c";
+	
+			#print xml http header along with session cookie
+			print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+			print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
 		}
-	}
-	elsif($query->param('action') eq "logout")
-	{
-		#if logout is requested
-		#remove sid from database
-		$dbh->do(qq{update users set sid = '' where username = ?}, undef, get_username_from_sid($session->id)) or die $dbh->errstr;
-		$session->delete();
-		print $session->header();
-		print "logged out";
 	}
 	else
 	{
 		#something ugly was passed
-		print $session->header();
-		print "wtf?";
+		$page->{'message'}->{'type'} = "error";
+		$page->{'message'}->{'text'} = "error_202c";
+	
+		#print xml http header along with session cookie
+		print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+		print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
 	}
 
 	#disconnect db
 	$dbh->disconnect();
 }
-else
+#check if user is logged in
+elsif($username)
 {
-	#if not, print login form
-
-	%page = ();
-
-	#if a username is associated with session id, username is nonempty
-	$page->{username} = get_username_from_sid($session->id);
-	$page->{locale} = $locale;
-	$page->{stylesheet} = $stylesheet;
-	$page->{loginform} = [''];
-
+	$page->{'message'}->{'type'} = "error";
+	$page->{'message'}->{'text'} = "error_already_logged_in";
+	
 	#print xml http header along with session cookie
 	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
 
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+}
+else
+{
+	#if not, print login form
+	$page->{loginform} = [''];
+	
+	#print xml http header along with session cookie
+	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
+
+	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
 }
