@@ -1,9 +1,42 @@
-GNUtube - a free software video CMS
+GNUtube - http://mister-muffin.de/proj
+=======================================================
 
-Frontend: XML + XSL + CSS
-(c) 2007 Nils Moskopp
+A video content management using Perl for the backend and XML and XSLT for the frontend. Video playback is provided by Fluendo's Cortado applet.
 
-Backend: Perl
-(c) 2007 Johannes Schauer
+Installation
+============
 
-License is the Affero General Public License version 3 or (at your option) any later version published by the Free Software Foundation.
+apache2
+apache2-mpm-prefork
+libapache2-mod-perl2
+libcgi-session-perl
+libdbi-perl
+libxml-simple-perl
+libproc-daemon-perl
+libdigest-sha-perl
+libnet-openid-consumer-perl
+libio-socket-ssl-perl
+liblwpx-paranoidagent-perl
+mysql-server
+ffmpeg
+ffmpeg2theora 
+
+You will also need one of the following java packages for playback purposes:
+sun-java6-plugin
+sun-java5-plugin
+j2re1.4-mozilla-plugin
+
+Important: The GNU java implementation does not seem to work with Cortado yet.
+
+Usage
+=====
+
+Launch the worker script (gnutube_daemon.pl).
+
+Help
+====
+
+If you have any questions/bug reports/ideas, you can find help in the following
+locations:
+
+http://mister-muffin.de/proj - Main project page and wiki
