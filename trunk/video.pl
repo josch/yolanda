@@ -16,8 +16,12 @@ $page->{'xmlns:dc'} = $xmlns_dc;
 $page->{'xmlns:cc'} = $xmlns_cc;
 $page->{'xmlns:rdf'} = $xmlns_rdf;
 
+if($query->url_param('edit') eq 'true' and $query->url_param('id'))
+{
+	$page->{'message'}->{'type'} = "information";
+}
 #check if id or title is passed
-if($query->url_param('title') or $query->url_param('id'))
+elsif($query->url_param('title') or $query->url_param('id'))
 {
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;

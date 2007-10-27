@@ -6,10 +6,11 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
+$username = get_username_from_sid($session->id);
+
 %page = ();
-	
-#if a username is associated with session id, username is nonempty
-$page->{'username'} = get_username_from_sid($session->id);
+
+$page->{'username'} = $username;
 $page->{'locale'} = $locale;
 $page->{'stylesheet'} = $stylesheet;
 $page->{'xmlns:dc'} = $xmlns_dc;
@@ -19,9 +20,11 @@ $page->{'xmlns:rdf'} = $xmlns_rdf;
 #check if query is set
 if($query->param('query') or $query->param('orderby'))
 {
-	$page->{results}->{query} = $query->param('query');
-	$page->{results}->{orderby} = $query->param('orderby');
-	$page->{results}->{sort} = $query->param('sort');
+	$page->{'results'}->{'scriptname'} = 'search.pl';
+	$page->{'results'}->{'argument'} = 'query';
+	$page->{'results'}->{'value'} = $query->param('query');
+	$page->{'results'}->{'orderby'} = $query->param('orderby');
+	$page->{'results'}->{'sort'} = $query->param('sort');
 	
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
@@ -88,7 +91,7 @@ if($query->param('query') or $query->param('orderby'))
 	my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
 	
 	#execute it
-	$resultcount = $sth->execute(@args) or die $dbquery;
+	$resultcount = $sth->execute(@args) or die $dbh->errstr;
 	
 	$rowsperpage = 2;
 	
@@ -111,7 +114,7 @@ if($query->param('query') or $query->param('orderby'))
 	$page->{'results'}->{'resultcount'} = $resultcount;
 	
 	#get every returned value
-	while (my ($id, $title, $creator, $description, $username, $timestamp, $duration, $viewcount, $relevance) = $sth->fetchrow_array())
+	while (my ($id, $title, $creator, $description, $publisher, $timestamp, $duration, $viewcount, $relevance) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
@@ -119,6 +122,7 @@ if($query->param('query') or $query->param('orderby'))
 			'thumbnail'		=> "./video-stills/$id",
 			'duration'		=> $duration,
 			'viewcount'		=> $viewcount,
+			'edit'			=> $username eq $publisher ? "true" : "false",
 			'rdf:RDF'		=>
 			{
 				'cc:Work'		=>
@@ -128,7 +132,7 @@ if($query->param('query') or $query->param('orderby'))
 					'dc:creator'		=> [$creator],
 					'dc:date'			=> [$timestamp],
 					'dc:identifier'		=> ["$domain/video/$title/$id"],
-					'dc:publisher'		=> [$username]
+					'dc:publisher'		=> [$publisher]
 				},
 				'cc:License'	=>
 				{

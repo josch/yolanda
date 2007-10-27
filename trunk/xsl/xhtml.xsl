@@ -290,13 +290,13 @@
 			<xsl:otherwise>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=1')" />
+						<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=1')" />
 					</xsl:attribute>
 					&lt;&lt;
 				</a>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 1)" />
+						<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 1)" />
 					</xsl:attribute>
 					&lt;
 				</a>
@@ -305,7 +305,7 @@
 		<xsl:if test="@currentpage > 2">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 2)" />
+					<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 2)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage - 2" />
 			</a>
@@ -313,7 +313,7 @@
 		<xsl:if test="@currentpage > 1">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 1)" />
+					<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage - 1)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage - 1" />
 			</a>
@@ -323,7 +323,7 @@
 		<xsl:if test="$temp > 0">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 1)" />
+					<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 1)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage + 1" />
 			</a>
@@ -331,7 +331,7 @@
 		<xsl:if test="$temp > 1">
 			<a>
 				<xsl:attribute name="href">
-					<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 2)" />
+					<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 2)" />
 				</xsl:attribute>
 				<xsl:value-of select="@currentpage + 2" />
 			</a>
@@ -343,13 +343,13 @@
 			<xsl:otherwise>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 1)" />
+						<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @currentpage + 1)" />
 					</xsl:attribute>
 					&gt;
 				</a>
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat($site_strings[@id='page_results'], @query, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @lastpage)" />
+						<xsl:value-of select="concat(@scriptname, '?', @argument, '=', @value, '&amp;orderby=', @orderby, '&amp;sort=', @sort, '&amp;page=', @lastpage)" />
 					</xsl:attribute>
 					&gt;&gt;
 				</a>
@@ -479,12 +479,13 @@
 					</a>
 				</td>
 				<td><h2>
-					<a>
-						<xsl:attribute name="href">
-							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-						</xsl:attribute>
-						<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
-					</a></h2>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+							</xsl:attribute>
+							<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+						</a>
+					</h2>
 					<table class="videometadata">
 						<tr>
 							<td class="leftcell">
@@ -506,6 +507,21 @@
 							</td>
 						</tr>
 					</table>
+					<xsl:if test="@edit='true'">
+						<a>
+							<xsl:attribute name="href">
+								<xsl:choose>
+									<xsl:when test="@duration=0">
+										<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, '/edit=true')" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />edit
+						</a>
+					</xsl:if>
 				</td>
 			</tr>
 		</xsl:for-each>
@@ -514,11 +530,17 @@
 	<xsl:call-template name="pagination"/>
 	
 	<div>
-		<form method="get" action="search.pl">
+		<form method="get">
+			<xsl:attribute name="action">
+				<xsl:value-of select="@scriptname" />
+			</xsl:attribute>
 			<fieldset>
-				<input type="hidden" name="query">
+				<input type="hidden">
+					<xsl:attribute name="name">
+						<xsl:value-of select="@argument" />
+					</xsl:attribute>
 					<xsl:attribute name="value">
-						<xsl:value-of select="@query" />
+						<xsl:value-of select="@value" />
 					</xsl:attribute>
 				</input>
 				order by: 
