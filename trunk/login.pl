@@ -144,9 +144,8 @@ if($query->param('action'))
 		}
 		else
 		{
-			#someone is messing with the args
-			$page->{'message'}->{'type'} = "error";
-			$page->{'message'}->{'text'} = "error_202c";
+			#if not, print login form
+			$page->{'loginform'}->{'action'} = 'openid';
 	
 			#print xml http header along with session cookie
 			print $session->header(-type=>'text/xml', -charset=>'UTF-8');
@@ -183,7 +182,7 @@ elsif($username)
 else
 {
 	#if not, print login form
-	$page->{loginform} = [''];
+	$page->{'loginform'} = [''];
 	
 	#print xml http header along with session cookie
 	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
