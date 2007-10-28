@@ -93,15 +93,15 @@ if($query->param('query') or $query->param('orderby'))
 	#execute it
 	$resultcount = $sth->execute(@args) or die $dbh->errstr;
 	
-	$rowsperpage = 2;
+	$pagesize = $query->param('pagesize') or $pagesize = 5;
 	
-	#rediculous but funny round up, will fail with 1000000000000000 results per page
-	#on 0.00000000000001% of all queries - this is a risk we can handle
-	$lastpage = int($resultcount/$rowsperpage+0.999999999999999);
+	#rediculous but funny round up, will fail with 100000000000000 results per page
+	#on 0.0000000000001% of all queries - this is a risk we can handle
+	$lastpage = int($resultcount/$pagesize+0.99999999999999);
 	
 	$currentpage = $query->param('page') or $currentpage = 1;
 	
-	$dbquery .= " limit ".($currentpage-1)*$rowsperpage.", ".$rowsperpage;
+	$dbquery .= " limit ".($currentpage-1)*$pagesize.", ".$pagesize;
 	
 	#prepare query
 	$sth = $dbh->prepare($dbquery) or die $dbh->errstr;
@@ -112,6 +112,7 @@ if($query->param('query') or $query->param('orderby'))
 	$page->{'results'}->{'lastpage'} = $lastpage;
 	$page->{'results'}->{'currentpage'} = $currentpage;
 	$page->{'results'}->{'resultcount'} = $resultcount;
+	$page->{'results'}->{'pagesize'} = $pagesize;
 	
 	#get every returned value
 	while (my ($id, $title, $creator, $description, $publisher, $timestamp, $duration, $viewcount, $relevance) = $sth->fetchrow_array())
