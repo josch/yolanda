@@ -4,7 +4,7 @@
 <strings>
 
 	<!-- visible -->
-	<str id="site_name">GNUtube</str>
+	<str id="site_name">Yolanda</str>
 	<str id="site_motto">WebTV free as in Speech</str>
 
 	<!-- invisible -->
@@ -14,6 +14,7 @@
 	<str id="page_account">/account.pl</str>
 	<str id="page_account_settings">/account.pl?show=settings</str>
 	<str id="page_account_uploads">/account.pl?show=uploads</str>
+	<str id="page_account_bookmarks">/account.pl?show=bookmarks</str>
 	<str id="page_bookmarks"></str>
 	<str id="page_login">/login.pl</str>
 	<str id="page_login-openid">/login.pl?action=openid</str>
