@@ -7,6 +7,8 @@ my $session = new CGI::Session;
 
 my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 
+$dbh->do(qq{drop table config});
+
 $dbh->do(qq{drop table users});
 
 $dbh->do(qq{drop table videos});
@@ -35,12 +37,25 @@ $dbh->do(qq{insert into
 }) or die $dbh->errstr;
 
 $dbh->do(qq{create table
+	config
+	(
+		key			varchar(255)		not null,
+		value		varchar(255)		not null,
+		primary key (key)
+	)
+}) or die $dbh->errstr;
+
+$dbh->do(qq{create table
 	users
 	(
 		id			int auto_increment	not null,
 		username	varchar(255)		not null,
 		password	char(41)			not null,
 		sid			char(32)			not null,
+		timestamp	bigint				not null,
+		locale		varchar(10)			not null,
+		pagesize	unsigned tinyint	default 5,
+		cortado		tinyint				default	1,
 		primary key	(id)
 	)
 }) or die $dbh->errstr;

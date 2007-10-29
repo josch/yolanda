@@ -48,8 +48,10 @@
 	<str id="error_already_registered">You seem to be already registered. Please log out to create a new account.</str>
 	<str id="error_already_logged_in">You seem to be already logged in. Please log out to log in again.</str>
 	<str id="error_username_password_do_not_match">Username and password do not match.</str>
-	<str id=""></str>
-	<str id=""></str>
+	<str id="error_passwords_do_not_match">Passwords do not match.</str>
+	<str id="error_insert_username">Please insert a username.</str>
+	<str id="error_insert_password">Please insert a password.</str>
+	<str id="error_repeat_password">Please repeat your password.</str>
 	<str id=""></str>
 
 	<!-- information -->
@@ -83,6 +85,7 @@
 	<!-- login / register page -->
 	<str id="username">username</str>
 	<str id="password">password</str>
+	<str id="password_repeat">repeat password</str>
 	<str id="button_register">register</str>
 	<str id="button_login">login</str>
 
