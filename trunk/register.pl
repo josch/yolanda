@@ -33,7 +33,7 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
 		my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
 	
 		#do query
-		$dbh->de(qq{insert into users (username, password, timestamp, locale) values ( ?, password( ? ), unix_timestamp(), ?)}, undef,
+		$dbh->do(qq{insert into users (username, password, timestamp, locale) values ( ?, password( ? ), unix_timestamp(), ?)}, undef,
 				$query->param("user"), $query->param("pass"), $page->{'locale'}) or die $dbh->errstr;
 
 		#disconnect db

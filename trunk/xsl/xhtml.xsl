@@ -341,6 +341,10 @@
 				<br />
 				<input name="pass" type="password" size="30" maxlength="30" />
 				<br />
+				<xsl:value-of select="$locale_strings[@id='password_repeat']" />:
+				<br />
+				<input name="pass_repeat" type="password" size="30" maxlength="30" />
+				<br />
 				<input type="submit" name="register" >
 					<xsl:attribute name="value">
 						<xsl:value-of select="$locale_strings[@id='button_register']" />

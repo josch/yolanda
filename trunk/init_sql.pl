@@ -54,7 +54,7 @@ $dbh->do(qq{create table
 		sid			char(32)			not null,
 		timestamp	bigint				not null,
 		locale		varchar(10)			not null,
-		pagesize	unsigned tinyint	default 5,
+		pagesize	tinyint unsigned	default 5,
 		cortado		tinyint				default	1,
 		primary key	(id)
 	)
