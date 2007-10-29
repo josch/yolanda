@@ -116,7 +116,7 @@ sub fill_results
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
 		{
-			'thumbnail'		=> "./video-stills/$id",
+			'thumbnail'		=> "/video-stills/$id",
 			'duration'		=> $duration,
 			'viewcount'		=> $viewcount,
 			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",

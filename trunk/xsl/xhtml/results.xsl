@@ -297,7 +297,7 @@
 </xsl:template>
 
 <xsl:template name="pagination">
-	<xsl:variable name="query_string" select="concat(//results/@scriptname, '?', //results/@argument, '=', //results/@value, '&amp;orderby=', //results/@orderby, '&amp;sort=', //results/@sort, '&amp;pagesize=', //results/@pagesize)" />
+	<xsl:variable name="query_string" select="concat('/', //results/@scriptname, '?', //results/@argument, '=', //results/@value, '&amp;orderby=', //results/@orderby, '&amp;sort=', //results/@sort, '&amp;pagesize=', //results/@pagesize)" />
 	<div>
 		<xsl:choose>
 			<xsl:when test="//results/@currentpage&lt;=1">
