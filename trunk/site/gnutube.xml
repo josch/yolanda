@@ -12,6 +12,8 @@
 	<str id=""></str>
 	<str id=""></str>-->
 	<str id="page_account">/account.pl</str>
+	<str id="page_account_settings">/account.pl?show=settings</str>
+	<str id="page_account_uploads">/account.pl?show=uploads</str>
 	<str id="page_bookmarks"></str>
 	<str id="page_login">/login.pl</str>
 	<str id="page_login-openid">/login.pl?action=openid</str>

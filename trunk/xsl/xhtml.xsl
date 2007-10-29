@@ -166,11 +166,14 @@
 				<xsl:when test="//uploadform">
 					<xsl:call-template name="uploadform"/>
 				</xsl:when>
-				<xsl:when test="//results">
-					<xsl:call-template name="results"/>
+				<xsl:when test="//search">
+					<xsl:call-template name="search"/>
 				</xsl:when>
 				<xsl:when test="//video">
 					<xsl:call-template name="video"/>
+				</xsl:when>
+				<xsl:when test="//account">
+					<xsl:call-template name="account"/>
 				</xsl:when>
 			</xsl:choose>
 
@@ -244,6 +247,10 @@
 
 	<xsl:call-template name="tagcloud"/>
 
+</xsl:template>
+
+<xsl:template name="search">
+	<xsl:call-template name="results"/>
 </xsl:template>
 
 <xsl:template name="searchbar">
@@ -501,6 +508,40 @@
 		</xsl:choose>
 	</div>
 
+</xsl:template>
+
+<xsl:template name="account">
+	<div>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="$site_strings[@id='page_account_uploads']" />
+			</xsl:attribute>
+			<xsl:value-of select="$locale_strings[@id='account_uploads']" />
+		</a>
+		<xsl:value-of select="$locale_strings[@id='separator']" />
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="$site_strings[@id='page_account_settings']" />
+			</xsl:attribute>
+			<xsl:value-of select="$locale_strings[@id='account_settings']" />
+		</a>
+		<xsl:value-of select="$locale_strings[@id='separator']" />
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="$site_strings[@id='page_account_bookmarks']" />
+			</xsl:attribute>
+			<xsl:value-of select="$locale_strings[@id='account_bookmarks']" />
+		</a>
+	</div>
+	
+	<xsl:choose>
+		<xsl:when test="//account/@show='uploads'">
+			<xsl:call-template name="results"/>
+		</xsl:when>
+		<xsl:when test="//account/@show='settings'">
+			settings
+		</xsl:when>
+	</xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>

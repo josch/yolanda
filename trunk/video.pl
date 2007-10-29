@@ -23,35 +23,42 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	if($query->url_param('id'))
 	{
 		#if id is passed ignore title and check for the id
-		$sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+		$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
 							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
-							v.license, filesize, duration, width, height, fps, viewcount,
-							downloadcount
-							from videos as v, users as u where v.id = ? and u.id=v.userid }) or die $dbh->errstr;
-		$rowcount = $sth->execute($query->url_param('id')) or die $dbh->errstr;
+							v.license, filesize, duration, width, height, fps, viewcount, downloadcount
+							from videos as v, users as u where v.id = ? and u.id=v.userid";
+							
+		@args = ($query->url_param('id'));
 	}
 	else
 	{
 		#if no id was passed there has to be a title we search for
-		$sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+		$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
 							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
-							v.license, filesize, duration, width, height, fps, viewcount,
-							downloadcount
-							from videos as v, users as u where v.title = ? and u.id=v.userid }) or die $dbh->errstr;
-		$rowcount = $sth->execute($query->url_param('title')) or die $dbh->errstr;
+							v.license, filesize, duration, width, height, fps, viewcount, downloadcount
+							from videos as v, users as u where v.title = ? and u.id=v.userid";
+							
+		@args = ($query->url_param('title'));
 	}
+	
+	$sth = $dbh->prepare($dbquery);
+	$rowcount = $sth->execute(@args) or die $dbh->errstr;
 	
 	#if the args are wrong there my be zero results
 	#if there was a title passed, then perform a search
 	if($rowcount == 0 and $query->url_param('title'))
 	{
-		$sth = $dbh->prepare(qq{select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+		$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
 							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
-							v.license, filesize, duration, width, height, fps, viewcount,
-							downloadcount
-							from videos as v, users as u where match(v.title, v.description, v.subject) against( ? )
-							and u.id=v.userid }) or die $dbh->errstr;
-		$rowcount = $sth->execute($query->url_param('title')) or die $dbh->errstr;
+							v.license, filesize, duration, width, height, fps, viewcount, downloadcount";
+		$dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
+		$dbquery .= " from videos as v, users as u where u.id = v.userid";
+		$dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
+		
+		@args = ($query->url_param('title'));
+		
+		$sth = $dbh->prepare($dbquery);
+		$rowcount = $sth->execute(@args) or die $dbh->errstr;
 	}
 	
 	#from this point on, do not use $query->param('id') anymore - we do not know what was given
@@ -65,7 +72,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	elsif($rowcount == 1)
 	{
 		#if there was a single result, display the video
-		my ($id, $title, $description, $username, $timestamp, $creator, $subject,
+		my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
 			$contributor, $source, $language, $coverage, $rights, $license,
 			$filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array();
 		
@@ -131,7 +138,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
 					'dc:description'	=> [$description],
-					'dc:publisher'		=> [$username],
+					'dc:publisher'		=> [$publisher],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
 					'dc:identifier'		=> ["$domain/video/$title/$id"],
@@ -177,33 +184,17 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	else
 	{
 		#when an ambigous title was passed there may me many results - display them like search.pl does
-		$page->{results}->{query} = $query->url_param('title');
-		#get every returned value
-		while (my ($id, $title, $description, $userid, $timestamp) = $sth->fetchrow_array())
-		{
-			#before code cleanup, this was a really obfuscated array/hash creation
-			push @{ $page->{'results'}->{'result'} },
-			{
-				'thumbnail'		=> ['./video-stills/225x150/4chan_city_mashup.png'],
-				'rdf:RDF'		=>
-				{
-					'cc:Work'		=>
-					{
-						'rdf:about'		=> "./video.pl?title=$title&id=".$id,
-						'dc:title'		=> [$title],
-						'dc:date'		=> [$timestamp],
-						'dc:publisher'	=> [get_username_from_id($userid)],
-						'dc:description'=> [$description]
-					},
-					'cc:License'	=>
-					{
-						'rdf:about' 	=> 'http://creativecommons.org/licenses/GPL/2.0/'
-					}
-				}
-			};
-		}
-		#finish query
-		$sth->finish() or die $dbh->errstr;
+		
+		$page->{'search'} = [''];
+		$page->{'results'}->{'scriptname'} = 'video.pl';
+		$page->{'results'}->{'argument'} = 'title';
+		$page->{'results'}->{'value'} = $query->param('title');
+		$page->{'results'}->{'orderby'} = $query->param('orderby');
+		$page->{'results'}->{'sort'} = $query->param('sort');
+		
+		$page->{'search'} = [''];
+		
+		fill_results(@args);
 	}
 	
 	#close db

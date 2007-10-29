@@ -75,3 +75,73 @@ sub get_page_array
 	$page->{'xmlns:cc'} = $xmlns_cc;
 	$page->{'xmlns:rdf'} = $xmlns_rdf;
 }
+
+sub fill_results
+{
+	#connect to db
+	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
+	
+	#prepare query
+	my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
+	
+	#execute it
+	$resultcount = $sth->execute(@_) or die $dbh->errstr;
+	
+	$pagesize = $query->param('pagesize') or $pagesize = 5;
+	
+	#rediculous but funny round up, will fail with 100000000000000 results per page
+	#on 0.0000000000001% of all queries - this is a risk we can handle
+	$lastpage = int($resultcount/$pagesize+0.99999999999999);
+	
+	$currentpage = $query->param('page') or $currentpage = 1;
+	
+	$dbquery .= " limit ".($currentpage-1)*$pagesize.", ".$pagesize;
+	
+	#prepare query
+	$sth = $dbh->prepare($dbquery) or die $dbh->errstr;
+	
+	#execute it
+	$sth->execute(@_) or die $dbquery;
+	
+	$page->{'results'}->{'lastpage'} = $lastpage;
+	$page->{'results'}->{'currentpage'} = $currentpage;
+	$page->{'results'}->{'resultcount'} = $resultcount eq '0E0' ? 0 : $resultcount;
+	$page->{'results'}->{'pagesize'} = $pagesize;
+	
+	#get every returned value
+	while (my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
+			$contributor, $source, $language, $coverage, $rights, $license,
+			$filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array())
+	{
+		#before code cleanup, this was a really obfuscated array/hash creation
+		push @{ $page->{'results'}->{'result'} },
+		{
+			'thumbnail'		=> "./video-stills/$id",
+			'duration'		=> $duration,
+			'viewcount'		=> $viewcount,
+			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
+			'rdf:RDF'		=>
+			{
+				'cc:Work'		=>
+				{
+					'rdf:about'			=> "$domain/download/$id",
+					'dc:title'			=> [$title],
+					'dc:creator'		=> [$creator],
+					'dc:date'			=> [$timestamp],
+					'dc:identifier'		=> ["$domain/video/$title/$id"],
+					'dc:publisher'		=> [$publisher]
+				},
+				'cc:License'	=>
+				{
+					'rdf:about' 	=> 'http://creativecommons.org/licenses/GPL/2.0/'
+				}
+			}
+		};
+	}
+	
+	#finish query
+	$sth->finish() or die $dbh->errstr;
+	
+	#close db
+	$dbh->disconnect() or die $dbh->errstr;
+}

@@ -126,6 +126,13 @@
 	
 	<str id="duration">duration</str>
 	<str id="viewcount">viewcount</str>
+	
+	<!-- account page -->
+	<str id="account_uploads">my uploads</str>
+	<str id="account_settings">edit my settings</str>
+	<str id="account_bookmarks">my bookmarks</str>
+	<str id=""></str>
+	
 
 </strings>
 

@@ -13,19 +13,19 @@ $session = new CGI::Session;
 #check if query is set
 if($query->param('query') or $query->param('orderby'))
 {
+	$page->{'search'} = [''];
 	$page->{'results'}->{'scriptname'} = 'search.pl';
 	$page->{'results'}->{'argument'} = 'query';
 	$page->{'results'}->{'value'} = $query->param('query');
 	$page->{'results'}->{'orderby'} = $query->param('orderby');
 	$page->{'results'}->{'sort'} = $query->param('sort');
 	
-	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
-	
 	my @args = ();
 	
 	#build mysql query
-	$dbquery = "select v.id, v.title, v.creator, v.description, u.username, from_unixtime( v.timestamp ), v.duration, v.viewcount";
+	$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
+							v.license, filesize, duration, width, height, fps, viewcount, downloadcount";
 	
 	if($query->param('query'))
 	{
@@ -80,67 +80,7 @@ if($query->param('query') or $query->param('orderby'))
 		}
 	}
 	
-	#prepare query
-	my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
-	
-	#execute it
-	$resultcount = $sth->execute(@args) or die $dbh->errstr;
-	
-	$pagesize = $query->param('pagesize') or $pagesize = 5;
-	
-	#rediculous but funny round up, will fail with 100000000000000 results per page
-	#on 0.0000000000001% of all queries - this is a risk we can handle
-	$lastpage = int($resultcount/$pagesize+0.99999999999999);
-	
-	$currentpage = $query->param('page') or $currentpage = 1;
-	
-	$dbquery .= " limit ".($currentpage-1)*$pagesize.", ".$pagesize;
-	
-	#prepare query
-	$sth = $dbh->prepare($dbquery) or die $dbh->errstr;
-	
-	#execute it
-	$sth->execute(@args) or die $dbquery;
-	
-	$page->{'results'}->{'lastpage'} = $lastpage;
-	$page->{'results'}->{'currentpage'} = $currentpage;
-	$page->{'results'}->{'resultcount'} = $resultcount eq '0E0' ? 0 : $resultcount;
-	$page->{'results'}->{'pagesize'} = $pagesize;
-	
-	#get every returned value
-	while (my ($id, $title, $creator, $description, $publisher, $timestamp, $duration, $viewcount, $relevance) = $sth->fetchrow_array())
-	{
-		#before code cleanup, this was a really obfuscated array/hash creation
-		push @{ $page->{'results'}->{'result'} },
-		{
-			'thumbnail'		=> "./video-stills/$id",
-			'duration'		=> $duration,
-			'viewcount'		=> $viewcount,
-			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
-			'rdf:RDF'		=>
-			{
-				'cc:Work'		=>
-				{
-					'rdf:about'			=> "$domain/download/$id",
-					'dc:title'			=> [$title],
-					'dc:creator'		=> [$creator],
-					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["$domain/video/$title/$id"],
-					'dc:publisher'		=> [$publisher]
-				},
-				'cc:License'	=>
-				{
-					'rdf:about' 	=> 'http://creativecommons.org/licenses/GPL/2.0/'
-				}
-			}
-		};
-	}
-	
-	#finish query
-	$sth->finish() or die $dbh->errstr;
-	
-	#close db
-	$dbh->disconnect() or die $dbh->errstr;
+	fill_results(@args);
 }
 else
 {
