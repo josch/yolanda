@@ -61,7 +61,7 @@ if($query->param('id'))
 		}
 		
 		#in both cases - do some slurp-eaze to the browser
-		open(FILE, "<$gnutube_root/videos/".$query->param('id'));
+		open(FILE, "<$root/videos/".$query->param('id'));
 		print <FILE>;
 		close(FILE);
 	}

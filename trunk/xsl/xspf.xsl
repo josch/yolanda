@@ -17,7 +17,7 @@
 	omit-xml-declaration="no"
 />
 
-<xsl:variable name="site_strings" select="document('../site/gnutube.xml')//strings" />
+<xsl:variable name="site_strings" select="document('../site/main.xml')//strings" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings" />
 
 <xsl:template match="/">

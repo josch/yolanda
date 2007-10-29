@@ -39,9 +39,9 @@ $dbh->do(qq{insert into
 $dbh->do(qq{create table
 	config
 	(
-		key			varchar(255)		not null,
+		attribute	varchar(255)		not null,
 		value		varchar(255)		not null,
-		primary key (key)
+		primary key (attribute)
 	)
 }) or die $dbh->errstr;
 

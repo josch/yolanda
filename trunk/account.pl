@@ -20,6 +20,10 @@ if($userinfo->{'username'})
 		#language
 		#cortado or plugin
 	}
+	elsif($query->param('show') eq 'bookmarks')
+	{
+		$page->{'account'}->{'show'} = 'bookmarks';
+	}
 	elsif($query->param('show') eq 'uploads')
 	{
 		$page->{'account'}->{'show'} = 'uploads';

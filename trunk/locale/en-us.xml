@@ -20,9 +20,9 @@
 	<str id="logout">logout</str>
 
 	<!-- footer -->
-	<str id="gnutube_authors">&#169; 2007 GNUtube team</str>
-	<str id="gnutube_license">license</str>
-	<str id="gnutube_source_code">download source code</str>
+	<str id="authors">&#169; 2007 Yolanda team</str>
+	<str id="license">license</str>
+	<str id="source_code">download source code</str>
 
 	<!-- front page -->
 	<str id="button_find">Find</str>

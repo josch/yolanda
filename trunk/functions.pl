@@ -5,7 +5,7 @@ require "include.pl";
 sub fill_tagcloud
 {
 	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
+	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 	
 	#prepare query
 	my $sth = $dbh->prepare(qq{select text, count from tagcloud }) or die $dbh->errstr;
@@ -33,7 +33,7 @@ sub get_userinfo_from_sid
 	my ($sid) = @_;
 	
 	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
+	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 	
 	#prepare query
 	my $sth = $dbh->prepare(qq{select id, username, locale, pagesize, cortado from users where sid = ?}) or die $dbh->errstr;
@@ -79,7 +79,7 @@ sub get_page_array
 sub fill_results
 {
 	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
+	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 	
 	#prepare query
 	my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;

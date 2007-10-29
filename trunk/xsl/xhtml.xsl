@@ -20,7 +20,7 @@
 <xsl:include href="/xsl/xhtml/results.xsl"/>
 <xsl:include href="/xsl/xhtml/video.xsl"/>
 
-<xsl:variable name="site_strings" select="document('../site/gnutube.xml')//strings/str" />
+<xsl:variable name="site_strings" select="document('../site/main.xml')//strings/str" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings/str" />
 
 <!-- this kills 99% of the processed XML... sorry Tim Bray.... -->
@@ -180,23 +180,23 @@
 			<div class="footer">
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings[@id='page_gnutube-authors']" />
+						<xsl:value-of select="$site_strings[@id='page_authors']" />
 					</xsl:attribute>
-					<xsl:value-of select="$locale_strings[@id='gnutube_authors']" />
+					<xsl:value-of select="$locale_strings[@id='authors']" />
 				</a>
 				<xsl:value-of select="$locale_strings[@id='separator']" />
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings[@id='page_gnutube-license']" />
+						<xsl:value-of select="$site_strings[@id='page_license']" />
 					</xsl:attribute>
-					<xsl:value-of select="$locale_strings[@id='gnutube_license']" />
+					<xsl:value-of select="$locale_strings[@id='license']" />
 				</a>
 				<xsl:value-of select="$locale_strings[@id='separator']" />
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings[@id='page_gnutube-source-code']" />
+						<xsl:value-of select="$site_strings[@id='page_source-code']" />
 					</xsl:attribute>
-				<xsl:value-of select="$locale_strings[@id='gnutube_source_code']" />
+				<xsl:value-of select="$locale_strings[@id='source_code']" />
 				</a>
 			</div>
 
@@ -208,7 +208,7 @@
 <xsl:template name="frontpage">
 
 	<div class="logo-big">
-		<img src="/images/logo-big.png" alt="GNUtube logo (320x100)" />
+		<img src="/images/logo-big.png" alt="Yolanda logo (320x100)" />
 	</div>
 
 	<div class="search">
@@ -257,7 +257,7 @@
 
 	<div class="logo-small-top">
 		<a href="/">
-			<img src="/images/logo-small-top.png" alt="GNUtube logo top (160x25)" />
+			<img src="/images/logo-small-top.png" alt="Yolanda logo top (160x25)" />
 		</a>
 	</div>
 
@@ -275,7 +275,7 @@
 
 	<div class="logo-small-bottom">
 		<a href="/">
-			<img src="/images/logo-small-bottom.png" alt="GNUtube logo top (160x25)" />
+			<img src="/images/logo-small-bottom.png" alt="Yolanda logo top (160x25)" />
 		</a>
 	</div>
 
@@ -540,6 +540,9 @@
 		</xsl:when>
 		<xsl:when test="//account/@show='settings'">
 			settings
+		</xsl:when>
+		<xsl:when test="//account/@show='bookmarks'">
+			bookmarks
 		</xsl:when>
 	</xsl:choose>
 </xsl:template>

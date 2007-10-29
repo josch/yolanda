@@ -1,4 +1,4 @@
-GNUtube - http://mister-muffin.de/proj
+Yolanda - http://mister-muffin.de/proj
 =======================================================
 
 A video content management using Perl for the backend and XML and XSLT for the frontend. Video playback is provided by Fluendo's Cortado applet.
@@ -31,7 +31,7 @@ Important: The GNU java implementation does not seem to work with Cortado yet.
 Usage
 =====
 
-Launch the worker script (gnutube_daemon.pl).
+Launch the worker script (daemon.pl).
 
 Help
 ====

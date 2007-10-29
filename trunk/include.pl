@@ -9,12 +9,12 @@ use LWPx::ParanoidAgent;
 use Net::OpenID::Consumer;
 
 # change this as you install it somewhere else
-$gnutube_root = '/var/www/gnutube';
+$root = '/var/www/yolanda';
 
-use lib qw(/var/www/gnutube);
+use lib qw(/var/www/yolanda);
 
 #set global variables
-$database = 'gnutube';
+$database = 'yolanda';
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
@@ -22,7 +22,7 @@ $domain = 'http://localhost';
 $session_name = 'sid';
 $XMLDecl = qq{<?xml version="1.0" encoding="UTF-8" ?><?xml-stylesheet type="text/xsl" href="/xsl/xhtml.xsl" ?>};
 $locale = "en-US";
-$stylesheet = "/style/gnutube.css";
+$stylesheet = "/style/default.css";
 $xmlns_dc = "http://purl.org/dc/elements/1.1/";
 $xmlns_cc = "http://web.resource.org/cc/";
 $xmlns_rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
