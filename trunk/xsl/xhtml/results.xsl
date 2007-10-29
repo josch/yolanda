@@ -7,8 +7,6 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
 <xsl:template name="results">
-	<xsl:call-template name="searchbar"/>
-	
 	<div>
 		<xsl:choose>
 			<xsl:when test="//results/@query!=''">

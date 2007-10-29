@@ -144,7 +144,11 @@
 			</xsl:choose>
 
 			<hr />
-
+						
+			<xsl:if test="not(//frontpage)">
+				<xsl:call-template name="searchbar"/>
+			</xsl:if>
+			
 			<xsl:if test="//message">
 				<xsl:call-template name="message"/>
 			</xsl:if>
@@ -323,9 +327,6 @@
 </xsl:template>
 
 <xsl:template name="registerform">
-
-	<xsl:call-template name="searchbar"/>
-
 	<div class="registerform">
 
 		<form method="post">
@@ -358,9 +359,6 @@
 </xsl:template>
 
 <xsl:template name="loginform">
-
-	<xsl:call-template name="searchbar"/>
-
 	<div class="loginform">
 		<xsl:choose>
 			<xsl:when test="//loginform/@action='openid'">
@@ -427,13 +425,10 @@
 </xsl:template>
 
 <xsl:template name="uploadform">
-
-	<xsl:call-template name="searchbar"/>
-
 	<div class="uploadform">
 		<xsl:choose>
 
-			<xsl:when test="@page=1">
+			<xsl:when test="//uploadform/@page=1">
 				<form method="post" enctype="multipart/form-data">
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_uploader']" />
@@ -464,7 +459,7 @@
 				</form>
 			</xsl:when>
 
-			<xsl:when test="@page=2">
+			<xsl:when test="//uploadform/@page=2">
 				<form method="post" enctype="multipart/form-data">
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_uploader']" />

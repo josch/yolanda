@@ -67,15 +67,9 @@ if($query->param('id'))
 	}
 	else
 	{
-		#there is no video with this id
-		%page = ();
-	
-		$page->{'username'} = get_username_from_sid($session->id);
-		$page->{'locale'} = $locale;
-		$page->{'stylesheet'} = $stylesheet;
-		$page->{'xmlns:dc'} = $xmlns_dc;
-		$page->{'xmlns:cc'} = $xmlns_cc;
-		$page->{'xmlns:rdf'} = $xmlns_rdf;
+		@userinfo = get_userinfo_from_sid($session->id);
+
+		@page = get_page_array(@userinfo);
 	
 		$page->{'message'}->{'type'} = "error";
 		$page->{'message'}->{'text'} = "error_202c";
@@ -92,15 +86,9 @@ if($query->param('id'))
 }
 else
 {
-	%page = ();
-	
-	#if a username is associated with session id, username is nonempty
-	$page->{'username'} = get_username_from_sid($session->id);
-	$page->{'locale'} = $locale;
-	$page->{'stylesheet'} = $stylesheet;
-	$page->{'xmlns:dc'} = $xmlns_dc;
-	$page->{'xmlns:cc'} = $xmlns_cc;
-	$page->{'xmlns:rdf'} = $xmlns_rdf;
+	@userinfo = get_userinfo_from_sid($session->id);
+
+	@page = get_page_array(@userinfo);
 	
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_202c";

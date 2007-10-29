@@ -6,15 +6,9 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
-%page = ();
+@userinfo = get_userinfo_from_sid($session->id);
 
-#if a username is associated with session id, username is nonempty
-$page->{'username'} = get_username_from_sid($session->id);
-$page->{'locale'} = $locale;
-$page->{'stylesheet'} = $stylesheet;
-$page->{'xmlns:dc'} = $xmlns_dc;
-$page->{'xmlns:cc'} = $xmlns_cc;
-$page->{'xmlns:rdf'} = $xmlns_rdf;
+@page = get_page_array(@userinfo);
 
 if($query->url_param('edit') eq 'true' and $query->url_param('id'))
 {
@@ -79,7 +73,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 		$sth->finish() or die $dbh->errstr;
 		
 		#if user is logged in
-		if($userid = get_userid_from_sid($session->id))
+		if($userinfo->{'username'})
 		{
 			#check if a comment is about to be created
 			if($query->param('comment'))
@@ -89,7 +83,8 @@ elsif($query->url_param('title') or $query->url_param('id'))
 				$page->{'message'}->{'text'} = "information_comment_created";
 			
 				#add to database
-				$dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef, $userid, $id, $query->param('comment')) or die $dbh->errstr;
+				$dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef,
+						$userinfo->{'id'}, $id, $query->param('comment')) or die $dbh->errstr;
 			}
 		}
 		

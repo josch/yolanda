@@ -18,19 +18,11 @@ sub hook
 	#close TEMP;
 }
  
-my $userid = get_userid_from_sid($session->id);
+@userinfo = get_userinfo_from_sid($session->id);
 
-%page = ();
-	
-#if a username is associated with session id, username is nonempty
-$page->{'username'} = get_username_from_sid($session->id);
-$page->{'locale'} = $locale;
-$page->{'stylesheet'} = $stylesheet;
-$page->{'xmlns:dc'} = $xmlns_dc;
-$page->{'xmlns:cc'} = $xmlns_cc;
-$page->{'xmlns:rdf'} = $xmlns_rdf;
+@page = get_page_array(@userinfo);
 
-if($userid)
+if($userinfo->{'id'})
 {
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
@@ -40,7 +32,7 @@ if($userid)
 	$dbh->do(qq{insert into uploaded (title, description, userid, timestamp,
 			creator, subject, contributor, source, language, coverage, rights)
 			values ( ?, ?, ?, unix_timestamp(), ?, ?, ?, ?, ?, ?, ? )}, undef,
-			$query->param("DC.Title"), $query->param("DC.Description"), $userid,
+			$query->param("DC.Title"), $query->param("DC.Description"), $userinfo->{'id'},
 			$query->param("DC.Creator"), $query->param("DC.Subject"), '', $query->param("DC.Source"),
 			$query->param("DC.Language"), $query->param("DC.Coverage"), '') or die $dbh->errstr;
 	

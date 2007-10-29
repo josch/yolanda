@@ -7,13 +7,11 @@ CGI::Session->name($session_name);
 $query = new CGI;
 my $session = new CGI::Session;
 
-%page = ();
+@userinfo = get_userinfo_from_sid($session->id);
 
-#if a username is associated with session id, username is nonempty
-$page->{username} = get_username_from_sid($session->id);
-$page->{locale} = $locale;
-$page->{stylesheet} = $stylesheet;
-$page->{frontpage} = [''];
+@page = get_page_array(@userinfo);
+
+$page->{frontpage} = [''];	
 
 if($query->param('information'))
 {

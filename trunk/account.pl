@@ -7,18 +7,11 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
-$username = get_username_from_sid($session->id);
+@userinfo = get_userinfo_from_sid($session->id);
 
-%page = ();
-
-$page->{'username'} = $username;
-$page->{'locale'} = $locale;
-$page->{'stylesheet'} = $stylesheet;
-$page->{'xmlns:dc'} = $xmlns_dc;
-$page->{'xmlns:cc'} = $xmlns_cc;
-$page->{'xmlns:rdf'} = $xmlns_rdf;
+@page = get_page_array(@userinfo);
 	
-if($username)
+if($userinfo->{'username'})
 {
 	if($query->param('show') eq 'settings')
 	{
@@ -113,7 +106,7 @@ if($username)
 				'thumbnail'		=> $duration == 0 ? "/images/tango/video-x-generic.png" : "/video-stills/$id",
 				'duration'		=> $duration,
 				'viewcount'		=> $viewcount,
-				'edit'			=> $username eq $publisher ? "true" : "false",
+				'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
 				'rdf:RDF'		=>
 				{
 					'cc:Work'		=>

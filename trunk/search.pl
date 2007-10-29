@@ -6,16 +6,9 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
-$username = get_username_from_sid($session->id);
+@userinfo = get_userinfo_from_sid($session->id);
 
-%page = ();
-
-$page->{'username'} = $username;
-$page->{'locale'} = $locale;
-$page->{'stylesheet'} = $stylesheet;
-$page->{'xmlns:dc'} = $xmlns_dc;
-$page->{'xmlns:cc'} = $xmlns_cc;
-$page->{'xmlns:rdf'} = $xmlns_rdf;
+@page = get_page_array(@userinfo);
 
 #check if query is set
 if($query->param('query') or $query->param('orderby'))
@@ -111,7 +104,7 @@ if($query->param('query') or $query->param('orderby'))
 	
 	$page->{'results'}->{'lastpage'} = $lastpage;
 	$page->{'results'}->{'currentpage'} = $currentpage;
-	$page->{'results'}->{'resultcount'} = $resultcount;
+	$page->{'results'}->{'resultcount'} = $resultcount eq '0E0' ? 0 : $resultcount;
 	$page->{'results'}->{'pagesize'} = $pagesize;
 	
 	#get every returned value
@@ -123,7 +116,7 @@ if($query->param('query') or $query->param('orderby'))
 			'thumbnail'		=> "./video-stills/$id",
 			'duration'		=> $duration,
 			'viewcount'		=> $viewcount,
-			'edit'			=> $username eq $publisher ? "true" : "false",
+			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
 			'rdf:RDF'		=>
 			{
 				'cc:Work'		=>

@@ -6,21 +6,13 @@ require "functions.pl";
 CGI::Session->name($session_name);
 my $session = new CGI::Session;
 
-my $username = get_username_from_sid($session->id);
+@userinfo = get_userinfo_from_sid($session->id);
 
-%page = ();
+@page = get_page_array(@userinfo);
 
-#if a username is associated with session id, username is nonempty
-$page->{'username'} = $username;
-$page->{'locale'} = $locale;
-$page->{'stylesheet'} = $stylesheet;
-$page->{'xmlns:dc'} = $xmlns_dc;
-$page->{'xmlns:cc'} = $xmlns_cc;
-$page->{'xmlns:rdf'} = $xmlns_rdf;
-
-if($username)
+if($userinfo->{'username'})
 {
-	$page->{uploadform} = {'page' => '2'};
+	$page->{uploadform} = {'page' => '1'};
 }
 else
 {

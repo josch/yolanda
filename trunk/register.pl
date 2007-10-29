@@ -7,16 +7,9 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
-$username = get_username_from_sid($session->id);
+@userinfo = get_userinfo_from_sid($session->id);
 
-%page = ();
-
-$page->{'username'} = $username;
-($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
-$page->{'stylesheet'} = $stylesheet;
-$page->{'xmlns:dc'} = $xmlns_dc;
-$page->{'xmlns:cc'} = $xmlns_cc;
-$page->{'xmlns:rdf'} = $xmlns_rdf;
+@page = get_page_array(@userinfo);
 
 #check if user is logged in
 if($username)
@@ -50,19 +43,19 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
 		$page->{'message'}->{'text'} = "error_passwords_do_not_match";
 	}
 }
-elsif(not $query->param('user'))
+elsif(not $query->param('user') and ($query->param('pass') or $query->param('pass_repeat')))
 {
 	$page->{'registerform'} = [''];
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_insert_username";
 }
-elsif(not $query->param('pass'))
+elsif(not $query->param('pass') and ($query->param('user') or $query->param('pass_repeat')))
 {
 	$page->{'registerform'} = [''];
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_insert_password";
 }
-elsif(not $query->param('pass_repeat'))
+elsif(not $query->param('pass_repeat') and ($query->param('user') or $query->param('pass')))
 {
 	$page->{'registerform'} = [''];
 	$page->{'message'}->{'type'} = "error";

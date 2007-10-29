@@ -27,8 +27,7 @@ sub fill_tagcloud
 	$dbh->disconnect() or die $dbh->errstr;
 }
 
-#return a username from passed session id
-sub get_username_from_sid
+sub get_userinfo_from_sid
 {
 	#get parameters
 	my ($sid) = @_;
@@ -37,13 +36,13 @@ sub get_username_from_sid
 	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
 	
 	#prepare query
-	my $sth = $dbh->prepare(qq{select username from users where sid = ?}) or die $dbh->errstr;
+	my $sth = $dbh->prepare(qq{select id, username, locale, pagesize, cortado from users where sid = ?}) or die $dbh->errstr;
 	
 	#execute it
 	$sth->execute($sid) or die $dbh->errstr;
 	
 	#save the resulting username
-	my ($username) = $sth->fetchrow_array();
+	($userinfo->{'id'}, $userinfo->{'username'}, $userinfo->{'locale'}, $userinfo->{'pagesize'}, $userinfo->{'cortado'}) = $sth->fetchrow_array();
 	
 	#finish query
 	$sth->finish() or die $dbh->errstr;
@@ -52,33 +51,27 @@ sub get_username_from_sid
 	$dbh->disconnect() or die $dbh->errstr;
 	
 	#return 
-	return $username;
+	return @userinfo;
 }
 
-#return a username from passed session id
-sub get_userid_from_sid
+sub get_page_array
 {
 	#get parameters
-	my ($sid) = @_;
+	my (@userinfo) = @_;
 	
-	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
-	
-	#prepare query
-	my $sth = $dbh->prepare(qq{select id from users where sid = ?}) or die $dbh->errstr;
-	
-	#execute it
-	$sth->execute($sid) or die $dbh->errstr;
-	
-	#save the resulting username
-	my ($username) = $sth->fetchrow_array();
-	
-	#finish query
-	$sth->finish() or die $dbh->errstr;
-	
-	#close db
-	$dbh->disconnect() or die $dbh->errstr;
-	
-	#return 
-	return $username;
+	$page->{'username'} = $userinfo->{'username'};
+	#if user is logged in, use his locale setting
+	if($userinfo->{'locale'})
+	{
+		$page->{'locale'} = $userinfo->{'locale'};
+	}
+	#else get the locale from the http server variable
+	else
+	{
+		($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
+	}
+	$page->{stylesheet} = $stylesheet;
+	$page->{'xmlns:dc'} = $xmlns_dc;
+	$page->{'xmlns:cc'} = $xmlns_cc;
+	$page->{'xmlns:rdf'} = $xmlns_rdf;
 }

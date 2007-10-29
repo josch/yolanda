@@ -8,9 +8,6 @@
 >
 
 <xsl:template name="video">
-
-	<xsl:call-template name="searchbar"/>
-
 	<div class="video">
 		<xsl:choose>
 			<xsl:when test="//video/@cortado='true'">

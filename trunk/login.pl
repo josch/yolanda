@@ -7,16 +7,9 @@ CGI::Session->name($session_name);
 $query = new CGI;
 $session = new CGI::Session;
 
-$username = get_username_from_sid($session->id);
+@userinfo = get_userinfo_from_sid($session->id);
 
-%page = ();
-
-$page->{'username'} = $username;
-$page->{'locale'} = $locale;
-$page->{'stylesheet'} = $stylesheet;
-$page->{'xmlns:dc'} = $xmlns_dc;
-$page->{'xmlns:cc'} = $xmlns_cc;
-$page->{'xmlns:rdf'} = $xmlns_rdf;
+@page = get_page_array(@userinfo);
 
 #check if action is set
 if($query->param('action'))
@@ -28,12 +21,12 @@ if($query->param('action'))
 	{
 		#if logout is requested
 		#remove sid from database
-		$dbh->do(qq{update users set sid = '' where username = ?}, undef, get_username_from_sid($session->id)) or die $dbh->errstr;
+		$dbh->do(qq{update users set sid = '' where id = ?}, undef, $userinfo->{'id'}) or die $dbh->errstr;
 		$session->delete();
 		print $query->redirect("index.pl?information=information_logged_out");
 	}
 	#check if user is logged in
-	elsif($username)
+	elsif($userinfo->{'username'})
 	{
 		$page->{'message'}->{'type'} = "error";
 		$page->{'message'}->{'text'} = "error_already_logged_in";
@@ -169,7 +162,7 @@ if($query->param('action'))
 	$dbh->disconnect();
 }
 #check if user is logged in
-elsif($username)
+elsif($userinfo->{'username'})
 {
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_already_logged_in";
