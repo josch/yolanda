@@ -255,9 +255,9 @@
 
 <xsl:template name="searchbar">
 
-	<div class="logo-small-top">
+	<div class="logo-small">
 		<a href="/">
-			<img src="/images/logo-small-top.png" alt="Yolanda logo top (160x25)" />
+			<img src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
 		</a>
 	</div>
 
@@ -271,12 +271,6 @@
 				<input type="text" name="query" size="auto" />
 			</fieldset>
 		</form>
-	</div>
-
-	<div class="logo-small-bottom">
-		<a href="/">
-			<img src="/images/logo-small-bottom.png" alt="Yolanda logo top (160x25)" />
-		</a>
 	</div>
 
 </xsl:template>

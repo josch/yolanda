@@ -100,19 +100,13 @@ div
 		text-align:		center;
 	}
 
-	div.logo-small-top
+	div.logo-small
 	{
 		float:			left;
-		height:			25px;
+		height:			50px;
 		margin-top:		1em;
 	}
 
-	div.logo-small-bottom
-	{
-		float:				left;
-		height:				1.25em;
-		margin-bottom:		2em;
-	}
 
 	div.search
 	{
