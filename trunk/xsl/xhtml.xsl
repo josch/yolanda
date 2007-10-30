@@ -438,18 +438,21 @@
 					</xsl:attribute>
 					<fieldset>
 						<input type="hidden" name="page" value="2" />
-						<xsl:value-of select="$locale_strings[@id='instruction_title']" />
-						<br />
-						<input name="DC.Title" type="text" size="30" />
-						<br />
-						<xsl:value-of select="$locale_strings[@id='instruction_subject']" />
-						<br />
-						<input name="DC.Subject" type="text" size="30" />
-						<br />
-						<xsl:value-of select="$locale_strings[@id='instruction_description']" />
-						<br />
-						<textarea name="DC.Description" cols="50" rows="5"></textarea>
-						<br /><br />
+						<div class="messagebox">
+							<xsl:value-of select="$locale_strings[@id='instruction_title']" />
+							<br />
+							<input name="DC.Title" type="text" size="30" />
+						</div>
+						<div class="messagebox">
+							<xsl:value-of select="$locale_strings[@id='instruction_subject']" />
+							<br />
+							<input name="DC.Subject" type="text" size="30" />
+						</div>
+						<div class="messagebox">
+							<xsl:value-of select="$locale_strings[@id='instruction_description']" />
+							<br />
+							<textarea name="DC.Description" cols="50" rows="5"></textarea>
+						</div>
 						<input type="submit" name="2">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$locale_strings[@id='button_next_page']" />
@@ -499,33 +502,33 @@
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
 					<fieldset>
-						<xsl:value-of select="$locale_strings[@id='instruction_creator']" />
-						<br />
-						<input type="radio" name="creator" value="user" />myself
-						<br />
-						<input type="radio" name="creator" value="other" />other:
-						<br />
-						<input name="DC.Creator" type="text" size="30" />
-						<br />
-						<br />
-						<xsl:value-of select="$locale_strings[@id='instruction_source']" />
-						<br />
-						<input name="DC.Source" type="text" size="30" />
-						<br />
-						<br />
-						<xsl:value-of select="$locale_strings[@id='instruction_language']" />
-						<br />
-						<select name="DC.Language">
-							<option>English</option>
-							<option>German</option>
-						</select>
-						<br />
-						<br />
-						<xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
-						<br />
-						<input name="DC.Coverage" type="text" size="30" />
-						<br />
-						<br />
+						<div class="messagebox">
+							<xsl:value-of select="$locale_strings[@id='instruction_creator']" />
+							<br />
+							<input type="radio" name="creator" value="user" />myself
+							<br />
+							<input type="radio" name="creator" value="other" />other:
+							<br />
+							<input name="DC.Creator" type="text" size="30" />
+							</div>
+						<div class="messagebox">
+							<xsl:value-of select="$locale_strings[@id='instruction_source']" />
+							<br />
+							<input name="DC.Source" type="text" size="30" />
+						</div>
+						<div class="messagebox">
+							<xsl:value-of select="$locale_strings[@id='instruction_language']" />
+							<br />
+							<select name="DC.Language">
+								<option>English</option>
+								<option>German</option>
+							</select>
+						</div>
+						<div class="messagebox">
+							<xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
+							<br />
+							<input name="DC.Coverage" type="text" size="30" />
+						</div>
 						<input type="submit" name="2">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$locale_strings[@id='button_previous_page']" />
@@ -552,24 +555,24 @@
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
 					<fieldset>
-						<input type="radio" name="license" checked="checked" />none
-						<br />
-						<input type="radio" name="license" />proprietary
-						<br />
-						<input type="radio" name="license" />public domain
-						<br />
-						<input type="radio" name="license" />creative commons
-						<br />
-						<select>
-							<option>cc-by</option>
-							<option>cc-by-sa</option>
-							<option>cc-by-sa-nc</option>
-							<option>cc-by-nc</option>
-							<option>cc-by-nd</option>
-							<option>cc-by-nd-nc</option>
-						</select>
-						<br />
-						<br />
+						<div class="messagebox">
+							<input type="radio" name="license" checked="checked" />none
+							<br />
+							<input type="radio" name="license" />proprietary
+							<br />
+							<input type="radio" name="license" />public domain
+							<br />
+							<input type="radio" name="license" />creative commons
+							<br />
+							<select>
+								<option>cc-by</option>
+								<option>cc-by-sa</option>
+								<option>cc-by-sa-nc</option>
+								<option>cc-by-nc</option>
+								<option>cc-by-nd</option>
+								<option>cc-by-nd-nc</option>
+							</select>
+						</div>
 						<input type="submit" name="3">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$locale_strings[@id='button_previous_page']" />
@@ -590,56 +593,62 @@
 			
 			<xsl:when test="//uploadform/@page=5">
 				<h2>Summary</h2>
-				<p>Please check everything for correctness and edit if neccessary. If Everything is okay proceed below by uploading your video.</p>
+				<p>Please check everything for correctness and edit if neccessary.</p>
 				<form method="post">
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
 					<fieldset>
-						title:
-						<br />
-						subject:
-						<br />
-						description
-						<br />
-						<input type="submit" name="1">
-							<xsl:attribute name="value">
-								<xsl:value-of select="$locale_strings[@id='button_page_1']" />
-							</xsl:attribute>
-						</input>
-						<br />
-						creator:
-						<br />
-						source:
-						<br />
-						language:
-						<br />
-						coverage:
-						<br />
-						<input type="submit" name="3">
-							<xsl:attribute name="value">
-								<xsl:value-of select="$locale_strings[@id='button_page_3']" />
-							</xsl:attribute>
-						</input>
-						<br />
-						license:
-						<br />
-						<input type="submit" name="4">
-							<xsl:attribute name="value">
-								<xsl:value-of select="$locale_strings[@id='button_page_4']" />
-							</xsl:attribute>
-						</input>
+						<div class="messagebox">
+							title:
+							<br />
+							subject:
+							<br />
+							description:
+							<br />
+							<input type="submit" name="1">
+								<xsl:attribute name="value">
+									<xsl:value-of select="$locale_strings[@id='button_page_1']" />
+								</xsl:attribute>
+							</input>
+						</div>
+						<div class="messagebox">
+							creator:
+							<br />
+							source:
+							<br />
+							language:
+							<br />
+							coverage:
+							<br />
+							<input type="submit" name="3">
+								<xsl:attribute name="value">
+									<xsl:value-of select="$locale_strings[@id='button_page_3']" />
+								</xsl:attribute>
+							</input>
+						</div>
+						<div class="messagebox">
+							license:
+							<br />
+							<input type="submit" name="4">
+								<xsl:attribute name="value">
+									<xsl:value-of select="$locale_strings[@id='button_page_4']" />
+								</xsl:attribute>
+							</input>
+						</div>
 					</fieldset>
 				</form>
+				<p>If Everything is okay proceed below by uploading your video.</p>
 				<form method="post" enctype="multipart/form-data">
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_uploader']" />
 					</xsl:attribute>
 					<fieldset>
+						<div class="messagebox">
 						<xsl:value-of select="$locale_strings[@id='instruction_file']" />
 						<br />
 						<input name="file" type="file" size="13" />
-						<br />
+						</div>
 						<input type="submit">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$locale_strings[@id='button_upload']" />
