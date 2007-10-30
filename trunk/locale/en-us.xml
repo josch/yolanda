@@ -92,6 +92,7 @@
 	<!-- upload page -->
 	<str id="file">file</str>
 	<str id="button_next_page">next page</str>
+	<str id="button_previous_page">previous page</str>
 	<str id="button_upload">upload</str>
 	<str id="instruction_file">Specify the file you want to upload.</str>
 	<str id="instruction_title">State the title of the video.</str>
@@ -101,9 +102,15 @@
 	<str id="instruction_source">Specify the source, preferably by URL.</str>
 	<str id="instruction_language">State the language of the video.</str>
 	<str id="instruction_coverage">Specify the time and location covered.</str>
-	<str id="this_is_page_1">This is page 1 of 3.</str>
-	<str id="this_is_page_2">This is page 2 of 3.</str>
-	<str id="this_is_page_2">This is page 3 of 3.</str>
+	<str id="this_is_page_1">This is page 1 of 6.</str>
+	<str id="this_is_page_2">This is page 2 of 6.</str>
+	<str id="this_is_page_3">This is page 3 of 6.</str>
+	<str id="this_is_page_4">This is page 4 of 6.</str>
+	<str id="this_is_page_5">This is page 5 of 6.</str>
+	<str id="this_is_page_6">This is page 6 of 6.</str>
+	<str id="button_page_1">Page 1</str>
+	<str id="button_page_3">Page 3</str>
+	<str id="button_page_4">Page 4</str>
 
 	<!-- video page -->
 	<str id="download_video">download video</str>

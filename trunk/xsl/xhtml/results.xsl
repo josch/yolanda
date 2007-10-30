@@ -6,6 +6,76 @@
 	xmlns:cc="http://web.resource.org/cc/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
+
+<xsl:template name="innerresults">
+	<table class="results" align="center">
+		<xsl:for-each select="//results/result">
+			<tr class="result">
+				<td>
+					<a>
+						<xsl:attribute name="href">
+							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+						</xsl:attribute>
+						<img>
+							<xsl:attribute name="src">
+								<xsl:value-of select="@thumbnail" />
+							</xsl:attribute>
+							<xsl:attribute name="alt">
+								<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+							</xsl:attribute>
+						</img>
+					</a>
+				</td>
+				<td><h2>
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+							</xsl:attribute>
+							<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+						</a>
+					</h2>
+					<table class="videometadata">
+						<tr>
+							<td class="leftcell">
+								<xsl:value-of select="$locale_strings[@id='duration']" />:
+							</td>
+							<td class="rightcell">
+								<xsl:variable name="minutes" select="floor(@duration div 60)" />
+								<xsl:variable name="hours" select="floor(@duration div 3600)" />
+								<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
+								<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
+							</td>
+						</tr>
+						<tr>
+							<td class="leftcell">
+								<xsl:value-of select="$locale_strings[@id='viewcount']" />:
+							</td>
+							<td class="rightcell">
+								<xsl:value-of select="@viewcount" />
+							</td>
+						</tr>
+					</table>
+					<xsl:if test="@edit='true'">
+						<a>
+							<xsl:attribute name="href">
+								<xsl:choose>
+									<xsl:when test="@duration=0">
+										<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, '/edit=true')" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />edit
+						</a>
+					</xsl:if>
+				</td>
+			</tr>
+		</xsl:for-each>
+	</table>
+</xsl:template>
+
 <xsl:template name="results">
 	<div>
 		<xsl:choose>
@@ -106,72 +176,7 @@
 	
 	<xsl:call-template name="pagination"/>
 	
-	<table class="results" align="center">
-		<xsl:for-each select="//results/result">
-			<tr class="result">
-				<td>
-					<a>
-						<xsl:attribute name="href">
-							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-						</xsl:attribute>
-						<img>
-							<xsl:attribute name="src">
-								<xsl:value-of select="@thumbnail" />
-							</xsl:attribute>
-							<xsl:attribute name="alt">
-								<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
-							</xsl:attribute>
-						</img>
-					</a>
-				</td>
-				<td><h2>
-						<a>
-							<xsl:attribute name="href">
-								<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-							</xsl:attribute>
-							<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
-						</a>
-					</h2>
-					<table class="videometadata">
-						<tr>
-							<td class="leftcell">
-								<xsl:value-of select="$locale_strings[@id='duration']" />:
-							</td>
-							<td class="rightcell">
-								<xsl:variable name="minutes" select="floor(@duration div 60)" />
-								<xsl:variable name="hours" select="floor(@duration div 3600)" />
-								<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
-								<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-							</td>
-						</tr>
-						<tr>
-							<td class="leftcell">
-								<xsl:value-of select="$locale_strings[@id='viewcount']" />:
-							</td>
-							<td class="rightcell">
-								<xsl:value-of select="@viewcount" />
-							</td>
-						</tr>
-					</table>
-					<xsl:if test="@edit='true'">
-						<a>
-							<xsl:attribute name="href">
-								<xsl:choose>
-									<xsl:when test="@duration=0">
-										<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, '/edit=true')" />
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:attribute>
-							<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />edit
-						</a>
-					</xsl:if>
-				</td>
-			</tr>
-		</xsl:for-each>
-	</table>
+	<xsl:call-template name="innerresults"/>
 	
 	<xsl:call-template name="pagination"/>
 	

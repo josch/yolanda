@@ -13,7 +13,30 @@ my $session = new CGI::Session;
 
 if($userinfo->{'username'})
 {
-	$page->{uploadform} = {'page' => '1'};
+	if($query->param('2'))
+	{
+		$page->{uploadform} = {'page' => '2'};
+	}
+	elsif($query->param('3'))
+	{
+		$page->{uploadform} = {'page' => '3'};
+	}
+	elsif($query->param('4'))
+	{
+		$page->{uploadform} = {'page' => '4'};
+	}
+	elsif($query->param('5'))
+	{
+		$page->{uploadform} = {'page' => '5'};
+	}
+	elsif($query->param('6'))
+	{
+		$page->{uploadform} = {'page' => '6'};
+	}
+	else
+	{
+		$page->{uploadform} = {'page' => '1'};
+	}
 }
 else
 {
