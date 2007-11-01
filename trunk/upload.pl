@@ -15,28 +15,37 @@ if($userinfo->{'username'})
 {
 	if($query->param('2'))
 	{
-		$page->{uploadform} = {'page' => '2'};
+		$page->{'uploadform'}->{'page'} = '2';
 	}
 	elsif($query->param('3'))
 	{
-		$page->{uploadform} = {'page' => '3'};
+		$page->{'uploadform'}->{'page'} = '3';
 	}
 	elsif($query->param('4'))
 	{
-		$page->{uploadform} = {'page' => '4'};
+		$page->{'uploadform'}->{'page'} = '4';
 	}
 	elsif($query->param('5'))
 	{
-		$page->{uploadform} = {'page' => '5'};
+		$page->{'uploadform'}->{'page'} = '5';
 	}
 	elsif($query->param('6'))
 	{
-		$page->{uploadform} = {'page' => '6'};
+		$page->{'uploadform'}->{'page'} = '6';
 	}
 	else
 	{
-		$page->{uploadform} = {'page' => '1'};
+		$page->{'uploadform'}->{'page'} = '1';
 	}
+	$temp = $query->param('DC.Description');
+	$temp =~ s/\r\n/\n/g;
+	$page->{'uploadform'}->{'DC.Title'} = $query->param('DC.Title');
+	$page->{'uploadform'}->{'DC.Subject'} = $query->param('DC.Subject');
+	$page->{'uploadform'}->{'DC.Description'} = $temp;
+	$page->{'uploadform'}->{'DC.Creator'} = $query->param('DC.Creator');
+	$page->{'uploadform'}->{'DC.Source'} = $query->param('DC.Source');
+	$page->{'uploadform'}->{'DC.Language'} = $query->param('DC.Language');
+	$page->{'uploadform'}->{'DC.Coverage'} = $query->param('DC.Coverage');
 }
 else
 {

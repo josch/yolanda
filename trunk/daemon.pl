@@ -5,16 +5,16 @@ use DBI;
 use Digest::SHA;
 use File::Copy;
 
-$database = 'gnutube';
+$database = 'yolanda';
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$gnutube_root = '/var/www/gnutube';
+$root = '/var/www/yolanda';
 
 #TODO: deamonize by uncommenting this line
 #Proc::Daemon::Init;
 
-$LOG = "/var/www/gnutube/daemon.log";
+$LOG = "$root/daemon.log";
 
 
 sub appendlog
@@ -53,7 +53,7 @@ while(1)
 	
 	if($id)
 	{
-		$info = `ffplay -stats -an -vn -nodisp $gnutube_root/tmp/$id 2>&1`;
+		$info = `ffplay -stats -an -vn -nodisp $root/tmp/$id 2>&1`;
 		
 		if($info =~ /ignoring/)
 		{
@@ -61,7 +61,7 @@ while(1)
 			
 			#write status 2 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 2, $id) or interrupt $dbh->errstr;
-			unlink "$gnutube_root/tmp/$id";
+			unlink "$root/tmp/$id";
 		}
 		elsif ($info =~ /I\/O error occured/)
 		{
@@ -69,7 +69,7 @@ while(1)
 			
 			#write status 3 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 3, $id) or interrupt $dbh->errstr;
-			unlink "$gnutube_root/tmp/$id";
+			unlink "$root/tmp/$id";
 		}
 		elsif ($info =~ /Unknown format/ or $info =~ /could not find codec parameters/)
 		{
@@ -77,12 +77,12 @@ while(1)
 			
 			#write status 4 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 4, $id) or interrupt $dbh->errstr;
-			unlink "$gnutube_root/tmp/$id";
+			unlink "$root/tmp/$id";
 		}
 		else
 		{
 			$sha = new Digest::SHA(256);
-			$sha->addfile("$gnutube_root/tmp/$id");
+			$sha->addfile("$root/tmp/$id");
 			$sha = $sha->hexdigest;
 			
 			#check if this hash is already in database
@@ -98,7 +98,7 @@ while(1)
 				
 				#write status 5 to uploaded table
 				$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 5, $id) or interrupt $dbh->errstr;
-				unlink "$gnutube_root/tmp/$id";
+				unlink "$root/tmp/$id";
 			}
 			else
 			{
@@ -114,12 +114,12 @@ while(1)
 					
 					#write status 2 to uploaded table
 					$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 2, $id) or interrupt $dbh->errstr;
-					unlink "$gnutube_root/tmp/$id";
+					unlink "$root/tmp/$id";
 				}
 				else
 				{
 					#TODO: maybe delete entry from uploaded table after successful upload?
-					$filesize = -s "$gnutube_root/tmp/$id";
+					$filesize = -s "$root/tmp/$id";
 					
 					#convert hh:mm:ss.s duration to full seconds - thanks perl for making this so damn easy!
 					#don't want to know how this would look in python or php... hell I don't even have to create extra variables!
@@ -137,7 +137,7 @@ while(1)
 						$tnheight = 120;
 						$tnwidth = int(120*($width/$height)/2 + .5)*2;
 					}
-					system "ffmpeg -i $gnutube_root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $gnutube_root/video-stills/$id";
+					system "ffmpeg -i $root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/$id";
 					
 					#check if the upload already is in the right format
 					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis')
@@ -152,13 +152,13 @@ while(1)
 												$height, $fps, $sha, $id) or interrupt $dbh->errstr;
 						
 						#move video
-						move "$gnutube_root/tmp/$id", "$gnutube_root/videos/$id";
+						move "$root/tmp/$id", "$root/videos/$id";
 					}
 					else #encode video
 					{
 						#FIXME: remove endtime - this is for testing only
 						#TODO: addmetadata information
-						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --endtime 10 --output $gnutube_root/videos/$id $gnutube_root/tmp/$id 2>&1";
+						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --endtime 10 --output $root/videos/$id $root/tmp/$id 2>&1";
 						appendlog $id, $audio, $video, $width, $height, $fps, $duration, $sha;
 						
 						#add video to videos table
@@ -169,7 +169,7 @@ while(1)
 												$height, $fps, $sha, $id) or interrupt $dbh->errstr;
 						
 						#delete temp file
-						unlink "$gnutube_root/tmp/$id";
+						unlink "$root/tmp/$id";
 					}
 					
 					#write status 1 to uploaded table

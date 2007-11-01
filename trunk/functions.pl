@@ -116,7 +116,7 @@ sub fill_results
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
 		{
-			'thumbnail'		=> "/video-stills/$id",
+			'thumbnail'		=> $duration == 0 ? "/images/tango/video-x-generic.png" : "/video-stills/$id",
 			'duration'		=> $duration,
 			'viewcount'		=> $viewcount,
 			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
@@ -128,7 +128,7 @@ sub fill_results
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["$domain/video/$title/$id"],
+					'dc:identifier'		=> ["$domain/video/$title/$id" . ($duration == 0 ? "/edit=true" : "")],
 					'dc:publisher'		=> [$publisher]
 				},
 				'cc:License'	=>

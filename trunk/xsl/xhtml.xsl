@@ -436,22 +436,52 @@
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+					<input name="DC.Creator" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Creator" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Source" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Source" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Language" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Language" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Coverage" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Coverage" />
+						</xsl:attribute>
+					</input>
 					<fieldset>
 						<input type="hidden" name="page" value="2" />
 						<div class="messagebox">
 							<xsl:value-of select="$locale_strings[@id='instruction_title']" />
 							<br />
-							<input name="DC.Title" type="text" size="30" />
+							<input name="DC.Title" type="text" size="30">
+								<xsl:attribute name="value">
+									<xsl:value-of select="//uploadform/@DC.Title" />
+								</xsl:attribute>
+							</input>
 						</div>
 						<div class="messagebox">
 							<xsl:value-of select="$locale_strings[@id='instruction_subject']" />
 							<br />
-							<input name="DC.Subject" type="text" size="30" />
+							<input name="DC.Subject" type="text" size="30">
+								<xsl:attribute name="value">
+									<xsl:value-of select="//uploadform/@DC.Subject" />
+								</xsl:attribute>
+							</input>
 						</div>
 						<div class="messagebox">
 							<xsl:value-of select="$locale_strings[@id='instruction_description']" />
 							<br />
-							<textarea name="DC.Description" cols="50" rows="5"></textarea>
+							<textarea name="DC.Description" cols="50" rows="5">
+								<xsl:value-of select="//uploadform/@DC.Description" />
+							</textarea>
 						</div>
 						<input type="submit" name="2">
 							<xsl:attribute name="value">
@@ -474,6 +504,41 @@
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+					<input name="DC.Title" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Title" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Subject" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Subject" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Description" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Description" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Creator" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Creator" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Source" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Source" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Language" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Language" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Coverage" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Coverage" />
+						</xsl:attribute>
+					</input>
 					<fieldset>
 						<input type="submit" name="1">
 							<xsl:attribute name="value">
@@ -501,6 +566,21 @@
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+					<input name="DC.Title" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Title" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Subject" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Subject" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Description" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Description" />
+						</xsl:attribute>
+					</input>
 					<fieldset>
 						<div class="messagebox">
 							<xsl:value-of select="$locale_strings[@id='instruction_creator']" />
@@ -554,6 +634,41 @@
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+					<input name="DC.Title" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Title" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Subject" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Subject" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Description" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Description" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Creator" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Creator" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Source" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Source" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Language" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Language" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Coverage" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Coverage" />
+						</xsl:attribute>
+					</input>
 					<fieldset>
 						<div class="messagebox">
 							<input type="radio" name="license" checked="checked" />none
@@ -598,7 +713,57 @@
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+					<input name="DC.Title" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Title" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Subject" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Subject" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Description" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Description" />
+						</xsl:attribute>
+					</input>
 					<fieldset>
+					<input name="DC.Title" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Title" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Subject" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Subject" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Description" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Description" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Creator" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Creator" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Source" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Source" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Language" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Language" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Coverage" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Coverage" />
+						</xsl:attribute>
+					</input>
 						<div class="messagebox">
 							title:
 							<br />
@@ -643,6 +808,41 @@
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_uploader']" />
 					</xsl:attribute>
+					<input name="DC.Title" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Title" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Subject" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Subject" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Description" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Description" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Creator" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Creator" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Source" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Source" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Language" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Language" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Coverage" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Coverage" />
+						</xsl:attribute>
+					</input>
 					<fieldset>
 						<div class="messagebox">
 						<xsl:value-of select="$locale_strings[@id='instruction_file']" />
