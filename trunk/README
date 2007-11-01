@@ -6,6 +6,7 @@ A video content management using Perl for the backend and XML and XSLT for the f
 Installation
 ============
 
+You will need to install following packages prior to using Yolanda:
 apache2
 apache2-mpm-prefork
 libapache2-mod-perl2
