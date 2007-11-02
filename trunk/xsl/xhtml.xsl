@@ -47,7 +47,7 @@
 	<html xmlns="http://www.w3.org/1999/xhtml">
 
 		<head>
-			<meta http-equiv="Content-Type" content="application/xhtml+xml" />
+			<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 			<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 			<link rel="stylesheet" type="text/css">
 				<xsl:attribute name="href">
