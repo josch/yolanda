@@ -20,8 +20,19 @@
 <xsl:include href="../xsl/xhtml/results.xsl"/>
 <xsl:include href="../xsl/xhtml/video.xsl"/>
 
+<xsl:variable name="locale">
+	<xsl:choose>
+		<xsl:when test="//@locale='en-us'">
+			en-us
+		</xsl:when>
+		<xsl:otherwise>
+			en-us
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
 <xsl:variable name="site_strings" select="document('../site/main.xml')//strings/str" />
-<xsl:variable name="locale_strings" select="document('../locale/en-us.xml')//strings/str" />
+<xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/str" />
 
 <!-- this kills 99% of the processed XML... sorry Tim Bray.... -->
 <xsl:template match="@*|node()">
