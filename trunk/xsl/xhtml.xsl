@@ -22,8 +22,8 @@
 
 <xsl:variable name="locale">
 	<xsl:choose>
-		<xsl:when test="//@locale='en-us'">
-			en-us
+		<xsl:when test="document(concat('../locale/', //@locale, '.xml'))">
+			<xsl:value-of select="//@locale" />
 		</xsl:when>
 		<xsl:otherwise>
 			en-us
