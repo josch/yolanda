@@ -173,7 +173,7 @@ while(1)
 					}
 					
 					#write status 1 to uploaded table
-					$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 1, $id) or interrupt $dbh->errstr;
+					$dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or interrupt $dbh->errstr;
 				}
 			}
 		}

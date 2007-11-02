@@ -17,11 +17,11 @@
 	omit-xml-declaration="no"
 />
 
-<xsl:include href="/xsl/xhtml/results.xsl"/>
-<xsl:include href="/xsl/xhtml/video.xsl"/>
+<xsl:include href="../xsl/xhtml/results.xsl"/>
+<xsl:include href="../xsl/xhtml/video.xsl"/>
 
 <xsl:variable name="site_strings" select="document('../site/main.xml')//strings/str" />
-<xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings/str" />
+<xsl:variable name="locale_strings" select="document('../locale/en-us.xml')//strings/str" />
 
 <!-- this kills 99% of the processed XML... sorry Tim Bray.... -->
 <xsl:template match="@*|node()">
@@ -240,9 +240,19 @@
 			<xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
 		</a>
 		<xsl:value-of select="$locale_strings[@id='separator']" />
-		<a href="about:blank"><xsl:value-of select="$locale_strings[@id='query_mostdownloads']" /></a>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="$site_strings[@id='page_query_mostdownloads']" />
+			</xsl:attribute>
+			<xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
+		</a>
 		<xsl:value-of select="$locale_strings[@id='separator']" />
-		<a href="about:blank"><xsl:value-of select="$locale_strings[@id='query_bestrated']" /></a>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="$site_strings[@id='page_query_mostviews']" />
+			</xsl:attribute>
+			<xsl:value-of select="$locale_strings[@id='query_mostviews']" />
+		</a>
 	</div>
 
 	<xsl:call-template name="tagcloud"/>
@@ -300,19 +310,14 @@
 </xsl:template>
 
 <xsl:template name="tagcloud">
-
+	<xsl:variable name="max" select="//tagcloud/tag/count[not(//tagcloud/tag/count &gt; .)]" />
+	<xsl:variable name="min" select="//tagcloud/tag/count[not(//tagcloud/tag/count &lt; .)]" />
 	<div class="tagcloud">
 		<xsl:for-each select="//tagcloud/tag">
 			<xsl:sort select="text" order="ascending" data-type="text" />
 			<a class="tag">
 				<xsl:attribute name="style">
-					<xsl:choose>
-						<xsl:when test="count &gt;= 64">font-size:32px</xsl:when>
-						<xsl:when test="count &lt;= 28">font-size:14px</xsl:when>
-						<xsl:otherwise>
-							font-size:<xsl:value-of select="round(number(count)div 2)" />px
-						</xsl:otherwise>
-					</xsl:choose>
+					font-size:<xsl:value-of select="round((32-12)*(number(count)-number($min))div (number($max)-number($min)))+12" />px
 				</xsl:attribute>
 				<xsl:attribute name="href">
 					<xsl:value-of select="$site_strings[@id='page_results']" />

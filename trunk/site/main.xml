@@ -27,6 +27,8 @@
 	<str id="page_upload">/upload.pl</str>
 	<str id="page_uploader">uploader.pl</str>
 	<str id="page_query_latestadditions">search.pl?query=&amp;orderby=timestamp&amp;sort=desc</str>
+	<str id="page_query_mostdownloads">search.pl?query=&amp;orderby=downloadcount&amp;sort=desc</str>
+	<str id="page_query_mostviews">search.pl?query=&amp;orderby=viewcount&amp;sort=desc</str>
 
 </strings>
 
