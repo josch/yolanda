@@ -289,7 +289,11 @@
 			</xsl:attribute>
 			<fieldset>
 				<xsl:value-of select="$locale_strings[@id='search']" />:
-				<input type="text" name="query" size="auto" />
+				<input type="text" name="query" size="30">
+					<xsl:attribute name="value">
+						<xsl:value-of select="//results/@value" />
+					</xsl:attribute>
+				</input>
 			</fieldset>
 		</form>
 	</div>

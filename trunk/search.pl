@@ -22,21 +22,34 @@ if($query->param('query') or $query->param('orderby'))
 	
 	my @args = ();
 	
+	$strquery = $query->param('query');
+	push @tags, $strquery =~ /tag:"([^"]+)"/gi;
+	push @tags, $strquery =~ /tag:(\w+)/gi;
+	$strquery =~ s/(tag|title):"[^"]+"//gi;
+	$strquery =~ s/(tag|title):\w+//gi;
+	$strquery =~ s/^\s*(.*?)\s*$/$1/;
+
 	#build mysql query
 	$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
 							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
 							v.license, filesize, duration, width, height, fps, viewcount, downloadcount";
 	
-	if($query->param('query'))
+	if($strquery)
 	{
 		$dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
 		$dbquery .= " from videos as v, users as u where u.id = v.userid";
 		$dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
-		push @args, $query->param('query'), $query->param('query');
+		push @args, $strquery, $strquery;
 	}
 	else
 	{
 		$dbquery .= " from videos as v, users as u where u.id = v.userid";
+	}
+	
+	if(@tags)
+	{
+		$dbquery .= " and match(v.subject) against (? in boolean mode)";
+		push @args, "@tags";
 	}
 	
 	if($query->param('orderby'))

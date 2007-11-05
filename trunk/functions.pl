@@ -17,7 +17,7 @@ sub fill_tagcloud
 	while (my ($text, $count) = $sth->fetchrow_array())
 	{
 		#push the new value to the $page->tagcloud array
-		push @{ $page->{tagcloud}->{tag} }, { text => [$text], count => [$count] };
+		push @{ $page->{tagcloud}->{tag} }, { text => [$text =~ / / ? "\"$text\"" : $text], count => [$count] };
 	}
 	
 	#finish query

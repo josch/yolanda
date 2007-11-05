@@ -67,9 +67,9 @@
 
 	<!-- results page-->
 	<str id="results_for_query">results for query</str>
-	<str id="ordered_by">ordered by</str>
-	<str id="ascending">ascending</str>
-	<str id="descending">descending</str>
+	<str id="ordered_by">ordered by </str>
+	<str id="ascending"> ascending</str>
+	<str id="descending"> descending</str>
 	<str id="results_on">results on</str>
 	<str id="pages">pages</str>
 	<str id="relevance">relevance</str>

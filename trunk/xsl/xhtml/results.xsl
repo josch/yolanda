@@ -79,9 +79,9 @@
 <xsl:template name="results">
 	<div>
 		<xsl:choose>
-			<xsl:when test="//results/@query!=''">
-				<xsl:value-of select="$locale_strings[@id='results_for_query']" />
-				"<xsl:value-of select="//results/@query" />"
+			<xsl:when test="//results/@value!=''">
+				<!-- <xsl:value-of select="$locale_strings[@id='results_for_query']" /> -->
+				<i><xsl:value-of select="//results/@value" /></i><br />
 				<xsl:if test="//results/@orderby!=''">
 					<xsl:value-of select="$locale_strings[@id='ordered_by']" />
 					<xsl:choose>

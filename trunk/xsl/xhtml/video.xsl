@@ -8,6 +8,10 @@
 >
 
 <xsl:template name="video">
+	
+</xsl:template>
+
+<xsl:template name="video">
 	<div class="video">
 		<xsl:choose>
 			<xsl:when test="//video/@cortado='true'">
