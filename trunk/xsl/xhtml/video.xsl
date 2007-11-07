@@ -8,10 +8,6 @@
 >
 
 <xsl:template name="video">
-	
-</xsl:template>
-
-<xsl:template name="video">
 	<div class="video">
 		<xsl:choose>
 			<xsl:when test="//video/@cortado='true'">
@@ -47,7 +43,14 @@
 				<div>
 					<a>
 						<xsl:attribute name="href">
-						<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, '/cortado=false')" />
+							<xsl:choose>
+								<xsl:when test="//@embed='true'">
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, '/cortado=false&amp;embed=true')" />
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, '/cortado=false')" />
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:attribute>
 						Watch using Browser Video Plugin
 					</a>
@@ -68,7 +71,14 @@
 				<div>
 					<a>
 						<xsl:attribute name="href">
-						<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
+							<xsl:choose>
+								<xsl:when test="//@embed='true'">
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:attribute>
 						Watch using Cortado Java Applet
 					</a>
@@ -77,184 +87,185 @@
 		</xsl:choose>
 	</div>
 
-	<div class="videodownload">
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-			</xsl:attribute>
-			<img src="/images/tango/document-save.png" />
-		</a>
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-			</xsl:attribute>
+	<xsl:if test="not(//@embed='true')">
+		<div class="videodownload">
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+				</xsl:attribute>
+				<img src="/images/tango/document-save.png" />
+			</a>
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+				</xsl:attribute>
+				<br />
+				<xsl:value-of select="$locale_strings[@id='download_video']" />
+			</a>
+		</div>
+
+		<div class="videoccdata">
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="//video/rdf:RDF/cc:License/@rdf:about" />
+				</xsl:attribute>
+				<xsl:value-of select="$locale_strings[@id='license_conditions']" />:
+			</a>
 			<br />
-			<xsl:value-of select="$locale_strings[@id='download_video']" />
-		</a>
-	</div>
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="//video/rdf:RDF/cc:License/@rdf:about" />
+				</xsl:attribute>
+	<!--
+				unfinished bizness
+				<xsl:value-of select="@rdf:about" />
+				<xsl:if test="true()">
+					<img src="./images/cc/somerights.png" />
+				</xsl:if>
+	-->
+				<xsl:for-each select="//video/rdf:RDF/cc:License/cc:permits">
+	<!--
+					since we are talking about digital media here, distribution actually /is/ reproduction
+					(also, i was too stupid to figure out how to test for both conditions).
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Reproduction'">
+						<img src="./images/cc/cc-share.png" />
+					</xsl:if>
+	-->
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Distribution'">
+						<img src="./images/cc/cc-share.png" />
+					</xsl:if>
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
+						<img src="./images/cc/cc-remix.png" />
+					</xsl:if>
+				</xsl:for-each>
+				<xsl:for-each select="rdf:RDF/cc:License/cc:requires">
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Notice'">
+						<img src="./images/cc/cc-by.png" />
+					</xsl:if>
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/ShareAlike'">
+						<img src="./images/cc/cc-sharealike.png" />
+					</xsl:if>
+	<!--
+					source code doesn't make much sense in video context.
+					still, this is preserved for potential future use.
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/SourceCode'">
+					SOURCE
+					</xsl:if>
+	-->
+				</xsl:for-each>
+				<xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">		
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
+						<img src="./images/cc/cc-noncommercial.png" />
+					</xsl:if>
+					<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
+						<img src="./images/cc/cc-noderivatives.png" />
+					</xsl:if>
+				</xsl:for-each>
+			</a>
+		</div>
 
-	<div class="videoccdata">
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="//video/rdf:RDF/cc:License/@rdf:about" />
-			</xsl:attribute>
-			<xsl:value-of select="$locale_strings[@id='license_conditions']" />:
-		</a>
-		<br />
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="//video/rdf:RDF/cc:License/@rdf:about" />
-			</xsl:attribute>
-<!--
-			unfinished bizness
-			<xsl:value-of select="@rdf:about" />
-			<xsl:if test="true()">
-				<img src="./images/cc/somerights.png" />
-			</xsl:if>
--->
-			<xsl:for-each select="//video/rdf:RDF/cc:License/cc:permits">
-<!--
-				since we are talking about digital media here, distribution actually /is/ reproduction
-				(also, i was too stupid to figure out how to test for both conditions).
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Reproduction'">
-					<img src="./images/cc/cc-share.png" />
-				</xsl:if>
--->
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Distribution'">
-					<img src="./images/cc/cc-share.png" />
-				</xsl:if>
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
-					<img src="./images/cc/cc-remix.png" />
-				</xsl:if>
-			</xsl:for-each>
-			<xsl:for-each select="rdf:RDF/cc:License/cc:requires">
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Notice'">
-					<img src="./images/cc/cc-by.png" />
-				</xsl:if>
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/ShareAlike'">
-					<img src="./images/cc/cc-sharealike.png" />
-				</xsl:if>
-<!--
-				source code doesn't make much sense in video context.
-				still, this is preserved for potential future use.
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/SourceCode'">
-				SOURCE
-				</xsl:if>
--->
-			</xsl:for-each>
-			<xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">		
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
-					<img src="./images/cc/cc-noncommercial.png" />
-				</xsl:if>
-				<xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
-					<img src="./images/cc/cc-noderivatives.png" />
-				</xsl:if>
-			</xsl:for-each>
-		</a>
-	</div>
-
-	<table class="videometadata">
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Title']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-			</td>
-		</tr>
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:creator" />
-			</td>
-		</tr>
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Subject']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:subject" />
-			</td>
-		</tr>
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Description']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
-			</td>
-		</tr>
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Publisher']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:publisher" />
-			</td>
-		</tr>
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Date']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:date" />
-			</td>
-		</tr>
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Source']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:source" />
-			</td>
-		</tr>
-		<tr>
-			<td class="leftcell">
-				<xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
-			</td>
-			<td class="rightcell">
-				<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:rights" />
-			</td>
-		</tr>
-	</table>
-	
-	<table class="referer">
-		<xsl:for-each select="//referers/referer">
+		<table class="videometadata">
 			<tr>
 				<td class="leftcell">
-					<xsl:value-of select="@count" />
+					<xsl:value-of select="$locale_strings[@id='DC.Title']" />:
 				</td>
 				<td class="rightcell">
-					<xsl:value-of select="@referer" />
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
 				</td>
 			</tr>
-		</xsl:for-each>
-	</table>
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:creator" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="$locale_strings[@id='DC.Subject']" />:
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:subject" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="$locale_strings[@id='DC.Description']" />:
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="$locale_strings[@id='DC.Publisher']" />:
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:publisher" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="$locale_strings[@id='DC.Date']" />:
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:date" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="$locale_strings[@id='DC.Source']" />:
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:source" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					<xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:rights" />
+				</td>
+			</tr>
+		</table>
 	
-	<xsl:call-template name="comments"/>
+		<table class="videometadata">
+			<xsl:for-each select="//referers/referer">
+				<tr>
+					<td class="leftcell">
+						<xsl:value-of select="@count" />
+					</td>
+					<td class="rightcell">
+						<xsl:value-of select="@referer" />
+					</td>
+				</tr>
+			</xsl:for-each>
+		</table>
 	
-	<xsl:if test="not(//@username='')">
-		<div class="commentform">
-			<form method="post">
-				<xsl:attribute name="action">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
-				</xsl:attribute>
-				<fieldset>
-					<br />
-					<textarea name="comment" cols="30" rows="3" />
-					<br />
-					<input type="submit" name="send">
-						<xsl:attribute name="value">
-							<xsl:value-of select="$locale_strings[@id='comment_post']" />
-						</xsl:attribute>
-					</input>
-				</fieldset>
-			</form>
-		</div>
+		<xsl:call-template name="comments"/>
+	
+		<xsl:if test="not(//@username='')">
+			<div class="commentform">
+				<form method="post">
+					<xsl:attribute name="action">
+						<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
+					</xsl:attribute>
+					<fieldset>
+						<br />
+						<textarea name="comment" cols="30" rows="3" />
+						<br />
+						<input type="submit" name="send">
+							<xsl:attribute name="value">
+								<xsl:value-of select="$locale_strings[@id='comment_post']" />
+							</xsl:attribute>
+						</input>
+					</fieldset>
+				</form>
+			</div>
+		</xsl:if>
 	</xsl:if>
-
 </xsl:template>
 
 <xsl:template name="comments">
@@ -268,7 +279,7 @@
 			<div class="comment">
 				<a>
 					<xsl:attribute name="href">
-						./user/<xsl:value-of select="@username" />
+						/user/<xsl:value-of select="@username" />
 					</xsl:attribute>
 					<xsl:value-of select="@username" />
 				</a>:

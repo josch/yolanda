@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 
 use DBI;
-use Data::Dumper::Simple;
 
 $database = 'yolanda';
 $dbhost = 'localhost';
