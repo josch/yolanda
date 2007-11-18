@@ -223,9 +223,7 @@
 
 <xsl:template name="frontpage">
 
-	<div class="logo-big">
-		<img src="/images/logo-big.png" alt="Yolanda logo (320x100)" />
-	</div>
+	<img class="logo-big" src="/images/logo-big.png" alt="Yolanda logo (320x100)" />
 
 	<div class="search">
 		<form method="get" enctype="text/plain">
@@ -281,11 +279,9 @@
 
 <xsl:template name="searchbar">
 
-	<div class="logo-small">
-		<a href="/">
-			<img src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
-		</a>
-	</div>
+	<a href="/">
+		<img class="logo-small" src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
+	</a>
 
 	<div class="search-small">
 		<form method="get" enctype="text/plain">
