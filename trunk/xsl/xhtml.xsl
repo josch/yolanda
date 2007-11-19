@@ -156,11 +156,15 @@
 				</xsl:choose>
 
 				<hr />
-						
-				<xsl:if test="not(//frontpage)">
+
+				<xsl:if test="//search">
 					<xsl:call-template name="searchbar"/>
 				</xsl:if>
-			
+
+				<xsl:if test="not(//frontpage)">
+					<xsl:call-template name="logo-small"/>
+				</xsl:if>
+
 				<xsl:if test="//message">
 					<xsl:call-template name="message"/>
 				</xsl:if>
@@ -277,11 +281,15 @@
 	<xsl:call-template name="results"/>
 </xsl:template>
 
-<xsl:template name="searchbar">
+<xsl:template name="logo-small">
 
 	<a href="/">
 		<img class="logo-small" src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
 	</a>
+
+</xsl:template>
+
+<xsl:template name="searchbar">
 
 	<div class="search-small">
 		<form method="get" enctype="text/plain">
@@ -290,7 +298,7 @@
 			</xsl:attribute>
 			<fieldset>
 				<xsl:value-of select="$locale_strings[@id='search']" />:
-				<input type="text" name="query" size="30">
+				<input type="text" name="query" size="20">
 					<xsl:attribute name="value">
 						<xsl:value-of select="//results/@value" />
 					</xsl:attribute>

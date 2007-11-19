@@ -59,9 +59,9 @@
 	<str id="information_logged_out">You are now logged out.</str>
 	<str id="information_metainformation_needed">To put the video into context, additional metainformation is needed.</str>
 	<str id="information_metainformation_rights"></str>
-	<str id="information_comment_created">Your comment has been created.</str>
-	<str id="information_registered">You successfully created yourself an account</str>
-	<str id="information_uploaded">You succcessfully uploaded your file</str>
+	<str id="information_comment_created">Your comment has been submitted.</str>
+	<str id="information_registered">Your account has been created.</str>
+	<str id="information_uploaded">Your file has been uploaded.</str>
 
 	<!-- warnings -->
 
@@ -113,10 +113,10 @@
 	<str id="button_page_4">Page 4</str>
 
 	<!-- video page -->
-	<str id="download_video">download video</str>
-	<str id="license_conditions">license conditions</str>
-	<str id="comment_on_video">Flamewar area below. Proceed with Caution.</str>
-	<str id="comment_post">post comment</str>
+	<str id="download_video">Download</str>
+	<str id="license_conditions">License Conditions</str>
+	<str id="comment_on_video">Flamewar area below. Proceed with caution.</str>
+	<str id="comment_post">Post</str>
 
 	<!-- dublin core entities -->
 	<str id="DC.Title">title</str>

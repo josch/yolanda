@@ -96,7 +96,7 @@ div
 
 	div.search-small
 	{
-		clear:			none;
+		clear:			both;
 		float:			right;
 		text-align:		right;
 		padding-top:	1em;
@@ -154,8 +154,6 @@ img
 
 	img.logo-small
 	{
-		display:		inline-block;
-		float:			left;
 	}
 
 span.protip
