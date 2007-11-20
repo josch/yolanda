@@ -98,8 +98,9 @@ div
 	{
 		clear:			both;
 		float:			right;
+		height:			0em;
+		overflow:		visible;
 		text-align:		right;
-		padding-top:	1em;
 	}
 
 	div.toplists
