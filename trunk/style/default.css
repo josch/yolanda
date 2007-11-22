@@ -20,7 +20,7 @@ a
 	a.tag
 	{
 		display:			inline-block;
-		margin:				1.5em;
+		margin:				0.25em;
 		padding:			0em;
 	}
 
@@ -85,7 +85,7 @@ div
 
 		div.messagebox img
 		{
-			margin-bottom:		0.75em;
+			margin:				0.75em;
 			vertical-align:		middle;
 		}
 
@@ -110,7 +110,10 @@ div
 
 	div.tagcloud
 	{
-		padding:	4em;
+		display:	inline-block;
+		padding:	1.5em;
+		padding-left:	20%;
+		padding-right:	20%;
 	}
 
 	div.footer

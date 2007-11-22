@@ -296,7 +296,7 @@
 			<a class="tag">
 				<xsl:attribute name="style">
 <!--
-				this *should* be logarihmic, but thats not widely supportet
+				scale *should* be logarihmic, but that's not widely supportet
 -->
 					font-size:<xsl:value-of select="round((32-12)*(number(count)-number($min))div (number($max)-number($min)))+12" />px
 				</xsl:attribute>
@@ -305,12 +305,14 @@
 					tag:
 					<xsl:value-of select="text" />
 				</xsl:attribute>
+				
 				<xsl:value-of select="text" />
 <!--
 				unnecessary, except for debug purposes
 				(<xsl:value-of select="count" />)
 -->
 			</a>
+			&#8204;
 		</xsl:for-each>
 	</div>
 
