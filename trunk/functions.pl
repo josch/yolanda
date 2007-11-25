@@ -127,9 +127,16 @@ sub fill_results
 					'rdf:about'			=> "$domain/download/$id",
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
+					'dc:subject'		=> [$subject],
+					'dc:description'	=> [$description],
+					'dc:publisher'		=> [$publisher],
+					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
 					'dc:identifier'		=> ["$domain/video/$title/$id" . ($duration == 0 ? "/edit=true" : "")],
-					'dc:publisher'		=> [$publisher]
+					'dc:source'			=> [$source],
+					'dc:language'		=> [$language],
+					'dc:coverage'		=> [$coverage],
+					'dc:rights'			=> [$rights]
 				},
 				'cc:License'	=>
 				{

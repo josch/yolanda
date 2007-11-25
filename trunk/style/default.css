@@ -175,6 +175,30 @@ span.protip:before
 	content:			"( ";
 }
 
+span.videotitle
+{
+	font-size:			1.5em;
+}
+
+table.videometadata
+{
+	border-width:	0px;
+	width:			100%;
+}
+
+	table.videometadata tr td.leftcell
+	{
+		color:			#606060;
+		text-align:		right;
+		width:			50%;
+	}
+
+	table.videometadata tr td.rightcell
+	{
+		text-align:		left;
+		width:			50%;
+	}
+
 td
 {
 	vertical-align:		top;

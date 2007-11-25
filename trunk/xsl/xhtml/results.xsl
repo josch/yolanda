@@ -26,14 +26,17 @@
 						</img>
 					</a>
 				</td>
-				<td><h2>
+				<td>
+					<span class="videotitle">
 						<a>
 							<xsl:attribute name="href">
 								<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 							</xsl:attribute>
 							<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
 						</a>
-					</h2>
+					</span>
+					<br />
+					<xsl:value-of select="rdf:RDF/cc:Work/dc:description" />
 					<table class="videometadata">
 						<tr>
 							<td class="leftcell">
@@ -44,14 +47,6 @@
 								<xsl:variable name="hours" select="floor(@duration div 3600)" />
 								<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
 								<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-							</td>
-						</tr>
-						<tr>
-							<td class="leftcell">
-								<xsl:value-of select="$locale_strings[@id='viewcount']" />:
-							</td>
-							<td class="rightcell">
-								<xsl:value-of select="@viewcount" />
 							</td>
 						</tr>
 					</table>
