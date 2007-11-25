@@ -180,6 +180,11 @@ span.videotitle
 	font-size:			1.5em;
 }
 
+table.results
+{
+	display:			inline;
+}
+
 table.videometadata
 {
 	border-width:	0px;
