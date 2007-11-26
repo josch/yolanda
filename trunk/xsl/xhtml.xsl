@@ -22,6 +22,8 @@
 <xsl:include href="./xhtml/results.xsl"/>
 <xsl:include href="./xhtml/upload.xsl"/>
 <xsl:include href="./xhtml/video.xsl"/>
+<xsl:include href="./xhtml/register.xsl"/>
+<xsl:include href="./xhtml/account.xsl"/>
 
 <xsl:variable name="locale">
 	<xsl:choose>
@@ -221,6 +223,10 @@
 						</xsl:attribute>
 					<xsl:value-of select="$locale_strings[@id='source_code']" />
 					</a>
+					<xsl:value-of select="$locale_strings[@id='separator']" />
+					wiki
+					<xsl:value-of select="$locale_strings[@id='separator']" />
+					report bug
 				</div>
 			</xsl:if>
 
@@ -254,7 +260,9 @@
 				<xsl:value-of select="$locale_strings[@id='search']" />:
 				<input type="text" name="query" size="20">
 					<xsl:attribute name="value">
-						<xsl:value-of select="//results/@value" />
+						<xsl:if test="//results/@argument='query'">
+							<xsl:value-of select="//results/@value" />
+						</xsl:if>
 					</xsl:attribute>
 				</input>
 			</fieldset>
@@ -318,73 +326,5 @@
 
 </xsl:template>
 
-<xsl:template name="registerform">
-	<div class="registerform">
-
-		<form method="post">
-			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings[@id='page_register']" />
-			</xsl:attribute>
-			<fieldset>
-				<xsl:value-of select="$locale_strings[@id='username']" />:
-				<br />				
-				<input name="user" type="text" size="30" maxlength="30" />
-				<br />
-				<xsl:value-of select="$locale_strings[@id='password']" />:
-				<br />
-				<input name="pass" type="password" size="30" maxlength="30" />
-				<br />
-				<xsl:value-of select="$locale_strings[@id='password_repeat']" />:
-				<br />
-				<input name="pass_repeat" type="password" size="30" maxlength="30" />
-				<br />
-				<input type="submit" name="register" >
-					<xsl:attribute name="value">
-						<xsl:value-of select="$locale_strings[@id='button_register']" />
-					</xsl:attribute>
-				</input>
-			</fieldset>
-		</form>
-
-	</div>
-
-</xsl:template>
-
-<xsl:template name="account">
-	<div>
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="$site_strings[@id='page_account_uploads']" />
-			</xsl:attribute>
-			<xsl:value-of select="$locale_strings[@id='account_uploads']" />
-		</a>
-		<xsl:value-of select="$locale_strings[@id='separator']" />
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="$site_strings[@id='page_account_settings']" />
-			</xsl:attribute>
-			<xsl:value-of select="$locale_strings[@id='account_settings']" />
-		</a>
-		<xsl:value-of select="$locale_strings[@id='separator']" />
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="$site_strings[@id='page_account_bookmarks']" />
-			</xsl:attribute>
-			<xsl:value-of select="$locale_strings[@id='account_bookmarks']" />
-		</a>
-	</div>
-	
-	<xsl:choose>
-		<xsl:when test="//account/@show='uploads'">
-			<xsl:call-template name="results"/>
-		</xsl:when>
-		<xsl:when test="//account/@show='settings'">
-			settings
-		</xsl:when>
-		<xsl:when test="//account/@show='bookmarks'">
-			bookmarks
-		</xsl:when>
-	</xsl:choose>
-</xsl:template>
 
 </xsl:stylesheet>

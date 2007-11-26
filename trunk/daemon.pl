@@ -172,7 +172,7 @@ while(1)
 						unlink "$root/tmp/$id";
 					}
 					
-					#write status 1 to uploaded table
+					#delete from uploaded table
 					$dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or interrupt $dbh->errstr;
 				}
 			}

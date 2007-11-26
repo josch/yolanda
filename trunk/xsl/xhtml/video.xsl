@@ -8,6 +8,7 @@
 >
 
 <xsl:template name="video">
+	<h2><xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" /></h2>
 	<div class="video">
 		<xsl:choose>
 			<xsl:when test="//video/@cortado='true'">
@@ -88,22 +89,97 @@
 	</div>
 
 	<xsl:if test="not(//@embed='true')">
-		<div class="videodownload">
+		<div style="display:table-cell">
 			<a>
 				<xsl:attribute name="href">
 					<xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
 				</xsl:attribute>
 				<img src="/images/tango/document-save.png" />
 			</a>
+			<br />
 			<a>
 				<xsl:attribute name="href">
 					<xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
 				</xsl:attribute>
-				<br />
 				<xsl:value-of select="$locale_strings[@id='download_video']" />
 			</a>
 		</div>
-
+		<div style="display:table-cell">
+			<xsl:if test="//@edit='true'">
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
+					</xsl:attribute>
+					<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />
+				</a>
+				<br />
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
+					</xsl:attribute>
+					Edit
+				</a>
+			</xsl:if>
+		</div>
+		<div style="display:table-cell">
+			<xsl:if test="//@edit='true'">
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=bookmark')" />
+					</xsl:attribute>
+					<img src="/images/tango/bookmark-new.png" style="border:0;vertical-align:bottom;" />
+				</a>
+				<br />
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=bookmark')" />
+					</xsl:attribute>
+					Bookmark
+				</a>
+			</xsl:if>
+		</div>
+		
+		<table class="videometadata">
+			<tr>
+				<td class="leftcell">
+					Filesize
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="format-number(number(//video/@filesize) div 1048576, '0.0#')" /> MB
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					Duration
+				</td>
+				<td class="rightcell">
+					<xsl:variable name="minutes" select="floor(//video/@duration div 60)" />
+					<xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
+					<xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
+					<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					Viewcount
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/@viewcount" />
+				</td>
+			</tr>
+			<tr>
+				<td class="leftcell">
+					Downloadcount
+				</td>
+				<td class="rightcell">
+					<xsl:value-of select="//video/@downloadcount" />
+				</td>
+			</tr>
+		</table>
+		
+		Permalink: <xsl:value-of select="//rdf:RDF/cc:Work/dc:identifier" />
+		<br />
+		<textarea>&lt;iframe src="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />"&gt;&lt;/iframe&gt;</textarea>
 		<div class="videoccdata">
 			<a>
 				<xsl:attribute name="href">

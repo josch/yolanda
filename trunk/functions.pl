@@ -76,6 +76,9 @@ sub get_page_array
 	$page->{'xmlns:rdf'} = $xmlns_rdf;
 }
 
+# called by video.pl (display ambiguous videos),
+# search.pl (display search results)
+# and account.pl (display own videos)
 sub fill_results
 {
 	#connect to db
@@ -132,7 +135,7 @@ sub fill_results
 					'dc:publisher'		=> [$publisher],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["$domain/video/$title/$id" . ($duration == 0 ? "/edit=true" : "")],
+					'dc:identifier'		=> ["$domain/video/$title/$id" . ($duration == 0 ? "/action=edit" : "")],
 					'dc:source'			=> [$source],
 					'dc:language'		=> [$language],
 					'dc:coverage'		=> [$coverage],

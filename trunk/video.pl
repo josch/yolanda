@@ -10,7 +10,11 @@ $session = new CGI::Session;
 
 @page = get_page_array(@userinfo);
 
-if($query->url_param('edit') eq 'true' and $query->url_param('id'))
+if($query->url_param('action') eq 'edit' and $query->url_param('id'))
+{
+	$page->{'message'}->{'type'} = "information";
+}
+if($query->url_param('action') eq 'bookmark' and $query->url_param('id'))
 {
 	$page->{'message'}->{'type'} = "information";
 }
@@ -131,6 +135,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 			'fps'			=> $fps,
 			'viewcount'		=> $viewcount,
 			'downloadcount'	=> $downloadcount,
+			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
 			'rdf:RDF'		=>
 			{
 				'cc:Work'		=>
@@ -187,7 +192,6 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	{
 		#when an ambigous title was passed there may me many results - display them like search.pl does
 		
-		$page->{'search'} = [''];
 		$page->{'results'}->{'scriptname'} = 'video.pl';
 		$page->{'results'}->{'argument'} = 'title';
 		$page->{'results'}->{'value'} = $query->param('title');

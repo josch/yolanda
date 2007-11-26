@@ -59,7 +59,7 @@
 										<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, '/edit=true')" />
+										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:attribute>
@@ -76,8 +76,10 @@
 	<div>
 		<xsl:choose>
 			<xsl:when test="//results/@value!=''">
-				<!-- <xsl:value-of select="$locale_strings[@id='results_for_query']" /> -->
-				<i><xsl:value-of select="//results/@value" /></i><br />
+				<xsl:if test="//results/@argument='query'">
+					<!-- <xsl:value-of select="$locale_strings[@id='results_for_query']" /> -->
+					<i><xsl:value-of select="//results/@value" /></i><br />
+				</xsl:if>
 				<xsl:if test="//results/@orderby!=''">
 					<xsl:value-of select="$locale_strings[@id='ordered_by']" />
 					<xsl:choose>
