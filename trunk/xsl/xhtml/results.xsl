@@ -171,8 +171,7 @@
 	<div>
 		<xsl:value-of select="//results/@resultcount" /> results on <xsl:value-of select="//results/@lastpage" /> pages
 	</div>
-
-	<xsl:call-template name="pagination-numbers"/>	
+	
 	<xsl:call-template name="pagination-arrows"/>
 	<xsl:call-template name="innerresults"/>
 	<xsl:call-template name="pagination-arrows"/>
@@ -346,6 +345,10 @@
 </xsl:template>
 
 <xsl:template name="pagination-numbers">
+<!--
+	this template is currently unused,
+	it will probably be removed soon.
+-->
 	<xsl:variable name="query_string" select="concat('/', //results/@scriptname, '?', //results/@argument, '=', //results/@value, '&amp;orderby=', //results/@orderby, '&amp;sort=', //results/@sort, '&amp;pagesize=', //results/@pagesize)" />
 	<xsl:if test="//results/@currentpage > 2">
 		<a>

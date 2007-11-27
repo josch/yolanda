@@ -3,7 +3,7 @@
 
 <strings>
 
-	<str id="separator">|</str>
+	<str id="separator">&#160;|&#160;</str>
 
 	<!-- header -->
 	<str id="login_to_upload">to upload videos, log in first.</str>

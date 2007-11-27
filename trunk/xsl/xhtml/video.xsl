@@ -179,7 +179,7 @@
 		
 		Permalink: <xsl:value-of select="//rdf:RDF/cc:Work/dc:identifier" />
 		<br />
-		<textarea>&lt;iframe src="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />"&gt;&lt;/iframe&gt;</textarea>
+		<pre>&lt;iframe src="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />" /&gt;</pre>
 		<div class="videoccdata">
 			<a>
 				<xsl:attribute name="href">
