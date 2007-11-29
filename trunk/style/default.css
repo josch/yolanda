@@ -35,8 +35,17 @@ body
 div
 {
 	border-width:		0px;
-	border-style:		dashed;
 }
+
+	div.button-download, div.button-edit, div.button-bookmark
+	{
+		display:			inline-block;
+	}
+
+	div.footer
+	{
+		padding:	0.75em;
+	}
 
 	div.header1
 	{
@@ -112,11 +121,6 @@ div
 		padding:	1.5em;
 		padding-left:	20%;
 		padding-right:	20%;
-	}
-
-	div.footer
-	{
-		padding:	0.75em;
 	}
 
 fieldset

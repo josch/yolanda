@@ -20,8 +20,8 @@
 	<str id="page_login-openid">/login.pl?action=openid</str>
 	<str id="page_logout">/login.pl?action=logout</str>
 	<str id="page_authors">INSERT LINK TO YOLANDA AUTHORS HERE</str>
-	<str id="page_license">http://gplv3.fsf.org/agplv3-dd2.html</str>
-	<str id="page_source-code">http://mister-muffin.de/proj/browser/trunk</str>
+	<str id="page_license">http://www.fsf.org/licensing/licenses/agpl-3.0.html</str>
+	<str id="page_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</str>
 	<str id="page_register">/register.pl</str>
 	<str id="page_results">search.pl?query=</str>
 	<str id="page_upload">/upload.pl</str>

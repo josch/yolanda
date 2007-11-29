@@ -8,7 +8,22 @@
 >
 
 <xsl:template name="video">
-	<h2><xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" /></h2>
+	<xsl:if test="//@embed!='true'">
+		<h2>
+			<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+			<xsl:variable name="minutes" select="floor(//video/@duration div 60)" />
+			<xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
+			<xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
+			<xsl:choose>
+				<xsl:when test="$hours=0">
+					(<xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+				</xsl:when>
+				<xsl:otherwise>
+					(<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+				</xsl:otherwise>
+			</xsl:choose>
+		</h2>
+	</xsl:if>
 	<div class="video">
 		<xsl:choose>
 			<xsl:when test="//video/@cortado='true'">
@@ -88,8 +103,8 @@
 		</xsl:choose>
 	</div>
 
-	<xsl:if test="not(//@embed='true')">
-		<div style="display:table-cell">
+	<xsl:if test="//@embed!='true'">
+		<div class="button-download">
 			<a>
 				<xsl:attribute name="href">
 					<xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
@@ -103,62 +118,45 @@
 				</xsl:attribute>
 				<xsl:value-of select="$locale_strings[@id='download_video']" />
 			</a>
+			<br />
+			(<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='megabytes']" />)
 		</div>
-		<div style="display:table-cell">
+		<div class="button-edit">
 			<xsl:if test="//@edit='true'">
 				<a>
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
 					</xsl:attribute>
-					<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />
+					<img src="/images/tango/accessories-text-editor.png" />
 				</a>
 				<br />
 				<a>
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
 					</xsl:attribute>
-					Edit
+					<xsl:value-of select="$locale_strings[@id='edit_video']" />
 				</a>
 			</xsl:if>
 		</div>
-		<div style="display:table-cell">
+		<div class="button-bookmark">
 			<xsl:if test="//@edit='true'">
 				<a>
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=bookmark')" />
 					</xsl:attribute>
-					<img src="/images/tango/bookmark-new.png" style="border:0;vertical-align:bottom;" />
+					<img src="/images/tango/bookmark-new.png" />
 				</a>
 				<br />
 				<a>
 					<xsl:attribute name="href">
 						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=bookmark')" />
 					</xsl:attribute>
-					Bookmark
+					<xsl:value-of select="$locale_strings[@id='bookmark_video']" />
 				</a>
 			</xsl:if>
 		</div>
 		
 		<table class="videometadata">
-			<tr>
-				<td class="leftcell">
-					Filesize
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="format-number(number(//video/@filesize) div 1048576, '0.0#')" /> MB
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
-					Duration
-				</td>
-				<td class="rightcell">
-					<xsl:variable name="minutes" select="floor(//video/@duration div 60)" />
-					<xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
-					<xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
-					<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-				</td>
-			</tr>
 			<tr>
 				<td class="leftcell">
 					Viewcount
@@ -241,14 +239,6 @@
 		</div>
 
 		<table class="videometadata">
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Title']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-				</td>
-			</tr>
 			<tr>
 				<td class="leftcell">
 					<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:

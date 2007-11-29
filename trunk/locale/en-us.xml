@@ -114,6 +114,9 @@
 
 	<!-- video page -->
 	<str id="download_video">Download</str>
+	<str id="megabytes">MB</str>
+	<str id="edit_video">Edit</str>
+	<str id="bookmark_video">Bookmark</str>
 	<str id="license_conditions">License Conditions</str>
 	<str id="comment_on_video">Flamewar area below. Proceed with caution.</str>
 	<str id="comment_post">Post</str>
