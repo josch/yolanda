@@ -39,7 +39,18 @@ div
 
 	div.button-download, div.button-edit, div.button-bookmark
 	{
-		display:			inline-block;
+		display:		inline-block;
+		margin:			0.5em;
+	}
+
+		div.button-download img, div.button-edit img, div.button-bookmark img
+		{
+			margin:			0.5em;
+		}
+
+	div.comments
+	{
+		display:		none;
 	}
 
 	div.footer
@@ -117,11 +128,33 @@ div
 
 	div.tagcloud
 	{
-		display:	inline-block;
-		padding:	1.5em;
+		padding:		1.5em;
 		padding-left:	20%;
 		padding-right:	20%;
 	}
+
+	div.videoccdata
+	{
+		margin:			1.5em;
+	}
+
+		div.videoccdata img
+		{
+			border-width:		0px;
+			margin-left:		0.5em;
+			margin-right:		0.5em;
+			margin-top:			0.5em;
+		}
+
+div.videostuff
+{	
+}
+
+div.videotitle
+{
+	font-size:			1.5em;
+	margin-bottom:		0.5em;
+}
 
 fieldset
 {
@@ -154,13 +187,17 @@ img
 
 	img.logo-big
 	{
-		display:		inline-block;
-		padding-bottom:	1.5em;
+		padding-bottom:		0.5em;
 	}
 
 	img.logo-small
 	{
 	}
+
+span.code
+{
+	font-family:	monospace;
+}
 
 span.protip
 {
@@ -175,11 +212,6 @@ span.protip:after
 span.protip:before
 {
 	content:			"( ";
-}
-
-span.videotitle
-{
-	font-size:			1.5em;
 }
 
 table.results

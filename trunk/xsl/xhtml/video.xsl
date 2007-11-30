@@ -8,8 +8,9 @@
 >
 
 <xsl:template name="video">
-	<xsl:if test="//@embed!='true'">
-		<h2>
+	<xsl:if test="not(//@embed='true')">
+		<br />
+		<div class="videotitle">
 			<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
 			<xsl:variable name="minutes" select="floor(//video/@duration div 60)" />
 			<xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
@@ -22,7 +23,7 @@
 					(<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
 				</xsl:otherwise>
 			</xsl:choose>
-		</h2>
+		</div>
 	</xsl:if>
 	<div class="video">
 		<xsl:choose>
@@ -68,7 +69,7 @@
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:attribute>
-						Watch using Browser Video Plugin
+						<xsl:value-of select="$locale_strings[@id='watch_browserplugin']" />
 					</a>
 				</div>
 			</xsl:when>
@@ -96,14 +97,14 @@
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:attribute>
-						Watch using Cortado Java Applet
+					<xsl:value-of select="$locale_strings[@id='watch_cortadoapplet']" />
 					</a>
 				</div>
 			</xsl:otherwise>
 		</xsl:choose>
 	</div>
 
-	<xsl:if test="//@embed!='true'">
+	<xsl:if test="not(//@embed='true')">
 		<div class="button-download">
 			<a>
 				<xsl:attribute name="href">
@@ -155,29 +156,6 @@
 				</a>
 			</xsl:if>
 		</div>
-		
-		<table class="videometadata">
-			<tr>
-				<td class="leftcell">
-					Viewcount
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/@viewcount" />
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
-					Downloadcount
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/@downloadcount" />
-				</td>
-			</tr>
-		</table>
-		
-		Permalink: <xsl:value-of select="//rdf:RDF/cc:Work/dc:identifier" />
-		<br />
-		<pre>&lt;iframe src="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />" /&gt;</pre>
 		<div class="videoccdata">
 			<a>
 				<xsl:attribute name="href">
@@ -249,26 +227,10 @@
 			</tr>
 			<tr>
 				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Subject']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:subject" />
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
 					<xsl:value-of select="$locale_strings[@id='DC.Description']" />:
 				</td>
 				<td class="rightcell">
 					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Publisher']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:publisher" />
 				</td>
 			</tr>
 			<tr>
@@ -296,20 +258,17 @@
 				</td>
 			</tr>
 		</table>
-	
-		<table class="videometadata">
-			<xsl:for-each select="//referers/referer">
-				<tr>
-					<td class="leftcell">
-						<xsl:value-of select="@count" />
-					</td>
-					<td class="rightcell">
-						<xsl:value-of select="@referer" />
-					</td>
-				</tr>
-			</xsl:for-each>
-		</table>
-	
+
+		<div class="videostuff">
+			<span class="protip-embed">
+				To embed the video on another web page, use the following HTML code:
+				<br />
+				<span class="code">
+					&lt;iframe src="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />" /&gt;
+				</span>
+			</span>
+		</div>
+
 		<xsl:call-template name="comments"/>
 	
 		<xsl:if test="not(//@username='')">

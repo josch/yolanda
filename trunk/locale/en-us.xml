@@ -115,6 +115,8 @@
 	<!-- video page -->
 	<str id="download_video">Download</str>
 	<str id="megabytes">MB</str>
+	<str id="watch_browserplugin">use browser plugin</str>
+	<str id="watch_cortadoapplet">use java applet</str>
 	<str id="edit_video">Edit</str>
 	<str id="bookmark_video">Bookmark</str>
 	<str id="license_conditions">License Conditions</str>

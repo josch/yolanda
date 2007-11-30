@@ -28,14 +28,14 @@
 					</a>
 				</td>
 				<td>
-					<span class="videotitle">
+					<div class="videotitle">
 						<a>
 							<xsl:attribute name="href">
 								<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 							</xsl:attribute>
 							<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
 						</a>
-					</span>
+					</div>
 					<br />
 					<xsl:value-of select="rdf:RDF/cc:Work/dc:description" />
 					<table class="videometadata">
@@ -301,46 +301,50 @@
 <xsl:template name="pagination-arrows">
 	<xsl:variable name="query_string" select="concat('/', //results/@scriptname, '?', //results/@argument, '=', //results/@value, '&amp;orderby=', //results/@orderby, '&amp;sort=', //results/@sort, '&amp;pagesize=', //results/@pagesize)" />
 	<div>
-		<xsl:choose>
-			<xsl:when test="//results/@currentpage&lt;=1">
-				<img src="./images/placeholder32x32.png" />
-				<img src="./images/placeholder32x32.png" />
-			</xsl:when>
-			<xsl:otherwise>
-				<a>
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat($query_string, '&amp;page=1')" />
-					</xsl:attribute>
-					<img src="./images/tango/go-first.png" />
-				</a>
-				<a>
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage - 1)" />
-					</xsl:attribute>
-					<img src="./images/tango/go-previous.png" />
-				</a>
-			</xsl:otherwise>
-		</xsl:choose>
-		<xsl:choose>
-			<xsl:when test="//results/@lastpage&lt;=//results/@currentpage">
-				<img src="./images/placeholder32x32.png" />
-				<img src="./images/placeholder32x32.png" />
-			</xsl:when>
-			<xsl:otherwise>
-				<a>
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage + 1)" />
-					</xsl:attribute>
-					<img src="./images/tango/go-next.png" />
-				</a>
-				<a>
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat($query_string, '&amp;page=', //results/@lastpage)" />
-					</xsl:attribute>
-					<img src="./images/tango/go-last.png" />
-				</a>
-			</xsl:otherwise>
-		</xsl:choose>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="concat($query_string, '&amp;page=1')" />
+			</xsl:attribute>
+			<xsl:if test="//results/@currentpage&lt;=1">
+				<xsl:attribute name="style">
+					visibility: hidden;
+				</xsl:attribute>
+			</xsl:if>
+			<img src="./images/tango/go-first.png" />
+		</a>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage - 1)" />
+			</xsl:attribute>
+			<xsl:if test="//results/@currentpage&lt;=1">
+				<xsl:attribute name="style">
+					visibility: hidden;
+				</xsl:attribute>
+			</xsl:if>
+			<img src="./images/tango/go-previous.png" />
+		</a>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage + 1)" />
+			</xsl:attribute>
+			<xsl:if test="//results/@lastpage&lt;=//results/@currentpage">
+				<xsl:attribute name="style">
+					visibility: hidden;
+				</xsl:attribute>
+			</xsl:if>
+			<img src="./images/tango/go-next.png" />
+		</a>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@lastpage)" />
+			</xsl:attribute>
+			<xsl:if test="//results/@lastpage&lt;=//results/@currentpage">
+				<xsl:attribute name="style">
+					visibility: hidden;
+				</xsl:attribute>
+			</xsl:if>
+			<img src="./images/tango/go-last.png" />
+		</a>
 	</div>
 </xsl:template>
 

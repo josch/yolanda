@@ -54,12 +54,16 @@
 
 		<head>
 			<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
-			<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-			<link rel="stylesheet" type="text/css">
-				<xsl:attribute name="href">
-					<xsl:value-of select="//@stylesheet" />
-				</xsl:attribute>
-			</link>
+
+				<xsl:if test="not(//@embed='true')">
+					<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+					<link rel="stylesheet" type="text/css">
+						<xsl:attribute name="href">
+							<xsl:value-of select="//@stylesheet" />
+						</xsl:attribute>
+					</link>
+				</xsl:if>
+
 			<title>
 				<xsl:choose>
 					<xsl:when test="boolean(//frontpage)">
