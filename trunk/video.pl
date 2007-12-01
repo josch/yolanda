@@ -59,7 +59,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 		$dbquery .= " from videos as v, users as u where u.id = v.userid";
 		$dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
 		
-		@args = ($query->url_param('title'));
+		@args = ($query->url_param('title'), $query->url_param('title'));
 		
 		$sth = $dbh->prepare($dbquery);
 		$rowcount = $sth->execute(@args) or die $dbh->errstr;
@@ -140,7 +140,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'			=> "$domain/download/$id",
+					'rdf:about'			=> "$domain/download/$id/",
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
@@ -148,7 +148,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 					'dc:publisher'		=> [$publisher],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["$domain/video/$title/$id"],
+					'dc:identifier'		=> ["$domain/video/".urlencode($title)."/$id/"],
 					'dc:source'			=> [$source],
 					'dc:language'		=> [$language],
 					'dc:coverage'		=> [$coverage],

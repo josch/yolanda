@@ -62,10 +62,10 @@
 						<xsl:attribute name="href">
 							<xsl:choose>
 								<xsl:when test="//@embed='true'">
-									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, '/cortado=false&amp;embed=true')" />
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=false&amp;embed=true')" />
 								</xsl:when>
 								<xsl:otherwise>
-									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, '/cortado=false')" />
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=false')" />
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:attribute>
@@ -90,7 +90,7 @@
 						<xsl:attribute name="href">
 							<xsl:choose>
 								<xsl:when test="//@embed='true'">
-									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
@@ -137,35 +137,33 @@
 			<xsl:if test="//@edit='true'">
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
+						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
 					</xsl:attribute>
 					<img src="/images/tango/accessories-text-editor.png" />
 				</a>
 				<br />
 				<a>
 					<xsl:attribute name="href">
-						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
+						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
 					</xsl:attribute>
 					<xsl:value-of select="$locale_strings[@id='edit_video']" />
 				</a>
 			</xsl:if>
 		</div>
 		<div class="button-bookmark">
-			<xsl:if test="//@edit='true'">
-				<a>
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=bookmark')" />
-					</xsl:attribute>
-					<img src="/images/tango/bookmark-new.png" />
-				</a>
-				<br />
-				<a>
-					<xsl:attribute name="href">
-						<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/action=bookmark')" />
-					</xsl:attribute>
-					<xsl:value-of select="$locale_strings[@id='bookmark_video']" />
-				</a>
-			</xsl:if>
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=bookmark')" />
+				</xsl:attribute>
+				<img src="/images/tango/bookmark-new.png" />
+			</a>
+			<br />
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=bookmark')" />
+				</xsl:attribute>
+				<xsl:value-of select="$locale_strings[@id='bookmark_video']" />
+			</a>
 		</div>
 		<div class="videoccdata">
 			<a>

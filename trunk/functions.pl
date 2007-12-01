@@ -127,7 +127,7 @@ sub fill_results
 			{
 				'cc:Work'		=>
 				{
-					'rdf:about'			=> "$domain/download/$id",
+					'rdf:about'			=> "$domain/download/$id/",
 					'dc:title'			=> [$title],
 					'dc:creator'		=> [$creator],
 					'dc:subject'		=> [$subject],
@@ -135,7 +135,7 @@ sub fill_results
 					'dc:publisher'		=> [$publisher],
 					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
-					'dc:identifier'		=> ["$domain/video/$title/$id" . ($duration == 0 ? "/action=edit" : "")],
+					'dc:identifier'		=> ["$domain/video/".urlencode($title)."/$id/" . ($duration == 0 ? "/action=edit" : "")],
 					'dc:source'			=> [$source],
 					'dc:language'		=> [$language],
 					'dc:coverage'		=> [$coverage],
@@ -154,4 +154,12 @@ sub fill_results
 	
 	#close db
 	$dbh->disconnect() or die $dbh->errstr;
+}
+
+#replace chars in url as said in this rfc: http://www.rfc-editor.org/rfc/rfc1738.txt
+sub urlencode
+{
+	my ($url) = @_[0];
+	$url =~ s/([^A-Za-z0-9_\$\-.+!*'()])/sprintf("%%%02X", ord($1))/eg;
+	return $url;
 }
