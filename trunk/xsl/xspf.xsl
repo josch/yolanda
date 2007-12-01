@@ -18,7 +18,7 @@
 />
 
 <xsl:variable name="site_strings" select="document('../site/main.xml')//strings" />
-<xsl:variable name="locale_strings" select="document(concat('../locale/',/page/@locale,'.xml'))//strings" />
+<xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
 
 <xsl:template match="/">
 	<xsl:apply-templates />

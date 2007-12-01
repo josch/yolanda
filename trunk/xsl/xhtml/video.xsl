@@ -57,7 +57,7 @@
 					<param name="showStatus" value="show"/>
 					<param name="bufferSize" value="200"/>
 				</applet>
-				<div>
+				<div class="watch-browserplugin">
 					<a>
 						<xsl:attribute name="href">
 							<xsl:choose>
@@ -85,7 +85,7 @@
 						<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
 					</xsl:attribute>
 				</object>
-				<div>
+				<div class="watch-cortadoapplet">
 					<a>
 						<xsl:attribute name="href">
 							<xsl:choose>
@@ -103,6 +103,17 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</div>
+
+	<xsl:if test="//@embed='true'">
+		<div class="embedded-backlink">
+			<a target="_blank">
+				<xsl:attribute name="href">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
+				</xsl:attribute>
+				<xsl:value-of select="$locale_strings[@id='backlink']" />
+			</a>
+		</div>
+	</xsl:if>
 
 	<xsl:if test="not(//@embed='true')">
 		<div class="button-download">
@@ -261,10 +272,14 @@
 
 		<div class="videostuff">
 			<span class="protip-embed">
-				To embed the video on another web page, use the following HTML code:
+				<xsl:value-of select="$locale_strings[@id='protip_embed']" />
 				<br />
 				<span class="code">
-					&lt;iframe src="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />" /&gt;
+					&lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />"
+						type="application/xml"
+						width=<xsl:value-of select="//video/@width + 24" />
+						height=<xsl:value-of select="//video/@height + 48" />
+					/&gt;
 				</span>
 			</span>
 		</div>

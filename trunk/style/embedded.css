@@ -1,0 +1,21 @@
+body
+{
+	font-family:		sans-serif;
+	font-size:			8pt;
+	font-weight:		bold;
+	overflow:			visible;
+}
+
+div.watch-browserplugin, div.watch-cortadoapplet
+{
+	float:				left;
+	text-align:			left;
+	width:				50%;
+}
+
+div.embedded-backlink
+{
+	float:				right;
+	text-align:			right;
+	width:				50%;
+}

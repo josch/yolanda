@@ -3,148 +3,150 @@
 
 <strings>
 
-	<str id="separator">&#160;|&#160;</str>
+	<string id="separator">&#160;|&#160;</string>
 
 	<!-- header -->
-	<str id="login_to_upload">to upload videos, log in first.</str>
+	<string id="login_to_upload">to upload videos, log in first.</string>
 
-	<str id="register">register</str>
-	<str id="login">login</str>
-	<str id="login_openid">login with OpenID</str>
+	<string id="register">register</string>
+	<string id="login">login</string>
+	<string id="login_openid">login with OpenID</string>
 
-	<str id="upload_video">upload video</str>
-	<str id="bookmarks">bookmarks</str>
-	<str id="account_details">account details</str>
+	<string id="upload_video">upload video</string>
+	<string id="bookmarks">bookmarks</string>
+	<string id="account_details">account details</string>
 
-	<str id="logged_in_as">logged in as</str>
-	<str id="logout">logout</str>
+	<string id="logged_in_as">logged in as</string>
+	<string id="logout">logout</string>
 
 	<!-- footer -->
-	<str id="authors">&#169; 2007 Yolanda team</str>
-	<str id="license">license</str>
-	<str id="source_code">download source code</str>
+	<string id="authors">&#169; 2007 Yolanda team</string>
+	<string id="license">license</string>
+	<string id="source_code">download source code</string>
 
 	<!-- front page -->
-	<str id="button_find">Find</str>
-	<str id="button_lucky">Instant Access</str>
+	<string id="button_find">Find</string>
+	<string id="button_lucky">Instant Access</string>
 
-	<str id="query_latestadditions">latest additions</str>
-	<str id="query_mostdownloads">most downloads</str>
-	<str id="query_mostviews">most views</str>
+	<string id="query_latestadditions">latest additions</string>
+	<string id="query_mostdownloads">most downloads</string>
+	<string id="query_mostviews">most views</string>
 
 	<!-- errors -->
-	<str id="error_202c">Error 202c - Access forbidden by government.</str>
-	<str id="error_missing_file">You did not supply a file.</str>
-	<str id="error_missing_DC.Title">You did not supply a title.</str>
-	<str id="error_missing_DC.Creator">You did not supply a creator.</str>
-	<str id="error_missing_DC.Subject">You did not supply any keywords.</str>
-	<str id="error_missing_DC.Description">You did not supply a description.</str>
-	<str id="error_missing_DC.Publisher">You did not supply a publisher.</str>
-	<str id="error_missing_DC.Title">You did not supply a title.</str>
-	<str id="error_missing_DC.Source">You did not supply a source.</str>
-	<str id="error_missing_DC.Language">You did not supply a language.</str>
-	<str id="error_missing_DC.Coverage">You did not supply a coverage.</str>
-	<str id="error_missing_DC.Rights">You did not supply a rights holder.</str>
-	<str id="error_already_registered">You seem to be already registered. Please log out to create a new account.</str>
-	<str id="error_already_logged_in">You seem to be already logged in. Please log out to log in again.</str>
-	<str id="error_username_password_do_not_match">Username and password do not match.</str>
-	<str id="error_passwords_do_not_match">Passwords do not match.</str>
-	<str id="error_insert_username">Please insert a username.</str>
-	<str id="error_insert_password">Please insert a password.</str>
-	<str id="error_repeat_password">Please repeat your password.</str>
-	<str id=""></str>
+	<string id="error_202c">Error 202c - Access forbidden by government.</string>
+	<string id="error_missing_file">You did not supply a file.</string>
+	<string id="error_missing_DC.Title">You did not supply a title.</string>
+	<string id="error_missing_DC.Creator">You did not supply a creator.</string>
+	<string id="error_missing_DC.Subject">You did not supply any keywords.</string>
+	<string id="error_missing_DC.Description">You did not supply a description.</string>
+	<string id="error_missing_DC.Publisher">You did not supply a publisher.</string>
+	<string id="error_missing_DC.Title">You did not supply a title.</string>
+	<string id="error_missing_DC.Source">You did not supply a source.</string>
+	<string id="error_missing_DC.Language">You did not supply a language.</string>
+	<string id="error_missing_DC.Coverage">You did not supply a coverage.</string>
+	<string id="error_missing_DC.Rights">You did not supply a rights holder.</string>
+	<string id="error_already_registered">You seem to be already registered. Please log out to create a new account.</string>
+	<string id="error_already_logged_in">You seem to be already logged in. Please log out to log in again.</string>
+	<string id="error_username_password_do_not_match">Username and password do not match.</string>
+	<string id="error_passwords_do_not_match">Passwords do not match.</string>
+	<string id="error_insert_username">Please insert a username.</string>
+	<string id="error_insert_password">Please insert a password.</string>
+	<string id="error_repeat_password">Please repeat your password.</string>
+	<string id=""></string>
 
 	<!-- information -->
-	<str id="information_logged_in">You are now logged in.</str>
-	<str id="information_logged_out">You are now logged out.</str>
-	<str id="information_metainformation_needed">To put the video into context, additional metainformation is needed.</str>
-	<str id="information_metainformation_rights"></str>
-	<str id="information_comment_created">Your comment has been submitted.</str>
-	<str id="information_registered">Your account has been created.</str>
-	<str id="information_uploaded">Your file has been uploaded.</str>
+	<string id="information_logged_in">You are now logged in.</string>
+	<string id="information_logged_out">You are now logged out.</string>
+	<string id="information_metainformation_needed">To put the video into context, additional metainformation is needed.</string>
+	<string id="information_metainformation_rights"></string>
+	<string id="information_comment_created">Your comment has been submitted.</string>
+	<string id="information_registered">Your account has been created.</string>
+	<string id="information_uploaded">Your file has been uploaded.</string>
 
 	<!-- warnings -->
 
 	<!-- results page-->
-	<str id="results_for_query">results for query</str>
-	<str id="ordered_by">ordered by </str>
-	<str id="ascending"> ascending</str>
-	<str id="descending"> descending</str>
-	<str id="results_on">results on</str>
-	<str id="pages">pages</str>
-	<str id="relevance">relevance</str>
-	<str id="duration">duration</str>
-	<str id="filesize">filesize</str>
-	<str id="viewcount">viewcount</str>
-	<str id="downloadcount">downloadcount</str>
-	<str id="timestamp">timestamp</str>
+	<string id="results_for_query">results for query</string>
+	<string id="ordered_by">ordered by </string>
+	<string id="ascending"> ascending</string>
+	<string id="descending"> descending</string>
+	<string id="results_on">results on</string>
+	<string id="pages">pages</string>
+	<string id="relevance">relevance</string>
+	<string id="duration">duration</string>
+	<string id="filesize">filesize</string>
+	<string id="viewcount">viewcount</string>
+	<string id="downloadcount">downloadcount</string>
+	<string id="timestamp">timestamp</string>
 	
 	<!-- search bar-->
-	<str id="search">search</str>
+	<string id="search">search</string>
 	
 	<!-- login / register page -->
-	<str id="username">username</str>
-	<str id="password">password</str>
-	<str id="password_repeat">repeat password</str>
-	<str id="button_register">register</str>
-	<str id="button_login">login</str>
+	<string id="username">username</string>
+	<string id="password">password</string>
+	<string id="password_repeat">repeat password</string>
+	<string id="button_register">register</string>
+	<string id="button_login">login</string>
 
 	<!-- upload page -->
-	<str id="file">file</str>
-	<str id="button_next_page">next page</str>
-	<str id="button_previous_page">previous page</str>
-	<str id="button_upload">upload</str>
-	<str id="instruction_file">Specify the file you want to upload.</str>
-	<str id="instruction_title">State the title of the video.</str>
-	<str id="instruction_creator">Specify the creator of the video.</str>
-	<str id="instruction_subject">State some keywords, separated by commas.</str>
-	<str id="instruction_description">Describe the video in natural language.</str>
-	<str id="instruction_source">Specify the source, preferably by URL.</str>
-	<str id="instruction_language">State the language of the video.</str>
-	<str id="instruction_coverage">Specify the time and location covered.</str>
-	<str id="this_is_page_1">This is page 1 of 6.</str>
-	<str id="this_is_page_2">This is page 2 of 6.</str>
-	<str id="this_is_page_3">This is page 3 of 6.</str>
-	<str id="this_is_page_4">This is page 4 of 6.</str>
-	<str id="this_is_page_5">This is page 5 of 6.</str>
-	<str id="this_is_page_6">This is page 6 of 6.</str>
-	<str id="button_page_1">Page 1</str>
-	<str id="button_page_3">Page 3</str>
-	<str id="button_page_4">Page 4</str>
+	<string id="file">file</string>
+	<string id="button_next_page">next page</string>
+	<string id="button_previous_page">previous page</string>
+	<string id="button_upload">upload</string>
+	<string id="instringuction_file">Specify the file you want to upload.</string>
+	<string id="instringuction_title">State the title of the video.</string>
+	<string id="instringuction_creator">Specify the creator of the video.</string>
+	<string id="instringuction_subject">State some keywords, separated by commas.</string>
+	<string id="instringuction_description">Describe the video in natural language.</string>
+	<string id="instringuction_source">Specify the source, preferably by URL.</string>
+	<string id="instringuction_language">State the language of the video.</string>
+	<string id="instringuction_coverage">Specify the time and location covered.</string>
+	<string id="this_is_page_1">This is page 1 of 6.</string>
+	<string id="this_is_page_2">This is page 2 of 6.</string>
+	<string id="this_is_page_3">This is page 3 of 6.</string>
+	<string id="this_is_page_4">This is page 4 of 6.</string>
+	<string id="this_is_page_5">This is page 5 of 6.</string>
+	<string id="this_is_page_6">This is page 6 of 6.</string>
+	<string id="button_page_1">Page 1</string>
+	<string id="button_page_3">Page 3</string>
+	<string id="button_page_4">Page 4</string>
 
 	<!-- video page -->
-	<str id="download_video">Download</str>
-	<str id="megabytes">MB</str>
-	<str id="watch_browserplugin">use browser plugin</str>
-	<str id="watch_cortadoapplet">use java applet</str>
-	<str id="edit_video">Edit</str>
-	<str id="bookmark_video">Bookmark</str>
-	<str id="license_conditions">License Conditions</str>
-	<str id="comment_on_video">Flamewar area below. Proceed with caution.</str>
-	<str id="comment_post">Post</str>
+	<string id="download_video">Download</string>
+	<string id="megabytes">MB</string>
+	<string id="watch_browserplugin">use browser plugin</string>
+	<string id="watch_cortadoapplet">use java applet</string>
+	<string id="edit_video">Edit</string>
+	<string id="bookmark_video">Bookmark</string>
+	<string id="license_conditions">License Conditions</string>
+	<string id="protip_embed">To embed the video on another web page, use the following HTML code:</string>
+	<string id="comment_on_video">Flamewar area below. Proceed with caution.</string>
+	<string id="comment_post">Post</string>
+
+	<!-- embedded video page-->
+	<string id="backlink">backlink</string>
 
 	<!-- dublin core entities -->
-	<str id="DC.Title">title</str>
-	<str id="DC.Creator">author</str>
-	<str id="DC.Subject">subject</str>
-	<str id="DC.Description">description</str>
-	<str id="DC.Publisher">uploader</str>
-	<str id="DC.Contributor">contributor</str>
-	<str id="DC.Date">date</str>
-	<str id="DC.Source">source</str>
-	<str id="DC.Language">language</str>
-	<str id="DC.Coverage">coverage</str>
-	<str id="DC.Rights">righs holder</str>
+	<string id="DC.Title">title</string>
+	<string id="DC.Creator">author</string>
+	<string id="DC.Subject">subject</string>
+	<string id="DC.Description">description</string>
+	<string id="DC.Publisher">uploader</string>
+	<string id="DC.Contributor">contributor</string>
+	<string id="DC.Date">date</string>
+	<string id="DC.Source">source</string>
+	<string id="DC.Language">language</string>
+	<string id="DC.Coverage">coverage</string>
+	<string id="DC.Rights">righs holder</string>
 	
-	<str id="duration">duration</str>
-	<str id="viewcount">viewcount</str>
+	<string id="duration">duration</string>
+	<string id="viewcount">viewcount</string>
 	
 	<!-- account page -->
-	<str id="account_uploads">my uploads</str>
-	<str id="account_settings">edit my settings</str>
-	<str id="account_bookmarks">my bookmarks</str>
-	<str id=""></str>
-	
+	<string id="account_uploads">my uploads</string>
+	<string id="account_settings">edit my settings</string>
+	<string id="account_bookmarks">my bookmarks</string>
 
 </strings>
 

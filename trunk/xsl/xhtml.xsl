@@ -37,7 +37,7 @@
 </xsl:variable>
 
 <xsl:variable name="site_strings" select="document('../site/main.xml')//strings/str" />
-<xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/str" />
+<xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
 
 <!-- this kills 99% of the processed XML... sorry Tim Bray.... -->
 <!-- had to look up Bray in Wikipedia, 2 points off my geek score -->
@@ -55,14 +55,27 @@
 		<head>
 			<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 
-				<xsl:if test="not(//@embed='true')">
-					<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-					<link rel="stylesheet" type="text/css">
-						<xsl:attribute name="href">
-							<xsl:value-of select="//@stylesheet" />
-						</xsl:attribute>
-					</link>
-				</xsl:if>
+				<xsl:choose>
+					<xsl:when test="not(//@embed='true')">
+						<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+						<link rel="stylesheet" type="text/css">
+							<xsl:attribute name="href">
+								<xsl:value-of select="//@stylesheet" />
+							</xsl:attribute>
+						</link>
+					</xsl:when>
+					<xsl:when test="//@embed='true'">
+<!--
+					embedded stylesheet should rather be done through URL like
+					"http://localhost/video/4chan%20city/3/embed=true+stylesheet=embedded.css"
+-->
+						<link rel="stylesheet" type="text/css">
+							<xsl:attribute name="href">
+								/style/embedded.css
+							</xsl:attribute>
+						</link>
+					</xsl:when>
+				</xsl:choose>
 
 			<title>
 				<xsl:choose>
