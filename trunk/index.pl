@@ -26,7 +26,27 @@ elsif($query->param('error'))
 	$page->{'message'}->{'text'} = $query->param('error');
 }
 
-fill_tagcloud;
+#connect to db
+my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
+
+#prepare query
+my $sth = $dbh->prepare(qq{select text, count from tagcloud }) or die $dbh->errstr;
+
+#execute it
+$sth->execute() or die $dbh->errstr;
+
+#get every returned value
+while (my ($text, $count) = $sth->fetchrow_array())
+{
+	#push the new value to the $page->tagcloud array
+	push @{ $page->{tagcloud}->{tag} }, { text => [$text =~ / / ? "\"$text\"" : $text], count => [$count] };
+}
+
+#finish query
+$sth->finish() or die $dbh->errstr;
+
+#close db
+$dbh->disconnect() or die $dbh->errstr;
 
 #print xml http header along with session cookie
 print $session->header(-type=>'text/xml', -charset=>'UTF-8');
