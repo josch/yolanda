@@ -39,7 +39,7 @@
 					</input>
 					<fieldset>
 						<input type="hidden" name="page" value="2" />
-						<div class="messagebox">
+						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_title']" />
 							<br />
 							<input name="DC.Title" type="text" size="30">
@@ -48,7 +48,7 @@
 								</xsl:attribute>
 							</input>
 						</div>
-						<div class="messagebox">
+						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_subject']" />
 							<br />
 							<input name="DC.Subject" type="text" size="30">
@@ -57,10 +57,10 @@
 								</xsl:attribute>
 							</input>
 						</div>
-						<div class="messagebox">
+						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_description']" />
 							<br />
-							<textarea name="DC.Description" cols="50" rows="5">
+							<textarea name="DC.Description" cols="60" rows="2">
 								<xsl:value-of select="//uploadform/@DC.Description" />
 							</textarea>
 						</div>

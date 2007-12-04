@@ -23,6 +23,7 @@
 	<str id="page_license">http://www.fsf.org/licensing/licenses/agpl-3.0.html</str>
 	<str id="page_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</str>
 	<str id="page_register">/register.pl</str>
+	<str id="page_report_bug">http://yolanda.mister-muffin.de/trac/ WHERE IS THE BUGTRACKER ?</str>
 	<str id="page_results">search.pl?query=</str>
 	<str id="page_upload">/upload.pl</str>
 	<str id="page_uploader">uploader.pl</str>

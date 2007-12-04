@@ -16,13 +16,14 @@
 	<string id="bookmarks">bookmarks</string>
 	<string id="account_details">account details</string>
 
-	<string id="logged_in_as">logged in as</string>
+	<string id="logged_in_as">logged in as&#160;</string>
 	<string id="logout">logout</string>
 
 	<!-- footer -->
 	<string id="authors">&#169; 2007 Yolanda team</string>
 	<string id="license">license</string>
 	<string id="source_code">download source code</string>
+	<string id="report_bug">report bug</string>
 
 	<!-- front page -->
 	<string id="button_find">Find</string>
@@ -94,14 +95,14 @@
 	<string id="button_next_page">next page</string>
 	<string id="button_previous_page">previous page</string>
 	<string id="button_upload">upload</string>
-	<string id="instringuction_file">Specify the file you want to upload.</string>
-	<string id="instringuction_title">State the title of the video.</string>
-	<string id="instringuction_creator">Specify the creator of the video.</string>
-	<string id="instringuction_subject">State some keywords, separated by commas.</string>
-	<string id="instringuction_description">Describe the video in natural language.</string>
-	<string id="instringuction_source">Specify the source, preferably by URL.</string>
-	<string id="instringuction_language">State the language of the video.</string>
-	<string id="instringuction_coverage">Specify the time and location covered.</string>
+	<string id="instruction_file">Specify the file you want to upload.</string>
+	<string id="instruction_title">State the title of the video.</string>
+	<string id="instruction_creator">Specify the creator of the video.</string>
+	<string id="instruction_subject">State some keywords, separated by commas.</string>
+	<string id="instruction_description">Describe the video in natural language.</string>
+	<string id="instruction_source">Specify the source, preferably by URL.</string>
+	<string id="instruction_language">State the language of the video.</string>
+	<string id="instruction_coverage">Specify the time and location covered.</string>
 	<string id="this_is_page_1">This is page 1 of 6.</string>
 	<string id="this_is_page_2">This is page 2 of 6.</string>
 	<string id="this_is_page_3">This is page 3 of 6.</string>

@@ -241,9 +241,12 @@
 					<xsl:value-of select="$locale_strings[@id='source_code']" />
 					</a>
 					<xsl:value-of select="$locale_strings[@id='separator']" />
-					wiki
-					<xsl:value-of select="$locale_strings[@id='separator']" />
-					report bug
+					<a>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$site_strings[@id='page_report_bug']" />
+						</xsl:attribute>
+						<xsl:value-of select="$locale_strings[@id='report_bug']" />
+					</a>
 				</div>
 			</xsl:if>
 
