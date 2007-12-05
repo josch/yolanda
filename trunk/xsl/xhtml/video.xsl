@@ -74,7 +74,7 @@
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
-				<object>
+				<object type="application/ogg">
 					<xsl:attribute name="width">
 						<xsl:value-of select="//video/@width" />
 					</xsl:attribute>
@@ -273,7 +273,7 @@
 				<xsl:value-of select="$locale_strings[@id='protip_embed']" />
 				<br />
 				<span class="code">
-					&lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, '/embed=true')" />"
+					&lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
 						type="application/xml"
 						width=<xsl:value-of select="//video/@width + 24" />
 						height=<xsl:value-of select="//video/@height + 48" />

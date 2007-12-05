@@ -180,16 +180,16 @@
 
 				<hr />
 
+				<xsl:if test="//message">
+					<xsl:call-template name="message"/>
+				</xsl:if>
+
 				<xsl:if test="//search">
 					<xsl:call-template name="searchbar"/>
 				</xsl:if>
 
 				<xsl:if test="not(//frontpage)">
 					<xsl:call-template name="logo-small"/>
-				</xsl:if>
-
-				<xsl:if test="//message">
-					<xsl:call-template name="message"/>
 				</xsl:if>
 			
 			</xsl:if>
