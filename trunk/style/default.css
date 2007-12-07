@@ -48,6 +48,16 @@ div
 			margin:			0.5em;
 		}
 
+	div.cc-license-chooser
+	{
+	}
+
+		div.cc-license-chooser img
+		{
+			margin:				0.25em;
+			vertical-align:		middle;
+		}
+
 	div.comments
 	{
 		display:		none;
@@ -197,6 +207,16 @@ img
 span.code
 {
 	font-family:	monospace;
+}
+
+span.heading
+{
+	font-size:			1.5em;
+}
+
+span.instruction
+{
+	color:				#606060;
 }
 
 span.protip

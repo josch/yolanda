@@ -92,9 +92,18 @@
 
 	<!-- upload page -->
 	<string id="file">file</string>
-	<string id="button_next_page">next page</string>
-	<string id="button_previous_page">previous page</string>
+	<string id="button_next_page">continue</string>
 	<string id="button_upload">upload</string>
+	<string id="title_page_1">Basic Information</string>
+	<string id="title_page_2">Similar Videos</string>
+	<string id="title_page_3">Additional Metainformation</string>
+	<string id="title_page_4">Licensing</string>
+	<string id="title_page_5">Summary / Upload</string>
+	<string id="instruction_page_1">Describe the video you want to upload.</string>
+	<string id="instruction_page_2">Similar videos have already been uploaded. If none of these videos matches yours, continue.</string>
+	<string id="instruction_page_3">Providing these infos helps us to put the video into context.</string>
+	<string id="instruction_page_4">Describe the video's license.</string>
+	<string id="instruction_page_5">Double-check the data and correct mistakes, if necessary.</string>
 	<string id="instruction_file">Specify the file you want to upload.</string>
 	<string id="instruction_title">State the title of the video.</string>
 	<string id="instruction_creator">Specify the creator of the video.</string>
@@ -103,27 +112,36 @@
 	<string id="instruction_source">Specify the source, preferably by URL.</string>
 	<string id="instruction_language">State the language of the video.</string>
 	<string id="instruction_coverage">Specify the time and location covered.</string>
-	<string id="this_is_page_1">This is page 1 of 6.</string>
-	<string id="this_is_page_2">This is page 2 of 6.</string>
-	<string id="this_is_page_3">This is page 3 of 6.</string>
-	<string id="this_is_page_4">This is page 4 of 6.</string>
-	<string id="this_is_page_5">This is page 5 of 6.</string>
-	<string id="this_is_page_6">This is page 6 of 6.</string>
-	<string id="button_page_1">Page 1</string>
-	<string id="button_page_3">Page 3</string>
-	<string id="button_page_4">Page 4</string>
+	<string id="instruction_license">Specify the license, preferably by URL.</string>
+	<string id="instruction_license_cc">Optionally, choose Creative Commons licensing.</string>
+	<string id="instruction_license_cc_remix">Permit modification.</string>
+	<string id="instruction_license_cc_sharealike">Permit modification, derivatives must use the same license.</string>
+	<string id="instruction_license_cc_noderivatives">Prohibit modification.</string>
+	<string id="instruction_license_cc_noncommercial">Prohibit commercial use.</string>
+	<string id="this_is_page_1">This is page 1 of 5.</string>
+	<string id="this_is_page_2">This is page 2 of 5.</string>
+	<string id="this_is_page_3">This is page 3 of 5.</string>
+	<string id="this_is_page_4">This is page 4 of 5.</string>
+	<string id="this_is_page_5">This is page 5 of 5.</string>
+	<string id="button_page_1">go to page 1</string>
+	<string id="button_page_3">go to page 3</string>
+	<string id="button_page_4">go to page 4</string>
+
+	<!-- languages -->
+	<string id="language_en-us">English</string>
+	<string id="language_de-de">German</string>
 
 	<!-- video page -->
-	<string id="download_video">Download</string>
+	<string id="download_video">download</string>
 	<string id="megabytes">MB</string>
 	<string id="watch_browserplugin">use browser plugin</string>
 	<string id="watch_cortadoapplet">use java applet</string>
-	<string id="edit_video">Edit</string>
-	<string id="bookmark_video">Bookmark</string>
-	<string id="license_conditions">License Conditions</string>
+	<string id="edit_video">edit</string>
+	<string id="bookmark_video">bookmark</string>
+	<string id="license_conditions">license conditions</string>
 	<string id="protip_embed">To embed the video on another web page, use the following HTML code:</string>
 	<string id="comment_on_video">Flamewar area below. Proceed with caution.</string>
-	<string id="comment_post">Post</string>
+	<string id="comment_post">post</string>
 
 	<!-- embedded video page-->
 	<string id="backlink">backlink</string>

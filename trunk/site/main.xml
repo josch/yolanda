@@ -8,9 +8,6 @@
 	<str id="site_motto">WebTV free as in Speech</str>
 
 	<!-- invisible -->
-<!--	<str id=""></str>
-	<str id=""></str>
-	<str id=""></str>-->
 	<str id="page_account">/account.pl</str>
 	<str id="page_account_settings">/account.pl?show=settings</str>
 	<str id="page_account_uploads">/account.pl?show=uploads</str>
@@ -23,7 +20,7 @@
 	<str id="page_license">http://www.fsf.org/licensing/licenses/agpl-3.0.html</str>
 	<str id="page_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</str>
 	<str id="page_register">/register.pl</str>
-	<str id="page_report_bug">http://yolanda.mister-muffin.de/trac/ WHERE IS THE BUGTRACKER ?</str>
+	<str id="page_report_bug">http://yolanda.mister-muffin.de/trac/newticket</str>
 	<str id="page_results">search.pl?query=</str>
 	<str id="page_upload">/upload.pl</str>
 	<str id="page_uploader">uploader.pl</str>
