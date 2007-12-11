@@ -208,7 +208,7 @@
 					<xsl:call-template name="uploadform"/>
 				</xsl:when>
 				<xsl:when test="//search">
-					<xsl:call-template name="search"/>
+					<xsl:call-template name="results"/>
 				</xsl:when>
 				<xsl:when test="//video">
 					<xsl:call-template name="video"/>
@@ -253,12 +253,6 @@
 		</body>
 
 	</html>
-</xsl:template>
-
-<xsl:template name="search">
-
-	<xsl:call-template name="results"/>
-
 </xsl:template>
 
 <xsl:template name="logo-small">

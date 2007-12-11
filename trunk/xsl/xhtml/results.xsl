@@ -59,7 +59,7 @@
 										<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, '/action=edit')" />
+										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:attribute>

@@ -1,5 +1,3 @@
-#!/usr/bin/perl
-require "include.pl";
 require "functions.pl";
 
 #create or resume session
@@ -15,7 +13,47 @@ if($userinfo->{'username'})
 {
 	if($query->param('2'))
 	{
-		$page->{'uploadform'}->{'page'} = '2';
+		if($query->param('DC.Title')&&$query->param('DC.Subject')&&$query->param('DC.Description'))
+		{
+			$page->{'innerresults'} = [''];
+	
+			my @args = ();
+
+			#build mysql query
+			$dbquery = "select v.id, v.title, v.description, u.username,
+				from_unixtime( v.timestamp ), v.creator, v.subject,
+				v.contributor, v.source, v.language, v.coverage, v.rights,
+				v.license, filesize, duration, width, height, fps, viewcount,
+				downloadcount,
+				match(v.title, v.description, v.subject)
+				against( ? in boolean mode) as relevance
+				from videos as v, users as u where u.id = v.userid
+				and match(v.title, v.description, v.subject)
+				against( ? in boolean mode)";
+			push @args, $query->param('DC.Title'), $query->param('DC.Title');
+	
+			fill_results(@args);
+			$page->{'uploadform'}->{'page'} = '2';
+		}
+		else
+		{
+			if(!$query->param('DC.Title'))
+			{
+				$page->{'message'}->{'type'} = "error";
+				$page->{'message'}->{'text'} = "error_missing_DC.Title";
+			}
+			elsif(!$query->param('DC.Subject'))
+			{
+				$page->{'message'}->{'type'} = "error";
+				$page->{'message'}->{'text'} = "error_missing_DC.Subject";
+			}
+			elsif(!$query->param('DC.Description'))
+			{
+				$page->{'message'}->{'type'} = "error";
+				$page->{'message'}->{'text'} = "error_missing_DC.Description";
+			}
+			$page->{'uploadform'}->{'page'} = '1';
+		}
 	}
 	elsif($query->param('3'))
 	{
@@ -37,11 +75,9 @@ if($userinfo->{'username'})
 	{
 		$page->{'uploadform'}->{'page'} = '1';
 	}
-	$temp = $query->param('DC.Description');
-	$temp =~ s/\r\n/\n/g;
 	$page->{'uploadform'}->{'DC.Title'} = $query->param('DC.Title');
 	$page->{'uploadform'}->{'DC.Subject'} = $query->param('DC.Subject');
-	$page->{'uploadform'}->{'DC.Description'} = $temp;
+	$page->{'uploadform'}->{'DC.Description'} = $query->param('DC.Description');
 	$page->{'uploadform'}->{'DC.Creator'} = $query->param('DC.Creator');
 	$page->{'uploadform'}->{'DC.Source'} = $query->param('DC.Source');
 	$page->{'uploadform'}->{'DC.Language'} = $query->param('DC.Language');

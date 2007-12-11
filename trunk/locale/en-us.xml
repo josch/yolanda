@@ -123,9 +123,9 @@
 	<string id="this_is_page_3">This is page 3 of 5.</string>
 	<string id="this_is_page_4">This is page 4 of 5.</string>
 	<string id="this_is_page_5">This is page 5 of 5.</string>
-	<string id="button_page_1">go to page 1</string>
-	<string id="button_page_3">go to page 3</string>
-	<string id="button_page_4">go to page 4</string>
+	<string id="button_page_1">back to page 1</string>
+	<string id="button_page_3">back to page 3</string>
+	<string id="button_page_4">back to page 4</string>
 
 	<!-- languages -->
 	<string id="language_en-us">English</string>

@@ -1,5 +1,3 @@
-#!/usr/bin/perl
-require "include.pl";
 require "functions.pl";
 
 #create or resume session

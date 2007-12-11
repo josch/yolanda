@@ -43,7 +43,6 @@
 						</xsl:attribute>
 					</input>
 					<fieldset>
-						<input type="hidden" name="page" value="2" />
 						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_title']" />
 							<br />
@@ -186,6 +185,7 @@
 							<xsl:value-of select="$locale_strings[@id='instruction_language']" />
 							<br />
 							<select name="DC.Language">
+								<option></option>
 								<option>
 									<xsl:value-of select="$locale_strings[@id='language_en-us']" />
 								</option>
@@ -385,7 +385,7 @@
 								<xsl:value-of select="$locale_strings[@id='DC.Title']" />:
 							</td>
 							<td class="rightcell">
-								<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+								<xsl:value-of select="//uploadform/@DC.Title" />
 							</td>
 						</tr>
 						<tr>
@@ -393,7 +393,7 @@
 								<xsl:value-of select="$locale_strings[@id='DC.Subject']" />:
 							</td>
 							<td class="rightcell">
-								<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:subject" />
+								<xsl:value-of select="//uploadform/@DC.Subject" />
 							</td>
 						</tr>
 						<tr>
@@ -401,7 +401,7 @@
 								<xsl:value-of select="$locale_strings[@id='DC.Description']" />:
 							</td>
 							<td class="rightcell">
-								<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
+								<xsl:value-of select="//uploadform/@DC.Description" />
 							</td>
 						</tr>
 					</table>
@@ -418,7 +418,7 @@
 								<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
 							</td>
 							<td class="rightcell">
-								<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:creator" />
+								<xsl:value-of select="//uploadform/@DC.Creator" />
 							</td>
 						</tr>
 						<tr>
@@ -426,7 +426,7 @@
 								<xsl:value-of select="$locale_strings[@id='DC.Source']" />:
 							</td>
 							<td class="rightcell">
-								<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:source" />
+								<xsl:value-of select="//uploadform/@DC.Source" />
 							</td>
 						</tr>
 						<tr>
@@ -434,7 +434,7 @@
 								<xsl:value-of select="$locale_strings[@id='DC.Language']" />:
 							</td>
 							<td class="rightcell">
-								<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:language" />
+								<xsl:value-of select="//uploadform/@DC.Language" />
 							</td>
 						</tr>
 						<tr>
@@ -442,7 +442,7 @@
 								<xsl:value-of select="$locale_strings[@id='DC.Coverage']" />:
 							</td>
 							<td class="rightcell">
-								<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:coverage" />
+								<xsl:value-of select="//uploadform/@DC.Coverage" />
 							</td>
 						</tr>
 					</table>

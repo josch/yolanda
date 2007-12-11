@@ -1,4 +1,3 @@
-require "include.pl";
 require "functions.pl";
 
 #initialize session data

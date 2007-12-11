@@ -1,5 +1,3 @@
-#!/usr/bin/perl
-require "include.pl";
 require "functions.pl";
 
 CGI::Session->name($session_name);
@@ -22,7 +20,7 @@ sub hook
 
 @page = get_page_array(@userinfo);
 
-if($userinfo->{'id'})
+if($userinfo->{'id'}&&$query->param("DC.Title") && $query->param("DC.Description") && $query->param("DC.Subject"))
 {
 	#connect to db
 	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;

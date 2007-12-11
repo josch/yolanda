@@ -1,4 +1,3 @@
-#!/usr/bin/perl
 require "include.pl";
 
 sub get_userinfo_from_sid
