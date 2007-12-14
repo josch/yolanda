@@ -51,9 +51,10 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	#if there was a title passed, then perform a search
 	if($rowcount == 0 and $query->url_param('title'))
 	{
-		$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
-							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
-							v.license, filesize, duration, width, height, fps, viewcount, downloadcount";
+		$dbquery = "select v.id, v.title, v.description, u.username,
+			from_unixtime( v.timestamp ), v.creator, v.subject, v.contributor, 
+			v.source, v.language, v.coverage, v.rights, v.license, filesize,
+			duration, width, height, fps, viewcount, downloadcount, 1";
 		$dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
 		$dbquery .= " from videos as v, users as u where u.id = v.userid";
 		$dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";

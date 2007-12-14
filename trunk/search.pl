@@ -29,9 +29,10 @@ if($query->param('query') or $query->param('orderby'))
 	$strquery =~ s/^\s*(.*?)\s*$/$1/;
 
 	#build mysql query
-	$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
-							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
-							v.license, filesize, duration, width, height, fps, viewcount, downloadcount";
+	$dbquery = "select v.id, v.title, v.description, u.username,
+		from_unixtime( v.timestamp ), v.creator, v.subject, v.contributor,
+		v.source, v.language, v.coverage, v.rights, v.license, filesize,
+		duration, width, height, fps, viewcount, downloadcount, 1";
 	
 	if($strquery)
 	{

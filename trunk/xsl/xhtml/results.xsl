@@ -51,11 +51,28 @@
 							</td>
 						</tr>
 					</table>
+					<xsl:choose>
+						<xsl:when test="@status=0">
+							processing, please wait....
+						</xsl:when>
+						<xsl:when test="@status=2">
+							invalid audio and/or video stream
+						</xsl:when>
+						<xsl:when test="@status=3">
+							file not found - contact the admin
+						</xsl:when>
+						<xsl:when test="@status=4">
+							file is not a video
+						</xsl:when>
+						<xsl:when test="@status=5">
+							same video was already uploaded
+						</xsl:when>
+					</xsl:choose>
 					<xsl:if test="@edit='true'">
 						<a>
 							<xsl:attribute name="href">
 								<xsl:choose>
-									<xsl:when test="@duration=0">
+									<xsl:when test="not(@status=1)">
 										<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 									</xsl:when>
 									<xsl:otherwise>

@@ -85,9 +85,10 @@ sub fill_results
 	$page->{'results'}->{'pagesize'} = $pagesize;
 	
 	#get every returned value
-	while (my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
-			$contributor, $source, $language, $coverage, $rights, $license,
-			$filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array())
+	while (my ($id, $title, $description, $publisher, $timestamp, $creator,
+		$subject, $contributor, $source, $language, $coverage, $rights,
+		$license, $filesize, $duration, $width, $height, $fps, $viewcount,
+		$downloadcount, $status) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
@@ -95,6 +96,7 @@ sub fill_results
 			'thumbnail'		=> $duration == 0 ? "/images/tango/video-x-generic.png" : "/video-stills/$id",
 			'duration'		=> $duration,
 			'viewcount'		=> $viewcount,
+			'status'		=> $status,
 			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
 			'rdf:RDF'		=>
 			{

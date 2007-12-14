@@ -174,22 +174,39 @@
 						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_creator']" />
 							<br />
-							<input name="DC.Creator" type="text" size="30" />
+							<input name="DC.Creator" type="text" size="30">
+								<xsl:attribute name="value">
+									<xsl:value-of select="//uploadform/@DC.Creator" />
+								</xsl:attribute>
+							</input>
 							</div>
 						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_source']" />
 							<br />
-							<input name="DC.Source" type="text" size="30" />
+							<input name="DC.Source" type="text" size="30">
+								<xsl:attribute name="value">
+									<xsl:value-of select="//uploadform/@DC.Source" />
+								</xsl:attribute>
+							</input>
 						</div>
 						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_language']" />
 							<br />
-							<select name="DC.Language">
-								<option></option>
+							<select name="DC.Language" size="2">
 								<option>
+									<xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_en-us']">
+										<xsl:attribute name="selected">
+											selected
+										</xsl:attribute>
+									</xsl:if>
 									<xsl:value-of select="$locale_strings[@id='language_en-us']" />
 								</option>
 								<option>
+									<xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_de-de']">
+										<xsl:attribute name="selected">
+											selected
+										</xsl:attribute>
+									</xsl:if>
 									<xsl:value-of select="$locale_strings[@id='language_de-de']" />
 								</option>
 							</select>
@@ -197,7 +214,11 @@
 						<div>
 							<xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
 							<br />
-							<input name="DC.Coverage" type="text" size="30" />
+							<input name="DC.Coverage" type="text" size="30">
+								<xsl:attribute name="value">
+									<xsl:value-of select="//uploadform/@DC.Coverage" />
+								</xsl:attribute>
+							</input>
 						</div>
 						<input type="submit" name="4">
 							<xsl:attribute name="value">
@@ -262,7 +283,11 @@
 					<fieldset>
 						<xsl:value-of select="$locale_strings[@id='instruction_license']" />
 						<br />
-						<input name="License" type="text" size="30" />
+						<input name="License" type="text" size="30">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.License" />
+						</xsl:attribute>
+						</input>
 						<br />
 						<xsl:value-of select="$locale_strings[@id='instruction_license_cc']" />
 						<br />

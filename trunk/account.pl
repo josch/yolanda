@@ -34,12 +34,12 @@ if($userinfo->{'username'})
 		#build mysql query
 		$dbquery = "(select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ) as timestamp,
 							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
-							v.license, filesize, duration, width, height, fps, viewcount, downloadcount
+							v.license, filesize, duration, width, height, fps, viewcount, downloadcount, 1
 					from videos as v, users as u where v.userid = u.id and u.sid = ?)
 					union
 					(select v.id, v.title, '', u.username, from_unixtime( v.timestamp ) as timestamp,
 							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
-							v.license, 0, 0, 0, 0, 0, 0, 0
+							v.license, 0, 0, 0, 0, 0, 0, 0, v.status
 					from uploaded as v, users as u where v.userid = u.id and u.sid = ?)";
 	
 		if($query->param('orderby'))

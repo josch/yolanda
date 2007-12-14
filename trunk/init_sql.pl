@@ -75,7 +75,7 @@ $dbh->do(qq{create table
 	(
 		id				int auto_increment	not null,
 		title			varchar(255)		not null,
-		description		varchar(255)		not null,
+		description		text				not null,
 		userid			int					not null,
 		timestamp		bigint				not null,
 		creator			varchar(255)		not null,
@@ -100,7 +100,7 @@ $dbh->do(qq{create table
 	(
 		id				int auto_increment	not null,
 		title			varchar(255)		not null,
-		description		varchar(255)		not null,
+		description		text				not null,
 		userid			int					not null,
 		timestamp		bigint				not null,
 		creator			varchar(255)		not null,

@@ -130,12 +130,14 @@ while(1)
 					$thumbnailsec = int($duration/3 + .5);
 					
 					#the width/height calculation could of course be much shorter but less readable then
-					$tnwidth = 160;
-					$tnheight = int(160*($height/$width)/2 + .5)*2;
-					if($tnheight > 120)
+					$tnmaxwidth = 160;
+					$tnmaxheight = 120
+					$tnwidth = $tnmaxwidth;
+					$tnheight = int($tnwidth*($height/$width)/2 + .5)*2;
+					if($tnheight > $tnmaxheight)
 					{
-						$tnheight = 120;
-						$tnwidth = int(120*($width/$height)/2 + .5)*2;
+						$tnheight = $tnmaxheight;
+						$tnwidth = int($tnheight*($width/$height)/2 + .5)*2;
 					}
 					system "ffmpeg -i $root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/$id";
 					
@@ -156,9 +158,8 @@ while(1)
 					}
 					else #encode video
 					{
-						#FIXME: remove endtime - this is for testing only
 						#TODO: addmetadata information
-						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --endtime 10 --output $root/videos/$id $root/tmp/$id 2>&1";
+						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --output $root/videos/$id $root/tmp/$id 2>&1";
 						appendlog $id, $audio, $video, $width, $height, $fps, $duration, $sha;
 						
 						#add video to videos table
