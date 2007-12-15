@@ -9,84 +9,77 @@
 
 <xsl:template name="innerresults">
 
-	<table class="results">
-		<xsl:for-each select="//results/result">
-			<tr class="result">
-				<td>
-					<a>
-						<xsl:attribute name="href">
-							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-						</xsl:attribute>
-						<img>
-							<xsl:attribute name="src">
-								<xsl:value-of select="@thumbnail" />
-							</xsl:attribute>
-							<xsl:attribute name="alt">
-								<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
-							</xsl:attribute>
-						</img>
-					</a>
-				</td>
-				<td>
-					<div class="videotitle">
-						<a>
-							<xsl:attribute name="href">
-								<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-							</xsl:attribute>
-							<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
-						</a>
-					</div>
-					<br />
-					<xsl:value-of select="rdf:RDF/cc:Work/dc:description" />
-					<table class="videometadata">
-						<tr>
-							<td class="leftcell">
-								<xsl:value-of select="$locale_strings[@id='duration']" />:
-							</td>
-							<td class="rightcell">
-								<xsl:variable name="minutes" select="floor(@duration div 60)" />
-								<xsl:variable name="hours" select="floor(@duration div 3600)" />
-								<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
-								<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-							</td>
-						</tr>
-					</table>
+	<xsl:for-each select="//results/result">
+		<div>
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+				</xsl:attribute>
+				<img>
+					<xsl:attribute name="src">
+						<xsl:value-of select="@thumbnail" />
+					</xsl:attribute>
+					<xsl:attribute name="alt">
+						<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+					</xsl:attribute>
+				</img>
+			</a>
+			<br />
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+				</xsl:attribute>
+				<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+			<xsl:variable name="minutes" select="floor(@duration div 60)" />
+			<xsl:variable name="hours" select="floor(@duration div 3600)" />
+			<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
+			<xsl:choose>
+				<xsl:when test="$hours=0">
+					(<xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+				</xsl:when>
+				<xsl:otherwise>
+					(<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+				</xsl:otherwise>
+			</xsl:choose>
+			</a>
+			<br />
+			<xsl:choose>
+				<xsl:when test="@status=0">
+					processing, please wait....
+				</xsl:when>
+				<xsl:when test="@status=2">
+					invalid audio and/or video stream
+				</xsl:when>
+				<xsl:when test="@status=3">
+					file not found - contact the admin
+				</xsl:when>
+				<xsl:when test="@status=4">
+					file is not a video
+				</xsl:when>
+				<xsl:when test="@status=5">
+					same video was already uploaded
+				</xsl:when>
+			</xsl:choose>
+			<br />
+			<xsl:value-of select="@viewcount" />
+			<xsl:value-of select="$locale_strings[@id='viewcount']" />
+			<xsl:if test="@edit='true'">
+			<a>
+				<xsl:attribute name="href">
 					<xsl:choose>
-						<xsl:when test="@status=0">
-							processing, please wait....
+						<xsl:when test="not(@status=1)">
+							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 						</xsl:when>
-						<xsl:when test="@status=2">
-							invalid audio and/or video stream
-						</xsl:when>
-						<xsl:when test="@status=3">
-							file not found - contact the admin
-						</xsl:when>
-						<xsl:when test="@status=4">
-							file is not a video
-						</xsl:when>
-						<xsl:when test="@status=5">
-							same video was already uploaded
-						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
+						</xsl:otherwise>
 					</xsl:choose>
-					<xsl:if test="@edit='true'">
-						<a>
-							<xsl:attribute name="href">
-								<xsl:choose>
-									<xsl:when test="not(@status=1)">
-										<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:attribute>
-							<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />edit
-						</a>
-					</xsl:if>
-				</td>
-			</tr>
-		</xsl:for-each>
-	</table>
+				</xsl:attribute>
+				<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />edit
+			</a>
+			</xsl:if>
+		</div>
+	</xsl:for-each>
 </xsl:template>
 
 <xsl:template name="results">
@@ -134,50 +127,50 @@
 					<xsl:when test="//results/@orderby='timestamp'">
 						<xsl:choose>
 							<xsl:when test="//results/@sort='asc'">
-								the oldest videos
+								<xsl:value-of select="$locale_strings[@id='videos_oldest']" />
 							</xsl:when>
 							<xsl:otherwise>
-								the newest videos
+								<xsl:value-of select="$locale_strings[@id='videos_newest']" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
 					<xsl:when test="//results/@orderby='downloadcount'">
 						<xsl:choose>
 							<xsl:when test="//results/@sort='asc'">
-								the least downloaded videos
+								<xsl:value-of select="$locale_strings[@id='videos_downloaded_least']" />
 							</xsl:when>
 							<xsl:otherwise>
-								the most downloaded videos
+								<xsl:value-of select="$locale_strings[@id='videos_downloaded_most']" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
 					<xsl:when test="//results/@orderby='viewcount'">
 						<xsl:choose>
 							<xsl:when test="//results/@sort='asc'">
-								the least viewed videos
+								<xsl:value-of select="$locale_strings[@id='videos_viewed_least']" />
 							</xsl:when>
 							<xsl:otherwise>
-								the most viewed videos
+								<xsl:value-of select="$locale_strings[@id='videos_viewed_most']" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
 					<xsl:when test="//results/@orderby='duration'">
 						<xsl:choose>
 							<xsl:when test="//results/@sort='asc'">
-								the shortest videos
+								<xsl:value-of select="$locale_strings[@id='videos_shortest']" />
 							</xsl:when>
 							<xsl:otherwise>
-								the lengthest videos
+								<xsl:value-of select="$locale_strings[@id='videos_lengthest']" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
 					<xsl:when test="//results/@orderby='filesize'">
 						<xsl:choose>
 							<xsl:when test="//results/@sort='asc'">
-								the smallest videos
+								<xsl:value-of select="$locale_strings[@id='videos_smallest']" />
 							</xsl:when>
 							<xsl:otherwise>
-								the biggest videos
+								<xsl:value-of select="$locale_strings[@id='videos_biggest']" />
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
@@ -186,10 +179,12 @@
 		</xsl:choose>
 	</div>
 	<div>
-		<xsl:value-of select="//results/@resultcount" /> results on <xsl:value-of select="//results/@lastpage" /> pages
+		<xsl:value-of select="//results/@resultcount" />&#160;
+		<xsl:value-of select="$locale_strings[@id='results_on']" />&#160;
+		<xsl:value-of select="//results/@lastpage" />&#160;
+		<xsl:value-of select="$locale_strings[@id='pages']" />
 	</div>
-	
-	<xsl:call-template name="pagination-arrows"/>
+
 	<xsl:call-template name="innerresults"/>
 	<xsl:call-template name="pagination-arrows"/>
 	<xsl:call-template name="pagination-numbers"/>

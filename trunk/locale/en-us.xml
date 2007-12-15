@@ -68,16 +68,26 @@
 
 	<!-- results page-->
 	<string id="results_for_query">results for query</string>
-	<string id="ordered_by">ordered by </string>
-	<string id="ascending"> ascending</string>
-	<string id="descending"> descending</string>
+	<string id="ordered_by">ordered by</string>
+	<string id="ascending">ascending</string>
+	<string id="descending">descending</string>
+	<string id="videos_oldest">oldest first</string>
+	<string id="videos_newest">most recent first</string>
+	<string id="videos_downloaded_least">least downloaded first</string>
+	<string id="videos_downloaded_most">most downloaded first</string>
+	<string id="videos_viewed_least">least viewed first</string>
+	<string id="videos_viewed_most">most viewed first</string>
+	<string id="videos_shortest">shortest first</string>
+	<string id="videos_lengthest">lenghtest first</string>
+	<string id="videos_smallest">smallest first</string>
+	<string id="videos_biggest">biggest first</string>
 	<string id="results_on">results on</string>
 	<string id="pages">pages</string>
 	<string id="relevance">relevance</string>
 	<string id="duration">duration</string>
 	<string id="filesize">filesize</string>
-	<string id="viewcount">viewcount</string>
-	<string id="downloadcount">downloadcount</string>
+	<string id="viewcount">views</string>
+	<string id="downloadcount">downloads</string>
 	<string id="timestamp">timestamp</string>
 	
 	<!-- search bar-->
