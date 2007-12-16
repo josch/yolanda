@@ -10,7 +10,7 @@
 <xsl:template name="innerresults">
 
 	<xsl:for-each select="//results/result">
-		<div>
+		<div class="result">
 			<a>
 				<xsl:attribute name="href">
 					<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
@@ -30,6 +30,8 @@
 					<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
 				</xsl:attribute>
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+			</a>
+			<br />
 			<xsl:variable name="minutes" select="floor(@duration div 60)" />
 			<xsl:variable name="hours" select="floor(@duration div 3600)" />
 			<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
@@ -41,48 +43,10 @@
 					(<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
 				</xsl:otherwise>
 			</xsl:choose>
-			</a>
-			<br />
-			<xsl:choose>
-				<xsl:when test="@status=0">
-					processing, please wait....
-				</xsl:when>
-				<xsl:when test="@status=2">
-					invalid audio and/or video stream
-				</xsl:when>
-				<xsl:when test="@status=3">
-					file not found - contact the admin
-				</xsl:when>
-				<xsl:when test="@status=4">
-					file is not a video
-				</xsl:when>
-				<xsl:when test="@status=5">
-					same video was already uploaded
-				</xsl:when>
-			</xsl:choose>
-			<br />
-			<xsl:value-of select="@viewcount" />
-			<xsl:value-of select="$locale_strings[@id='viewcount']" />
-			<xsl:if test="@edit='true'">
-			<a>
-				<xsl:attribute name="href">
-					<xsl:choose>
-						<xsl:when test="not(@status=1)">
-							<xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="concat(rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:attribute>
-				<img src="/images/tango/accessories-text-editor.png" style="border:0;vertical-align:bottom;" />edit
-			</a>
-			</xsl:if>
 		</div>
 	</xsl:for-each>
 </xsl:template>
 
-<xsl:template name="results">
 	<div>
 		<xsl:choose>
 			<xsl:when test="//results/@value!=''">
@@ -178,17 +142,44 @@
 			</xsl:when>
 		</xsl:choose>
 	</div>
+
+<xsl:template name="results">
+
 	<div>
-		<xsl:value-of select="//results/@resultcount" />&#160;
-		<xsl:value-of select="$locale_strings[@id='results_on']" />&#160;
-		<xsl:value-of select="//results/@lastpage" />&#160;
-		<xsl:value-of select="$locale_strings[@id='pages']" />
+		<span class="heading">
+			<xsl:value-of select="$locale_strings[@id='results_heading_1']" />&#160;
+			<xsl:value-of select="//results/@pagesize * (//results/@currentpage - 1) + 1" />&#160;
+			<xsl:value-of select="$locale_strings[@id='results_heading_2']" />&#160;
+			<xsl:choose>
+				<xsl:when test="(//results/@pagesize * //results/@currentpage) &lt; //results/@resultcount">
+					<xsl:value-of select="//results/@pagesize * //results/@currentpage" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="//results/@resultcount" />
+				</xsl:otherwise>
+			</xsl:choose>&#160;
+			<xsl:value-of select="$locale_strings[@id='results_heading_3']" />&#160;
+			<xsl:value-of select="//results/@resultcount" />&#160;
+			<xsl:value-of select="$locale_strings[@id='results_heading_4']" />&#160;
+			"<xsl:value-of select="//results/@value" />"
+		</span>
 	</div>
 
 	<xsl:call-template name="innerresults"/>
-	<xsl:call-template name="pagination-arrows"/>
-	<xsl:call-template name="pagination-numbers"/>
-	
+
+	<xsl:if test="//results/@lastpage &gt; 1">
+		<xsl:call-template name="pagination-arrows"/>
+	</xsl:if>
+
+</xsl:template>
+
+
+<xsl:template name="results-ordering">
+
+<!--
+	this is deprecated - dont use it.
+-->
+
 	<div>
 		<form method="get">
 			<xsl:attribute name="action">
@@ -335,6 +326,11 @@
 			</xsl:if>
 			<img src="./images/tango/go-previous.png" />
 		</a>
+
+		<div class="page-number">
+			<xsl:value-of select="//results/@currentpage" />
+		</div>
+
 		<a>
 			<xsl:attribute name="href">
 				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage + 1)" />
@@ -358,48 +354,6 @@
 			<img src="./images/tango/go-last.png" />
 		</a>
 	</div>
-</xsl:template>
-
-<xsl:template name="pagination-numbers">
-<!--
-	this template is currently unused,
-	it will probably be removed soon.
--->
-	<xsl:variable name="query_string" select="concat('/', //results/@scriptname, '?', //results/@argument, '=', //results/@value, '&amp;orderby=', //results/@orderby, '&amp;sort=', //results/@sort, '&amp;pagesize=', //results/@pagesize)" />
-	<xsl:if test="//results/@currentpage > 2">
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage - 2)" />
-			</xsl:attribute>
-			<xsl:value-of select="//results/@currentpage - 2" />
-		</a>
-	</xsl:if>
-	<xsl:if test="//results/@currentpage > 1">
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage - 1)" />
-			</xsl:attribute>
-			<xsl:value-of select="//results/@currentpage - 1" />
-		</a>
-	</xsl:if>
-	<xsl:value-of select="//results/@currentpage" />
-	<xsl:variable name="temp" select="//results/@lastpage - //results/@currentpage" />
-	<xsl:if test="$temp > 0">
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage + 1)" />
-			</xsl:attribute>
-			<xsl:value-of select="//results/@currentpage + 1" />
-		</a>
-	</xsl:if>
-	<xsl:if test="$temp > 1">
-		<a>
-			<xsl:attribute name="href">
-				<xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage + 2)" />
-			</xsl:attribute>
-			<xsl:value-of select="//results/@currentpage + 2" />
-		</a>
-	</xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>

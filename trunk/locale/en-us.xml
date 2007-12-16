@@ -28,6 +28,7 @@
 	<!-- front page -->
 	<string id="button_find">Find</string>
 	<string id="button_lucky">Instant Access</string>
+	<string id="button_advanced">Avanced Search</string>
 
 	<string id="query_latestadditions">latest additions</string>
 	<string id="query_mostdownloads">most downloads</string>
@@ -53,6 +54,7 @@
 	<string id="error_insert_username">Please insert a username.</string>
 	<string id="error_insert_password">Please insert a password.</string>
 	<string id="error_repeat_password">Please repeat your password.</string>
+	<string id="information_no_results">There are no results satisfying your query.</string>
 	<string id=""></string>
 
 	<!-- information -->
@@ -67,7 +69,10 @@
 	<!-- warnings -->
 
 	<!-- results page-->
-	<string id="results_for_query">results for query</string>
+	<string id="results_heading_1">results</string>
+	<string id="results_heading_2">to</string>
+	<string id="results_heading_3">out of</string>
+	<string id="results_heading_4">for</string>
 	<string id="ordered_by">ordered by</string>
 	<string id="ascending">ascending</string>
 	<string id="descending">descending</string>

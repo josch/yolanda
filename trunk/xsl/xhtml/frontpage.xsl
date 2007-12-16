@@ -22,10 +22,15 @@
 					<xsl:attribute name="value">
 						<xsl:value-of select="$locale_strings[@id='button_find']" />
 					</xsl:attribute>
-				</input>&#160;
+				</input>
 				<input type="submit" name="lucky">
 					<xsl:attribute name="value">
 						<xsl:value-of select="$locale_strings[@id='button_lucky']" />
+					</xsl:attribute>
+				</input>
+				<input type="submit" name="advanced">
+					<xsl:attribute name="value">
+						<xsl:value-of select="$locale_strings[@id='button_advanced']" />
 					</xsl:attribute>
 				</input>
 			</fieldset>
