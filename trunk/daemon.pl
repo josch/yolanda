@@ -130,19 +130,17 @@ while(1)
 					$thumbnailsec = int($duration/3 + .5);
 					
 					#the width/height calculation could of course be much shorter but less readable then
-					$tnmaxwidth = 160;
-					$tnmaxheight = 120
-					$tnwidth = $tnmaxwidth;
-					$tnheight = int($tnwidth*($height/$width)/2 + .5)*2;
-					if($tnheight > $tnmaxheight)
-					{
-						$tnheight = $tnmaxheight;
-						$tnwidth = int($tnheight*($width/$height)/2 + .5)*2;
-					}
+					#all thumbs have equal height
+					$tnmaxheight = 120;
+					$tnheight = $tnmaxheight;
+					$tnwidth = int($tnheight*($width/$height)/2 + .5)*2;
+					
 					system "ffmpeg -i $root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/$id";
 					
-					#check if the upload already is in the right format
-					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis')
+					$vmaxheight = 240;
+					
+					#check if the upload already is in the right format and smaller/equal max-width/height
+					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis' and $height <= $vmaxheight)
 					{
 						appendlog $id, "file already is ogg-theora/vorbis";
 						
@@ -158,16 +156,20 @@ while(1)
 					}
 					else #encode video
 					{
+						#calculate video width
+						$vheight = $vmaxheight <= $height ? $vmaxheight : $height;
+						$vwidth = int($vheight*($width/$height)/2 + .5)*2;
+					
 						#TODO: addmetadata information
-						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --output $root/videos/$id $root/tmp/$id 2>&1";
-						appendlog $id, $audio, $video, $width, $height, $fps, $duration, $sha;
+						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id $root/tmp/$id 2>&1";
+						appendlog $id, $audio, $video, $vwidth, $vheight, $fps, $duration, $sha;
 						
 						#add video to videos table
 						$dbh->do(qq{insert into videos select id, title, description, userid, timestamp, creator,
 												subject, contributor, source, language, coverage, rights, license, notice,
 												derivativeworks, sharealike, commercialuse, ?, ?, ?, ?, ?, ?, 0, 0
-												from uploaded where id = ?}, undef, $filesize, $duration, $width,
-												$height, $fps, $sha, $id) or interrupt $dbh->errstr;
+												from uploaded where id = ?}, undef, $filesize, $duration, $vwidth,
+												$vheight, $fps, $sha, $id) or interrupt $dbh->errstr;
 						
 						#delete temp file
 						unlink "$root/tmp/$id";

@@ -22,9 +22,6 @@ sub hook
 
 if($userinfo->{'id'}&&$query->param("DC.Title") && $query->param("DC.Description") && $query->param("DC.Subject"))
 {
-	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
-	
 	#make new entry for video into the databse
 	#FIXME: contributor, rights
 	$dbh->do(qq{insert into uploaded (title, description, userid, timestamp,
@@ -51,9 +48,6 @@ if($userinfo->{'id'}&&$query->param("DC.Title") && $query->param("DC.Description
 	
 	$page->{'message'}->{'type'} = "information";
 	$page->{'message'}->{'text'} = "information_uploaded";
-	
-	#disconnect db
-	$dbh->disconnect() or die $dbh->errstr;
 }
 else
 {

@@ -47,6 +47,11 @@
 	</xsl:for-each>
 </xsl:template>
 
+<xsl:template name="results-heading">
+
+<!--
+	this is deprecated - dont use it.
+-->
 	<div>
 		<xsl:choose>
 			<xsl:when test="//results/@value!=''">
@@ -142,6 +147,7 @@
 			</xsl:when>
 		</xsl:choose>
 	</div>
+</xsl:template>
 
 <xsl:template name="results">
 

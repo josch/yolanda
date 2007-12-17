@@ -12,9 +12,6 @@ $session = new CGI::Session;
 #check if action is set
 if($query->param('action'))
 {
-	#connect to db
-	$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
-	
 	if($query->param('action') eq "logout")
 	{
 		#if logout is requested
@@ -155,9 +152,6 @@ if($query->param('action'))
 
 		print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
 	}
-
-	#disconnect db
-	$dbh->disconnect();
 }
 #check if user is logged in
 elsif($userinfo->{'username'})

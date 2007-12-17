@@ -5,9 +5,6 @@ sub get_userinfo_from_sid
 	#get parameters
 	my ($sid) = @_;
 	
-	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
-	
 	#prepare query
 	my $sth = $dbh->prepare(qq{select id, username, locale, pagesize, cortado from users where sid = ?}) or die $dbh->errstr;
 	
@@ -19,9 +16,6 @@ sub get_userinfo_from_sid
 	
 	#finish query
 	$sth->finish() or die $dbh->errstr;
-	
-	#close db
-	$dbh->disconnect() or die $dbh->errstr;
 	
 	#return 
 	return @userinfo;
@@ -43,7 +37,7 @@ sub get_page_array
 	{
 		($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
 	}
-	$page->{stylesheet} = $stylesheet;
+	$page->{'stylesheet'} = $stylesheet;
 	$page->{'xmlns:dc'} = $xmlns_dc;
 	$page->{'xmlns:cc'} = $xmlns_cc;
 	$page->{'xmlns:rdf'} = $xmlns_rdf;
@@ -54,16 +48,13 @@ sub get_page_array
 # and account.pl (display own videos)
 sub fill_results
 {
-	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
-	
 	#prepare query
 	my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
 	
 	#execute it
 	$resultcount = $sth->execute(@_) or die $dbh->errstr;
 	
-	$pagesize = $query->param('pagesize') or $pagesize = 5;
+	$pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = 5;
 	
 	#rediculous but funny round up, will fail with 100000000000000 results per page
 	#on 0.0000000000001% of all queries - this is a risk we can handle
@@ -83,6 +74,12 @@ sub fill_results
 	$page->{'results'}->{'currentpage'} = $currentpage;
 	$page->{'results'}->{'resultcount'} = $resultcount eq '0E0' ? 0 : $resultcount;
 	$page->{'results'}->{'pagesize'} = $pagesize;
+	
+	if($resultcount eq '0E0')
+	{
+		$page->{'message'}->{'type'} = "information";
+		$page->{'message'}->{'text'} = "information_no_results";
+	}
 	
 	#get every returned value
 	while (my ($id, $title, $description, $publisher, $timestamp, $creator,
@@ -126,9 +123,6 @@ sub fill_results
 	
 	#finish query
 	$sth->finish() or die $dbh->errstr;
-	
-	#close db
-	$dbh->disconnect() or die $dbh->errstr;
 }
 
 #replace chars in url as said in this rfc: http://www.rfc-editor.org/rfc/rfc1738.txt

@@ -30,9 +30,7 @@
 		<xsl:when test="document(concat('../locale/', //@locale, '.xml'))">
 			<xsl:value-of select="//@locale" />
 		</xsl:when>
-		<xsl:otherwise>
-			en-us
-		</xsl:otherwise>
+		<xsl:otherwise>en-us</xsl:otherwise>
 	</xsl:choose>
 </xsl:variable>
 
@@ -147,7 +145,7 @@
 							<xsl:value-of select="$locale_strings[@id='separator']" />
 							<a>
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_bookmarks']" />
+									<xsl:value-of select="$site_strings[@id='page_account_bookmarks']" />
 								</xsl:attribute>
 								<xsl:value-of select="$locale_strings[@id='bookmarks']" />
 							</a>

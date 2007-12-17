@@ -12,6 +12,8 @@ $session = new CGI::Session;
 #check if query is set
 if($query->param('query') or $query->param('orderby'))
 {
+	#TODO: clean up scriptname, argument, value only being there because of
+	#TODO: account.pl also calling fill_results() which will be changed
 	$page->{'search'} = [''];
 	$page->{'results'}->{'scriptname'} = 'search.pl';
 	$page->{'results'}->{'argument'} = 'query';

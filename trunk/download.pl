@@ -8,9 +8,6 @@ $session = new CGI::Session;
 #do we have an id?
 if($query->param('id'))
 {
-	#connect to db
-	$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
-
 	#check if video with requested id is in the database
 	my $sth = $dbh->prepare(qq{select title from videos where id = ? });
 	$sth->execute($query->param('id'));
@@ -19,8 +16,7 @@ if($query->param('id'))
 	{
 		#if referer is not the local site update referer table
 		$referer = $query->referer() or $referer = '';
-		$server_name = $query->server_name();
-		if($referer !~ /^\w+:\/\/$server_name/)
+		if($referer !~ /^$domain/)
 		{
 			#check if already in database
 			$sth = $dbh->prepare(qq{select 1 from referer where videoid = ? and referer = ? }) or die $dbh->errstr;
@@ -78,9 +74,6 @@ if($query->param('id'))
 		#print xml
 		print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page');
 	}
-	
-	#disconnect db
-	$dbh->disconnect();
 }
 else
 {

@@ -20,9 +20,6 @@ if($query->url_param('action') eq 'bookmark' and $query->url_param('id'))
 #check if id or title is passed
 elsif($query->url_param('title') or $query->url_param('id'))
 {
-	#connect to db
-	my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or die $dbh->errstr;
-	
 	if($query->url_param('id'))
 	{
 		#if id is passed ignore title and check for the id
@@ -103,8 +100,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 		
 		#if referer is not the local site update referer table
 		$referer = $query->referer() or $referer = '';
-		$server_name = $query->server_name();
-		if($referer !~ /^\w+:\/\/$server_name/)
+		if($referer !~ /^$domain/)
 		{
 			#check if already in database
 			$sth = $dbh->prepare(qq{select 1 from referer where videoid = ? and referer = ? }) or die $dbh->errstr;
@@ -123,11 +119,32 @@ elsif($query->url_param('title') or $query->url_param('id'))
 			}
 		}
 		
+		if($query->param('cortado') eq 'true')
+		{
+			$cortado = 'true';
+		}
+		elsif($query->param('cortado') eq 'false')
+		{
+			$cortado = 'false'
+		}
+		elsif($userinfo->{'cortado'} = 1)
+		{
+			$cortado = 'true';
+		}
+		elsif($userinfo->{'cortado'} = 0)
+		{
+			$cortado = 'false';
+		}
+		else
+		{
+			$cortado = 'true';
+		}
+		
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'video'} },
 		{
 			'thumbnail'		=> "$domain/video-stills/$id",
-			'cortado'		=> $query->param('cortado') eq 'false' ? "false" : "true",
+			'cortado'		=> $cortado,
 			'filesize'		=> $filesize,
 			'duration'		=> $duration,
 			'width'			=> $width,
@@ -202,9 +219,6 @@ elsif($query->url_param('title') or $query->url_param('id'))
 		
 		fill_results(@args);
 	}
-	
-	#close db
-	$dbh->disconnect() or die $dbh->errstr;
 }
 else
 {

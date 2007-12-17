@@ -90,10 +90,10 @@
 						<xsl:attribute name="href">
 							<xsl:choose>
 								<xsl:when test="//@embed='true'">
-									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=true&amp;embed=true')" />
 								</xsl:when>
 								<xsl:otherwise>
-									<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
+									<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=true')" />
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:attribute>

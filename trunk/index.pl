@@ -24,8 +24,6 @@ elsif($query->param('error'))
 	$page->{'message'}->{'text'} = $query->param('error');
 }
 
-#connect to db
-my $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 
 #prepare query
 my $sth = $dbh->prepare(qq{select text, count from tagcloud }) or die $dbh->errstr;
@@ -51,4 +49,3 @@ print $session->header(-type=>'text/xml', -charset=>'UTF-8');
 
 #print xml
 print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
-

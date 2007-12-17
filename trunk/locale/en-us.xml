@@ -54,7 +54,6 @@
 	<string id="error_insert_username">Please insert a username.</string>
 	<string id="error_insert_password">Please insert a password.</string>
 	<string id="error_repeat_password">Please repeat your password.</string>
-	<string id="information_no_results">There are no results satisfying your query.</string>
 	<string id=""></string>
 
 	<!-- information -->
@@ -65,6 +64,7 @@
 	<string id="information_comment_created">Your comment has been submitted.</string>
 	<string id="information_registered">Your account has been created.</string>
 	<string id="information_uploaded">Your file has been uploaded.</string>
+	<string id="information_no_results">There are no results satisfying your query.</string>
 
 	<!-- warnings -->
 
@@ -181,6 +181,9 @@
 	<string id="account_uploads">my uploads</string>
 	<string id="account_settings">edit my settings</string>
 	<string id="account_bookmarks">my bookmarks</string>
+	<string id="account_locale">locale</string>
+	<string id="account_pagesize">pagesize</string>
+	<string id="account_cortado">cortado</string>
 
 </strings>
 

@@ -7,6 +7,16 @@ $session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 
+if($userinfo->{'username'})
+{
+	if($query->param('show') eq 'settings' and $query->param('submit'))
+	{
+		$dbh->do(qq{update users set locale = ?, pagesize = ?, cortado = ? where id = ?}, undef, $query->param('locale'), $query->param('pagesize'), $query->param('cortado'), $userinfo->{'id'} ) or die $dbh->errstr;
+	}
+}
+
+@userinfo = get_userinfo_from_sid($session->id);
+
 @page = get_page_array(@userinfo);
 	
 if($userinfo->{'username'})
@@ -14,9 +24,9 @@ if($userinfo->{'username'})
 	if($query->param('show') eq 'settings')
 	{
 		$page->{'account'}->{'show'} = 'settings';
-		#results per page
-		#language
-		#cortado or plugin
+		$page->{'account'}->{'locale'} = $userinfo->{'locale'};
+		$page->{'account'}->{'pagesize'} = $userinfo->{'pagesize'};
+		$page->{'account'}->{'cortado'} = $userinfo->{'cortado'}
 	}
 	elsif($query->param('show') eq 'bookmarks')
 	{

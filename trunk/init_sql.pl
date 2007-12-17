@@ -2,8 +2,6 @@
 CGI::Session->name($session_name);
 my $session = new CGI::Session;
 
-my $dbh = DBI->connect("DBI:mysql:$database:$host", $dbuser, $dbpass) or die $dbh->errstr;
-
 $dbh->do(qq{drop table config});
 
 $dbh->do(qq{drop table users});
@@ -148,8 +146,6 @@ $dbh->do(qq{create table
 		primary key		(id)
 	)
 }) or die $dbh->errstr;
-
-$dbh->disconnect() or die $dbh->errstr;
 
 print $session->header();
 print "initiated database";
