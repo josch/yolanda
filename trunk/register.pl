@@ -15,10 +15,7 @@ if($username)
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_already_registered";
 	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	print output_page();
 }
 #if username and password are passed put them into the database
 elsif($query->param('user') and $query->param('pass') and $query->param('pass_repeat'))
@@ -37,10 +34,7 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
 		$page->{'message'}->{'type'} = "error";
 		$page->{'message'}->{'text'} = "error_passwords_do_not_match";
 	
-		#print xml http header along with session cookie
-		print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-		print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+		print output_page();
 	}
 }
 elsif(not $query->param('user') and ($query->param('pass') or $query->param('pass_repeat')))
@@ -49,10 +43,7 @@ elsif(not $query->param('user') and ($query->param('pass') or $query->param('pas
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_insert_username";
 	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	print output_page();
 }
 elsif(not $query->param('pass') and ($query->param('user') or $query->param('pass_repeat')))
 {
@@ -60,10 +51,7 @@ elsif(not $query->param('pass') and ($query->param('user') or $query->param('pas
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_insert_password";
 	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	print output_page();
 }
 elsif(not $query->param('pass_repeat') and ($query->param('user') or $query->param('pass')))
 {
@@ -71,17 +59,11 @@ elsif(not $query->param('pass_repeat') and ($query->param('user') or $query->par
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_repeat_password";
 	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	print output_page();
 }
 else
 {
 	$page->{'registerform'} = [''];
 	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	print output_page();
 }

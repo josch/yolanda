@@ -132,3 +132,50 @@ sub urlencode
 	$url =~ s/([^A-Za-z0-9_\$\-.+!*'()])/sprintf("%%%02X", ord($1))/eg;
 	return $url;
 }
+
+sub output_page
+{
+	if($query->http('USER_AGENT') =~ m{(Firefox/[2-3]|MSIE [6-7]|yolanda-upload)})
+	{
+		#print xml
+		return $session->header(
+				-type=>'text/xml',
+				-charset=>'UTF-8'
+			),
+			XMLout(
+				$page,
+				KeyAttr => {},
+				XMLDecl => $XMLDecl,
+				RootName => 'page',
+				AttrIndent => '1'
+			);
+	}
+	else
+	{
+		use XML::LibXSLT;
+		use XML::LibXML;
+
+		my $parser = XML::LibXML->new();
+		my $xslt = XML::LibXSLT->new();
+
+		my $stylesheet = $xslt->parse_stylesheet($parser->parse_file("$root/xsl/xhtml.xsl"));
+
+		return $session->header(
+				-type=>'text/xml',
+				-charset=>'UTF-8'
+			),
+			$stylesheet->output_string(
+				$stylesheet->transform(
+					$parser->parse_string(
+						XMLout(
+							$page,
+							KeyAttr => {},
+							XMLDecl => $XMLDecl,
+							RootName => 'page',
+							AttrIndent => '1'
+						)
+					)
+				)
+			);
+	}
+}

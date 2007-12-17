@@ -26,10 +26,7 @@ if($query->param('action'))
 		$page->{'message'}->{'type'} = "error";
 		$page->{'message'}->{'text'} = "error_already_logged_in";
 		
-		#print xml http header along with session cookie
-		print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-		print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+		print output_page();
 	}
 	#if login is requested
 	elsif($query->param('action') eq "login")
@@ -54,10 +51,7 @@ if($query->param('action'))
 			$page->{'message'}->{'type'} = "error";
 			$page->{'message'}->{'text'} = "error_username_password_do_not_match";
 			
-			#print xml http header along with session cookie
-			print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-			print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+			print output_page();
 		}
 		
 	}
@@ -135,10 +129,7 @@ if($query->param('action'))
 			#if not, print login form
 			$page->{'loginform'}->{'action'} = 'openid';
 	
-			#print xml http header along with session cookie
-			print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-			print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+			print output_page();
 		}
 	}
 	else
@@ -147,10 +138,7 @@ if($query->param('action'))
 		$page->{'message'}->{'type'} = "error";
 		$page->{'message'}->{'text'} = "error_202c";
 	
-		#print xml http header along with session cookie
-		print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-		print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+		print output_page();
 	}
 }
 #check if user is logged in
@@ -159,18 +147,12 @@ elsif($userinfo->{'username'})
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_already_logged_in";
 	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	print output_page();
 }
 else
 {
 	#if not, print login form
 	$page->{'loginform'} = [''];
 	
-	#print xml http header along with session cookie
-	print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-	print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+	print output_page();
 }

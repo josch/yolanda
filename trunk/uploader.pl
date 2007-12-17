@@ -54,8 +54,5 @@ else
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = "error_202c";
 }
-#print xml http header along with session cookie
-print $session->header(-type=>'text/xml', -charset=>'UTF-8');
 
-#print xml
-print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+print output_page();

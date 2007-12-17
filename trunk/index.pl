@@ -3,7 +3,7 @@ require "functions.pl";
 #create or resume session
 CGI::Session->name($session_name);
 $query = new CGI;
-my $session = new CGI::Session;
+$session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 
@@ -41,11 +41,4 @@ while (my ($text, $count) = $sth->fetchrow_array())
 #finish query
 $sth->finish() or die $dbh->errstr;
 
-#close db
-$dbh->disconnect() or die $dbh->errstr;
-
-#print xml http header along with session cookie
-print $session->header(-type=>'text/xml', -charset=>'UTF-8');
-
-#print xml
-print XMLout($page, KeyAttr => {}, XMLDecl => $XMLDecl, RootName => 'page', AttrIndent => '1');
+print output_page();
