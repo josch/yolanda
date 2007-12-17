@@ -3,7 +3,7 @@ require "functions.pl";
 #create or resume session
 CGI::Session->name($session_name);
 $query = new CGI;
-my $session = new CGI::Session;
+$session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 

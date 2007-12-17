@@ -143,12 +143,10 @@ sub output_page
 
 	my $stylesheet = $xslt->parse_stylesheet($parser->parse_file("$root/xsl/xhtml.xsl"));
 
-	return $session->header(
-			-type=>'text/xml',
-			-charset=>'UTF-8'
-		),
-		$stylesheet->output_string(
-			$stylesheet->transform(
+	#TODO: this usage of libxsl omits the xsl:output definition (no ident of html) but outputs in UTF8
+	#TODO: later versions of XML::LibXSLT (>= 1.62) define output_as_bytes - this is what we want to use
+	#TODO: wait for debian packagers to update to 1.62 or later
+	$foo = $stylesheet->transform(
 				$parser->parse_string(
 					XMLout(
 						$page,
@@ -158,6 +156,11 @@ sub output_page
 						AttrIndent => '1'
 					)
 				)
-			)
-		);
+			);
+	
+	return $session->header(
+			-type=>'text/xml',
+			-charset=>'UTF-8'
+		),
+		$foo->toString;
 }
