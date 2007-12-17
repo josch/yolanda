@@ -10,6 +10,11 @@ a
 	white-space:		nowrap;
 }
 
+	a:focus
+	{
+		font-style:			italic;
+	}
+
 	a:hover
 	{
 		text-decoration:	underline;
@@ -120,6 +125,7 @@ div
 
 	div.page-number
 	{
+		color:				#606060;
 		display:			inline-block;
 		font-size:			40px;
 		height:				32px;
@@ -143,16 +149,16 @@ div
 
 	div.search
 	{
-		padding:	0.75em;
+		padding:			0.75em;
 	}
 
 	div.search-small
 	{
-		clear:			both;
-		float:			right;
-		height:			0em;
-		overflow:		visible;
-		text-align:		right;
+		clear:				both;
+		float:				right;
+		height:				0em;
+		overflow:			visible;
+		text-align:			right;
 	}
 
 	div.toplists
@@ -162,9 +168,14 @@ div
 
 	div.tagcloud
 	{
-		padding:		1.5em;
-		padding-left:	20%;
-		padding-right:	20%;
+		background-color:	#f0f0f0;
+		border-color:		#c0c0c0;
+		border-style:		solid;
+		border-width:		1px;
+		margin:				0.75em;
+		margin-left:		20%;
+		margin-right:		20%;
+		padding:			0.75em;
 	}
 
 	div.videoccdata

@@ -166,8 +166,7 @@
 			</xsl:choose>&#160;
 			<xsl:value-of select="$locale_strings[@id='results_heading_3']" />&#160;
 			<xsl:value-of select="//results/@resultcount" />&#160;
-			<xsl:value-of select="$locale_strings[@id='results_heading_4']" />&#160;
-			"<xsl:value-of select="//results/@value" />"
+			<xsl:value-of select="$locale_strings[@id='results_heading_4']" />
 		</span>
 	</div>
 

@@ -31,8 +31,8 @@
 	<string id="button_advanced">Avanced Search</string>
 
 	<string id="query_latestadditions">latest additions</string>
-	<string id="query_mostdownloads">most downloads</string>
-	<string id="query_mostviews">most views</string>
+	<string id="query_mostdownloads">most downloaded</string>
+	<string id="query_mostviews">most viewed</string>
 
 	<!-- errors -->
 	<string id="error_202c">Error 202c - Access forbidden by government.</string>
@@ -72,7 +72,7 @@
 	<string id="results_heading_1">results</string>
 	<string id="results_heading_2">to</string>
 	<string id="results_heading_3">out of</string>
-	<string id="results_heading_4">for</string>
+	<string id="results_heading_4"></string>	<!-- this may be needed for other languages -->
 	<string id="ordered_by">ordered by</string>
 	<string id="ascending">ascending</string>
 	<string id="descending">descending</string>
