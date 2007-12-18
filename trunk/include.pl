@@ -20,7 +20,6 @@ $dbuser = 'root';
 $dbpass = '';
 $domain = 'http://localhost';
 $session_name = 'sid';
-$XMLDecl = qq{<?xml version="1.0" encoding="UTF-8" ?><?xml-stylesheet type="text/xsl" href="/xsl/xhtml.xsl" ?>};
 $locale = "en-US";
 $stylesheet = "/style/default.css";
 $xmlns_dc = "http://purl.org/dc/elements/1.1/";

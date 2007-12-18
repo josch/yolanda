@@ -24,10 +24,9 @@ if($query->param('query') or $query->param('orderby'))
 	my @args = ();
 	
 	$strquery = $query->param('query');
-	push @tags, $strquery =~ /tag:"([^"]+)"/gi;
-	push @tags, $strquery =~ /tag:(\w+)/gi;
-	$strquery =~ s/(tag|title):"[^"]+"//gi;
-	$strquery =~ s/(tag|title):\w+//gi;
+	(@tags) = $strquery =~ /tag:(\w+)/gi;
+	($username) = $strquery =~ /user:(\w+)/i;
+	$strquery =~ s/(tag|title|user):\w+//gi;
 	$strquery =~ s/^\s*(.*?)\s*$/$1/;
 
 	#build mysql query
@@ -52,6 +51,12 @@ if($query->param('query') or $query->param('orderby'))
 	{
 		$dbquery .= " and match(v.subject) against (? in boolean mode)";
 		push @args, "@tags";
+	}
+	
+	if($username)
+	{
+		$dbquery .= " and match(u.username) against (? in boolean mode)";
+		push @args, "$username";
 	}
 	
 	if($query->param('orderby'))

@@ -26,17 +26,34 @@ sub get_page_array
 	#get parameters
 	my (@userinfo) = @_;
 	
-	$page->{'username'} = $userinfo->{'username'};
-	#if user is logged in, use his locale setting
-	if($userinfo->{'locale'})
+	#if user is logged in, use his locale setting and check for new upload status
+	if($userinfo->{'username'})
 	{
 		$page->{'locale'} = $userinfo->{'locale'};
+		
+		#prepare query
+		my $sth = $dbh->prepare(qq{select id, title, status from uploaded where userid = ? and status != 0}) or die $dbh->errstr;
+	
+		#execute it
+		$sth->execute($userinfo->{'id'}) or die $dbh->errstr;
+		
+		while(my ($id, $title, $status) = $sth->fetchrow_array())
+		{
+			$page->{'message'}->{'type'} = "error";
+			$page->{'message'}->{'text'} = "error_202c";
+			#TODO: delete from uploaded where id = $id
+		}
+		
+		#finish query
+		$sth->finish() or die $dbh->errstr;
 	}
 	#else get the locale from the http server variable
 	else
 	{
 		($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
 	}
+	
+	$page->{'username'} = $userinfo->{'username'};
 	$page->{'stylesheet'} = $stylesheet;
 	$page->{'xmlns:dc'} = $xmlns_dc;
 	$page->{'xmlns:cc'} = $xmlns_cc;
@@ -45,7 +62,7 @@ sub get_page_array
 
 # called by video.pl (display ambiguous videos),
 # search.pl (display search results)
-# and account.pl (display own videos)
+# and upload.pl (display similar videos)
 sub fill_results
 {
 	#prepare query
@@ -137,11 +154,24 @@ sub output_page
 {
 	use XML::LibXSLT;
 	use XML::LibXML;
-
+	
 	my $parser = XML::LibXML->new();
 	my $xslt = XML::LibXSLT->new();
+	
+	#let the xslt param choose other stylesheets or default to xhtml.xsl
+	my $param_xslt = $query->param('xslt');
+	$param_xslt =~ s/[^a-z]//gi;
+	
+	if( -f "$root/xsl/$param_xslt.xsl")
+	{
+		$xsltpath = "$root/xsl/$param_xslt.xsl"
+	}
+	else
+	{
+		$xsltpath = "$root/xsl/xhtml.xsl";
+	}
 
-	my $stylesheet = $xslt->parse_stylesheet($parser->parse_file("$root/xsl/xhtml.xsl"));
+	my $stylesheet = $xslt->parse_stylesheet($parser->parse_file($xsltpath));
 
 	#TODO: this usage of libxsl omits the xsl:output definition (no ident of html) but outputs in UTF8
 	#TODO: later versions of XML::LibXSLT (>= 1.62) define output_as_bytes - this is what we want to use
@@ -151,7 +181,6 @@ sub output_page
 					XMLout(
 						$page,
 						KeyAttr => {},
-						XMLDecl => $XMLDecl,
 						RootName => 'page',
 						AttrIndent => '1'
 					)
