@@ -13,11 +13,14 @@ $sth = $dbh->prepare("select subject from videos");
 $sth->execute();
 while(($subject) = $sth->fetchrow_array())
 {
-	@subject = split(',', $subject);
+	@subject = split(' ', $subject);
 	foreach my $val (@subject)
 	{
 	    $val =~ s/^\s*(.*?)\s*$/$1/;
-		%hash->{$val}++;
+		if(length($val) >= 4)
+		{
+			%hash->{$val}++;
+		}
 	}
 }
 $sth->finish();
