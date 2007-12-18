@@ -20,7 +20,8 @@ sub hook
 
 @page = get_page_array(@userinfo);
 
-if($userinfo->{'id'}&&$query->param("DC.Title") && $query->param("DC.Description") && $query->param("DC.Subject"))
+if($userinfo->{'id'} && $query->param("DC.Title") &&
+	$query->param("DC.Description") && $query->param("DC.Subject"))
 {
 	#make new entry for video into the databse
 	#FIXME: contributor, rights
