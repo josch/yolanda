@@ -8,18 +8,18 @@
 >
 
 <xsl:template name="settings">
-	<h2><xsl:value-of select="$locale_strings[@id='account_settings']" /></h2>
+	<h2><xsl:value-of select="$locale_strings[@id='settings_settings']" /></h2>
 	<form method="POST">
 		<xsl:attribute name="action">
-			<xsl:value-of select="$site_strings[@id='page_account']" />
+			<xsl:value-of select="$site_strings[@id='page_settings']" />
 		</xsl:attribute>
 		<input type="hidden" name="show" value="settings" />
 		<div>
-			<h3><xsl:value-of select="$locale_strings[@id='account_locale']" /></h3>
+			<h3><xsl:value-of select="$locale_strings[@id='settings_locale']" /></h3>
 			<br />
 			<select name="locale" size="2">
 				<option value="en-us">
-					<xsl:if test="//account/@locale='en-us'">
+					<xsl:if test="//settings/@locale='en-us'">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -27,7 +27,7 @@
 					<xsl:value-of select="$locale_strings[@id='language_en-us']" />
 				</option>
 				<option value="de-de">
-					<xsl:if test="//account/@locale='de-de'">
+					<xsl:if test="//settings/@locale='de-de'">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -37,11 +37,11 @@
 			</select>
 		</div>
 		<div>
-			<h3><xsl:value-of select="$locale_strings[@id='account_pagesize']" /></h3>
+			<h3><xsl:value-of select="$locale_strings[@id='settings_pagesize']" /></h3>
 			<br />
 			<select name="pagesize" size="7">
 				<option>
-					<xsl:if test="//account/@pagesize=1">
+					<xsl:if test="//settings/@pagesize=1">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -49,7 +49,7 @@
 					1
 				</option>
 				<option>
-					<xsl:if test="//account/@pagesize=2">
+					<xsl:if test="//settings/@pagesize=2">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -57,7 +57,7 @@
 					2
 				</option>
 				<option>
-					<xsl:if test="//account/@pagesize=5">
+					<xsl:if test="//settings/@pagesize=5">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -65,7 +65,7 @@
 					5
 				</option>
 				<option>
-					<xsl:if test="//account/@pagesize=10">
+					<xsl:if test="//settings/@pagesize=10">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -73,7 +73,7 @@
 					10
 				</option>
 				<option>
-					<xsl:if test="//account/@pagesize=20">
+					<xsl:if test="//settings/@pagesize=20">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -81,7 +81,7 @@
 					20
 				</option>
 				<option>
-					<xsl:if test="//account/@pagesize=50">
+					<xsl:if test="//settings/@pagesize=50">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -89,7 +89,7 @@
 					50
 				</option>
 				<option>
-					<xsl:if test="//account/@pagesize=100">
+					<xsl:if test="//settings/@pagesize=100">
 						<xsl:attribute name="selected">
 							selected
 						</xsl:attribute>
@@ -99,9 +99,9 @@
 			</select>
 		</div>
 		<div>
-			<h3><xsl:value-of select="$locale_strings[@id='account_cortado']" /></h3>
+			<h3><xsl:value-of select="$locale_strings[@id='settings_cortado']" /></h3>
 			<input type="radio" name="cortado" value="1">
-				<xsl:if test="//account/@cortado=1">
+				<xsl:if test="//settings/@cortado=1">
 					<xsl:attribute name="checked">
 						checked
 					</xsl:attribute>
@@ -110,7 +110,7 @@
 			<xsl:value-of select="$locale_strings[@id='watch_cortadoapplet']" />
 			<br />
 			<input type="radio" name="cortado" value="0">
-				<xsl:if test="//account/@cortado=0">
+				<xsl:if test="//settings/@cortado=0">
 					<xsl:attribute name="checked">
 						checked
 					</xsl:attribute>

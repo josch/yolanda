@@ -21,7 +21,6 @@ if($userinfo->{'username'})
 	
 if($userinfo->{'username'})
 {
-	$page->{'settings'}->{'show'} = 'settings';
 	$page->{'settings'}->{'locale'} = $userinfo->{'locale'};
 	$page->{'settings'}->{'pagesize'} = $userinfo->{'pagesize'};
 	$page->{'settings'}->{'cortado'} = $userinfo->{'cortado'}
