@@ -185,6 +185,11 @@
 	<string id="account_pagesize">pagesize</string>
 	<string id="account_cortado">cortado</string>
 
+	<!-- rss feed -->
+	<string id="rss_separator">&#160;-&#160;</string>
+	<string id="rss_description_1">This is an Yolanda RSS Feed for query "</string>
+	<string id="rss_description_2">".</string>
+
 </strings>
 
 </xsl:stylesheet>

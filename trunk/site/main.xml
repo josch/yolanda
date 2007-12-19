@@ -4,28 +4,29 @@
 <strings>
 
 	<!-- visible -->
-	<str id="site_name">Yolanda</str>
-	<str id="site_motto">WebTV free as in Speech</str>
+	<string id="site_name">Yolanda</string>
+	<string id="site_motto">WebTV free as in Speech</string>
 
 	<!-- invisible -->
-	<str id="page_account">/account.pl</str>
-	<str id="page_account_settings">/account.pl?show=settings</str>
-	<str id="page_account_uploads">/account.pl?show=uploads</str>
-	<str id="page_account_bookmarks">/account.pl?show=bookmarks</str>
-	<str id="page_login">/login.pl</str>
-	<str id="page_login-openid">/login.pl?action=openid</str>
-	<str id="page_logout">/login.pl?action=logout</str>
-	<str id="page_authors">http://yolanda.mister-muffin.de/trac</str>
-	<str id="page_license">http://www.fsf.org/licensing/licenses/agpl-3.0.html</str>
-	<str id="page_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</str>
-	<str id="page_register">/register.pl</str>
-	<str id="page_report_bug">http://yolanda.mister-muffin.de/trac/newticket</str>
-	<str id="page_results">search.pl?query=</str>
-	<str id="page_upload">/upload.pl</str>
-	<str id="page_uploader">uploader.pl</str>
-	<str id="page_query_latestadditions">search.pl?query=&amp;orderby=timestamp&amp;sort=desc</str>
-	<str id="page_query_mostdownloads">search.pl?query=&amp;orderby=downloadcount&amp;sort=desc</str>
-	<str id="page_query_mostviews">search.pl?query=&amp;orderby=viewcount&amp;sort=desc</str>
+	<string id="page_account">/account.pl</string>
+	<string id="page_account_settings">/account.pl?show=settings</string>
+	<string id="page_account_uploads">/account.pl?show=uploads</string>
+	<string id="page_account_bookmarks">/account.pl?show=bookmarks</string>
+	<string id="page_login">/login.pl</string>
+	<string id="page_login-openid">/login.pl?action=openid</string>
+	<string id="page_logout">/login.pl?action=logout</string>
+	<string id="page_authors">http://yolanda.mister-muffin.de/trac</string>
+	<string id="page_license">http://www.fsf.org/licensing/licenses/agpl-3.0.html</string>
+	<string id="page_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</string>
+	<string id="page_register">/register.pl</string>
+	<string id="page_report_bug">http://yolanda.mister-muffin.de/trac/newticket</string>
+	<string id="page_results">search.pl?query=</string>
+	<string id="page_root">http://localhost/</string>
+	<string id="page_upload">/upload.pl</string>
+	<string id="page_uploader">uploader.pl</string>
+	<string id="page_query_latestadditions">search.pl?query=&amp;orderby=timestamp&amp;sort=desc</string>
+	<string id="page_query_mostdownloads">search.pl?query=&amp;orderby=downloadcount&amp;sort=desc</string>
+	<string id="page_query_mostviews">search.pl?query=&amp;orderby=viewcount&amp;sort=desc</string>
 
 </strings>
 

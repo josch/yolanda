@@ -23,8 +23,8 @@ a
 	a.tag
 	{
 		display:			inline-block;
-		margin:				0.25em;
-		padding:			0em;
+		margin-left:		0.25em;
+		margin-right:		0.25em;
 	}
 
 body

@@ -34,7 +34,7 @@
 	</xsl:choose>
 </xsl:variable>
 
-<xsl:variable name="site_strings" select="document('../site/main.xml')//strings/str" />
+<xsl:variable name="site_strings" select="document('../site/main.xml')//strings/string" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
 
 <!-- this kills 99% of the processed XML... sorry Tim Bray.... -->
@@ -53,27 +53,42 @@
 		<head>
 			<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 
-				<xsl:choose>
-					<xsl:when test="not(//@embed='true')">
-						<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-						<link rel="stylesheet" type="text/css">
-							<xsl:attribute name="href">
-								<xsl:value-of select="//@stylesheet" />
-							</xsl:attribute>
-						</link>
-					</xsl:when>
-					<xsl:when test="//@embed='true'">
+			<xsl:choose>
+				<xsl:when test="not(//@embed='true')">
+					<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+					<link rel="stylesheet" type="text/css">
+						<xsl:attribute name="href">
+							<xsl:value-of select="//@stylesheet" />
+						</xsl:attribute>
+					</link>
+				</xsl:when>
+				<xsl:when test="//@embed='true'">
 <!--
-					embedded stylesheet should rather be done through URL like
-					"http://localhost/video/4chan%20city/3/embed=true+stylesheet=embedded.css"
+				embedded stylesheet should rather be done through URL like
+				"http://localhost/video/4chan%20city/3/embed=true+stylesheet=embedded.css"
 -->
-						<link rel="stylesheet" type="text/css">
-							<xsl:attribute name="href">
-								/style/embedded.css
-							</xsl:attribute>
-						</link>
-					</xsl:when>
-				</xsl:choose>
+					<link rel="stylesheet" type="text/css">
+						<xsl:attribute name="href">
+							/style/embedded.css
+						</xsl:attribute>
+					</link>
+				</xsl:when>
+			</xsl:choose>
+
+			<xsl:if test="boolean(//results)">
+
+				<link rel="alternate" type="application/rss+xml">
+					<xsl:attribute name="title">
+						<xsl:value-of select="//results/@value" />
+					</xsl:attribute>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$site_strings[@id='page_root']" />
+						<xsl:value-of select="$site_strings[@id='page_results']" />
+						<xsl:value-of select="//results/@value" />&#38;xslt=rss
+					</xsl:attribute>
+				</link>
+
+			</xsl:if>
 
 			<title>
 				<xsl:choose>
@@ -89,6 +104,10 @@
 						"<xsl:value-of select="//resultspage/@query" />"
 					</xsl:when>
 					<xsl:otherwise>
+<!--
+					this seems to be fail
+					should be fixed somehow
+-->
 						<xsl:value-of select="$site_strings[@id='site_name']" />
 						-
 						<xsl:value-of select="$site_strings[@id='site_motto']" />

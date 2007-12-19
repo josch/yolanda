@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0"
 	xmlns="http://xspf.org/ns/0/"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -8,17 +8,12 @@
 >
 
 <xsl:output
-	doctype-public="-//W3C//DTD XHTML 1.1//EN"
-	doctype-system="http://xspf.org/ns/0/"
 	encoding="utf8"
 	indent="yes"
 	method="xml"
 	media-type="application/xml"
 	omit-xml-declaration="no"
 />
-
-<xsl:variable name="site_strings" select="document('../site/main.xml')//strings" />
-<xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
 
 <xsl:template match="/">
 	<xsl:apply-templates />
@@ -54,5 +49,6 @@
 	</playlist>
 
 </xsl:template>
+
 
 </xsl:stylesheet>
