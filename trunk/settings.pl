@@ -21,10 +21,10 @@ if($userinfo->{'username'})
 	
 if($userinfo->{'username'})
 {
-	$page->{'account'}->{'show'} = 'settings';
-	$page->{'account'}->{'locale'} = $userinfo->{'locale'};
-	$page->{'account'}->{'pagesize'} = $userinfo->{'pagesize'};
-	$page->{'account'}->{'cortado'} = $userinfo->{'cortado'}
+	$page->{'settings'}->{'show'} = 'settings';
+	$page->{'settings'}->{'locale'} = $userinfo->{'locale'};
+	$page->{'settings'}->{'pagesize'} = $userinfo->{'pagesize'};
+	$page->{'settings'}->{'cortado'} = $userinfo->{'cortado'}
 }
 else
 {

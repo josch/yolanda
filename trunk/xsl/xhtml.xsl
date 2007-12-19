@@ -23,7 +23,7 @@
 <xsl:include href="./xhtml/upload.xsl"/>
 <xsl:include href="./xhtml/video.xsl"/>
 <xsl:include href="./xhtml/register.xsl"/>
-<xsl:include href="./xhtml/account.xsl"/>
+<xsl:include href="./xhtml/settings.xsl"/>
 
 <xsl:variable name="locale">
 	<xsl:choose>
@@ -164,16 +164,9 @@
 							<xsl:value-of select="$locale_strings[@id='separator']" />
 							<a>
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_account_bookmarks']" />
+									<xsl:value-of select="$site_strings[@id='page_settings']" />
 								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='bookmarks']" />
-							</a>
-							<xsl:value-of select="$locale_strings[@id='separator']" />
-							<a>
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_account']" />
-								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='account_details']" />
+								<xsl:value-of select="$locale_strings[@id='settings_details']" />
 							</a>
 						</div>
 						<div class="header2">
@@ -230,8 +223,8 @@
 				<xsl:when test="//video">
 					<xsl:call-template name="video"/>
 				</xsl:when>
-				<xsl:when test="//account">
-					<xsl:call-template name="account"/>
+				<xsl:when test="//settings">
+					<xsl:call-template name="settings"/>
 				</xsl:when>
 			</xsl:choose>
 

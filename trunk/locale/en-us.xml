@@ -14,7 +14,7 @@
 
 	<string id="upload_video">upload video</string>
 	<string id="bookmarks">bookmarks</string>
-	<string id="account_details">account details</string>
+	<string id="settings_details">settings details</string>
 
 	<string id="logged_in_as">logged in as&#160;</string>
 	<string id="logout">logout</string>
@@ -177,13 +177,10 @@
 	<string id="duration">duration</string>
 	<string id="viewcount">viewcount</string>
 	
-	<!-- account page -->
-	<string id="account_uploads">my uploads</string>
-	<string id="account_settings">edit my settings</string>
-	<string id="account_bookmarks">my bookmarks</string>
-	<string id="account_locale">locale</string>
-	<string id="account_pagesize">pagesize</string>
-	<string id="account_cortado">cortado</string>
+	<!-- settings page -->
+	<string id="settings_locale">locale</string>
+	<string id="settings_pagesize">pagesize</string>
+	<string id="settings_cortado">cortado</string>
 
 	<!-- rss feed -->
 	<string id="rss_separator">&#160;-&#160;</string>

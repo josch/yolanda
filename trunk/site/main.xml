@@ -8,10 +8,7 @@
 	<string id="site_motto">WebTV free as in Speech</string>
 
 	<!-- invisible -->
-	<string id="page_account">/account.pl</string>
-	<string id="page_account_settings">/account.pl?show=settings</string>
-	<string id="page_account_uploads">/account.pl?show=uploads</string>
-	<string id="page_account_bookmarks">/account.pl?show=bookmarks</string>
+	<string id="page_account">/settings.pl</string>
 	<string id="page_login">/login.pl</string>
 	<string id="page_login-openid">/login.pl?action=openid</string>
 	<string id="page_logout">/login.pl?action=logout</string>
