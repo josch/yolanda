@@ -15,11 +15,7 @@ if($query->param('query') or $query->param('orderby'))
 	#TODO: clean up scriptname, argument, value only being there because of
 	#TODO: account.pl also calling fill_results() which will be changed
 	$page->{'search'} = [''];
-	$page->{'results'}->{'scriptname'} = 'search.pl';
-	$page->{'results'}->{'argument'} = 'query';
-	$page->{'results'}->{'value'} = $query->param('query');
-	$page->{'results'}->{'orderby'} = $query->param('orderby');
-	$page->{'results'}->{'sort'} = $query->param('sort');
+	$page->{'results'}->{'query'} = $query->param('query');
 	
 	my @args = ();
 	

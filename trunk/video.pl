@@ -207,17 +207,8 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	}
 	else
 	{
-		#when an ambigous title was passed there may me many results - display them like search.pl does
-		
-		$page->{'results'}->{'scriptname'} = 'video.pl';
-		$page->{'results'}->{'argument'} = 'title';
-		$page->{'results'}->{'value'} = $query->param('title');
-		$page->{'results'}->{'orderby'} = $query->param('orderby');
-		$page->{'results'}->{'sort'} = $query->param('sort');
-		
-		$page->{'search'} = [''];
-		
-		fill_results(@args);
+		#when an ambigous title was passed there may me many results
+		#redirect to an appropriate search or throw an error with a link to such a search
 	}
 }
 else
