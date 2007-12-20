@@ -84,7 +84,7 @@
 					<xsl:attribute name="href">
 						<xsl:value-of select="$site_strings[@id='page_root']" />
 						<xsl:value-of select="$site_strings[@id='page_results']" />
-						<xsl:value-of select="//results/@value" />&#38;xslt=rss
+						<xsl:value-of select="//results/@query" />&#38;xslt=rss
 					</xsl:attribute>
 				</link>
 
