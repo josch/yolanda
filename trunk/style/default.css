@@ -91,7 +91,7 @@ div
 		vertical-align:	bottom;
 	}
 
-	div.loginform, div.registerform, div.uploadform
+	div.loginform, div.registerform, div.uploadform, div.settingsform
 	{
 		line-height:	2.5em;
 		margin:			1.5em;

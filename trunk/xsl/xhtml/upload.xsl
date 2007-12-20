@@ -8,218 +8,266 @@
 >
 <xsl:template name="uploadform">
 	<div class="uploadform">
+
 		<xsl:choose>
 
 			<xsl:when test="//uploadform/@page=1">
+
 				<span class="heading">
 					<xsl:value-of select="$locale_strings[@id='title_page_1']" />
 				</span>
 				<br />
+
 				<span class="instruction">
 					<xsl:value-of select="$locale_strings[@id='instruction_page_1']" />
 				</span>
+				<br />
+
 				<form method="post">
+
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+
 					<input name="DC.Creator" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Creator" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Source" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Source" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Language" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Language" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Coverage" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Coverage" />
 						</xsl:attribute>
 					</input>
+
 					<fieldset>
-						<div>
-							<xsl:value-of select="$locale_strings[@id='instruction_title']" />
-							<br />
-							<input name="DC.Title" type="text" size="30">
-								<xsl:attribute name="value">
-									<xsl:value-of select="//uploadform/@DC.Title" />
-								</xsl:attribute>
-							</input>
-						</div>
-						<div>
-							<xsl:value-of select="$locale_strings[@id='instruction_subject']" />
-							<br />
-							<input name="DC.Subject" type="text" size="30">
-								<xsl:attribute name="value">
-									<xsl:value-of select="//uploadform/@DC.Subject" />
-								</xsl:attribute>
-							</input>
-						</div>
-						<div>
-							<xsl:value-of select="$locale_strings[@id='instruction_description']" />
-							<br />
-							<textarea name="DC.Description" cols="60" rows="2">
-								<xsl:value-of select="//uploadform/@DC.Description" />
-							</textarea>
-						</div>
+
+						<xsl:value-of select="$locale_strings[@id='instruction_title']" />
+						<br />
+
+						<input name="DC.Title" type="text" size="30">
+							<xsl:attribute name="value">
+								<xsl:value-of select="//uploadform/@DC.Title" />
+							</xsl:attribute>
+						</input>
+						<br />
+
+						<xsl:value-of select="$locale_strings[@id='instruction_subject']" />
+						<br />
+
+						<input name="DC.Subject" type="text" size="30">
+							<xsl:attribute name="value">
+								<xsl:value-of select="//uploadform/@DC.Subject" />
+							</xsl:attribute>
+						</input>
+						<br />
+
+						<xsl:value-of select="$locale_strings[@id='instruction_description']" />
+						<br />
+
+						<textarea name="DC.Description" cols="60" rows="2">
+							<xsl:value-of select="//uploadform/@DC.Description" />
+						</textarea>
+						<br />
+
 						<input type="submit" name="2">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$locale_strings[@id='button_next_page']" />
 							</xsl:attribute>
 						</input>
 						<br />
+
 						<span class="protip">
 							<xsl:value-of select="$locale_strings[@id='this_is_page_1']" />
 						</span>
+
 					</fieldset>
 				</form>
+
 			</xsl:when>
 			
 			<xsl:when test="//uploadform/@page=2">
+
 				<span class="heading">
 					<xsl:value-of select="$locale_strings[@id='title_page_2']" />
 				</span>
 				<br />
+
 				<span class="instruction">
 					<xsl:value-of select="$locale_strings[@id='instruction_page_2']" />
 				</span>
+
 				<form method="post">
+
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+
 					<input name="DC.Title" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Title" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Subject" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Subject" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Description" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Description" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Creator" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Creator" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Source" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Source" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Language" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Language" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Coverage" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Coverage" />
 						</xsl:attribute>
 					</input>
+
 					<fieldset>
+
 						<input type="submit" name="3">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$locale_strings[@id='button_next_page']" />
 							</xsl:attribute>
 						</input>
 						<br />
+
 						<span class="protip">
 							<xsl:value-of select="$locale_strings[@id='this_is_page_2']" />
 						</span>
+
 					</fieldset>
 				</form>
+
 				<xsl:call-template name="innerresults"/>
+
 			</xsl:when>
 
 			<xsl:when test="//uploadform/@page=3">
+
 				<span class="heading">
 					<xsl:value-of select="$locale_strings[@id='title_page_3']" />
 				</span>
 				<br />
+
 				<span class="instruction">
 					<xsl:value-of select="$locale_strings[@id='instruction_page_3']" />
 				</span>
+
 				<form method="post">
+
 					<xsl:attribute name="action">
 						<xsl:value-of select="$site_strings[@id='page_upload']" />
 					</xsl:attribute>
+
 					<input name="DC.Title" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Title" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Subject" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Subject" />
 						</xsl:attribute>
 					</input>
+
 					<input name="DC.Description" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Description" />
 						</xsl:attribute>
 					</input>
+
 					<fieldset>
-						<div>
-							<xsl:value-of select="$locale_strings[@id='instruction_creator']" />
-							<br />
-							<input name="DC.Creator" type="text" size="30">
-								<xsl:attribute name="value">
-									<xsl:value-of select="//uploadform/@DC.Creator" />
-								</xsl:attribute>
-							</input>
-							</div>
-						<div>
-							<xsl:value-of select="$locale_strings[@id='instruction_source']" />
-							<br />
-							<input name="DC.Source" type="text" size="30">
-								<xsl:attribute name="value">
-									<xsl:value-of select="//uploadform/@DC.Source" />
-								</xsl:attribute>
-							</input>
-						</div>
-						<div>
-							<xsl:value-of select="$locale_strings[@id='instruction_language']" />
-							<br />
-							<select name="DC.Language" size="2">
-								<option>
-									<xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_en-us']">
-										<xsl:attribute name="selected">
-											selected
-										</xsl:attribute>
-									</xsl:if>
-									<xsl:value-of select="$locale_strings[@id='language_en-us']" />
-								</option>
-								<option>
-									<xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_de-de']">
-										<xsl:attribute name="selected">
-											selected
-										</xsl:attribute>
-									</xsl:if>
-									<xsl:value-of select="$locale_strings[@id='language_de-de']" />
-								</option>
-							</select>
-						</div>
-						<div>
-							<xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
-							<br />
-							<input name="DC.Coverage" type="text" size="30">
-								<xsl:attribute name="value">
-									<xsl:value-of select="//uploadform/@DC.Coverage" />
-								</xsl:attribute>
-							</input>
-						</div>
+
+						<xsl:value-of select="$locale_strings[@id='instruction_creator']" />
+						<br />
+
+						<input name="DC.Creator" type="text" size="30">
+							<xsl:attribute name="value">
+								<xsl:value-of select="//uploadform/@DC.Creator" />
+							</xsl:attribute>
+						</input>
+						<br />
+
+						<xsl:value-of select="$locale_strings[@id='instruction_source']" />
+						<br />
+
+						<input name="DC.Source" type="text" size="30">
+							<xsl:attribute name="value">
+								<xsl:value-of select="//uploadform/@DC.Source" />
+							</xsl:attribute>
+						</input>
+						<br />
+
+						<xsl:value-of select="$locale_strings[@id='instruction_language']" />
+						<br />
+
+						<select name="DC.Language" size="2">
+							<option>
+								<xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_en-us']">
+									<xsl:attribute name="selected">
+										selected
+									</xsl:attribute>
+								</xsl:if>
+								<xsl:value-of select="$locale_strings[@id='language_en-us']" />
+							</option>
+							<option>
+								<xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_de-de']">
+									<xsl:attribute name="selected">
+										selected
+									</xsl:attribute>
+								</xsl:if>
+								<xsl:value-of select="$locale_strings[@id='language_de-de']" />
+							</option>
+						</select>
+						<br />
+
+						<xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
+						<br />
+
+						<input name="DC.Coverage" type="text" size="30">
+							<xsl:attribute name="value">
+								<xsl:value-of select="//uploadform/@DC.Coverage" />
+							</xsl:attribute>
+						</input>
+						<br />
+
 						<input type="submit" name="4">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$locale_strings[@id='button_next_page']" />
