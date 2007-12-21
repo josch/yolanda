@@ -25,5 +25,7 @@ $stylesheet = "/style/default.css";
 $xmlns_dc = "http://purl.org/dc/elements/1.1/";
 $xmlns_cc = "http://web.resource.org/cc/";
 $xmlns_rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+$defaultpagesize = 20;
+$maxpagesize = 500;
 $dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
 1;

@@ -10,10 +10,8 @@ $session = new CGI::Session;
 @page = get_page_array(@userinfo);
 
 #check if query is set
-if($query->param('query') or $query->param('orderby'))
+if($query->param('query'))
 {
-	#TODO: clean up scriptname, argument, value only being there because of
-	#TODO: account.pl also calling fill_results() which will be changed
 	$page->{'search'} = [''];
 	$page->{'results'}->{'query'} = $query->param('query');
 	
@@ -22,7 +20,9 @@ if($query->param('query') or $query->param('orderby'))
 	$strquery = $query->param('query');
 	(@tags) = $strquery =~ /tag:(\w+)/gi;
 	($username) = $strquery =~ /user:(\w+)/i;
-	$strquery =~ s/(tag|title|user):\w+//gi;
+	($orderby) = $strquery =~ /orderby:(\w+)/i;
+	($sort) = $strquery =~ /sort:(\w+)/i;
+	$strquery =~ s/(tag|user|orderby|sort):\w+//gi;
 	$strquery =~ s/^\s*(.*?)\s*$/$1/;
 
 	#build mysql query
@@ -55,29 +55,29 @@ if($query->param('query') or $query->param('orderby'))
 		push @args, "$username";
 	}
 	
-	if($query->param('orderby'))
+	if($orderby)
 	{
-		if($query->param('orderby') eq 'filesize')
+		if($orderby eq 'filesize')
 		{
 			$dbquery .= " order by v.filesize";
 		}
-		elsif($query->param('orderby') eq 'duration')
+		elsif($orderby eq 'duration')
 		{
 			$dbquery .= " order by v.duration";
 		}
-		elsif($query->param('orderby') eq 'viewcount')
+		elsif($orderby eq 'viewcount')
 		{
 			$dbquery .= " order by v.viewcount";
 		}
-		elsif($query->param('orderby') eq 'downloadcount')
+		elsif($orderby eq 'downloadcount')
 		{
 			$dbquery .= " order by v.downloadcount";
 		}
-		elsif($query->param('orderby') eq 'timestamp')
+		elsif($orderby eq 'timestamp')
 		{
 			$dbquery .= " order by v.timestamp";
 		}
-		elsif($query->param('orderby') eq 'relevance' and $query->param('query'))
+		elsif($orderby eq 'relevance' and $strquery)
 		{
 			$dbquery .= " order by relevance";
 		}
@@ -86,22 +86,28 @@ if($query->param('query') or $query->param('orderby'))
 			$dbquery .= " order by v.id";
 		}
 		
-		if($query->param('sort') eq "asc")
+		if($sort eq "ascending")
 		{
-			$dbquery .= " asc"
+			$dbquery .= " asc";
 		}
-		else
+		elsif($sort eq "descending")
 		{
-			$dbquery .= " desc"
+			$dbquery .= " desc";
 		}
 	}
 	
 	fill_results(@args);
+	
+	if(@{$page->{'results'}->{'result'}} == 0)
+	{
+		print $query->redirect("index.pl?warning=warning_no_results");
+	}
+	else
+	{
+		print output_page();
+	}
 }
 else
 {
-	$page->{'message'}->{'type'} = "error";
-	$page->{'message'}->{'text'} = "error_202c";
+	print $query->redirect("index.pl?warning=warning_no_query");
 }
-
-print output_page();

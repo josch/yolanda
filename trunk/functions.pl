@@ -30,22 +30,6 @@ sub get_page_array
 	if($userinfo->{'username'})
 	{
 		$page->{'locale'} = $userinfo->{'locale'};
-		
-		#prepare query
-		my $sth = $dbh->prepare(qq{select id, title, status from uploaded where userid = ? and status != 0}) or die $dbh->errstr;
-	
-		#execute it
-		$sth->execute($userinfo->{'id'}) or die $dbh->errstr;
-		
-		while(my ($id, $title, $status) = $sth->fetchrow_array())
-		{
-			$page->{'message'}->{'type'} = "error";
-			$page->{'message'}->{'text'} = "error_202c";
-			#TODO: delete from uploaded where id = $id
-		}
-		
-		#finish query
-		$sth->finish() or die $dbh->errstr;
 	}
 	#else get the locale from the http server variable
 	else
@@ -71,7 +55,11 @@ sub fill_results
 	#execute it
 	$resultcount = $sth->execute(@_) or die $dbh->errstr;
 	
-	$pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = 5;
+	#set pagesize by query or usersettings or default
+	$pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = $defaultpagesize;
+	
+	#if pagesize is more than maxpagesize reduce to maxpagesize
+	$pagesize = $pagesize > $maxpagesize ? $maxpagesize : $pagesize;
 	
 	#rediculous but funny round up, will fail with 100000000000000 results per page
 	#on 0.0000000000001% of all queries - this is a risk we can handle
@@ -160,7 +148,7 @@ sub output_page
 	
 	#let the xslt param choose other stylesheets or default to xhtml.xsl
 	my $param_xslt = $query->param('xslt');
-	$param_xslt =~ s/[^a-z]//gi;
+	$param_xslt =~ s/[^\w]//gi;
 	
 	if( -f "$root/xsl/$param_xslt.xsl")
 	{
@@ -187,6 +175,7 @@ sub output_page
 				)
 			);
 	
+	#send everything including http headers to the user - if xslt chosen is xspf set download filename
 	return $session->header(
 			-type=>'text/xml',
 			-charset=>'UTF-8'

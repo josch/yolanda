@@ -13,15 +13,21 @@ $page->{frontpage} = [''];
 
 if($query->param('information'))
 {
-	
 	$page->{'message'}->{'type'} = "information";
 	$page->{'message'}->{'text'} = $query->param('information');
+	$page->{'message'}->{'value'} = $query->param('value');
 }
 elsif($query->param('error'))
 {
-	
 	$page->{'message'}->{'type'} = "error";
 	$page->{'message'}->{'text'} = $query->param('error');
+	$page->{'message'}->{'value'} = $query->param('value');
+}
+elsif($query->param('warning'))
+{
+	$page->{'message'}->{'type'} = "warning";
+	$page->{'message'}->{'text'} = $query->param('warning');
+	$page->{'message'}->{'value'} = $query->param('value');
 }
 
 

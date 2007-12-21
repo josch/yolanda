@@ -64,9 +64,10 @@
 	<string id="information_comment_created">Your comment has been submitted.</string>
 	<string id="information_registered">Your account has been created.</string>
 	<string id="information_uploaded">Your file has been uploaded.</string>
-	<string id="information_no_results">There are no results satisfying your query.</string>
 
 	<!-- warnings -->
+	<string id="warning_no_results">There are no results satisfying your query.</string>
+	<string id="warning_no_query">You passed no query string.</string>
 
 	<!-- results page-->
 	<string id="results_heading_1">results</string>
@@ -122,7 +123,7 @@
 	<string id="instruction_file">Specify the file you want to upload.</string>
 	<string id="instruction_title">State the title of the video.</string>
 	<string id="instruction_creator">Specify the creator of the video.</string>
-	<string id="instruction_subject">State some keywords, separated by commas.</string>
+	<string id="instruction_subject">State some keywords, separated by spaces.</string>
 	<string id="instruction_description">Describe the video in natural language.</string>
 	<string id="instruction_source">Specify the source, preferably by URL.</string>
 	<string id="instruction_language">State the language of the video.</string>

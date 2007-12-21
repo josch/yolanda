@@ -50,7 +50,7 @@ if($query->param('id'))
 			#video is being downloaded - update downloadcount
 			$dbh->do(qq{update videos set downloadcount=downloadcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
 			
-			print $query->header(-type=>'application/x-download',
+			print $query->header(-type=>'application/ogg',
 						-attachment=>$title.".ogv");
 		}
 		
