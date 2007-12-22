@@ -53,6 +53,18 @@
 						</xsl:attribute>
 					</input>
 
+					<input name="DC.Rights" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Rights" />
+						</xsl:attribute>
+					</input>
+
+					<input name="DC.License" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.License" />
+						</xsl:attribute>
+					</input>
+
 					<fieldset>
 
 						<xsl:value-of select="$locale_strings[@id='instruction_title']" />
@@ -158,6 +170,18 @@
 						</xsl:attribute>
 					</input>
 
+					<input name="DC.Rights" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Rights" />
+						</xsl:attribute>
+					</input>
+
+					<input name="DC.License" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.License" />
+						</xsl:attribute>
+					</input>
+
 					<fieldset>
 
 						<input type="submit" name="3">
@@ -210,6 +234,18 @@
 					<input name="DC.Description" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Description" />
+						</xsl:attribute>
+					</input>
+
+					<input name="DC.Rights" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Rights" />
+						</xsl:attribute>
+					</input>
+
+					<input name="DC.License" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.License" />
 						</xsl:attribute>
 					</input>
 
@@ -329,12 +365,20 @@
 						</xsl:attribute>
 					</input>
 					<fieldset>
+						<xsl:value-of select="$locale_strings[@id='instruction_rights']" />
+						<br />
+						<input name="DC.Rights" type="text" size="30">
+							<xsl:attribute name="value">
+								<xsl:value-of select="//uploadform/@DC.Rights" />
+							</xsl:attribute>
+						</input>
+						<br />
 						<xsl:value-of select="$locale_strings[@id='instruction_license']" />
 						<br />
-						<input name="License" type="text" size="30">
-						<xsl:attribute name="value">
-							<xsl:value-of select="//uploadform/@DC.License" />
-						</xsl:attribute>
+						<input name="DC.License" type="text" size="30">
+							<xsl:attribute name="value">
+								<xsl:value-of select="//uploadform/@DC.License" />
+							</xsl:attribute>
 						</input>
 						<br />
 						<xsl:value-of select="$locale_strings[@id='instruction_license_cc']" />
@@ -343,7 +387,13 @@
 						<div class="cc-license-chooser">
 
 							<img src="./images/cc/cc-remix.png" />
-							<input type="radio" name="modification" value="remix" />
+							<input type="radio" name="modification" value="remix">
+								<xsl:if test="//uploadform/@remix='true'">
+									<xsl:attribute name="checked">
+										checked
+									</xsl:attribute>
+								</xsl:if>
+							</input>
 							<br />
 							<span class="protip">
 								<xsl:value-of select="$locale_strings[@id='instruction_license_cc_remix']" />
@@ -351,7 +401,13 @@
 							<br />
 
 							<img src="./images/cc/cc-sharealike.png" />
-							<input type="radio" name="modification" value="ShareAlike" />
+							<input type="radio" name="modification" value="sharealike">
+								<xsl:if test="//uploadform/@sharealike='true'">
+									<xsl:attribute name="checked">
+										checked
+									</xsl:attribute>
+								</xsl:if>
+							</input>
 							<br />
 							<span class="protip">
 								<xsl:value-of select="$locale_strings[@id='instruction_license_cc_sharealike']" />
@@ -359,7 +415,13 @@
 							<br />
 
 							<img src="./images/cc/cc-noderivatives.png" />
-							<input type="radio" name="modification" value="noncommercial" />
+							<input type="radio" name="modification" value="noderivatives">
+								<xsl:if test="//uploadform/@noderivatives='true'">
+									<xsl:attribute name="checked">
+										checked
+									</xsl:attribute>
+								</xsl:if>
+							</input>
 							<br />
 							<span class="protip">
 								<xsl:value-of select="$locale_strings[@id='instruction_license_cc_noderivatives']" />
@@ -367,7 +429,13 @@
 							<br />
 
 							<img src="./images/cc/cc-noncommercial.png" />
-							<input type="checkbox" name="noncommercial" value="CommercialUse" />
+							<input type="checkbox" name="noncommercial" value="CommercialUse">
+								<xsl:if test="//uploadform/@noncommercial='true'">
+									<xsl:attribute name="checked">
+										checked
+									</xsl:attribute>
+								</xsl:if>
+							</input>
 							<br />
 							<span class="protip">
 								<xsl:value-of select="$locale_strings[@id='instruction_license_cc_noncommercial']" />
@@ -451,6 +519,16 @@
 							<xsl:value-of select="//uploadform/@DC.Coverage" />
 						</xsl:attribute>
 					</input>
+					<input name="DC.Rights" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Rights" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.License" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.License" />
+						</xsl:attribute>
+					</input>
 
 					<table class="videometadata">
 						<tr>
@@ -525,8 +603,25 @@
 							<xsl:value-of select="$locale_strings[@id='button_page_3']" />
 						</xsl:attribute>
 					</input>
-
-					<xsl:call-template name="cclicense"/>
+					
+					<table class="videometadata">
+						<tr>
+							<td class="leftcell">
+								<xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
+							</td>
+							<td class="rightcell">
+								<xsl:value-of select="//uploadform/@DC.Rights" />
+							</td>
+						</tr>
+						<tr>
+							<td class="leftcell">
+								<xsl:value-of select="$locale_strings[@id='DC.License']" />:
+							</td>
+							<td class="rightcell">
+								<xsl:value-of select="//uploadform/@DC.License" />
+							</td>
+						</tr>
+					</table>
 
 					<input type="submit" name="4">
 						<xsl:attribute name="value">
@@ -573,6 +668,16 @@
 					<input name="DC.Coverage" type="hidden">
 						<xsl:attribute name="value">
 							<xsl:value-of select="//uploadform/@DC.Coverage" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.Rights" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.Rights" />
+						</xsl:attribute>
+					</input>
+					<input name="DC.License" type="hidden">
+						<xsl:attribute name="value">
+							<xsl:value-of select="//uploadform/@DC.License" />
 						</xsl:attribute>
 					</input>
 					<fieldset>

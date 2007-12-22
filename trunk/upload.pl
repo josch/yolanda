@@ -11,6 +11,16 @@ $session = new CGI::Session;
 
 if($userinfo->{'username'})
 {
+	$page->{'uploadform'}->{'DC.Title'} = $query->param('DC.Title');
+	$page->{'uploadform'}->{'DC.Subject'} = $query->param('DC.Subject');
+	$page->{'uploadform'}->{'DC.Description'} = $query->param('DC.Description');
+	$page->{'uploadform'}->{'DC.Creator'} = $query->param('DC.Creator');
+	$page->{'uploadform'}->{'DC.Source'} = $query->param('DC.Source');
+	$page->{'uploadform'}->{'DC.Language'} = $query->param('DC.Language');
+	$page->{'uploadform'}->{'DC.Coverage'} = $query->param('DC.Coverage');
+	$page->{'uploadform'}->{'DC.Rights'} = $query->param('DC.Rights');
+	$page->{'uploadform'}->{'DC.License'} = $query->param('DC.License');
+	
 	if($query->param('2'))
 	{
 		if($query->param('DC.Title')&&$query->param('DC.Subject')&&$query->param('DC.Description'))
@@ -22,7 +32,7 @@ if($userinfo->{'username'})
 			#build mysql query
 			$dbquery = "select v.id, v.title, v.description, u.username,
 				from_unixtime( v.timestamp ), v.creator, v.subject,
-				v.contributor, v.source, v.language, v.coverage, v.rights,
+				v.source, v.language, v.coverage, v.rights,
 				v.license, filesize, duration, width, height, fps, viewcount,
 				downloadcount,
 				match(v.title, v.description, v.subject)
@@ -61,27 +71,81 @@ if($userinfo->{'username'})
 	}
 	elsif($query->param('4'))
 	{
+		if($query->param('DC.License') eq 'cc-by')
+		{
+			$page->{'uploadform'}->{'remix'} = 'true';
+		}
+		elsif($query->param('DC.License') eq 'cc-by-sa')
+		{
+			$page->{'uploadform'}->{'sharealike'} = 'true';
+		}
+		elsif($query->param('DC.License') eq 'cc-by-nd')
+		{
+			$page->{'uploadform'}->{'noderivatives'} = 'true';
+		}
+		elsif($query->param('DC.License') eq 'cc-by-nc')
+		{
+			$page->{'uploadform'}->{'remix'} = 'true';
+			$page->{'uploadform'}->{'noncommercial'} = 'true';
+		}
+		elsif($query->param('DC.License') eq 'cc-by-nc-sa')
+		{
+			$page->{'uploadform'}->{'sharealike'} = 'true';
+			$page->{'uploadform'}->{'noncommercial'} = 'true';
+		}
+		elsif($query->param('DC.License') eq 'cc-by-nc-nd')
+		{
+			$page->{'uploadform'}->{'noderivatives'} = 'true';
+			$page->{'uploadform'}->{'noncommercial'} = 'true';
+		}
+		
 		$page->{'uploadform'}->{'page'} = '4';
 	}
 	elsif($query->param('5'))
 	{
+		if($query->param('modification') and not $query->param('DC.License'))
+		{
+			if($query->param('modification') eq 'remix')
+			{
+				if($query->param('noncommercial'))
+				{
+					$page->{'uploadform'}->{'DC.License'} = 'cc-by-nc';
+				}
+				else
+				{
+					$page->{'uploadform'}->{'DC.License'} = 'cc-by';	
+				}
+			}
+			elsif($query->param('modification') eq 'sharealike')
+			{
+				if($query->param('noncommercial'))
+				{
+					$page->{'uploadform'}->{'DC.License'} = 'cc-by-nc-sa';
+				}
+				else
+				{
+					$page->{'uploadform'}->{'DC.License'} = 'cc-by-sa';
+				}
+			}
+			elsif($query->param('modification') eq 'noderivatives')
+			{
+				if($query->param('noncommercial'))
+				{
+					$page->{'uploadform'}->{'DC.License'} = 'cc-by-nc-nd';
+				}
+				else
+				{
+					$page->{'uploadform'}->{'DC.License'} = 'cc-by-nd';
+				}
+			}
+		}
+		
 		$page->{'uploadform'}->{'page'} = '5';
-	}
-	elsif($query->param('6'))
-	{
-		$page->{'uploadform'}->{'page'} = '6';
 	}
 	else
 	{
 		$page->{'uploadform'}->{'page'} = '1';
 	}
-	$page->{'uploadform'}->{'DC.Title'} = $query->param('DC.Title');
-	$page->{'uploadform'}->{'DC.Subject'} = $query->param('DC.Subject');
-	$page->{'uploadform'}->{'DC.Description'} = $query->param('DC.Description');
-	$page->{'uploadform'}->{'DC.Creator'} = $query->param('DC.Creator');
-	$page->{'uploadform'}->{'DC.Source'} = $query->param('DC.Source');
-	$page->{'uploadform'}->{'DC.Language'} = $query->param('DC.Language');
-	$page->{'uploadform'}->{'DC.Coverage'} = $query->param('DC.Coverage');
 }
 else
 {

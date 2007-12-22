@@ -24,7 +24,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	{
 		#if id is passed ignore title and check for the id
 		$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
-							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
+							v.creator, v.subject, v.source, v.language, v.coverage, v.rights,
 							v.license, filesize, duration, width, height, fps, viewcount, downloadcount
 							from videos as v, users as u where v.id = ? and u.id=v.userid";
 							
@@ -34,7 +34,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	{
 		#if no id was passed there has to be a title we search for
 		$dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
-							v.creator, v.subject, v.contributor, v.source, v.language, v.coverage, v.rights,
+							v.creator, v.subject, v.source, v.language, v.coverage, v.rights,
 							v.license, filesize, duration, width, height, fps, viewcount, downloadcount
 							from videos as v, users as u where v.title = ? and u.id=v.userid";
 							
@@ -49,7 +49,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	if($rowcount == 0 and $query->url_param('title'))
 	{
 		$dbquery = "select v.id, v.title, v.description, u.username,
-			from_unixtime( v.timestamp ), v.creator, v.subject, v.contributor, 
+			from_unixtime( v.timestamp ), v.creator, v.subject, 
 			v.source, v.language, v.coverage, v.rights, v.license, filesize,
 			duration, width, height, fps, viewcount, downloadcount, 1";
 		$dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
@@ -76,7 +76,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	
 		#if there was a single result, display the video
 		my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
-			$contributor, $source, $language, $coverage, $rights, $license,
+			$source, $language, $coverage, $rights, $license,
 			$filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array();
 		
 		#finish query
@@ -163,7 +163,6 @@ elsif($query->url_param('title') or $query->url_param('id'))
 					'dc:subject'		=> [$subject],
 					'dc:description'	=> [$description],
 					'dc:publisher'		=> [$publisher],
-					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
 					'dc:identifier'		=> ["$domain/video/".urlencode($title)."/$id/"],
 					'dc:source'			=> [$source],

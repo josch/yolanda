@@ -80,17 +80,11 @@ sub fill_results
 	$page->{'results'}->{'resultcount'} = $resultcount eq '0E0' ? 0 : $resultcount;
 	$page->{'results'}->{'pagesize'} = $pagesize;
 	
-	if($resultcount eq '0E0')
-	{
-		$page->{'message'}->{'type'} = "information";
-		$page->{'message'}->{'text'} = "information_no_results";
-	}
-	
 	#get every returned value
 	while (my ($id, $title, $description, $publisher, $timestamp, $creator,
-		$subject, $contributor, $source, $language, $coverage, $rights,
+		$subject, $source, $language, $coverage, $rights,
 		$license, $filesize, $duration, $width, $height, $fps, $viewcount,
-		$downloadcount, $status) = $sth->fetchrow_array())
+		$downloadcount) = $sth->fetchrow_array())
 	{
 		#before code cleanup, this was a really obfuscated array/hash creation
 		push @{ $page->{'results'}->{'result'} },
@@ -98,7 +92,6 @@ sub fill_results
 			'thumbnail'		=> $duration == 0 ? "/images/tango/video-x-generic.png" : "/video-stills/$id",
 			'duration'		=> $duration,
 			'viewcount'		=> $viewcount,
-			'status'		=> $status,
 			'edit'			=> $userinfo->{'username'} eq $publisher ? "true" : "false",
 			'rdf:RDF'		=>
 			{
@@ -110,7 +103,6 @@ sub fill_results
 					'dc:subject'		=> [$subject],
 					'dc:description'	=> [$description],
 					'dc:publisher'		=> [$publisher],
-					'dc:contributor'	=> [$contributor],
 					'dc:date'			=> [$timestamp],
 					'dc:identifier'		=> ["$domain/video/".urlencode($title)."/$id/" . ($duration == 0 ? "/action=edit" : "")],
 					'dc:source'			=> [$source],

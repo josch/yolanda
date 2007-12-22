@@ -51,6 +51,7 @@ if($query->param('id'))
 			$dbh->do(qq{update videos set downloadcount=downloadcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
 			
 			print $query->header(-type=>'application/ogg',
+						-length=> -s "$root/videos/".$query->param('id'),
 						-attachment=>$title.".ogv");
 		}
 		

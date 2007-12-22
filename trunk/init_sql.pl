@@ -1,3 +1,5 @@
+require "include.pl";
+
 #create or resume session
 CGI::Session->name($session_name);
 my $session = new CGI::Session;
@@ -78,16 +80,11 @@ $dbh->do(qq{create table
 		timestamp		bigint				not null,
 		creator			varchar(255)		not null,
 		subject			varchar(255)		not null,
-		contributor		varchar(255)		not null,
 		source			varchar(255)		not null,
 		language		varchar(255)		not null,
 		coverage		varchar(255)		not null,
 		rights			varchar(255)		not null,
 		license			varchar(255)		not null,
-		notice			bool				not null,
-		derivativeworks	bool				not null,
-		sharealike		bool				not null,
-		commercialuse	bool				not null,
 		status			int					default 0,
 		primary key		(id)
 	)
@@ -103,16 +100,11 @@ $dbh->do(qq{create table
 		timestamp		bigint				not null,
 		creator			varchar(255)		not null,
 		subject			varchar(255)		not null,
-		contributor		varchar(255)		not null,
 		source			varchar(255)		not null,
 		language		varchar(255)		not null,
 		coverage		varchar(255)		not null,
 		rights			varchar(255)		not null,
 		license			varchar(255)		not null,
-		notice			bool				not null,
-		derivativeworks	bool				not null,
-		sharealike		bool				not null,
-		commercialuse	bool				not null,
 		filesize		int					not null,
 		duration		int					not null,
 		width			smallint			not null,

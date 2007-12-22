@@ -26,11 +26,12 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
 	#make new entry for video into the databse
 	#FIXME: contributor, rights
 	$dbh->do(qq{insert into uploaded (title, description, userid, timestamp,
-			creator, subject, contributor, source, language, coverage, rights)
+			creator, subject, source, language, coverage, rights, license)
 			values ( ?, ?, ?, unix_timestamp(), ?, ?, ?, ?, ?, ?, ? )}, undef,
 			$query->param("DC.Title"), $query->param("DC.Description"), $userinfo->{'id'},
-			$query->param("DC.Creator"), $query->param("DC.Subject"), '', $query->param("DC.Source"),
-			$query->param("DC.Language"), $query->param("DC.Coverage"), '') or die $dbh->errstr;
+			$query->param("DC.Creator"), $query->param("DC.Subject"), $query->param("DC.Source"),
+			$query->param("DC.Language"), $query->param("DC.Coverage"),
+			$query->param("DC.Rights"), $query->param("DC.License")) or die $dbh->errstr;
 	
 	#get the id of the inserted db entry
 	$sth = $dbh->prepare(qq{select last_insert_id() }) or die $dbh->errstr;
@@ -47,13 +48,9 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
 	}
 	close TEMPFILE;
 	
-	$page->{'message'}->{'type'} = "information";
-	$page->{'message'}->{'text'} = "information_uploaded";
+	print $query->redirect("index.pl?information=information_uploaded&value=$domain/video/".urlencode($query->param("DC.Title"))."/$id/");
 }
 else
 {
-	$page->{'message'}->{'type'} = "error";
-	$page->{'message'}->{'text'} = "error_202c";
+	print $query->redirect("index.pl?error=error_202c");
 }
-
-print output_page();

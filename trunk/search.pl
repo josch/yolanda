@@ -19,17 +19,16 @@ if($query->param('query'))
 	
 	$strquery = $query->param('query');
 	(@tags) = $strquery =~ /tag:(\w+)/gi;
-	($username) = $strquery =~ /user:(\w+)/i;
 	($orderby) = $strquery =~ /orderby:(\w+)/i;
 	($sort) = $strquery =~ /sort:(\w+)/i;
-	$strquery =~ s/(tag|user|orderby|sort):\w+//gi;
+	$strquery =~ s/(tag|orderby|sort):\w+//gi;
 	$strquery =~ s/^\s*(.*?)\s*$/$1/;
 
 	#build mysql query
 	$dbquery = "select v.id, v.title, v.description, u.username,
-		from_unixtime( v.timestamp ), v.creator, v.subject, v.contributor,
+		from_unixtime( v.timestamp ), v.creator, v.subject, 
 		v.source, v.language, v.coverage, v.rights, v.license, filesize,
-		duration, width, height, fps, viewcount, downloadcount, 1";
+		duration, width, height, fps, viewcount, downloadcount";
 	
 	if($strquery)
 	{
@@ -49,10 +48,10 @@ if($query->param('query'))
 		push @args, "@tags";
 	}
 	
-	if($username)
+	if($publisher)
 	{
 		$dbquery .= " and match(u.username) against (? in boolean mode)";
-		push @args, "$username";
+		push @args, "$publisher";
 	}
 	
 	if($orderby)
@@ -102,6 +101,10 @@ if($query->param('query'))
 	{
 		print $query->redirect("index.pl?warning=warning_no_results");
 	}
+	if(@{$page->{'results'}->{'result'}} == 1 or $query->param('lucky'))
+	{
+		print $query->redirect(@{$page->{'results'}->{'result'}}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
+	}
 	else
 	{
 		print output_page();
@@ -109,5 +112,5 @@ if($query->param('query'))
 }
 else
 {
-	print $query->redirect("index.pl?warning=warning_no_query");
+	print $query->redirect("index.pl?error=error_no_query");
 }
