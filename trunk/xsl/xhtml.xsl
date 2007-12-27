@@ -79,7 +79,7 @@
 
 				<link rel="alternate" type="application/rss+xml">
 					<xsl:attribute name="title">
-						<xsl:value-of select="//results/@query" />
+						<xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
 					</xsl:attribute>
 					<xsl:attribute name="href">
 						<xsl:value-of select="$site_strings[@id='page_root']" />
@@ -87,6 +87,20 @@
 						<xsl:value-of select="//results/@query" />
 						&amp;pagesize=<xsl:value-of select="//results/@pagesize" />
 						&amp;page=<xsl:value-of select="//results/@page" />
+						&#38;xslt=rss
+					</xsl:attribute>
+				</link>
+
+				<link rel="alternate" type="application/rss+xml">
+					<xsl:attribute name="title">
+						<xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
+					</xsl:attribute>
+					<xsl:attribute name="href">
+						<xsl:value-of select="$site_strings[@id='page_root']" />
+						<xsl:value-of select="$site_strings[@id='page_results']" />
+						<xsl:value-of select="//results/@query" />
+						&amp;pagesize=99999
+						&amp;page=1
 						&#38;xslt=rss
 					</xsl:attribute>
 				</link>

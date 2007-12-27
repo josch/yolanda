@@ -7,7 +7,6 @@ a
 {
 	color:				#3f3fff;
 	text-decoration:	none;
-	white-space:		nowrap;
 }
 
 	a:focus
@@ -42,13 +41,18 @@ div
 	border-width:		0px;
 }
 
-	div.button-download, div.button-edit, div.button-bookmark
+	div.button-download,
+	div.button-edit,
+	div.button-junk
 	{
-		display:		inline-block;
-		margin:			0.5em;
+		display:			inline-block;
+		margin:				0.5em;
+		vertical-align:		top;
 	}
 
-		div.button-download img, div.button-edit img, div.button-bookmark img
+		div.button-download img,
+		div.button-edit img,
+		div.button-junk img
 		{
 			margin:			0.5em;
 		}
@@ -65,7 +69,6 @@ div
 
 	div.comments
 	{
-		display:		none;
 	}
 
 	div.footer
@@ -91,7 +94,10 @@ div
 		vertical-align:	bottom;
 	}
 
-	div.loginform, div.registerform, div.uploadform, div.settingsform
+	div.loginform,
+	div.registerform,
+	div.settingsform,
+	div.uploadform
 	{
 		line-height:	2.5em;
 		margin:			1.5em;
@@ -119,8 +125,8 @@ div
 		div.messagebox img
 		{
 			margin:				0.75em;
-			vertical-align:		middle;
 			overflow:			visible;
+			vertical-align:		middle;
 		}
 
 	div.page-number
@@ -137,8 +143,8 @@ div
 	{
 		display:			inline-block;
 		margin:				0.75em;
-		width:				160px;
 		overflow:			visible;
+		vertical-align:		top;
 	}
 
 		div.result img
@@ -178,9 +184,15 @@ div
 		padding:			0.75em;
 	}
 
+	div.video
+	{
+		display:			inline-block;
+		margin-bottom:		0.5em;
+	}
+
 	div.videoccdata
 	{
-		margin:			1.5em;
+		margin:			0.75em;
 	}
 
 		div.videoccdata img
@@ -191,15 +203,21 @@ div
 			margin-top:			0.5em;
 		}
 
-div.videostuff
-{	
-}
+	div.video-metadata
+	{
+		display:			inline-block;
+		line-height:		1.5em;
+		margin-left:		1.5em;
+		text-align:			left;
+		vertical-align:		top;
+		width:				256px;
+	}
 
-div.videotitle
-{
-	font-size:			1.5em;
-	margin-bottom:		0.5em;
-}
+	div.videotitle
+	{
+		font-size:			1.5em;
+		margin-bottom:		0.5em;
+	}
 
 fieldset
 {
@@ -224,12 +242,6 @@ img
 	border-width:		0;
 }
 
-	img.openid-icon
-	{
-		padding-left:		0.2em;
-		vertical-align:		text-top;
-	}
-
 	img.logo-big
 	{
 		padding-bottom:		0.5em;
@@ -237,6 +249,12 @@ img
 
 	img.logo-small
 	{
+	}
+
+	img.openid-icon
+	{
+		padding-left:		0.2em;
+		vertical-align:		text-top;
 	}
 
 span.code
@@ -250,11 +268,7 @@ span.heading
 	font-size:			1.5em;
 }
 
-span.instruction
-{
-	color:				#606060;
-}
-
+span.instruction,
 span.protip
 {
 	color:				#606060;
@@ -270,31 +284,34 @@ span.protip:before
 	content:			"( ";
 }
 
-table.results
+table.metadata,
+table.metadata-upload
 {
-	display:			inline;
+	border-width:		0px;
+	border-collapse:	collapse;
+	width:				100%;
 }
 
-table.videometadata
-{
-	border-width:	0px;
-	width:			100%;
-}
-
-	table.videometadata tr td.leftcell
+	table.metadata td.metadata-content,
+	table.metadata td.metadata-title,
+	table.metadata-upload td.metadata-content
 	{
-		color:			#606060;
-		text-align:		right;
-		width:			50%;
+		text-align:			left;
+		width:				50%;
 	}
 
-	table.videometadata tr td.rightcell
+	table.metadata td.metadata-title
 	{
-		text-align:		left;
-		width:			50%;
+		width:				40%;
 	}
 
-td
+	table.metadata-upload td.metadata-title
+	{
+		text-align:			right;
+		width:				50%;
+	}
+
+td.metadata-title
 {
-	vertical-align:		top;
+	color:				#606060;
 }

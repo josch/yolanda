@@ -530,28 +530,28 @@
 						</xsl:attribute>
 					</input>
 
-					<table class="videometadata">
+					<table class="metadata-upload">
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Title']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Title" />
 							</td>
 						</tr>
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Subject']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Subject" />
 							</td>
 						</tr>
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Description']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Description" />
 							</td>
 						</tr>
@@ -563,36 +563,36 @@
 						</xsl:attribute>
 					</input>
 
-					<table class="videometadata">
+					<table class="metadata-upload">
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Creator" />
 							</td>
 						</tr>
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Source']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Source" />
 							</td>
 						</tr>
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Language']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Language" />
 							</td>
 						</tr>
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Coverage']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Coverage" />
 							</td>
 						</tr>

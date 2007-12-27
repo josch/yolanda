@@ -13,7 +13,6 @@
 	<string id="login_openid">login with OpenID</string>
 
 	<string id="upload_video">upload video</string>
-	<string id="bookmarks">bookmarks</string>
 	<string id="settings_details">settings details</string>
 
 	<string id="logged_in_as">logged in as&#160;</string>
@@ -150,11 +149,11 @@
 
 	<!-- video page -->
 	<string id="download_video">download</string>
+	<string id="junk_video">mark as junk</string>
+	<string id="edit_video">edit</string>
 	<string id="megabytes">MB</string>
 	<string id="watch_browserplugin">use browser plugin</string>
 	<string id="watch_cortadoapplet">use java applet</string>
-	<string id="edit_video">edit</string>
-	<string id="bookmark_video">bookmark</string>
 	<string id="license_conditions">license conditions</string>
 	<string id="protip_embed">To embed the video on another web page, use the following HTML code:</string>
 	<string id="comment_on_video">Flamewar area below. Proceed with caution.</string>
@@ -166,15 +165,15 @@
 	<!-- dublin core entities -->
 	<string id="DC.Title">title</string>
 	<string id="DC.Creator">author</string>
-	<string id="DC.Subject">subject</string>
+	<string id="DC.Subject">keywords</string>
 	<string id="DC.Description">description</string>
 	<string id="DC.Publisher">uploader</string>
 	<string id="DC.Contributor">contributor</string>
-	<string id="DC.Date">date</string>
+	<string id="DC.Date">upload date</string>
 	<string id="DC.Source">source</string>
 	<string id="DC.Language">language</string>
 	<string id="DC.Coverage">coverage</string>
-	<string id="DC.Rights">righs holder</string>
+	<string id="DC.Rights">rights holder</string>
 	<string id="DC.License">license</string>
 
 	<string id="duration">duration</string>
@@ -188,7 +187,9 @@
 
 	<!-- rss feed -->
 	<string id="rss_separator">&#160;-&#160;</string>
-	<string id="rss_description_1">This is an Yolanda RSS Feed for query "</string>
+	<string id="rss_title_results_this_page">this page</string>
+	<string id="rss_title_results_all_pages">all results</string>
+	<string id="rss_description_1">This is an RSS Feed for the query "</string>
 	<string id="rss_description_2">".</string>
 
 </strings>

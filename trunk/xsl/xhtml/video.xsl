@@ -8,8 +8,8 @@
 >
 
 <xsl:template name="video">
-	<xsl:if test="not(//@embed='true')">
-		<br />
+
+	<xsl:if test="not(//@embed='true')">		
 		<div class="videotitle">
 			<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
 			<xsl:variable name="minutes" select="floor(//video/@duration div 60)" />
@@ -25,6 +25,7 @@
 			</xsl:choose>
 		</div>
 	</xsl:if>
+
 	<div class="video">
 		<xsl:choose>
 			<xsl:when test="//video/@cortado='true'">
@@ -116,6 +117,10 @@
 	</xsl:if>
 
 	<xsl:if test="not(//@embed='true')">
+
+		<xsl:call-template name="videometadata"/>
+		<br />
+
 		<div class="button-download">
 			<a>
 				<xsl:attribute name="href">
@@ -133,6 +138,26 @@
 			<br />
 			(<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='megabytes']" />)
 		</div>
+
+<!--
+not implemented right now
+
+		<div class="button-junk">
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=junk')" />
+				</xsl:attribute>
+				<img src="/images/tango/mail-mark-junk.png" />
+			</a>
+			<br />
+			<a>
+				<xsl:attribute name="href">
+					<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=junk')" />
+				</xsl:attribute>
+				<xsl:value-of select="$locale_strings[@id='junk_video']" />
+			</a>
+		</div>
+
 		<div class="button-edit">
 			<xsl:if test="//@edit='true'">
 				<a>
@@ -150,66 +175,9 @@
 				</a>
 			</xsl:if>
 		</div>
-		<div class="button-bookmark">
-			<a>
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=bookmark')" />
-				</xsl:attribute>
-				<img src="/images/tango/bookmark-new.png" />
-			</a>
-			<br />
-			<a>
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=bookmark')" />
-				</xsl:attribute>
-				<xsl:value-of select="$locale_strings[@id='bookmark_video']" />
-			</a>
-		</div>
+-->
 
 		<xsl:call-template name="cclicense"/>
-
-		<table class="videometadata">
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:creator" />
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Description']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Date']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:date" />
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Source']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:source" />
-				</td>
-			</tr>
-			<tr>
-				<td class="leftcell">
-					<xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
-				</td>
-				<td class="rightcell">
-					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:rights" />
-				</td>
-			</tr>
-		</table>
 
 		<div class="videostuff">
 			<span class="protip-embed">
@@ -225,27 +193,13 @@
 			</span>
 		</div>
 
+<!--
+		too ugly right now
+
 		<xsl:call-template name="comments"/>
+		<xsl:call-template name="commentform"/>
+-->
 	
-		<xsl:if test="not(//@username='')">
-			<div class="commentform">
-				<form method="post">
-					<xsl:attribute name="action">
-						<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
-					</xsl:attribute>
-					<fieldset>
-						<br />
-						<textarea name="comment" cols="30" rows="3" />
-						<br />
-						<input type="submit" name="send">
-							<xsl:attribute name="value">
-								<xsl:value-of select="$locale_strings[@id='comment_post']" />
-							</xsl:attribute>
-						</input>
-					</fieldset>
-				</form>
-			</div>
-		</xsl:if>
 	</xsl:if>
 </xsl:template>
 
@@ -269,6 +223,30 @@
 			</div>
 		</xsl:for-each>
 	</div>
+
+</xsl:template>
+
+<xsl:template name="commentform">
+
+		<xsl:if test="not(//@username='')">
+			<div class="commentform">
+				<form method="post">
+					<xsl:attribute name="action">
+						<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
+					</xsl:attribute>
+					<fieldset>
+						<br />
+						<textarea name="comment" cols="30" rows="3" />
+						<br />
+						<input type="submit" name="send">
+							<xsl:attribute name="value">
+								<xsl:value-of select="$locale_strings[@id='comment_post']" />
+							</xsl:attribute>
+						</input>
+					</fieldset>
+				</form>
+			</div>
+		</xsl:if>
 
 </xsl:template>
 
@@ -332,6 +310,95 @@
 				</xsl:if>
 			</xsl:for-each>
 		</a>
+	</div>
+
+</xsl:template>
+
+<xsl:template name="videometadata">
+
+	<div class="video-metadata">
+
+		<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
+
+		<hr />
+
+		<table class="metadata">
+
+			<tr>
+				<td class="metadata-title">
+					<xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
+				</td>
+				<td class="metadata-content">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:creator" />
+				</td>
+			</tr>
+
+<!--
+			dc:contributor is not in upload interface
+
+			<tr>
+				<td class="metadata-title">
+					<xsl:value-of select="$locale_strings[@id='DC.Contributor']" />:
+				</td>
+				<td class="metadata-content">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:contributor" />
+				</td>
+			</tr>
+-->
+
+			<tr>
+				<td class="metadata-title">
+					<xsl:value-of select="$locale_strings[@id='DC.Coverage']" />:
+				</td>
+				<td class="metadata-content">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:coverage" />
+				</td>
+			</tr>
+
+			<tr>
+				<td class="metadata-title">
+					<xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
+				</td>
+				<td class="metadata-content">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:rights" />
+				</td>
+			</tr>
+
+		</table>
+
+		<hr />
+
+		<table class="metadata">
+
+			<tr>
+				<td class="metadata-title">
+					<xsl:value-of select="$locale_strings[@id='DC.Publisher']" />:
+				</td>
+				<td class="metadata-content">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:publisher" />
+				</td>
+			</tr>
+
+			<tr>
+				<td class="metadata-title">
+					<xsl:value-of select="$locale_strings[@id='DC.Date']" />:
+				</td>
+				<td class="metadata-content">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:date" />
+				</td>
+			</tr>
+
+			<tr>
+				<td class="metadata-title">
+					<xsl:value-of select="$locale_strings[@id='DC.Source']" />:
+				</td>
+				<td class="metadata-content">
+					<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:source" />
+				</td>
+			</tr>
+
+		</table>
+		
 	</div>
 
 </xsl:template>
