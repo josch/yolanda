@@ -193,12 +193,8 @@ not implemented right now
 			</span>
 		</div>
 
-<!--
-		too ugly right now
-
-		<xsl:call-template name="comments"/>
 		<xsl:call-template name="commentform"/>
--->
+		<xsl:call-template name="comments"/>
 	
 	</xsl:if>
 </xsl:template>
@@ -206,10 +202,6 @@ not implemented right now
 <xsl:template name="comments">
 
 	<div class="comments">
-		<span class="protip">
-			<xsl:value-of select="$locale_strings[@id='comment_on_video']" />
-		</span>
-		<br />
 		<xsl:for-each select="//comments/comment">
 			<div class="comment">
 				<a>
@@ -228,7 +220,8 @@ not implemented right now
 
 <xsl:template name="commentform">
 
-		<xsl:if test="not(//@username='')">
+	<xsl:choose>
+		<xsl:when test="not(//@username='')">
 			<div class="commentform">
 				<form method="post">
 					<xsl:attribute name="action">
@@ -246,7 +239,15 @@ not implemented right now
 					</fieldset>
 				</form>
 			</div>
-		</xsl:if>
+		</xsl:when>
+		<xsl:otherwise>
+			<div class="commentform">
+				<span class="protip">
+					<xsl:value-of select="$locale_strings[@id='login_to_comment']" />
+				</span>
+			</div>
+		</xsl:otherwise>
+	</xsl:choose>
 
 </xsl:template>
 

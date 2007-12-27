@@ -97,7 +97,8 @@ div
 	div.loginform,
 	div.registerform,
 	div.settingsform,
-	div.uploadform
+	div.uploadform,
+	div.commentform
 	{
 		line-height:	2.5em;
 		margin:			1.5em;

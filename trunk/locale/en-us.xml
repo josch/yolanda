@@ -156,7 +156,7 @@
 	<string id="watch_cortadoapplet">use java applet</string>
 	<string id="license_conditions">license conditions</string>
 	<string id="protip_embed">To embed the video on another web page, use the following HTML code:</string>
-	<string id="comment_on_video">Flamewar area below. Proceed with caution.</string>
+	<string id="login_to_comment">login to comment</string>
 	<string id="comment_post">post</string>
 
 	<!-- embedded video page-->
