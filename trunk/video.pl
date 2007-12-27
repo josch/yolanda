@@ -125,13 +125,21 @@ elsif($query->url_param('title') or $query->url_param('id'))
 		}
 		elsif($query->param('cortado') eq 'false')
 		{
-			$cortado = 'false'
+			$cortado = 'false';
 		}
-		elsif($userinfo->{'cortado'} = 1)
+		elsif($userinfo->{'cortado'} eq 'true')
 		{
 			$cortado = 'true';
 		}
-		elsif($userinfo->{'cortado'} = 0)
+		elsif($userinfo->{'cortado'} eq 'false')
+		{
+			$cortado = 'false';
+		}
+		elsif($query->cookie('cortado') eq 'true')
+		{
+			$cortado = 'true';
+		}
+		elsif($query->cookie('cortado') eq 'false')
 		{
 			$cortado = 'false';
 		}

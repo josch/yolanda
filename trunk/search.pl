@@ -18,9 +18,20 @@ if($query->param('query'))
 	my @args = ();
 	
 	$strquery = $query->param('query');
+	$strquery = s/%([0-9A-F]{2})/chr(hex($1))/eg;
 	(@tags) = $strquery =~ /tag:(\w+)/gi;
 	($orderby) = $strquery =~ /orderby:(\w+)/i;
 	($sort) = $strquery =~ /sort:(\w+)/i;
+	#($title) = $strquery =~ /title:(\w+)/i;
+	#($description) = $strquery =~ /description:(\w+)/i;
+	#($creator) = $strquery =~ /creator:(\w+)/i;
+	#($language) = $strquery =~ /language:(\w+)/i;
+	#($coverage) = $strquery =~ /coverage:(\w+)/i;
+	#($rights) = $strquery =~ /rights:(\w+)/i;
+	#($license) = $strquery =~ /license:(\w+)/i;
+	#($filesize) = $strquery =~ /filesize:([<>]?\w+)/i;
+	#($duration) = $strquery =~ /duration:([<>]?\w+)/i;
+	#($timestamp) = $strquery =~ /timestamp:([<>]?\w+)/i;
 	$strquery =~ s/(tag|orderby|sort):\w+//gi;
 	$strquery =~ s/^\s*(.*?)\s*$/$1/;
 
@@ -101,14 +112,19 @@ if($query->param('query'))
 	{
 		print $query->redirect("index.pl?warning=warning_no_results");
 	}
-	if(@{$page->{'results'}->{'result'}} == 1 or $query->param('lucky'))
+	elsif(@{$page->{'results'}->{'result'}} == 1 or $query->param('lucky'))
 	{
-		print $query->redirect(@{$page->{'results'}->{'result'}}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
+		print $query->redirect($page->{'results'}->{'result'}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
 	}
 	else
 	{
 		print output_page();
 	}
+}
+elsif($query->param('advanced'))
+{
+	$page->{'advancedsearch'} = [''];
+	print output_page();
 }
 else
 {

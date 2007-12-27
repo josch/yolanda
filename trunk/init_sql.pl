@@ -52,7 +52,7 @@ $dbh->do(qq{create table
 		timestamp	bigint				not null,
 		locale		varchar(10)			not null,
 		pagesize	tinyint unsigned	default 5,
-		cortado		tinyint				default	1,
+		cortado		varchar(5)			default	'true',
 		primary key	(id)
 	)
 }) or die $dbh->errstr;

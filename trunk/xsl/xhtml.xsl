@@ -24,6 +24,7 @@
 <xsl:include href="./xhtml/video.xsl"/>
 <xsl:include href="./xhtml/register.xsl"/>
 <xsl:include href="./xhtml/settings.xsl"/>
+<xsl:include href="./xhtml/advancedsearch.xsl"/>
 
 <xsl:variable name="locale">
 	<xsl:choose>
@@ -236,6 +237,9 @@
 				</xsl:when>
 				<xsl:when test="//search">
 					<xsl:call-template name="results"/>
+				</xsl:when>
+				<xsl:when test="//advancedsearch">
+					<xsl:call-template name="advancedsearch"/>
 				</xsl:when>
 				<xsl:when test="//video">
 					<xsl:call-template name="video"/>

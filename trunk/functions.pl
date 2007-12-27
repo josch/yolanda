@@ -167,10 +167,20 @@ sub output_page
 				)
 			);
 	
+	if($query->param('cortado') eq 'true')
+	{
+		@cookies = [$session->cookie(-name=>$session_name, -value=>$session->id), $session->cookie(-name=>'cortado', -value=>'true')];
+	}
+	elsif($query->param('cortado') eq 'false')
+	{
+		@cookies = [$session->cookie(-name=>$session_name, -value=>$session->id), $session->cookie(-name=>'cortado', -value=>'false')];
+	}
+	
 	#send everything including http headers to the user - if xslt chosen is xspf set download filename
 	return $session->header(
 			-type=>'text/xml',
-			-charset=>'UTF-8'
+			-charset=>'UTF-8',
+			-cookie=>@cookies
 		),
 		$foo->toString;
 }

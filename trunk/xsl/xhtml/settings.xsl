@@ -59,8 +59,8 @@
 			<xsl:value-of select="$locale_strings[@id='settings_instruction_method']" />
 			<br />
 
-			<input type="radio" name="cortado" value="1">
-				<xsl:if test="//settings/@cortado=1">
+			<input type="radio" name="cortado" value="true">
+				<xsl:if test="//settings/@cortado='true'">
 					<xsl:attribute name="checked">
 						checked
 					</xsl:attribute>
@@ -69,8 +69,8 @@
 
 			<xsl:value-of select="$locale_strings[@id='watch_cortadoapplet']" />
 			<br />
-			<input type="radio" name="cortado" value="0">
-				<xsl:if test="//settings/@cortado=0">
+			<input type="radio" name="cortado" value="false">
+				<xsl:if test="//settings/@cortado='false'">
 					<xsl:attribute name="checked">
 						checked
 					</xsl:attribute>
