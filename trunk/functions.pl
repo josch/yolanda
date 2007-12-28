@@ -175,6 +175,10 @@ sub output_page
 	{
 		@cookies = [$session->cookie(-name=>$session_name, -value=>$session->id), $session->cookie(-name=>'cortado', -value=>'false')];
 	}
+	else
+	{
+		@cookies = [$session->cookie(-name=>$session_name, -value=>$session->id)];
+	}
 	
 	#send everything including http headers to the user - if xslt chosen is xspf set download filename
 	return $session->header(

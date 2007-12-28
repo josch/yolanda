@@ -123,8 +123,7 @@ if($query->param('query'))
 }
 elsif($query->param('advanced'))
 {
-	$page->{'advancedsearch'} = [''];
-	print output_page();
+	print $query->redirect("index.pl?error=error_202c");
 }
 else
 {
