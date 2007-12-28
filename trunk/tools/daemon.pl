@@ -53,7 +53,7 @@ while(1)
 	
 	if($id)
 	{
-		$info = `ffplay -stats -an -vn -nodisp $root/tmp/$id 2>&1`;
+		$info = `export SDL_VIDEODRIVER="dummy"; ffplay -stats -an -vn -nodisp $root/tmp/$id 2>&1`;
 		
 		if($info =~ /ignoring/)
 		{
@@ -82,7 +82,7 @@ while(1)
 		else
 		{
 			$sha = new Digest::SHA(256);
-			$sha->addfile("$root/tmp/$id");
+			$sha->addfile("$root/tmp/$id") or die "cannot open $root/tmp/$id";
 			$sha = $sha->hexdigest;
 			
 			#check if this hash is already in database
