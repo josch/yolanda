@@ -64,6 +64,7 @@
 	<string id="information_comment_created">Your comment has been submitted.</string>
 	<string id="information_registered">Your account has been created.</string>
 	<string id="information_uploaded">Your file has been uploaded.</string>
+	<string id="information_settings_changed">Your successfully changed your settings.</string>
 
 	<!-- warnings -->
 	<string id="warning_no_results">There are no results satisfying your query.</string>

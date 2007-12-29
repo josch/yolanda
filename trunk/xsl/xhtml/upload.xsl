@@ -604,20 +604,20 @@
 						</xsl:attribute>
 					</input>
 					
-					<table class="videometadata">
+					<table class="metadata-upload">
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.Rights" />
 							</td>
 						</tr>
 						<tr>
-							<td class="leftcell">
+							<td class="metadata-title">
 								<xsl:value-of select="$locale_strings[@id='DC.License']" />:
 							</td>
-							<td class="rightcell">
+							<td class="metadata-content">
 								<xsl:value-of select="//uploadform/@DC.License" />
 							</td>
 						</tr>
