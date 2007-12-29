@@ -106,7 +106,7 @@ while(1)
 				
 				#these two regexes have to be applied seperately because nobody knows which stream (audio or video) comes first
 				($audio) = $info =~ /Audio: (\w+)/;
-				($video, $width, $height, $fps) = $info =~ /Video: (\w+),.+?(\d+)x(\d+),.+?(\d+\.\d+) fps/;
+				($video, $width, $height, $fps) = $info =~ /Video: ([\w\d]+),.+?(\d+)x(\d+),.+?(\d+\.\d+) fps/;
 				
 				if(!$audio or !$video or !$duration)
 				{
@@ -160,8 +160,10 @@ while(1)
 						$vwidth = int($vheight*($width/$height)/2 + .5)*2;
 					
 						#TODO: addmetadata information
-						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id $root/tmp/$id 2>&1";
+						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id $root/tmp/$id";
 						appendlog $id, $audio, $video, $vwidth, $vheight, $fps, $duration, $sha;
+						
+						$filesize = -s "$root/videos/$id";
 						
 						#add video to videos table
 						$dbh->do(qq{insert into videos select id, title, description, userid, timestamp, creator,

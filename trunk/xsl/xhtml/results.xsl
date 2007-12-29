@@ -32,8 +32,8 @@
 				<xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
 			</a>
 			<br />
-			<xsl:variable name="minutes" select="floor(@duration div 60)" />
 			<xsl:variable name="hours" select="floor(@duration div 3600)" />
+			<xsl:variable name="minutes" select="floor((@duration - $hours*3600) div 60)" />
 			<xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
 			<xsl:choose>
 				<xsl:when test="$hours=0">

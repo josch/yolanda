@@ -18,7 +18,7 @@ if($query->param('query'))
 	my @args = ();
 	
 	$strquery = $query->param('query');
-	$strquery = s/%([0-9A-F]{2})/chr(hex($1))/eg;
+	$strquery =~ s/%([0-9A-F]{2})/chr(hex($1))/eg;
 	(@tags) = $strquery =~ /tag:(\w+)/gi;
 	($orderby) = $strquery =~ /orderby:(\w+)/i;
 	($sort) = $strquery =~ /sort:(\w+)/i;
@@ -112,7 +112,7 @@ if($query->param('query'))
 	{
 		print $query->redirect("index.pl?warning=warning_no_results");
 	}
-	elsif(@{$page->{'results'}->{'result'}} == 1 or $query->param('lucky'))
+	elsif((@{$page->{'results'}->{'result'}} == 1 or $query->param('lucky')) and (not $query->param('page') or $query->param('page') == 1))
 	{
 		print $query->redirect($page->{'results'}->{'result'}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
 	}

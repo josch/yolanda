@@ -12,8 +12,8 @@
 	<xsl:if test="not(//@embed='true')">		
 		<div class="videotitle">
 			<xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-			<xsl:variable name="minutes" select="floor(//video/@duration div 60)" />
-			<xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
+			<xsl:variable name="hours" select="floor(@duration div 3600)" />
+			<xsl:variable name="minutes" select="floor((@duration - $hours*3600) div 60)" />
 			<xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
 			<xsl:choose>
 				<xsl:when test="$hours=0">
@@ -41,7 +41,7 @@
 					</xsl:attribute>
 					<param name="url">
 						<xsl:attribute name="value">
-							<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
+							<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
 						</xsl:attribute>
 					</param>
 					<param name="seekable" value="true"/>
@@ -83,7 +83,7 @@
 						<xsl:value-of select="//video/@height + 16" />
 					</xsl:attribute>
 					<xsl:attribute name="data">
-						<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'/view=true')" />
+						<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
 					</xsl:attribute>
 				</object>
 				<div class="watch-cortadoapplet">

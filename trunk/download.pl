@@ -43,7 +43,8 @@ if($query->param('id'))
 			#seems we only want to watch it - update viewcount
 			$dbh->do(qq{update videos set viewcount=viewcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
 			
-			print $query->header(-type=>'application/ogg');
+			print $query->header(-type=>'application/ogg', 
+						-length=> -s "$root/videos/".$query->param('id'));
 		}
 		else
 		{
