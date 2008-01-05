@@ -42,23 +42,53 @@ if($query->param('id'))
 		{
 			#seems we only want to watch it - update viewcount
 			$dbh->do(qq{update videos set viewcount=viewcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
-			
-			print $query->header(-type=>'application/ogg', 
-						-length=> -s "$root/videos/".$query->param('id'));
 		}
 		else
 		{
 			#video is being downloaded - update downloadcount
 			$dbh->do(qq{update videos set downloadcount=downloadcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
-			
-			print $query->header(-type=>'application/ogg',
-						-length=> -s "$root/videos/".$query->param('id'),
-						-attachment=>$title.".ogv");
 		}
 		
 		#in both cases - do some slurp-eaze to the browser
 		open(FILE, "<$root/videos/".$query->param('id'));
-		print <FILE>;
+		
+		$filesize = -s "$root/videos/".$query->param('id');
+		$range = $query->http('range');
+		$range =~ s/bytes=([0-9]+)-/$1/;
+		
+		#if a specific range is requested send http partial content headers and seek in the inputfile
+		if($range)
+		{
+			#if $range is equal or more than filesize throw http 416 header
+			if($range >= $filesize)
+			{
+				print $query->header(-status=>'416 Requested Range Not Satisfiable');
+			}
+			else
+			{
+				print $query->header(-type=>'application/ogg',
+						-content_length=> $filesize-$range,
+						-status=>'206 Partial Content',
+						-attachment=>$title.".ogv",
+						-accept_ranges=> "bytes",
+						-content_range=> "bytes $range-".($filesize-1)."/$filesize"
+						);
+					
+				seek FILE, $range, 0;
+			}
+		}
+		else
+		{
+			print $query->header(-type=>'application/ogg',
+					-content_length=> $filesize,
+					-attachment=>$title.".ogv"
+					);
+		}
+		
+		while (my $BytesRead = read (FILE, $buff, 8192))
+		{
+			print $buff;
+		}
 		close(FILE);
 	}
 	else

@@ -35,6 +35,10 @@ sub get_page_array
 	else
 	{
 		($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
+		unless($page->{'locale'})
+		{
+			$page->{'locale'} = "en_us";
+		}
 	}
 	
 	$page->{'username'} = $userinfo->{'username'};

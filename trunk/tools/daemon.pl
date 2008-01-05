@@ -21,7 +21,10 @@ sub appendlog
 {
 	if (open(FILE, ">>$LOG"))
 	{
-		print FILE scalar(localtime)." ".$$." ".join(" ",@_)."\n";
+		print FILE scalar(localtime)." ".$$."\n";
+		print "------------------------------------\n";
+		print join("\n",@_)."\n";
+		print "------------------------------------\n\n";
 		close FILE;
 	}
 }
@@ -57,7 +60,9 @@ while(1)
 		
 		if($info =~ /ignoring/)
 		{
-			appendlog $id, "invalid stream";
+			appendlog "id: $id",
+				"error: invalid stream",
+				"ffplay msg: $info";
 			
 			#write status 2 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 2, $id) or interrupt $dbh->errstr;
@@ -65,7 +70,9 @@ while(1)
 		}
 		elsif ($info =~ /I\/O error occured/)
 		{
-			appendlog $id, "file not found";
+			appendlog "id: $id",
+				"error: file not found",
+				"ffplay msg: $info";
 			
 			#write status 3 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 3, $id) or interrupt $dbh->errstr;
@@ -73,7 +80,9 @@ while(1)
 		}
 		elsif ($info =~ /Unknown format/ or $info =~ /could not find codec parameters/)
 		{
-			appendlog $id, "file is no video";
+			appendlog "id: $id",
+				"error: file is of unknown format",
+				"ffplay msg: $info";
 			
 			#write status 4 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 4, $id) or interrupt $dbh->errstr;
@@ -94,7 +103,8 @@ while(1)
 			#if so, then video is a duplicate
 			if($resultid)
 			{
-				appendlog "$id, video already uploaded: $resultid";
+				appendlog  "id: $id",
+					"error: video already uploaded: $resultid";
 				
 				#write status 5 to uploaded table
 				$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 5, $id) or interrupt $dbh->errstr;
@@ -110,7 +120,12 @@ while(1)
 				
 				if(!$audio or !$video or !$duration)
 				{
-					appendlog $id, "a stream is missing or video is corrupt";
+					appendlog "id: $id",
+						"error: error: stream is missing or video is corrupt",
+						"audio: $audio",
+						"video: $video",
+						"duration: $duration",
+						"ffplay msg: $info";
 					
 					#write status 2 to uploaded table
 					$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 2, $id) or interrupt $dbh->errstr;
@@ -118,7 +133,6 @@ while(1)
 				}
 				else
 				{
-					#TODO: maybe delete entry from uploaded table after successful upload?
 					$filesize = -s "$root/tmp/$id";
 					
 					#convert hh:mm:ss.s duration to full seconds - thanks perl for making this so damn easy!
@@ -158,9 +172,13 @@ while(1)
 						#calculate video width
 						$vheight = $vmaxheight <= $height ? $vmaxheight : $height;
 						$vwidth = int($vheight*($width/$height)/2 + .5)*2;
-					
+						
+						$abitrate = 64;
+						$vbitrate = int($filesize*8) / $duration + .5) - $abitrate;
+						
 						#TODO: addmetadata information
-						system "ffmpeg2theora --optimize --videobitrate 1000 --audiobitrate 64 --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id $root/tmp/$id";
+						system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id $root/tmp/$id";
+						
 						appendlog $id, $audio, $video, $vwidth, $vheight, $fps, $duration, $sha;
 						
 						$filesize = -s "$root/videos/$id";
