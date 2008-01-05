@@ -253,31 +253,43 @@
 				<div class="footer">
 					<a>
 						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='page_authors']" />
-						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='authors']" />
-					</a>
-					<xsl:value-of select="$locale_strings[@id='separator']" />
-					<a>
-						<xsl:attribute name="href">
 							<xsl:value-of select="$site_strings[@id='page_license']" />
 						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='license']" />
+						<xsl:value-of select="$locale_strings[@id='footer_license']" />
 					</a>
 					<xsl:value-of select="$locale_strings[@id='separator']" />
 					<a>
 						<xsl:attribute name="href">
 							<xsl:value-of select="$site_strings[@id='page_source-code']" />
 						</xsl:attribute>
-					<xsl:value-of select="$locale_strings[@id='source_code']" />
+					<xsl:value-of select="$locale_strings[@id='footer_source_code']" />
 					</a>
 					<xsl:value-of select="$locale_strings[@id='separator']" />
 					<a>
 						<xsl:attribute name="href">
 							<xsl:value-of select="$site_strings[@id='page_report_bug']" />
 						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='report_bug']" />
+						<xsl:value-of select="$locale_strings[@id='footer_report_bug']" />
 					</a>
+					<xsl:value-of select="$locale_strings[@id='separator']" />
+					<a>
+						<xsl:attribute name="href">
+<!--
+					caveat: this currently does not work on root level
+					apache magic wanted
+-->
+							?xslt=null
+						</xsl:attribute>
+						<xsl:value-of select="$locale_strings[@id='footer_view_xml']" />
+					</a>
+					<br />
+					<xsl:value-of select="$locale_strings[@id='footer_copyright']" />
+					<br />
+
+					<span class="protip">
+						<xsl:value-of select="$locale_strings[@id='footer_warranty']" />
+					</span>
+
 				</div>
 			</xsl:if>
 

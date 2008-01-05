@@ -1,7 +1,7 @@
-Yolanda - http://mister-muffin.de/proj
+Yolanda - http://yolanda.mister-muffin.de/trac
 =======================================================
 
-A video content management using Perl for the backend and XML and XSLT for the frontend. Video playback is provided by Fluendo's Cortado applet.
+A video content management system using Perl for the backend and XML and XSLT for the frontend. Video playback is provided by Fluendo's Cortado Java applet.
 
 Installation
 ============

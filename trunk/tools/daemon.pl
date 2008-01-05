@@ -5,6 +5,7 @@ use DBI;
 use Digest::SHA;
 use File::Copy;
 
+#TODO: put this into central configuration file
 $database = 'yolanda';
 $dbhost = 'localhost';
 $dbuser = 'root';
@@ -17,6 +18,7 @@ $root = '/var/www/yolanda';
 $LOG = "$root/daemon.log";
 
 
+#TODO: maybe keep file open the whole time ?
 sub appendlog
 {
 	if (open(FILE, ">>$LOG"))
@@ -100,7 +102,7 @@ while(1)
 			my ($resultid) = $sth->fetchrow_array();
 			$sth->finish() or interrupt $dbh->errstr;
 			
-			#if so, then video is a duplicate
+			#if so, then video is a duplicate (alternatively ALL HAIL QUANTUM COMPUTING)
 			if($resultid)
 			{
 				appendlog  "id: $id",
@@ -151,7 +153,7 @@ while(1)
 					
 					system "ffmpeg -i $root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/$id";
 					
-					$vmaxheight = 240;
+					$vmaxheight = 640;
 					
 					#check if the upload already is in the right format and smaller/equal max-width/height
 					if ($container eq 'ogg' and $video eq 'theora' and $audio eq 'vorbis' and $height <= $vmaxheight)
@@ -170,13 +172,14 @@ while(1)
 					else #encode video
 					{
 						#calculate video width
+						#TODO: ffmpeg only accepts values dividable by 8 !!! ( check that )
 						$vheight = $vmaxheight <= $height ? $vmaxheight : $height;
 						$vwidth = int($vheight*($width/$height)/2 + .5)*2;
 						
 						$abitrate = 64;
 						$vbitrate = int($filesize*8) / $duration + .5) - $abitrate;
 						
-						#TODO: addmetadata information
+						#TODO: add metadata information
 						system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id $root/tmp/$id";
 						
 						appendlog $id, $audio, $video, $vwidth, $vheight, $fps, $duration, $sha;
@@ -190,6 +193,7 @@ while(1)
 												$vheight, $fps, $sha, $id) or interrupt $dbh->errstr;
 						
 						#delete temp file
+						#TODO: use /tmp you insensitive clod !
 						unlink "$root/tmp/$id";
 					}
 					
@@ -201,6 +205,7 @@ while(1)
 	}
 	else
 	{
+		TODO: maybe make this event-driven by using the kernels has-this-file-changed-interface ?
 		sleep 10;
 	}
 }

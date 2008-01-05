@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-16"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <strings>
@@ -13,7 +13,7 @@
 	<string id="page_login-openid">/login.pl?action=openid</string>
 	<string id="page_logout">/login.pl?action=logout</string>
 	<string id="page_authors">http://yolanda.mister-muffin.de/trac</string>
-	<string id="page_license">http://www.fsf.org/licensing/licenses/agpl-3.0.html</string>
+	<string id="page_license">/LICENSE</string>
 	<string id="page_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</string>
 	<string id="page_register">/register.pl</string>
 	<string id="page_report_bug">http://yolanda.mister-muffin.de/trac/newticket</string>

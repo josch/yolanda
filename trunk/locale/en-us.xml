@@ -19,10 +19,16 @@
 	<string id="logout">logout</string>
 
 	<!-- footer -->
-	<string id="authors">&#169; 2007 Yolanda team</string>
-	<string id="license">license</string>
-	<string id="source_code">download source code</string>
-	<string id="report_bug">report bug</string>
+	<string id="footer_copyright">&#169; 2007 - 2008 Yolanda Team</string>
+	<string id="footer_warranty">
+	This software comes WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the license for details.
+    </string>
+	<string id="footer_license">view license</string>
+	<string id="footer_source_code">get source code</string>
+	<string id="footer_report_bug">report bug</string>
+	<string id="footer_view_xml">view this page as xml</string>
+	
 
 	<!-- front page -->
 	<string id="button_find">Find</string>

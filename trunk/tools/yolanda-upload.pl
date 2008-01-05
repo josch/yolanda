@@ -11,7 +11,7 @@ sub preamble {
 }
 
 # set these values for default -l (login) and -p (pass) values
-#
+# TODO: lol configfile !!!
 use constant USER => "";
 use constant PASS  => "";
 
@@ -93,6 +93,7 @@ $ua = LWP::UserAgent->new(cookie_jar => {});
 push @{$ua->requests_redirectable}, 'POST';
 
 print "Getting sid cookie...\n";
+# DONT PRINT THIS - UNIX PHILOSPHY IS: IF IT WORKS DONT DISPLAY SHIT ! ( maybe add a -v switch )
 $response = $ua->request(GET $url);
 unless($response->is_success)
 {
@@ -101,6 +102,7 @@ unless($response->is_success)
 }
 
 print "Logging in to $url/login.pl...\n";
+# DONT PRINT THIS - UNIX PHILOSPHY IS: IF IT WORKS DONT DISPLAY SHIT ! ( maybe add a -v switch )
 $response = $ua->request(POST "$url/login.pl", "Content_Type" => "form-data", "Content" => [action => login, user => test, pass => test]);
 unless($response->is_success)
 {
@@ -113,6 +115,7 @@ unless($response->content =~ /action=logout/)
 }
 
 print "Uploading $opts{f} to $url/uploader.pl...\n";
+# DONT PRINT THIS - UNIX PHILOSPHY IS: IF IT WORKS DONT DISPLAY SHIT ! ( maybe add a -v switch )
 $response = $ua->request(POST "$url/uploader.pl",
 	"Content_Type" => "multipart/form-data",
 	"Content" => [
@@ -132,3 +135,4 @@ unless($response->is_success)
 		$response->status_line;
 }
 print "Done!\n";
+# DONT PRINT THIS - UNIX PHILOSPHY IS: IF IT WORKS DONT DISPLAY SHIT ! ( maybe add a -v switch )
