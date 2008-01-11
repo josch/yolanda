@@ -108,6 +108,13 @@
 
 			</xsl:if>
 
+			<link
+				rel="search"
+				type="application/opensearchdescription+xml"
+				href="/opensearch.xml"
+				title="Yolanda"
+			/>
+
 			<title>
 				<xsl:choose>
 					<xsl:when test="boolean(//frontpage)">
