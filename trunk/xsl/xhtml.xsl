@@ -111,9 +111,14 @@
 			<link
 				rel="search"
 				type="application/opensearchdescription+xml"
-				href="/opensearch.xml"
-				title="Yolanda"
-			/>
+			>
+				<xsl:attribute name="href">
+					<xsl:value-of select="$site_strings[@id='page_root']" />?xslt=opensearch
+				</xsl:attribute>
+				<xsl:attribute name="title">
+					<xsl:value-of select="$site_strings[@id='site_name']" />
+				</xsl:attribute>
+			</link>
 
 			<title>
 				<xsl:choose>
@@ -142,6 +147,9 @@
 		</head>
 
 		<body>
+
+		<!-- crime detection -->
+		<img class="bka" src="/images/bka.png" />
 			
 			<xsl:if test="not(//@embed='true')">
 				<xsl:choose>
