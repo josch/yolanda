@@ -1,7 +1,42 @@
+/*
+Yolanda default stylesheet
+(c) 2007-2008 Nils Dagsson Moskopp 
+*/
+
+/* global default */
+
 *
 {
 	clear:			both;
 }
+
+
+body
+{
+	font-family:		sans-serif;
+	font-size:			8pt;
+	font-weight:		bold;
+	margin:				1.5em;
+	min-height:			100%;
+	text-align:			center;
+}
+
+div
+{
+	border-width:		0px;
+}
+
+input
+{
+	text-align:		left;
+}
+
+img
+{
+	border-width:		0;
+}
+
+/* links */
 
 a
 {
@@ -26,20 +61,101 @@ a
 		margin-right:		0.25em;
 	}
 
-body
-{
-	font-family:		sans-serif;
-	font-size:			8pt;
-	font-weight:		bold;	
-	min-width:			550px;
-	margin:				2em;
-	text-align:			center;
-}
+/* header, footer */
 
-div
-{
-	border-width:		0px;
-}
+	a.footer,
+	a.header,
+	div.footer,
+	div.header
+	{
+		background-color:	#f0f0f0;
+		border-color:		#f0f0f0;
+		border-style:		solid;
+		clear:				none;
+		font-size:			1em;
+		line-height:		3em;
+		height:				3em;
+	}
+
+	a.footer,
+	a.header
+	{
+		border-bottom-width:	0px;
+		border-top-width:	0px;
+		border-left-width:	1px;
+		border-right-width:	1px;
+		display:			block;
+		padding-left:		1em;
+		padding-right:		1em;
+	}
+
+		a.footer:hover,
+		a.header:hover
+		{
+			background-color:	#ffffff;
+			border-color:		#c0c0c0;
+		}
+
+	a.latest-additions,
+	a.view-license
+	{
+		border-left-width:	0px;
+	}
+
+	a.register,
+	a.upload-video,
+	a.view-xml
+	{
+		border-right-width:	0px;
+	}
+
+	a.latest-additions,
+	a.most-downloads,
+	a.most-views,
+	a.report-bug,
+	a.view-license,
+	a.view-source-code
+	{
+		float:			left;
+	}
+
+	a.login,
+	a.login-openid,
+	a.logout,
+	a.preferences,
+	a.register,
+	a.upload-video,
+	a.view-xml
+	{
+		float:			right;
+	}
+
+	div.footer,
+	div.header
+	{
+		border-color:		#c0c0c0;
+		border-width:		1px;
+	}
+
+	div.footer
+	{
+		position:			absolute;
+		bottom:				1.5em;
+		margin-right:		1.5em;
+	}
+
+	img.logo-header
+	{
+		display:		none;
+		border:			1px black solid;
+		clear:			none;
+		float:			left;
+		margin-left:	1.5em;
+		margin-right:	0.5em;
+	}
+
+/* content */
+
 
 	div.button-download,
 	div.button-edit,
@@ -79,30 +195,6 @@ div
 
 	div.comments
 	{
-	}
-
-	div.footer
-	{
-		line-height:	2.5em;
-		padding:		0.75em;
-	}
-
-	div.header1
-	{
-		color:			#525252;
-		float:			left;
-		text-align:		left;
-		width:			50%;
-		vertical-align:	bottom;
-	}
-
-	div.header2
-	{
-		clear:			none;
-		float:			right;
-		text-align:		right;
-		width:			50%;
-		vertical-align:	bottom;
 	}
 
 	div.messagebox
@@ -226,39 +318,9 @@ fieldset
 	border-width:		0px;
 }
 
-hr
-{
-	background-color:	#c0c0c0;
-	position:			relative;
-	top:				0.25em;
-	margin-bottom:		1.5em;
-}
-
-input
-{
-	text-align:		left;
-}
-
-img
-{
-	border-width:		0;
-}
-
-img.bka
-{
-	bottom:				0px;
-	left:				0px;
-	position:			fixed;
-	z-index:			1;
-}
-
 	img.logo-big
 	{
 		padding-bottom:		0.5em;
-	}
-
-	img.logo-small
-	{
 	}
 
 	img.openid-icon

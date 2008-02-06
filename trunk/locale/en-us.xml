@@ -6,13 +6,13 @@
 	<string id="separator">&#160;|&#160;</string>
 
 	<!-- header -->
-	<string id="login_to_upload">to upload videos, log in first.</string>
+	<string id="header_login-to-upload">to upload videos, log in first.</string>
 
 	<string id="register">register</string>
 	<string id="login">login</string>
 	<string id="login_openid">login with OpenID</string>
 
-	<string id="upload_video">upload video</string>
+	<string id="header_upload-video">upload video</string>
 	<string id="settings_details">settings details</string>
 
 	<string id="logged_in_as">logged in as&#160;</string>
