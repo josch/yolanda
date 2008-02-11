@@ -56,6 +56,7 @@
 	<string id="error_already_logged_in">You seem to be already logged in. Please log out to log in again.</string>
 	<string id="error_username_password_do_not_match">Username and password do not match.</string>
 	<string id="error_passwords_do_not_match">Passwords do not match.</string>
+	<string id="error_username_already_registered">Your desired Username was already registered</string>
 	<string id="error_insert_username">Please insert a username.</string>
 	<string id="error_insert_password">Please insert a password.</string>
 	<string id="error_repeat_password">Please repeat your password.</string>

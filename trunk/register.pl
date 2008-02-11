@@ -22,11 +22,28 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
 {
 	if($query->param('pass') eq $query->param('pass_repeat'))
 	{
-		#do query
-		$dbh->do(qq{insert into users (username, password, timestamp, locale) values ( ?, password( ? ), unix_timestamp(), ?)}, undef,
-				$query->param("user"), $query->param("pass"), $page->{'locale'}) or die $dbh->errstr;
+		my $sth = $dbh->prepare(qq{select id from users where username = ? limit 1 });
+				
+		#execute query
+		$sth->execute($query->param('user'));
 		
-		print $query->redirect("index.pl?information=information_registered");
+		#if something was returned the selected username already exists
+		if($sth->fetchrow_array())
+		{
+		    $page->{'registerform'} = [''];
+		    $page->{'message'}->{'type'} = "error";
+		    $page->{'message'}->{'text'} = "error_username_already_registered";
+	
+		    print output_page();
+		}
+		else
+		{
+		    #insert new user
+		    $dbh->do(qq{insert into users (username, password, timestamp, locale) values ( ?, password( ? ), unix_timestamp(), ?)}, undef,
+				    $query->param("user"), $query->param("pass"), $page->{'locale'}) or die $dbh->errstr;
+		
+		    print $query->redirect("index.pl?information=information_registered");
+		}
 	}
 	else
 	{
