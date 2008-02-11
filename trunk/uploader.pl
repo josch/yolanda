@@ -41,7 +41,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
 
 	#save uploaded file into temppath
 	$upload_filehandle = $query->upload("file");
-	open(TEMPFILE, ">$root/tmp/$id") or die "cannot open $root/tmp/$id";
+	open(TEMPFILE, ">/tmp/$id");
 	while ( <$upload_filehandle> )
 	{
 		print TEMPFILE;

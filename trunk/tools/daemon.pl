@@ -58,7 +58,7 @@ while(1)
 	
 	if($id)
 	{
-		$info = `export SDL_VIDEODRIVER="dummy"; ffplay -stats -an -vn -nodisp $root/tmp/$id 2>&1`;
+		$info = `export SDL_VIDEODRIVER="dummy"; ffplay -stats -an -vn -nodisp /tmp/$id 2>&1`;
 		
 		if($info =~ /ignoring/)
 		{
@@ -68,7 +68,7 @@ while(1)
 			
 			#write status 2 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 2, $id) or interrupt $dbh->errstr;
-			unlink "$root/tmp/$id";
+			unlink "/tmp/$id";
 		}
 		elsif ($info =~ /I\/O error occured/)
 		{
@@ -78,7 +78,7 @@ while(1)
 			
 			#write status 3 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 3, $id) or interrupt $dbh->errstr;
-			unlink "$root/tmp/$id";
+			unlink "/tmp/$id";
 		}
 		elsif ($info =~ /Unknown format/ or $info =~ /could not find codec parameters/)
 		{
@@ -88,12 +88,12 @@ while(1)
 			
 			#write status 4 to uploaded table
 			$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 4, $id) or interrupt $dbh->errstr;
-			unlink "$root/tmp/$id";
+			unlink "/tmp/$id";
 		}
 		else
 		{
 			$sha = new Digest::SHA(256);
-			$sha->addfile("$root/tmp/$id") or die "cannot open $root/tmp/$id";
+			$sha->addfile("/tmp/$id");
 			$sha = $sha->hexdigest;
 			
 			#check if this hash is already in database
@@ -110,7 +110,7 @@ while(1)
 				
 				#write status 5 to uploaded table
 				$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 5, $id) or interrupt $dbh->errstr;
-				unlink "$root/tmp/$id";
+				unlink "/tmp/$id";
 			}
 			else
 			{
@@ -131,11 +131,11 @@ while(1)
 					
 					#write status 2 to uploaded table
 					$dbh->do(qq{update uploaded set status = ? where id = ?}, undef, 2, $id) or interrupt $dbh->errstr;
-					unlink "$root/tmp/$id";
+					unlink "/tmp/$id";
 				}
 				else
 				{
-					$filesize = -s "$root/tmp/$id";
+					$filesize = -s "/tmp/$id";
 					
 					#convert hh:mm:ss.s duration to full seconds - thanks perl for making this so damn easy!
 					#don't want to know how this would look in python or php... hell I don't even have to create extra variables!
@@ -151,7 +151,7 @@ while(1)
 					$tnheight = $tnmaxheight;
 					$tnwidth = int($tnheight*($width/$height)/2 + .5)*2;
 					
-					system "ffmpeg -i $root/tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/$id";
+					system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/$id";
 					
 					$vmaxheight = 640;
 					
@@ -167,20 +167,21 @@ while(1)
 												$height, $fps, $sha, $id) or interrupt $dbh->errstr;
 						
 						#move video
-						move "$root/tmp/$id", "$root/videos/$id";
+						move "/tmp/$id", "$root/videos/$id";
 					}
 					else #encode video
 					{
-						#calculate video width
-						#TODO: ffmpeg only accepts values dividable by 8 !!! ( check that )
-						$vheight = $vmaxheight <= $height ? $vmaxheight : $height;
-						$vwidth = int($vheight*($width/$height)/2 + .5)*2;
+						#video height is either ther maximum video height
+						#or when the original is smaller than that the original height
+						#check for multiple by 8
+						$vheight = $vmaxheight <= $height ? $vmaxheight : int($height/8 + .5)*8;
+						$vwidth = int($vheight*($width/$height)/8 + .5)*8;
 						
 						$abitrate = 64;
 						$vbitrate = int($filesize*8) / $duration + .5) - $abitrate;
 						
 						#TODO: add metadata information
-						system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id $root/tmp/$id";
+						system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id /tmp/$id";
 						
 						appendlog $id, $audio, $video, $vwidth, $vheight, $fps, $duration, $sha;
 						
@@ -193,9 +194,11 @@ while(1)
 												$vheight, $fps, $sha, $id) or interrupt $dbh->errstr;
 						
 						#delete temp file
-						#TODO: use /tmp you insensitive clod !
-						unlink "$root/tmp/$id";
+						unlink "/tmp/$id";
 					}
+					
+					#create torrent file
+					
 					
 					#delete from uploaded table
 					$dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or interrupt $dbh->errstr;
