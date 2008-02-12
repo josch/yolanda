@@ -85,6 +85,9 @@
 					<xsl:attribute name="data">
 						<xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
 					</xsl:attribute>
+					<img src="/images/flash-sucks.png"/><br />
+					<img src="/images/vlc.png"/>
+					<img src="/images/mplayer.png"/>					
 				</object>
 				<div class="watch-cortadoapplet">
 					<a>
