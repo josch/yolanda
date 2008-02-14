@@ -8,22 +8,22 @@
 	<string id="site_motto">WebTV free as in Speech</string>
 
 	<!-- invisible -->
-	<string id="page_settings">/settings.pl</string>
-	<string id="page_login">/login.pl</string>
-	<string id="page_login-openid">/login.pl?action=openid</string>
-	<string id="page_logout">/login.pl?action=logout</string>
-	<string id="page_authors">http://yolanda.mister-muffin.de/trac</string>
-	<string id="page_license">/LICENSE</string>
-	<string id="page_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</string>
-	<string id="page_register">/register.pl</string>
-	<string id="page_report_bug">http://yolanda.mister-muffin.de/trac/newticket</string>
-	<string id="page_results">/search.pl?query=</string>
-	<string id="page_root">http://localhost/</string>
-	<string id="page_upload">/upload.pl</string>
-	<string id="page_uploader">/uploader.pl</string>
-	<string id="page_query_latestadditions">/search.pl?query=orderby:timestamp%20sort:descending</string>
-	<string id="page_query_mostdownloads">/search.pl?query=orderby:downloadcount%20sort:descending</string>
-	<string id="page_query_mostviews">/search.pl?query=orderby:viewcount%20sort:descending</string>
+	<string id="path_settings">/settings.pl</string>
+	<string id="path_login">/login.pl</string>
+	<string id="path_login-openid">/login.pl?action=openid</string>
+	<string id="path_logout">/login.pl?action=logout</string>
+	<string id="path_authors">http://yolanda.mister-muffin.de/trac</string>
+	<string id="path_license">/LICENSE</string>
+	<string id="path_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</string>
+	<string id="path_register">/register.pl</string>
+	<string id="path_report_bug">http://yolanda.mister-muffin.de/trac/newticket</string>
+	<string id="path_results">/search.pl?query=</string>
+	<string id="path_root">http://localhost/</string>
+	<string id="path_upload">/upload.pl</string>
+	<string id="path_uploader">/uploader.pl</string>
+	<string id="path_query_latestadditions">/search.pl?query=orderby:timestamp%20sort:descending</string>
+	<string id="path_query_mostdownloads">/search.pl?query=orderby:downloadcount%20sort:descending</string>
+	<string id="path_query_mostviews">/search.pl?query=orderby:viewcount%20sort:descending</string>
 
 </strings>
 

@@ -40,7 +40,7 @@
 			width="16"
 			type="image/x-icon"
 		>
-			<xsl:value-of select="$site_strings[@id='page_root']" />images/favicon.ico
+			<xsl:value-of select="$site_strings[@id='path_root']" />images/favicon.ico
 		</Image>
 
 		<Query
@@ -54,7 +54,7 @@
 
 		<Url type="text/html">
 			<xsl:attribute name="template">
-				<xsl:value-of select="$site_strings[@id='page_root']" />/search.pl?query={searchTerms}
+				<xsl:value-of select="$site_strings[@id='path_root']" />/search.pl?query={searchTerms}
 			</xsl:attribute>
 		</Url>
 

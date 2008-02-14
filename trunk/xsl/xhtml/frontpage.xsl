@@ -14,7 +14,7 @@
 	<div class="search">
 		<form method="get" enctype="text/plain">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings[@id='page_results']" />
+				<xsl:value-of select="$site_strings[@id='path_results']" />
 			</xsl:attribute>
 			<fieldset>
 				<input type="text" name="query" size="40" /><br />
@@ -40,21 +40,21 @@
 	<div class="toplists">
 		<a>
 			<xsl:attribute name="href">
-				<xsl:value-of select="$site_strings[@id='page_query_latestadditions']" />
+				<xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
 			</xsl:attribute>
 			<xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
 		</a>
 		<xsl:value-of select="$locale_strings[@id='separator']" />
 		<a>
 			<xsl:attribute name="href">
-				<xsl:value-of select="$site_strings[@id='page_query_mostdownloads']" />
+				<xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
 			</xsl:attribute>
 			<xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
 		</a>
 		<xsl:value-of select="$locale_strings[@id='separator']" />
 		<a>
 			<xsl:attribute name="href">
-				<xsl:value-of select="$site_strings[@id='page_query_mostviews']" />
+				<xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
 			</xsl:attribute>
 			<xsl:value-of select="$locale_strings[@id='query_mostviews']" />
 		</a>

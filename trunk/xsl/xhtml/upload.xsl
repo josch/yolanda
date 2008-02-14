@@ -26,7 +26,7 @@
 				<form method="post">
 
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_upload']" />
+						<xsl:value-of select="$site_strings[@id='path_upload']" />
 					</xsl:attribute>
 
 					<input name="DC.Creator" type="hidden">
@@ -125,7 +125,7 @@
 				<form method="post">
 
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_upload']" />
+						<xsl:value-of select="$site_strings[@id='path_upload']" />
 					</xsl:attribute>
 
 					<input name="DC.Title" type="hidden">
@@ -216,7 +216,7 @@
 				<form method="post">
 
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_upload']" />
+						<xsl:value-of select="$site_strings[@id='path_upload']" />
 					</xsl:attribute>
 
 					<input name="DC.Title" type="hidden">
@@ -327,7 +327,7 @@
 				</span>
 				<form method="post">
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_upload']" />
+						<xsl:value-of select="$site_strings[@id='path_upload']" />
 					</xsl:attribute>
 					<input name="DC.Title" type="hidden">
 						<xsl:attribute name="value">
@@ -466,7 +466,7 @@
 				</span>
 				<form method="post">
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_upload']" />
+						<xsl:value-of select="$site_strings[@id='path_upload']" />
 					</xsl:attribute>
 					<input name="DC.Title" type="hidden">
 						<xsl:attribute name="value">
@@ -633,7 +633,7 @@
 				</form>
 				<form method="post" enctype="multipart/form-data">
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_uploader']" />
+						<xsl:value-of select="$site_strings[@id='path_uploader']" />
 					</xsl:attribute>
 					<input name="DC.Title" type="hidden">
 						<xsl:attribute name="value">

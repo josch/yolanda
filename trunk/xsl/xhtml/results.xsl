@@ -78,7 +78,7 @@
 </xsl:template>
 
 <xsl:template name="pagination-arrows">
-	<xsl:variable name="query_string" select="concat($site_strings[@id='page_results'], //results/@query, '&amp;pagesize=', //results/@pagesize)" />
+	<xsl:variable name="query_string" select="concat($site_strings[@id='path_results'], //results/@query, '&amp;pagesize=', //results/@pagesize)" />
 	<div>
 		<a>
 			<xsl:attribute name="href">

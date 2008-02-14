@@ -12,7 +12,7 @@
 
 		<form method="post">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings[@id='page_register']" />
+				<xsl:value-of select="$site_strings[@id='path_register']" />
 			</xsl:attribute>
 			<fieldset>
 				<xsl:value-of select="$locale_strings[@id='username']" />:

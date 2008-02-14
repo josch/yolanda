@@ -37,8 +37,8 @@
 
 		<channel>
 			<xsl:attribute name="rdf:about">
-				<xsl:value-of select="$site_strings[@id='page_root']" />
-				<xsl:value-of select="$site_strings[@id='page_results']" />
+				<xsl:value-of select="$site_strings[@id='path_root']" />
+				<xsl:value-of select="$site_strings[@id='path_results']" />
 				<xsl:value-of select="//results/@query" />&#38;xslt=rss
 			</xsl:attribute>
 			<title>
@@ -47,8 +47,8 @@
 				<xsl:value-of select="//results/@query" />
 			</title>
 			<link>
-				<xsl:value-of select="$site_strings[@id='page_root']" />
-				<xsl:value-of select="$site_strings[@id='page_results']" />
+				<xsl:value-of select="$site_strings[@id='path_root']" />
+				<xsl:value-of select="$site_strings[@id='path_results']" />
 				<xsl:value-of select="//results/@query" />&#38;
 			</link>
 			<description>

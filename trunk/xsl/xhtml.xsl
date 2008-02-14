@@ -83,8 +83,8 @@
 						<xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
 					</xsl:attribute>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings[@id='page_root']" />
-						<xsl:value-of select="$site_strings[@id='page_results']" />
+						<xsl:value-of select="$site_strings[@id='path_root']" />
+						<xsl:value-of select="$site_strings[@id='path_results']" />
 						<xsl:value-of select="//results/@query" />
 						&amp;pagesize=<xsl:value-of select="//results/@pagesize" />
 						&amp;page=<xsl:value-of select="//results/@page" />
@@ -97,8 +97,8 @@
 						<xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
 					</xsl:attribute>
 					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings[@id='page_root']" />
-						<xsl:value-of select="$site_strings[@id='page_results']" />
+						<xsl:value-of select="$site_strings[@id='path_root']" />
+						<xsl:value-of select="$site_strings[@id='path_results']" />
 						<xsl:value-of select="//results/@query" />
 						&amp;pagesize=99999
 						&amp;page=1
@@ -113,7 +113,7 @@
 				type="application/opensearchdescription+xml"
 			>
 				<xsl:attribute name="href">
-					<xsl:value-of select="$site_strings[@id='page_root']" />?xslt=opensearch
+					<xsl:value-of select="$site_strings[@id='path_root']" />?xslt=opensearch
 				</xsl:attribute>
 				<xsl:attribute name="title">
 					<xsl:value-of select="$site_strings[@id='site_name']" />
@@ -160,21 +160,21 @@
 	
 					<a class="header latest-additions">
 						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='page_query_latestadditions']" />
+							<xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
 						</xsl:attribute>
 						<xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
 					</a>
 
 					<a class="header most-views">
 						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='page_query_mostviews']" />
+							<xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
 						</xsl:attribute>
 						<xsl:value-of select="$locale_strings[@id='query_mostviews']" />
 					</a>
 
 					<a class="header most-downloads">
 						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='page_query_mostdownloads']" />
+							<xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
 						</xsl:attribute>
 						<xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
 					</a>
@@ -185,28 +185,28 @@
 	<!--
 							<a class="header">
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_login']" />
+									<xsl:value-of select="$site_strings[@id='path_login']" />
 								</xsl:attribute>
 								<xsl:value-of select="$locale_strings[@id='header_login-to-upload']" />
 							</a>
 	-->
 							<a class="header register">
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_register']" />
+									<xsl:value-of select="$site_strings[@id='path_register']" />
 								</xsl:attribute>
 								<xsl:value-of select="$locale_strings[@id='register']" />
 							</a>
 	
 							<a class="header login">
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_login']" />
+									<xsl:value-of select="$site_strings[@id='path_login']" />
 								</xsl:attribute>
 								<xsl:value-of select="$locale_strings[@id='login']" />
 							</a>
 	
 							<a class="header login-openid">
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_login-openid']" />
+									<xsl:value-of select="$site_strings[@id='path_login-openid']" />
 								</xsl:attribute>
 								<img class="openid-icon" src="/images/openid-icon.png" alt="open id logo" />
 								<xsl:value-of select="$locale_strings[@id='login_openid']" />
@@ -217,14 +217,14 @@
 
 							<a class="header upload-video">
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_upload']" />
+									<xsl:value-of select="$site_strings[@id='path_upload']" />
 								</xsl:attribute>
 								<xsl:value-of select="$locale_strings[@id='header_upload-video']" />
 							</a>
 
 							<a class="header preferences">
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_settings']" />
+									<xsl:value-of select="$site_strings[@id='path_settings']" />
 								</xsl:attribute>
 								<xsl:value-of select="$locale_strings[@id='settings_details']" />
 							</a>
@@ -242,7 +242,7 @@
 
 							<a class="header logout">
 								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='page_logout']" />
+									<xsl:value-of select="$site_strings[@id='path_logout']" />
 								</xsl:attribute>
 								<xsl:value-of select="$locale_strings[@id='logout']" />
 							</a>
@@ -299,21 +299,21 @@
 
 					<a class="footer view-license">
 						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='page_license']" />
+							<xsl:value-of select="$site_strings[@id='path_license']" />
 						</xsl:attribute>
 						<xsl:value-of select="$locale_strings[@id='footer_license']" />
 					</a>
 
 					<a class="footer view-source-code">
 						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='page_source-code']" />
+							<xsl:value-of select="$site_strings[@id='path_source-code']" />
 						</xsl:attribute>
 					<xsl:value-of select="$locale_strings[@id='footer_source_code']" />
 					</a>
 
 					<a class="footer report-bug">
 						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='page_report_bug']" />
+							<xsl:value-of select="$site_strings[@id='path_report_bug']" />
 						</xsl:attribute>
 						<xsl:value-of select="$locale_strings[@id='footer_report_bug']" />
 					</a>
@@ -362,7 +362,7 @@
 	<div class="search-small">
 		<form method="get" enctype="text/plain">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings[@id='page_results']" />
+				<xsl:value-of select="$site_strings[@id='path_results']" />
 			</xsl:attribute>
 			<fieldset>
 				<xsl:value-of select="$locale_strings[@id='search']" />:
@@ -418,7 +418,7 @@
 					font-size:<xsl:value-of select="round((32-12)*(number(count)-number($min))div (number($max)-number($min)))+12" />px
 				</xsl:attribute>
 				<xsl:attribute name="href">
-					<xsl:value-of select="$site_strings[@id='page_results']" />
+					<xsl:value-of select="$site_strings[@id='path_results']" />
 					tag:
 					<xsl:value-of select="text" />
 				</xsl:attribute>

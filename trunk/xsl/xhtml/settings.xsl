@@ -17,7 +17,7 @@
 
 		<form method="POST">
 			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings[@id='page_settings']" />
+				<xsl:value-of select="$site_strings[@id='path_settings']" />
 			</xsl:attribute>
 
 			<xsl:value-of select="$locale_strings[@id='settings_instruction_locale']" />

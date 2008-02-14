@@ -13,7 +13,7 @@
 			<xsl:when test="//loginform/@action='openid'">
 				<form method="post">
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_login']" />
+						<xsl:value-of select="$site_strings[@id='path_login']" />
 					</xsl:attribute>
 					<fieldset>
 						<input name="action" type="hidden" value="openid" />
@@ -31,7 +31,7 @@
 						<br />
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings[@id='page_login']" />
+								<xsl:value-of select="$site_strings[@id='path_login']" />
 							</xsl:attribute>
 							login with normal account
 						</a>
@@ -41,7 +41,7 @@
 			<xsl:otherwise>
 				<form method="post">
 					<xsl:attribute name="action">
-						<xsl:value-of select="$site_strings[@id='page_login']" />
+						<xsl:value-of select="$site_strings[@id='path_login']" />
 					</xsl:attribute>
 					<fieldset>
 						<input name="action" type="hidden" value="login" />
@@ -61,7 +61,7 @@
 						<br />
 						<a>
 							<xsl:attribute name="href">
-								<xsl:value-of select="$site_strings[@id='page_login-openid']" />
+								<xsl:value-of select="$site_strings[@id='path_login-openid']" />
 							</xsl:attribute>
 							login with openid
 						</a>
