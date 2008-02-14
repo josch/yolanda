@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:cc="http://web.resource.org/cc/"
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
 
 <xsl:output
-	doctype-public="-//W3C//DTD XHTML 1.1//EN"
-	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-	encoding="UTF-8"
-	indent="yes"
-	method="xml"
-	media-type="application/xhtml+xml"
-	omit-xml-declaration="no"
+    doctype-public="-//W3C//DTD XHTML 1.1//EN"
+    doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+    encoding="UTF-8"
+    indent="yes"
+    method="xml"
+    media-type="application/xhtml+xml"
+    omit-xml-declaration="no"
 />
 
 <xsl:include href="./xhtml/frontpage.xsl"/>
@@ -27,12 +27,12 @@
 <xsl:include href="./xhtml/advancedsearch.xsl"/>
 
 <xsl:variable name="locale">
-	<xsl:choose>
-		<xsl:when test="document(concat('../locale/', //@locale, '.xml'))">
-			<xsl:value-of select="//@locale" />
-		</xsl:when>
-		<xsl:otherwise>en-us</xsl:otherwise>
-	</xsl:choose>
+    <xsl:choose>
+        <xsl:when test="document(concat('../locale/', //@locale, '.xml'))">
+            <xsl:value-of select="//@locale" />
+        </xsl:when>
+        <xsl:otherwise>en-us</xsl:otherwise>
+    </xsl:choose>
 </xsl:variable>
 
 <xsl:variable name="site_strings" select="document('../site/main.xml')//strings/string" />
@@ -41,397 +41,397 @@
 <!-- this kills 99% of the processed XML... sorry Tim Bray.... -->
 <!-- had to look up Bray in Wikipedia, 2 points off my geek score -->
 <xsl:template match="@*|node()">
-	<xsl:if test="not(/)">
-		<xsl:copy>
-			<xsl:apply-templates select="@*|node()" />
-		</xsl:copy>
-	</xsl:if>
+    <xsl:if test="not(/)">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" />
+        </xsl:copy>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="/">
-	<html xmlns="http://www.w3.org/1999/xhtml">
+    <html xmlns="http://www.w3.org/1999/xhtml">
 
-		<head>
-			<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+        <head>
+            <meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 
-			<xsl:choose>
-				<xsl:when test="not(//@embed='true')">
-					<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-					<link rel="stylesheet" type="text/css">
-						<xsl:attribute name="href">
-							<xsl:value-of select="//@stylesheet" />
-						</xsl:attribute>
-					</link>
-				</xsl:when>
-				<xsl:when test="//@embed='true'">
+            <xsl:choose>
+                <xsl:when test="not(//@embed='true')">
+                    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+                    <link rel="stylesheet" type="text/css">
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="//@stylesheet" />
+                        </xsl:attribute>
+                    </link>
+                </xsl:when>
+                <xsl:when test="//@embed='true'">
 <!--
-				embedded stylesheet should rather be done through URL like
-				"http://localhost/video/4chan%20city/3/embed=true+stylesheet=embedded.css"
+                embedded stylesheet should rather be done through URL like
+                "http://localhost/video/4chan%20city/3/embed=true+stylesheet=embedded.css"
 -->
-					<link rel="stylesheet" type="text/css">
-						<xsl:attribute name="href">
-							/style/embedded.css
-						</xsl:attribute>
-					</link>
-				</xsl:when>
-			</xsl:choose>
+                    <link rel="stylesheet" type="text/css">
+                        <xsl:attribute name="href">
+                            /style/embedded.css
+                        </xsl:attribute>
+                    </link>
+                </xsl:when>
+            </xsl:choose>
 
-			<xsl:if test="boolean(//results)">
+            <xsl:if test="boolean(//results)">
 
-				<link rel="alternate" type="application/rss+xml">
-					<xsl:attribute name="title">
-						<xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
-					</xsl:attribute>
-					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings[@id='path_root']" />
-						<xsl:value-of select="$site_strings[@id='path_results']" />
-						<xsl:value-of select="//results/@query" />
-						&amp;pagesize=<xsl:value-of select="//results/@pagesize" />
-						&amp;page=<xsl:value-of select="//results/@page" />
-						&#38;xslt=rss
-					</xsl:attribute>
-				</link>
+                <link rel="alternate" type="application/rss+xml">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
+                    </xsl:attribute>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="$site_strings[@id='path_root']" />
+                        <xsl:value-of select="$site_strings[@id='path_results']" />
+                        <xsl:value-of select="//results/@query" />
+                        &amp;pagesize=<xsl:value-of select="//results/@pagesize" />
+                        &amp;page=<xsl:value-of select="//results/@page" />
+                        &#38;xslt=rss
+                    </xsl:attribute>
+                </link>
 
-				<link rel="alternate" type="application/rss+xml">
-					<xsl:attribute name="title">
-						<xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
-					</xsl:attribute>
-					<xsl:attribute name="href">
-						<xsl:value-of select="$site_strings[@id='path_root']" />
-						<xsl:value-of select="$site_strings[@id='path_results']" />
-						<xsl:value-of select="//results/@query" />
-						&amp;pagesize=99999
-						&amp;page=1
-						&#38;xslt=rss
-					</xsl:attribute>
-				</link>
+                <link rel="alternate" type="application/rss+xml">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
+                    </xsl:attribute>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="$site_strings[@id='path_root']" />
+                        <xsl:value-of select="$site_strings[@id='path_results']" />
+                        <xsl:value-of select="//results/@query" />
+                        &amp;pagesize=99999
+                        &amp;page=1
+                        &#38;xslt=rss
+                    </xsl:attribute>
+                </link>
 
-			</xsl:if>
+            </xsl:if>
 
-			<link
-				rel="search"
-				type="application/opensearchdescription+xml"
-			>
-				<xsl:attribute name="href">
-					<xsl:value-of select="$site_strings[@id='path_root']" />?xslt=opensearch
-				</xsl:attribute>
-				<xsl:attribute name="title">
-					<xsl:value-of select="$site_strings[@id='site_name']" />
-				</xsl:attribute>
-			</link>
+            <link
+                rel="search"
+                type="application/opensearchdescription+xml"
+            >
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_root']" />?xslt=opensearch
+                </xsl:attribute>
+                <xsl:attribute name="title">
+                    <xsl:value-of select="$site_strings[@id='site_name']" />
+                </xsl:attribute>
+            </link>
 
-			<title>
-				<xsl:choose>
-					<xsl:when test="boolean(//frontpage)">
-						<xsl:value-of select="$site_strings[@id='site_name']" />
-						-
-						<xsl:value-of select="$site_strings[@id='site_motto']" />
-					</xsl:when>
-					<xsl:when test="boolean(//resultspage)">
-						<xsl:value-of select="$site_strings[@id='site_name']" />
-						-
-						<xsl:value-of select="$locale_strings[@id='results_for_query']" />
-						"<xsl:value-of select="//resultspage/@query" />"
-					</xsl:when>
-					<xsl:otherwise>
+            <title>
+                <xsl:choose>
+                    <xsl:when test="boolean(//frontpage)">
+                        <xsl:value-of select="$site_strings[@id='site_name']" />
+                        -
+                        <xsl:value-of select="$site_strings[@id='site_motto']" />
+                    </xsl:when>
+                    <xsl:when test="boolean(//resultspage)">
+                        <xsl:value-of select="$site_strings[@id='site_name']" />
+                        -
+                        <xsl:value-of select="$locale_strings[@id='results_for_query']" />
+                        "<xsl:value-of select="//resultspage/@query" />"
+                    </xsl:when>
+                    <xsl:otherwise>
 <!--
-					this seems to be fail
-					should be fixed somehow
+                    this seems to be fail
+                    should be fixed somehow
 -->
-						<xsl:value-of select="$site_strings[@id='site_name']" />
-						-
-						<xsl:value-of select="$site_strings[@id='site_motto']" />
-					</xsl:otherwise>
-				</xsl:choose>
-			</title>
-		</head>
+                        <xsl:value-of select="$site_strings[@id='site_name']" />
+                        -
+                        <xsl:value-of select="$site_strings[@id='site_motto']" />
+                    </xsl:otherwise>
+                </xsl:choose>
+            </title>
+        </head>
 
-		<body>
-	
-			<xsl:if test="not(//@embed='true')">
-
-<!--
-				<a href="/">
-					<img class="logo-header" src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
-				</a>
--->
-
-				<div class="header">
-	
-					<a class="header latest-additions">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
-						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
-					</a>
-
-					<a class="header most-views">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
-						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='query_mostviews']" />
-					</a>
-
-					<a class="header most-downloads">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
-						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
-					</a>
-
-					<xsl:choose>
-						<xsl:when test="string-length(//@username)=0">
-	
-	<!--
-							<a class="header">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='path_login']" />
-								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='header_login-to-upload']" />
-							</a>
-	-->
-							<a class="header register">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='path_register']" />
-								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='register']" />
-							</a>
-	
-							<a class="header login">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='path_login']" />
-								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='login']" />
-							</a>
-	
-							<a class="header login-openid">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='path_login-openid']" />
-								</xsl:attribute>
-								<img class="openid-icon" src="/images/openid-icon.png" alt="open id logo" />
-								<xsl:value-of select="$locale_strings[@id='login_openid']" />
-							</a>
-	
-						</xsl:when>
-						<xsl:otherwise>
-
-							<a class="header upload-video">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='path_upload']" />
-								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='header_upload-video']" />
-							</a>
-
-							<a class="header preferences">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='path_settings']" />
-								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='settings_details']" />
-							</a>
+        <body>
+    
+            <xsl:if test="not(//@embed='true')">
 
 <!--
-							<xsl:value-of select="$locale_strings[@id='logged_in_as']" />
-
-							<a class="header">
-								<xsl:attribute name="href">
-									user/<xsl:value-of select="//@username" />
-								</xsl:attribute>
-								<xsl:value-of select="//@username" />
-							</a>
+                <a href="/">
+                    <img class="logo-header" src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
+                </a>
 -->
 
-							<a class="header logout">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$site_strings[@id='path_logout']" />
-								</xsl:attribute>
-								<xsl:value-of select="$locale_strings[@id='logout']" />
-							</a>
+                <div class="header">
+    
+                    <a class="header latest-additions">
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
+                    </a>
 
-						</xsl:otherwise>
-					</xsl:choose>
+                    <a class="header most-views">
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='query_mostviews']" />
+                    </a>
 
-				</div>
+                    <a class="header most-downloads">
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
+                    </a>
 
-				<xsl:if test="//message">
-					<xsl:call-template name="message"/>
-				</xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="string-length(//@username)=0">
+    
+    <!--
+                            <a class="header">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$site_strings[@id='path_login']" />
+                                </xsl:attribute>
+                                <xsl:value-of select="$locale_strings[@id='header_login-to-upload']" />
+                            </a>
+    -->
+                            <a class="header register">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$site_strings[@id='path_register']" />
+                                </xsl:attribute>
+                                <xsl:value-of select="$locale_strings[@id='register']" />
+                            </a>
+    
+                            <a class="header login">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$site_strings[@id='path_login']" />
+                                </xsl:attribute>
+                                <xsl:value-of select="$locale_strings[@id='login']" />
+                            </a>
+    
+                            <a class="header login-openid">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$site_strings[@id='path_login-openid']" />
+                                </xsl:attribute>
+                                <img class="openid-icon" src="/images/openid-icon.png" alt="open id logo" />
+                                <xsl:value-of select="$locale_strings[@id='login_openid']" />
+                            </a>
+    
+                        </xsl:when>
+                        <xsl:otherwise>
 
-				<xsl:if test="//search">
-					<xsl:call-template name="searchbar"/>
-				</xsl:if>
+                            <a class="header upload-video">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$site_strings[@id='path_upload']" />
+                                </xsl:attribute>
+                                <xsl:value-of select="$locale_strings[@id='header_upload-video']" />
+                            </a>
 
-				<xsl:if test="not(//frontpage)">
-					<xsl:call-template name="logo-small"/>
-				</xsl:if>
-			
-			</xsl:if>
-
-			<xsl:choose>
-				<xsl:when test="//frontpage">
-					<xsl:call-template name="frontpage"/>
-				</xsl:when>
-				<xsl:when test="//registerform">
-					<xsl:call-template name="registerform"/>
-				</xsl:when>
-				<xsl:when test="//loginform">
-					<xsl:call-template name="loginform"/>
-				</xsl:when>
-				<xsl:when test="//uploadform">
-					<xsl:call-template name="uploadform"/>
-				</xsl:when>
-				<xsl:when test="//search">
-					<xsl:call-template name="results"/>
-				</xsl:when>
-				<xsl:when test="//advancedsearch">
-					<xsl:call-template name="advancedsearch"/>
-				</xsl:when>
-				<xsl:when test="//video">
-					<xsl:call-template name="video"/>
-				</xsl:when>
-				<xsl:when test="//settings">
-					<xsl:call-template name="settings"/>
-				</xsl:when>
-			</xsl:choose>
-
-			<xsl:if test="not(//@embed='true')">
-
-				<div class="footer">
-
-					<a class="footer view-license">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='path_license']" />
-						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='footer_license']" />
-					</a>
-
-					<a class="footer view-source-code">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='path_source-code']" />
-						</xsl:attribute>
-					<xsl:value-of select="$locale_strings[@id='footer_source_code']" />
-					</a>
-
-					<a class="footer report-bug">
-						<xsl:attribute name="href">
-							<xsl:value-of select="$site_strings[@id='path_report_bug']" />
-						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='footer_report_bug']" />
-					</a>
-
-					<a class="footer view-xml">
-						<xsl:attribute name="href">
-<!--
-					caveat: this currently does not work on root level
-					apache magic wanted
--->
-							?xslt=null
-						</xsl:attribute>
-						<xsl:value-of select="$locale_strings[@id='footer_view_xml']" />
-					</a>
-
-				</div>
+                            <a class="header preferences">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$site_strings[@id='path_settings']" />
+                                </xsl:attribute>
+                                <xsl:value-of select="$locale_strings[@id='settings_details']" />
+                            </a>
 
 <!--
-				<br />
-				<xsl:value-of select="$locale_strings[@id='footer_copyright']" />
+                            <xsl:value-of select="$locale_strings[@id='logged_in_as']" />
+
+                            <a class="header">
+                                <xsl:attribute name="href">
+                                    user/<xsl:value-of select="//@username" />
+                                </xsl:attribute>
+                                <xsl:value-of select="//@username" />
+                            </a>
 -->
 
-				<br />
+                            <a class="header logout">
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$site_strings[@id='path_logout']" />
+                                </xsl:attribute>
+                                <xsl:value-of select="$locale_strings[@id='logout']" />
+                            </a>
 
-				<span class="protip">
-					<xsl:value-of select="$locale_strings[@id='footer_warranty']" />
-				</span>
+                        </xsl:otherwise>
+                    </xsl:choose>
 
-			</xsl:if>
+                </div>
 
-		</body>
+                <xsl:if test="//message">
+                    <xsl:call-template name="message"/>
+                </xsl:if>
 
-	</html>
+                <xsl:if test="//search">
+                    <xsl:call-template name="searchbar"/>
+                </xsl:if>
+
+                <xsl:if test="not(//frontpage)">
+                    <xsl:call-template name="logo-small"/>
+                </xsl:if>
+            
+            </xsl:if>
+
+            <xsl:choose>
+                <xsl:when test="//frontpage">
+                    <xsl:call-template name="frontpage"/>
+                </xsl:when>
+                <xsl:when test="//registerform">
+                    <xsl:call-template name="registerform"/>
+                </xsl:when>
+                <xsl:when test="//loginform">
+                    <xsl:call-template name="loginform"/>
+                </xsl:when>
+                <xsl:when test="//uploadform">
+                    <xsl:call-template name="uploadform"/>
+                </xsl:when>
+                <xsl:when test="//search">
+                    <xsl:call-template name="results"/>
+                </xsl:when>
+                <xsl:when test="//advancedsearch">
+                    <xsl:call-template name="advancedsearch"/>
+                </xsl:when>
+                <xsl:when test="//video">
+                    <xsl:call-template name="video"/>
+                </xsl:when>
+                <xsl:when test="//settings">
+                    <xsl:call-template name="settings"/>
+                </xsl:when>
+            </xsl:choose>
+
+            <xsl:if test="not(//@embed='true')">
+
+                <div class="footer">
+
+                    <a class="footer view-license">
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_license']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='footer_license']" />
+                    </a>
+
+                    <a class="footer view-source-code">
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_source-code']" />
+                        </xsl:attribute>
+                    <xsl:value-of select="$locale_strings[@id='footer_source_code']" />
+                    </a>
+
+                    <a class="footer report-bug">
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_report_bug']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='footer_report_bug']" />
+                    </a>
+
+                    <a class="footer view-xml">
+                        <xsl:attribute name="href">
+<!--
+                    caveat: this currently does not work on root level
+                    apache magic wanted
+-->
+                            ?xslt=null
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='footer_view_xml']" />
+                    </a>
+
+                </div>
+
+<!--
+                <br />
+                <xsl:value-of select="$locale_strings[@id='footer_copyright']" />
+-->
+
+                <br />
+
+                <span class="protip">
+                    <xsl:value-of select="$locale_strings[@id='footer_warranty']" />
+                </span>
+
+            </xsl:if>
+
+        </body>
+
+    </html>
 </xsl:template>
 
 <xsl:template name="logo-small">
 
-<!--	<a href="/">
-		<img class="logo-small" src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
-	</a>-->
+<!--    <a href="/">
+        <img class="logo-small" src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
+    </a>-->
 
 </xsl:template>
 
 <xsl:template name="searchbar">
 
-	<div class="search-small">
-		<form method="get" enctype="text/plain">
-			<xsl:attribute name="action">
-				<xsl:value-of select="$site_strings[@id='path_results']" />
-			</xsl:attribute>
-			<fieldset>
-				<xsl:value-of select="$locale_strings[@id='search']" />:
-				<input type="text" name="query" size="15">
-					<xsl:attribute name="value">
-						<xsl:if test="//results/@argument='query'">
-							<xsl:value-of select="//results/@value" />
-						</xsl:if>
-					</xsl:attribute>
-				</input>
-			</fieldset>
-		</form>
-	</div>
+    <div class="search-small">
+        <form method="get" enctype="text/plain">
+            <xsl:attribute name="action">
+                <xsl:value-of select="$site_strings[@id='path_results']" />
+            </xsl:attribute>
+            <fieldset>
+                <xsl:value-of select="$locale_strings[@id='search']" />:
+                <input type="text" name="query" size="15">
+                    <xsl:attribute name="value">
+                        <xsl:if test="//results/@argument='query'">
+                            <xsl:value-of select="//results/@value" />
+                        </xsl:if>
+                    </xsl:attribute>
+                </input>
+            </fieldset>
+        </form>
+    </div>
 
 </xsl:template>
 
 <xsl:template name="message">
 
-	<div class="messagebox">
-		<xsl:attribute name="id">
-			<xsl:value-of select="/page/message/@type" />
-		</xsl:attribute>
-		<xsl:choose>
-			<xsl:when test="/page/message/@type='error'">
-				<img src="/images/tango/dialog-error.png" />
-			</xsl:when>
-			<xsl:when test="/page/message/@type='information'">
-				<img src="/images/tango/dialog-information.png" />
-			</xsl:when>
-			<xsl:when test="/page/message/@type='warning'">
-				<img src="/images/tango/dialog-warning.png" />
-			</xsl:when>
-		</xsl:choose>
-		<xsl:variable name="messagetext" select="/page/message/@text" />
-		<xsl:value-of select="$locale_strings[@id=$messagetext]" />
-		<xsl:value-of select="/page/message/@value" />
-		<!-- probably one can do this on one line, dunno how -->
-	</div>
+    <div class="messagebox">
+        <xsl:attribute name="id">
+            <xsl:value-of select="/page/message/@type" />
+        </xsl:attribute>
+        <xsl:choose>
+            <xsl:when test="/page/message/@type='error'">
+                <img src="/images/tango/dialog-error.png" />
+            </xsl:when>
+            <xsl:when test="/page/message/@type='information'">
+                <img src="/images/tango/dialog-information.png" />
+            </xsl:when>
+            <xsl:when test="/page/message/@type='warning'">
+                <img src="/images/tango/dialog-warning.png" />
+            </xsl:when>
+        </xsl:choose>
+        <xsl:variable name="messagetext" select="/page/message/@text" />
+        <xsl:value-of select="$locale_strings[@id=$messagetext]" />
+        <xsl:value-of select="/page/message/@value" />
+        <!-- probably one can do this on one line, dunno how -->
+    </div>
 
 </xsl:template>
 
 <xsl:template name="tagcloud">
-	<xsl:variable name="max" select="//tagcloud/tag/count[not(//tagcloud/tag/count &gt; .)]" />
-	<xsl:variable name="min" select="//tagcloud/tag/count[not(//tagcloud/tag/count &lt; .)]" />
-	<div class="tagcloud">
-		<xsl:for-each select="//tagcloud/tag">
-			<xsl:sort select="text" order="ascending" data-type="text" />
-			<a class="tag">
-				<xsl:attribute name="style">
+    <xsl:variable name="max" select="//tagcloud/tag/count[not(//tagcloud/tag/count &gt; .)]" />
+    <xsl:variable name="min" select="//tagcloud/tag/count[not(//tagcloud/tag/count &lt; .)]" />
+    <div class="tagcloud">
+        <xsl:for-each select="//tagcloud/tag">
+            <xsl:sort select="text" order="ascending" data-type="text" />
+            <a class="tag">
+                <xsl:attribute name="style">
 <!--
-				scale *should* be logarihmic, but that's not widely supportet
+                scale *should* be logarihmic, but that's not widely supportet
 -->
-					font-size:<xsl:value-of select="round((32-12)*(number(count)-number($min))div (number($max)-number($min)))+12" />px
-				</xsl:attribute>
-				<xsl:attribute name="href">
-					<xsl:value-of select="$site_strings[@id='path_results']" />
-					tag:
-					<xsl:value-of select="text" />
-				</xsl:attribute>
-				
-				<xsl:value-of select="text" />
+                    font-size:<xsl:value-of select="round((32-12)*(number(count)-number($min))div (number($max)-number($min)))+12" />px
+                </xsl:attribute>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_results']" />
+                    tag:
+                    <xsl:value-of select="text" />
+                </xsl:attribute>
+                
+                <xsl:value-of select="text" />
 <!--
-				unnecessary, except for debug purposes
-				(<xsl:value-of select="count" />)
+                unnecessary, except for debug purposes
+                (<xsl:value-of select="count" />)
 -->
-			</a>
-			&#8204;
-		</xsl:for-each>
-	</div>
+            </a>
+            &#8204;
+        </xsl:for-each>
+    </div>
 
 </xsl:template>
 
