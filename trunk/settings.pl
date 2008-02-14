@@ -9,29 +9,29 @@ $session = new CGI::Session;
 
 if($userinfo->{'username'})
 {
-	if($query->param('submit'))
-	{
-		$dbh->do(qq{update users set locale = ?, pagesize = ?, cortado = ? where id = ?}, undef, $query->param('locale'), $query->param('pagesize'), $query->param('cortado'), $userinfo->{'id'} ) or die $dbh->errstr;
-		
-		$page->{'message'}->{'type'} = "information";
-		$page->{'message'}->{'text'} = "information_settings_changed";
-	}
+    if($query->param('submit'))
+    {
+        $dbh->do(qq{update users set locale = ?, pagesize = ?, cortado = ? where id = ?}, undef, $query->param('locale'), $query->param('pagesize'), $query->param('cortado'), $userinfo->{'id'} ) or die $dbh->errstr;
+        
+        $page->{'message'}->{'type'} = "information";
+        $page->{'message'}->{'text'} = "information_settings_changed";
+    }
 }
 
 @userinfo = get_userinfo_from_sid($session->id);
 
 @page = get_page_array(@userinfo);
-	
+    
 if($userinfo->{'username'})
 {
-	$page->{'settings'}->{'locale'} = $userinfo->{'locale'};
-	$page->{'settings'}->{'pagesize'} = $userinfo->{'pagesize'};
-	$page->{'settings'}->{'cortado'} = $userinfo->{'cortado'}
+    $page->{'settings'}->{'locale'} = $userinfo->{'locale'};
+    $page->{'settings'}->{'pagesize'} = $userinfo->{'pagesize'};
+    $page->{'settings'}->{'cortado'} = $userinfo->{'cortado'}
 }
 else
 {
-	$page->{'message'}->{'type'} = "error";
-	$page->{'message'}->{'text'} = "error_202c";
+    $page->{'message'}->{'type'} = "error";
+    $page->{'message'}->{'text'} = "error_202c";
 }
 
 print output_page();

@@ -9,25 +9,25 @@ $session = new CGI::Session;
 
 @page = get_page_array(@userinfo);
 
-$page->{frontpage} = [''];	
+$page->{frontpage} = [''];    
 
 if($query->param('information'))
 {
-	$page->{'message'}->{'type'} = "information";
-	$page->{'message'}->{'text'} = $query->param('information');
-	$page->{'message'}->{'value'} = $query->param('value');
+    $page->{'message'}->{'type'} = "information";
+    $page->{'message'}->{'text'} = $query->param('information');
+    $page->{'message'}->{'value'} = $query->param('value');
 }
 elsif($query->param('error'))
 {
-	$page->{'message'}->{'type'} = "error";
-	$page->{'message'}->{'text'} = $query->param('error');
-	$page->{'message'}->{'value'} = $query->param('value');
+    $page->{'message'}->{'type'} = "error";
+    $page->{'message'}->{'text'} = $query->param('error');
+    $page->{'message'}->{'value'} = $query->param('value');
 }
 elsif($query->param('warning'))
 {
-	$page->{'message'}->{'type'} = "warning";
-	$page->{'message'}->{'text'} = $query->param('warning');
-	$page->{'message'}->{'value'} = $query->param('value');
+    $page->{'message'}->{'type'} = "warning";
+    $page->{'message'}->{'text'} = $query->param('warning');
+    $page->{'message'}->{'value'} = $query->param('value');
 }
 
 
@@ -40,8 +40,8 @@ $sth->execute() or die $dbh->errstr;
 #get every returned value
 while (my ($text, $count) = $sth->fetchrow_array())
 {
-	#push the new value to the $page->tagcloud array
-	push @{ $page->{tagcloud}->{tag} }, { text => [$text =~ / / ? "\"$text\"" : $text], count => [$count] };
+    #push the new value to the $page->tagcloud array
+    push @{ $page->{tagcloud}->{tag} }, { text => [$text =~ / / ? "\"$text\"" : $text], count => [$count] };
 }
 
 #finish query
