@@ -72,7 +72,14 @@ elsif($query->url_param('title') or $query->url_param('id'))
 	}
 	elsif($rowcount == 1)
 	{
-		$page->{'embed'} = $query->param('embed') eq 'true' ? "true" : "false";
+	    if($query->param('embed') eq "video")
+	    {
+		    $page->{'embed'} = "video";
+		}
+		elsif($query->param('embed') eq "preview")
+		{
+		    $page->{'embed'} = "preview";
+		}
 	
 		#if there was a single result, display the video
 		my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
