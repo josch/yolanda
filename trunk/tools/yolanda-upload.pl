@@ -40,7 +40,7 @@ getopts('u:p:f:t:d:x:c:s:l:v:', \%opts);
 unless (defined $opts{u}) {
     unless (length USER) {
         preamble();
-		print "Username was neither defined nor passed as an argument\n";
+        print "Username was neither defined nor passed as an argument\n";
         print "Use -u switch to specify the username\n";
         print "Example: -u joe_random\n";
         exit 1;
@@ -97,8 +97,8 @@ print "Getting sid cookie...\n";
 $response = $ua->request(GET $url);
 unless($response->is_success)
 {
-	die "Failed opening $url: ",
-		$response->status_line;
+    die "Failed opening $url: ",
+        $response->status_line;
 }
 
 print "Logging in to $url/login.pl...\n";
@@ -106,33 +106,33 @@ print "Logging in to $url/login.pl...\n";
 $response = $ua->request(POST "$url/login.pl", "Content_Type" => "form-data", "Content" => [action => login, user => test, pass => test]);
 unless($response->is_success)
 {
-	die "Failed logging in: ",
-		$response->status_line;
+    die "Failed logging in: ",
+        $response->status_line;
 }
 unless($response->content =~ /action=logout/)
 {
-	die "Failed logging in: username/password do not match";
+    die "Failed logging in: username/password do not match";
 }
 
 print "Uploading $opts{f} to $url/uploader.pl...\n";
 # DONT PRINT THIS - UNIX PHILOSPHY IS: IF IT WORKS DONT DISPLAY SHIT ! ( maybe add a -v switch )
 $response = $ua->request(POST "$url/uploader.pl",
-	"Content_Type" => "multipart/form-data",
-	"Content" => [
-		file => [$opts{f}],
-		"DC.Title" => $opts{t},
-		"DC.Description" => $opts{d},
-		"DC.Subject" => $opts{x},
-		"DC.Creator" => $opts{c} ? $opts{c} : "",
-		"DC.Source" => $opts{s} ? $opts{s} : "",
-		"DC.Language" => $opts{l} ? $opts{l} : "",
-		"DC.Coverage" => $opts{v} ? $opts{v} : "",
-	]
+    "Content_Type" => "multipart/form-data",
+    "Content" => [
+        file => [$opts{f}],
+        "DC.Title" => $opts{t},
+        "DC.Description" => $opts{d},
+        "DC.Subject" => $opts{x},
+        "DC.Creator" => $opts{c} ? $opts{c} : "",
+        "DC.Source" => $opts{s} ? $opts{s} : "",
+        "DC.Language" => $opts{l} ? $opts{l} : "",
+        "DC.Coverage" => $opts{v} ? $opts{v} : "",
+    ]
 );
 unless($response->is_success)
 {
-	die "Failed uploading: ",
-		$response->status_line;
+    die "Failed uploading: ",
+        $response->status_line;
 }
 print "Done!\n";
 # DONT PRINT THIS - UNIX PHILOSPHY IS: IF IT WORKS DONT DISPLAY SHIT ! ( maybe add a -v switch )
