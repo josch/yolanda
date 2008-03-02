@@ -178,7 +178,7 @@ while(1)
                         $vwidth = int($vheight*($width/$height)/8 + .5)*8;
                         
                         $abitrate = 64;
-                        $vbitrate = int($filesize*8) / $duration + .5) - $abitrate;
+                        $vbitrate = int(($filesize*8) / $duration + .5) - $abitrate;
                         
                         #TODO: add metadata information
                         system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id /tmp/$id";
@@ -208,7 +208,7 @@ while(1)
     }
     else
     {
-        TODO: maybe make this event-driven by using the kernels has-this-file-changed-interface ?
+        #TODO: maybe make this event-driven by using the kernels has-this-file-changed-interface ?
         sleep 10;
     }
 }

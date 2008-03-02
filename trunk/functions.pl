@@ -186,7 +186,8 @@ sub output_page
     
     #send everything including http headers to the user - if xslt chosen is xspf set download filename
     return $session->header(
-            -type=>'text/xml',
+            -type=>'application/xhtml+xml',
+            # fix the MIME type so that every XSLT works again
             -charset=>'UTF-8',
             -cookie=>@cookies
         ),

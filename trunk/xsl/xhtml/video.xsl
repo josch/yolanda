@@ -9,6 +9,7 @@
 
 <xsl:template name="video">
 
+    <!--
     <xsl:if test="not(//@embed='true')">        
         <div class="videotitle">
             <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
@@ -25,10 +26,82 @@
             </xsl:choose>
         </div>
     </xsl:if>
+-->
 
-    <div class="video">
+    <script type="text/javascript">
+
+<!--
+    this looks awfully ugly, but nevertheless generates javascript inside _valid_ XHTML
+    kudos to toby white who details the solution on http://scispace.net/tow21/weblog/718.html
+-->
+    
+        <xsl:text disable-output-escaping="yes">&lt;![CDATA[
+        <![CDATA[
+
+        //alert('script works');
+
+        function hide_movie()
+            {
+            var _video = document.getElementbyId('video');
+            document.removeChild(_video);
+            }
+
+
+        function show_movie()
+            {
+            var _container = document.getElementById('container');
+            var _thumbnail = document.getElementById('thumbnail');
+            _container.removeChild(_thumbnail);
+
+            if (navigator.mimeTypes
+                && navigator.mimeTypes["application/ogg"]
+                && navigator.mimeTypes["application/ogg"].enabledPlugin)
+                {
+                _film = document.createElement('object');
+                _film.type = "application/ogg";
+                    ]]>
+        </xsl:text>
+                        <xsl:value-of select="concat('_film.data = &quot;',//video/rdf:RDF/cc:Work/@rdf:about,'view=true','&quot;;')" />
+        <xsl:text disable-output-escaping="yes">
+        <![CDATA[
+                _film.height = "480";
+                _film.width = "640";
+        		_film_alt = document.createTextNode('LOL OGG');
+        		_film.appendChild(_film_alt);
+        		_container.appendChild(_film);
+    		    }
+            else if (navigator.mimeTypes
+                && navigator.mimeTypes["application/x-java-applet"]
+                && navigator.mimeTypes["application/x-java-applet"].enabledPlugin)
+                {
+                _elseh1 = document.createElement('h1');
+        		_elsetext = document.createTextNode('LOL JAVA');
+        		_elseh1.appendChild(_elsetext);
+        		_container.appendChild(_elseh1);
+                }		    
+    		else
+    		    {
+        		_elseh1 = document.createElement('h1');
+        		_elsetext = document.createTextNode('NO PLUGIN FOUND');
+        		_elseh1.appendChild(_elsetext);
+        		_container.appendChild(_elseh1);
+    		    }
+    	    }
+
+        ]]]]></xsl:text>
+        <xsl:text disable-output-escaping="yes">></xsl:text>
+    </script>
+
+    <div class="video" id="container">
+
+        <div id="thumbnail">
+        thumbnail
+        <input type="button" value="playback" onclick="show_movie()" />
+        </div>
+
         <xsl:choose>
             <xsl:when test="//video/@cortado='true'">
+
                 <applet
                     code="com.fluendo.player.Cortado.class"
                     archive="/java/cortado-ovt-stripped-0.2.2.jar"
@@ -58,6 +131,7 @@
                     <param name="showStatus" value="show"/>
                     <param name="bufferSize" value="200"/>
                 </applet>
+
                 <div class="watch-browserplugin">
                     <a>
                         <xsl:attribute name="href">
@@ -75,7 +149,7 @@
                 </div>
             </xsl:when>
             <xsl:otherwise>
-                <object type="application/ogg">
+                <object type="application/ogg" style="float: left;" id="video">
                     <xsl:attribute name="width">
                         <xsl:value-of select="//video/@width" />
                     </xsl:attribute>
@@ -106,20 +180,21 @@
                 </div>
             </xsl:otherwise>
         </xsl:choose>
+
     </div>
 
-    <xsl:if test="//@embed='true'">
-        <div class="embedded-backlink">
-            <a target="_blank">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='backlink']" />
-            </a>
-        </div>
-    </xsl:if>
-
     <xsl:if test="not(//@embed='true')">
+
+<!--
+        <object type="application/xml" style="float: left">
+            <xsl:attribute name="data">
+                <xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=video')"/>
+            </xsl:attribute>
+            <xsl:attribute name="width">
+                75%
+            </xsl:attribute>
+        </object>
+-->
 
         <xsl:call-template name="videometadata"/>
         <br />

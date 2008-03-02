@@ -137,12 +137,15 @@ a
         border-width:       1px;
     }
 
+/*
     div.footer
     {
         position:           absolute;
         bottom:             1.5em;
         margin-right:       1.5em;
     }
+*/
+
     img.logo-header
     {
         display:        none;

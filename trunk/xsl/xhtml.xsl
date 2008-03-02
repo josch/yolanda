@@ -17,14 +17,15 @@
     omit-xml-declaration="no"
 />
 
+<xsl:include href="./xhtml/advancedsearch.xsl"/>
+<xsl:include href="./xhtml/embedded.xsl"/>
 <xsl:include href="./xhtml/frontpage.xsl"/>
 <xsl:include href="./xhtml/loginform.xsl"/>
+<xsl:include href="./xhtml/register.xsl"/>
 <xsl:include href="./xhtml/results.xsl"/>
+<xsl:include href="./xhtml/settings.xsl"/>
 <xsl:include href="./xhtml/upload.xsl"/>
 <xsl:include href="./xhtml/video.xsl"/>
-<xsl:include href="./xhtml/register.xsl"/>
-<xsl:include href="./xhtml/settings.xsl"/>
-<xsl:include href="./xhtml/advancedsearch.xsl"/>
 
 <xsl:variable name="locale">
     <xsl:choose>
@@ -51,11 +52,16 @@
 <xsl:template match="/">
     <html xmlns="http://www.w3.org/1999/xhtml">
 
+    
+
+
+
+
         <head>
             <meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 
             <xsl:choose>
-                <xsl:when test="not(//@embed='true')">
+                <xsl:when test="not(//@embed)">
                     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
                     <link rel="stylesheet" type="text/css">
                         <xsl:attribute name="href">
@@ -63,7 +69,7 @@
                         </xsl:attribute>
                     </link>
                 </xsl:when>
-                <xsl:when test="//@embed='true'">
+                <xsl:when test="//@embed='video'">
 <!--
                 embedded stylesheet should rather be done through URL like
                 "http://localhost/video/4chan%20city/3/embed=true+stylesheet=embedded.css"
@@ -148,13 +154,7 @@
 
         <body>
     
-            <xsl:if test="not(//@embed='true')">
-
-<!--
-                <a href="/">
-                    <img class="logo-header" src="/images/logo-small.png" alt="Yolanda logo top (160x25)" />
-                </a>
--->
+            <xsl:if test="not(//@embed)">
 
                 <div class="header">
     
@@ -208,7 +208,9 @@
                                 <xsl:attribute name="href">
                                     <xsl:value-of select="$site_strings[@id='path_login-openid']" />
                                 </xsl:attribute>
+<!--
                                 <img class="openid-icon" src="/images/openid-icon.png" alt="open id logo" />
+-->
                                 <xsl:value-of select="$locale_strings[@id='login_openid']" />
                             </a>
     
@@ -293,7 +295,7 @@
                 </xsl:when>
             </xsl:choose>
 
-            <xsl:if test="not(//@embed='true')">
+            <xsl:if test="not(//@embed)">
 
                 <div class="footer">
 
