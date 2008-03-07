@@ -38,74 +38,72 @@
         <xsl:text disable-output-escaping="yes">&lt;![CDATA[
         <![CDATA[
 
-        //alert('script works');
-
         function hide_movie()
             {
-            var _video = document.getElementById('video');
-            _video.style.display = 'none';
+            document.getElementById('video').style.display = 'none';
+            document.getElementById('thumbnail').style.display = 'block';
             }
 
         function show_movie()
             {
             document.getElementById('video').style.display = 'block';
+            document.getElementById('thumbnail').style.display = 'none';
             }
 
         ]]]]></xsl:text>
         <xsl:text disable-output-escaping="yes">></xsl:text>
     </script>
 
-    <div class="video" id="container">
+    <object type="application/ogg" id="video">
+        <xsl:attribute name="width">
+            <xsl:value-of select="//video/@width" />
+        </xsl:attribute>
+        <xsl:attribute name="height">
+            <xsl:value-of select="//video/@height" />
+        </xsl:attribute>
+        <xsl:attribute name="data">
+            <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
+        </xsl:attribute>
+        <img src="/images/flash-sucks.png"/><br />
+        <img src="/images/vlc.png"/>
+        <img src="/images/mplayer.png"/>                    
+    </object>
 
-        <div id="thumbnail">
-            <img>
-                <xsl:attribute name="src">
-                    <xsl:value-of select="//video/@thumbnail" />
-                </xsl:attribute>
-                <xsl:attribute name="alt">
-                    <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-                </xsl:attribute>
-                <xsl:attribute name="height">
-                    <xsl:value-of select="//video/@height" />
-                </xsl:attribute>
-                <xsl:attribute name="widht">
-                    <xsl:value-of select="//video/@width" />
-                </xsl:attribute>
-            </img>
-            <form method="get">
-                <xsl:attribute name="action">
-                    <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-                </xsl:attribute>
-                <button
-                    name="playback"
-                    type="button"
-                    value="playback"
-                    onclick="show_movie()">
-                    <img src="/images/tango/media-playback-start.png" alt="playback" />
-                </button>
-                <button
-                    name="download"
-                    type="submit"
-                    value="download">
-                    <img src="/images/tango/document-save.png" alt="download" />
-                </button>
-            </form>
-        </div>
+    <div id="thumbnail" style="display: none;">
 
-        <object type="application/ogg" style="display: none;" id="video">
-            <xsl:attribute name="width">
-                <xsl:value-of select="//video/@width" />
+        <img>
+            <xsl:attribute name="src">
+                <xsl:value-of select="//video/@thumbnail" />
+            </xsl:attribute>
+            <xsl:attribute name="alt">
+                <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
             </xsl:attribute>
             <xsl:attribute name="height">
                 <xsl:value-of select="//video/@height" />
             </xsl:attribute>
-            <xsl:attribute name="data">
-                <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
+            <xsl:attribute name="widht">
+                <xsl:value-of select="//video/@width" />
             </xsl:attribute>
-            <img src="/images/flash-sucks.png"/><br />
-            <img src="/images/vlc.png"/>
-            <img src="/images/mplayer.png"/>                    
-        </object>
+        </img>
+
+        <form method="get">
+            <xsl:attribute name="action">
+                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+            </xsl:attribute>
+            <button
+                name="playback"
+                type="button"
+                value="playback"
+                onclick="show_movie()">
+                <img src="/images/tango/media-playback-start.png" alt="playback" />
+            </button>
+            <button
+                name="download"
+                type="submit"
+                value="download">
+                <img src="/images/tango/document-save.png" alt="download" />
+            </button>
+        </form>
 
     </div>
 
