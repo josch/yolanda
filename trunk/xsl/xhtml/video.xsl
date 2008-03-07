@@ -42,30 +42,14 @@
 
         function hide_movie()
             {
-            var _video = document.getElementbyId('video');
-            document.removeChild(_video);
+            var _video = document.getElementById('video');
+            _video.style.display = 'none';
             }
-
 
         function show_movie()
             {
-            var _container = document.getElementById('container');
-            var _thumbnail = document.getElementById('thumbnail');
-            _container.removeChild(_thumbnail);
-
-            _film = document.createElement('object');
-            _film.type = "application/ogg";
-        ]]>
-        </xsl:text>
-                        <xsl:value-of select="concat('_film.data = &quot;',//video/rdf:RDF/cc:Work/@rdf:about,'view=true','&quot;;')" />
-        <xsl:text disable-output-escaping="yes">
-        <![CDATA[
-            _film.height = "480";
-            _film.width = "640";
-            _film_alt = document.createTextNode('LOL OGG');
-            _film.appendChild(_film_alt);
-            _container.appendChild(_film);
-        }
+            document.getElementById('video').style.display = 'block';
+            }
 
         ]]]]></xsl:text>
         <xsl:text disable-output-escaping="yes">></xsl:text>
@@ -74,16 +58,46 @@
     <div class="video" id="container">
 
         <div id="thumbnail">
-        thumbnail
-        <input type="button" value="playback" onclick="show_movie()" />
+            <img>
+                <xsl:attribute name="src">
+                    <xsl:value-of select="//video/@thumbnail" />
+                </xsl:attribute>
+                <xsl:attribute name="alt">
+                    <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+                </xsl:attribute>
+                <xsl:attribute name="height">
+                    <xsl:value-of select="//video/@height" />
+                </xsl:attribute>
+                <xsl:attribute name="widht">
+                    <xsl:value-of select="//video/@width" />
+                </xsl:attribute>
+            </img>
+            <form method="get">
+                <xsl:attribute name="action">
+                    <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+                </xsl:attribute>
+                <button
+                    name="playback"
+                    type="button"
+                    value="playback"
+                    onclick="show_movie()">
+                    <img src="/images/tango/media-playback-start.png" alt="playback" />
+                </button>
+                <button
+                    name="download"
+                    type="submit"
+                    value="download">
+                    <img src="/images/tango/document-save.png" alt="download" />
+                </button>
+            </form>
         </div>
 
-        <object type="application/ogg" style="float: left;" id="video">
+        <object type="application/ogg" style="display: none;" id="video">
             <xsl:attribute name="width">
                 <xsl:value-of select="//video/@width" />
             </xsl:attribute>
             <xsl:attribute name="height">
-                <xsl:value-of select="//video/@height + 16" />
+                <xsl:value-of select="//video/@height" />
             </xsl:attribute>
             <xsl:attribute name="data">
                 <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
