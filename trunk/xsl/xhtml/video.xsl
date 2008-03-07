@@ -53,40 +53,19 @@
             var _thumbnail = document.getElementById('thumbnail');
             _container.removeChild(_thumbnail);
 
-            if (navigator.mimeTypes
-                && navigator.mimeTypes["application/ogg"]
-                && navigator.mimeTypes["application/ogg"].enabledPlugin)
-                {
-                _film = document.createElement('object');
-                _film.type = "application/ogg";
-                    ]]>
+            _film = document.createElement('object');
+            _film.type = "application/ogg";
+        ]]>
         </xsl:text>
                         <xsl:value-of select="concat('_film.data = &quot;',//video/rdf:RDF/cc:Work/@rdf:about,'view=true','&quot;;')" />
         <xsl:text disable-output-escaping="yes">
         <![CDATA[
-                _film.height = "480";
-                _film.width = "640";
-        		_film_alt = document.createTextNode('LOL OGG');
-        		_film.appendChild(_film_alt);
-        		_container.appendChild(_film);
-    		    }
-            else if (navigator.mimeTypes
-                && navigator.mimeTypes["application/x-java-applet"]
-                && navigator.mimeTypes["application/x-java-applet"].enabledPlugin)
-                {
-                _elseh1 = document.createElement('h1');
-        		_elsetext = document.createTextNode('LOL JAVA');
-        		_elseh1.appendChild(_elsetext);
-        		_container.appendChild(_elseh1);
-                }		    
-    		else
-    		    {
-        		_elseh1 = document.createElement('h1');
-        		_elsetext = document.createTextNode('NO PLUGIN FOUND');
-        		_elseh1.appendChild(_elsetext);
-        		_container.appendChild(_elseh1);
-    		    }
-    	    }
+            _film.height = "480";
+            _film.width = "640";
+            _film_alt = document.createTextNode('LOL OGG');
+            _film.appendChild(_film_alt);
+            _container.appendChild(_film);
+        }
 
         ]]]]></xsl:text>
         <xsl:text disable-output-escaping="yes">></xsl:text>
@@ -99,87 +78,20 @@
         <input type="button" value="playback" onclick="show_movie()" />
         </div>
 
-        <xsl:choose>
-            <xsl:when test="//video/@cortado='true'">
-
-                <applet
-                    code="com.fluendo.player.Cortado.class"
-                    archive="/java/cortado-ovt-stripped-0.2.2.jar"
-                >
-                    <xsl:attribute name="width">
-                        <xsl:value-of select="//video/@width" />
-                    </xsl:attribute>
-                    <xsl:attribute name="height">
-                        <xsl:value-of select="//video/@height" />
-                    </xsl:attribute>
-                    <param name="url">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
-                        </xsl:attribute>
-                    </param>
-                    <param name="seekable" value="true"/>
-                    <param name="duration">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="//video/@duration" />
-                        </xsl:attribute>
-                    </param>
-                    <param name="keepAspect" value="true"/>
-                    <param name="video" value="true"/>
-                    <param name="audio" value="true"/>
-                    <param name="statusHeight" value="24"/>
-                    <param name="autoPlay" value="true"/>
-                    <param name="showStatus" value="show"/>
-                    <param name="bufferSize" value="200"/>
-                </applet>
-
-                <div class="watch-browserplugin">
-                    <a>
-                        <xsl:attribute name="href">
-                            <xsl:choose>
-                                <xsl:when test="//@embed='true'">
-                                    <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=false&amp;embed=true')" />
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=false')" />
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='watch_browserplugin']" />
-                    </a>
-                </div>
-            </xsl:when>
-            <xsl:otherwise>
-                <object type="application/ogg" style="float: left;" id="video">
-                    <xsl:attribute name="width">
-                        <xsl:value-of select="//video/@width" />
-                    </xsl:attribute>
-                    <xsl:attribute name="height">
-                        <xsl:value-of select="//video/@height + 16" />
-                    </xsl:attribute>
-                    <xsl:attribute name="data">
-                        <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
-                    </xsl:attribute>
-                    <img src="/images/flash-sucks.png"/><br />
-                    <img src="/images/vlc.png"/>
-                    <img src="/images/mplayer.png"/>                    
-                </object>
-                <div class="watch-cortadoapplet">
-                    <a>
-                        <xsl:attribute name="href">
-                            <xsl:choose>
-                                <xsl:when test="//@embed='true'">
-                                    <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=true&amp;embed=true')" />
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/dc:identifier, 'cortado=true')" />
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='watch_cortadoapplet']" />
-                    </a>
-                </div>
-            </xsl:otherwise>
-        </xsl:choose>
+        <object type="application/ogg" style="float: left;" id="video">
+            <xsl:attribute name="width">
+                <xsl:value-of select="//video/@width" />
+            </xsl:attribute>
+            <xsl:attribute name="height">
+                <xsl:value-of select="//video/@height + 16" />
+            </xsl:attribute>
+            <xsl:attribute name="data">
+                <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
+            </xsl:attribute>
+            <img src="/images/flash-sucks.png"/><br />
+            <img src="/images/vlc.png"/>
+            <img src="/images/mplayer.png"/>                    
+        </object>
 
     </div>
 
@@ -216,44 +128,6 @@
             <br />
             (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='megabytes']" />)
         </div>
-
-<!--
-not implemented right now
-
-        <div class="button-junk">
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=junk')" />
-                </xsl:attribute>
-                <img src="/images/tango/mail-mark-junk.png" />
-            </a>
-            <br />
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=junk')" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='junk_video']" />
-            </a>
-        </div>
-
-        <div class="button-edit">
-            <xsl:if test="//@edit='true'">
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
-                    </xsl:attribute>
-                    <img src="/images/tango/accessories-text-editor.png" />
-                </a>
-                <br />
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'action=edit')" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='edit_video']" />
-                </a>
-            </xsl:if>
-        </div>
--->
 
         <xsl:call-template name="cclicense"/>
 
