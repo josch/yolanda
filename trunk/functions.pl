@@ -126,7 +126,7 @@ sub fill_results
     $sth->finish() or die $dbh->errstr;
 }
 
-#replace chars in url as said in this rfc: http://www.rfc-editor.org/rfc/rfc1738.txt
+#replace chars in url according to RFC 1738 <http://www.rfc-editor.org/rfc/rfc1738.txt>
 sub urlencode
 {
     my ($url) = @_[0];
@@ -142,7 +142,7 @@ sub output_page
     my $parser = XML::LibXML->new();
     my $xslt = XML::LibXSLT->new();
     
-    #let the xslt param choose other stylesheets or default to xhtml.xsl
+    #let the XSLT param choose other stylesheets or default to xhtml.xsl
     my $param_xslt = $query->param('xslt');
     $param_xslt =~ s/[^\w]//gi;
     
@@ -157,9 +157,10 @@ sub output_page
 
     my $stylesheet = $xslt->parse_stylesheet($parser->parse_file($xsltpath));
 
-    #TODO: this usage of libxsl omits the xsl:output definition (no ident of html) but outputs in UTF8
-    #TODO: later versions of XML::LibXSLT (>= 1.62) define output_as_bytes - this is what we want to use
-    #TODO: wait for debian packagers to update to 1.62 or later
+    # TODO: this usage of libxsl omits the xsl:output definition (no ident of html) but outputs in UTF8
+    # TODO: later versions of XML::LibXSLT (>= 1.62) define output_as_bytes - this is what we want to use
+    # TODO: wait for debian packagers to update to 1.62 or later
+    # TODO: "foo" is not a meaningful variable name
     $foo = $stylesheet->transform(
                 $parser->parse_string(
                     XMLout(
@@ -170,7 +171,7 @@ sub output_page
                     )
                 )
             );
-    
+
     if($query->param('cortado') eq 'true')
     {
         @cookies = [$session->cookie(-name=>$session_name, -value=>$session->id), $session->cookie(-name=>'cortado', -value=>'true')];
@@ -184,10 +185,11 @@ sub output_page
         @cookies = [$session->cookie(-name=>$session_name, -value=>$session->id)];
     }
     
-    #send everything including http headers to the user - if xslt chosen is xspf set download filename
+    #send everything including http headers to the user - if XSLT chosen is XSPF set download filename
     return $session->header(
             -type=>'application/xhtml+xml',
-            # fix the MIME type so that every XSLT works again
+            # TODO: fix the MIME type so that every XSLT works again
+            # (you earned eternal hate for this, josch)
             -charset=>'UTF-8',
             -cookie=>@cookies
         ),

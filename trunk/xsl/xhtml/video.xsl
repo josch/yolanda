@@ -42,12 +42,14 @@
             {
             document.getElementById('video').style.display = 'none';
             document.getElementById('thumbnail').style.display = 'block';
+            document.getElementById('buttons').style.display = 'block';
             }
 
         function show_movie()
             {
             document.getElementById('video').style.display = 'block';
             document.getElementById('thumbnail').style.display = 'none';
+            document.getElementById('buttons').style.display = 'none';
             }
 
         ]]]]></xsl:text>
@@ -69,43 +71,57 @@
         <img src="/images/mplayer.png"/>                    
     </object>
 
-    <div id="thumbnail" style="display: none;">
+    <img id="thumbnail" style="display: none;">
+        <xsl:attribute name="src">
+            <xsl:value-of select="//video/@thumbnail" />
+        </xsl:attribute>
+        <xsl:attribute name="alt">
+            <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+        </xsl:attribute>
+        <xsl:attribute name="height">
+            <xsl:value-of select="//video/@height" />
+        </xsl:attribute>
+        <xsl:attribute name="widht">
+            <xsl:value-of select="//video/@width" />
+        </xsl:attribute>
+    </img>
 
-        <img>
-            <xsl:attribute name="src">
-                <xsl:value-of select="//video/@thumbnail" />
-            </xsl:attribute>
-            <xsl:attribute name="alt">
-                <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-            </xsl:attribute>
-            <xsl:attribute name="height">
-                <xsl:value-of select="//video/@height" />
-            </xsl:attribute>
-            <xsl:attribute name="widht">
-                <xsl:value-of select="//video/@width" />
-            </xsl:attribute>
-        </img>
-
-        <form method="get">
-            <xsl:attribute name="action">
-                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-            </xsl:attribute>
-            <button
-                name="playback"
-                type="button"
-                value="playback"
-                onclick="show_movie()">
-                <img src="/images/tango/media-playback-start.png" alt="playback" />
-            </button>
-            <button
-                name="download"
-                type="submit"
-                value="download">
-                <img src="/images/tango/document-save.png" alt="download" />
-            </button>
-        </form>
-
-    </div>
+    <form id="buttons" method="get">
+        <xsl:attribute name="action">
+            <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+        </xsl:attribute>
+        <button
+            name="playback"
+            type="button"
+            value="playback"
+            onclick="show_movie()">
+            <img src="/images/tango/media-playback-start.png" alt="playback" />
+            <br />
+            <xsl:value-of select="$locale_strings[@id='video_playback']" />
+            <br />
+            <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
+            <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
+            <xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
+            <xsl:choose>
+                <xsl:when test="$hours=0">
+                    (<xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+                </xsl:when>
+                <xsl:otherwise>
+                    (<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+                </xsl:otherwise>
+            </xsl:choose>
+        </button>
+        <button
+            name="download"
+            type="submit"
+            value="download">
+            <img src="/images/tango/document-save.png" alt="download" />
+            <br />
+            <xsl:value-of select="$locale_strings[@id='video_download']" />
+            <br />
+            (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='megabytes']" />)
+        </button>
+    </form>
 
     <xsl:if test="not(//@embed='true')">
 
@@ -135,7 +151,7 @@
                 <xsl:attribute name="href">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
                 </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='download_video']" />
+                <xsl:value-of select="$locale_strings[@id='video_download']" />
             </a>
             <br />
             (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='megabytes']" />)

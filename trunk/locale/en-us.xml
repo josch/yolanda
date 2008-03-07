@@ -156,7 +156,8 @@
     <string id="language_de-de">German</string>
 
     <!-- video page -->
-    <string id="download_video">download</string>
+    <string id="video_download">download</string>
+    <string id="video_playback">plackback</string>
     <string id="junk_video">mark as junk</string>
     <string id="edit_video">edit</string>
     <string id="megabytes">MB</string>
