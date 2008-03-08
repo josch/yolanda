@@ -5,12 +5,6 @@ Yolanda default stylesheet
 
 /* global default */
 
-*
-{
-    clear:            both;
-}
-
-
 body
 {
     font-family:        sans-serif;
@@ -77,6 +71,12 @@ a
         height:             3em;
     }
 
+    div.footer,
+    div.header
+    {
+        clear:                  both;
+    }
+
     a.footer,
     a.header
     {
@@ -137,15 +137,6 @@ a
         border-width:       1px;
     }
 
-/*
-    div.footer
-    {
-        position:           absolute;
-        bottom:             1.5em;
-        margin-right:       1.5em;
-    }
-*/
-
     img.logo-header
     {
         display:        none;
@@ -157,7 +148,6 @@ a
     }
 
 /* content */
-
 
     div.button-download,
     div.button-edit,
@@ -183,6 +173,20 @@ a
         {
             margin:         0.25em;
             vertical-align: middle;
+        }
+
+    div#container
+    {
+            position: relative;
+    }
+
+        div#container form
+        {
+            position:       absolute;
+            top:            50%;
+            padding-left:   auto;
+            padding-right:  auto;
+            width:          100%
         }
 
     div.commentform,
