@@ -50,6 +50,7 @@ if($query->param('id'))
         }
         
         #in both cases - do some slurp-eaze to the browser
+        #TODO: lol insecure!
         open(FILE, "<$root/videos/".$query->param('id'));
         
         $filesize = -s "$root/videos/".$query->param('id');
