@@ -11,7 +11,7 @@
     encoding="utf8"
     indent="yes"
     method="xml"
-    media-type="application/xml"
+    media-type="application/xspf+xml"
     omit-xml-declaration="no"
 />
 
