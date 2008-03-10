@@ -160,21 +160,19 @@ sub output_page
     $param_xslt =~ s/[^\w]//gi;
     
     if($param_xslt eq "null")
-    {        
-        $output = $parser->parse_string(
-            XMLout(
-                $page,
-                KeyAttr => {},
-                RootName => 'page',
-                AttrIndent => '1'
-            )
-        );
+    {
         return $session->header(
             -type=>'application/xml',
             -charset=>'UTF-8',
             -cookie=>@cookies
         ),
-        $output->toString;
+        $parser->parse_string(
+            XMLout(
+                    $page,
+                    KeyAttr => {},
+                    RootName => 'page'
+            )
+        )->toString;
     }
     else
     {
@@ -197,8 +195,7 @@ sub output_page
                     XMLout(
                         $page,
                         KeyAttr => {},
-                        RootName => 'page',
-                        AttrIndent => '1'
+                        RootName => 'page'
                     )
                 )
             );
@@ -206,27 +203,25 @@ sub output_page
         if($param_xslt eq "xspf")
         {
             return $session->header(
-                -type=>'application/xspf+xml',
-                -charset=>'UTF-8',
+                -type=>$stylesheet->media_type,
+                -charset=>$stylesheet->output_encoding,
                 -attachment=>$query->param('query').".xspf",
                 -cookie=>@cookies
             ),
             $output->toString;
         }
-        elsif($param_xslt eq "rss")
+        elsif($param_xslt eq "pr0n")
         {
             return $session->header(
-                -type=>'application/rss+xml',
-                -charset=>'UTF-8',
-                -cookie=>@cookies
-            ),
-            $output->toString;
+                -status=>'402 Payment required',
+                -cost=>'$9000.00',
+            )
         }
         else
         {
             return $session->header(
-                -type=>'application/xhtml+xml',
-                -charset=>'UTF-8',
+                -type=>$stylesheet->media_type,
+                -charset=>$stylesheet->output_encoding,
                 -cookie=>@cookies
             ),
             $output->toString;
