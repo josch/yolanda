@@ -9,101 +9,117 @@
 
 <xsl:template name="header">
 
-    <div class="header">
+    <ul id="header" role="navigation">
 
-        <a class="header latest-additions">
-            <xsl:attribute name="href">
-                <xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
-            </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
-        </a>
+        <li>
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
+                </xsl:attribute>
+                <xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
+            </a>
+        </li>
 
-        <a class="header most-views">
-            <xsl:attribute name="href">
-                <xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
-            </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='query_mostviews']" />
-        </a>
+        <li>
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
+                </xsl:attribute>
+                <xsl:value-of select="$locale_strings[@id='query_mostviews']" />
+            </a>
+        </li>
 
-        <a class="header most-downloads">
-            <xsl:attribute name="href">
-                <xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
-            </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
-        </a>
+        <li>
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
+                </xsl:attribute>
+                <xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
+            </a>
+        </li>
 
         <xsl:choose>
             <xsl:when test="string-length(//@username)=0">
 
+                <li>
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_register']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='register']" />
+                    </a>
+                </li>
+
+                <li>
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_login']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='login']" />
+                    </a>
+                </li>
+
 <!--
-                <a class="header">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_login']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='header_login-to-upload']" />
-                </a>
+                "login with openid" is fukken obsolete and will be removed in future iterations
 -->
-                <a class="header register">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_register']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='register']" />
-                </a>
 
-                <a class="header login">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_login']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='login']" />
-                </a>
+                <li>
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_login-openid']" />
+                        </xsl:attribute>
 
-                <a class="header login-openid">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_login-openid']" />
-                    </xsl:attribute>
-
-                    <xsl:value-of select="$locale_strings[@id='login_openid']" />
-                </a>
+                        <xsl:value-of select="$locale_strings[@id='login_openid']" />
+                    </a>
+                </li>
 
             </xsl:when>
             <xsl:otherwise>
 
-                <a class="header upload-video">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_upload']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='header_upload-video']" />
-                </a>
+                <li>
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_upload']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='header_upload-video']" />
+                    </a>
+                </li>
 
-                <a class="header preferences">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_settings']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='settings_details']" />
-                </a>
+                <li>
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_settings']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='settings_details']" />
+                    </a>
+                </li>
 
 <!--
                 <xsl:value-of select="$locale_strings[@id='logged_in_as']" />
 
-                <a class="header">
-                    <xsl:attribute name="href">
-                        user/<xsl:value-of select="//@username" />
-                    </xsl:attribute>
-                    <xsl:value-of select="//@username" />
-                </a>
+                <li>
+                    <a>
+                        <xsl:attribute name="href">
+                            user/<xsl:value-of select="//@username" />
+                        </xsl:attribute>
+                        <xsl:value-of select="//@username" />
+                    </a>
+                </li>
 -->
 
-                <a class="header logout">
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_logout']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='logout']" />
-                </a>
+                <li>
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_logout']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$locale_strings[@id='logout']" />
+                    </a>
+                </li>
 
             </xsl:otherwise>
         </xsl:choose>
 
-    </div>
+    </ul>
 
 </xsl:template>
 

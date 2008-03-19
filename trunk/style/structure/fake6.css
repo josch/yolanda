@@ -1,0 +1,240 @@
+/*
+Yolanda default stylesheet colors (using tango color palette)
+(c) 2007-2008 Nils Dagsson Moskopp
+
+This file is licensed under the WTF Public License
+(License terms: Do what the fuck you want.)
+
+Purpose of this file is to provide the structure of the layout, such as:
+    - display style (block, inline, inline-block etc.)
+    - size of (width, height)
+
+Please clear this file of any CSS properties that do not define structure.
+↑↑ Remove this notice as soon as this file holds only structural CSS. ↑↑
+*/
+
+body
+{
+    min-height:         100%;
+    text-align:         center;
+}
+
+a
+{
+}
+
+    a:focus
+    {
+    }
+
+    a:hover
+    {
+    }
+
+    a.tag
+    {
+        display:        inline-block;
+    }
+
+div
+{
+}
+
+    div.button-download,
+    div.button-edit,
+    div.button-junk
+    {
+        display:        inline-block;
+    }
+
+    div#container
+    {
+            position: relative;
+    }
+
+        div#container form
+        {
+            position:       absolute;
+            top:            50%;
+            width:          100%
+        }
+
+    div.commentform,
+    div.loginform,
+    div.registerform,
+    div.settingsform,
+    div.uploadform
+    {
+        line-height:    2.5em;
+        margin:         1.5em;
+    }
+
+    div.comments
+    {
+    }
+
+    div.page-number
+    {
+        display:        inline-block;
+        font-size:      40px;
+        height:         32px;
+        width:          32px;
+        overflow:       visible;
+    }
+
+    div.result
+    {
+        display:        inline-block;
+        position:       relative;
+        vertical-align: top;
+    }
+
+        div.result img
+        {
+        }
+
+/*
+        indefinitely postponed - does any major browser support absolute
+        positioning /inside inline-blocks/ ?
+
+        div.result img.flag
+        {
+            position:       absolute;
+            bottom:         32px;
+            right:          10px;
+        }
+*/
+
+    div.search
+    {
+        padding:            0.75em;
+    }
+
+    div.search-small
+    {
+        clear:              both;
+        float:              right;
+        height:             0em;
+        overflow:           visible;
+        text-align:         right;
+    }
+
+    div.toplists
+    {
+        padding:    0.75em;
+    }
+
+    div.tagcloud
+    {
+        border-style:       solid;
+        border-width:       1px;
+        margin:             0.75em;
+        margin-left:        20%;
+        margin-right:       20%;
+        padding:            0.75em;
+    }
+
+    div.video
+    {
+        display:            inline-block;
+        margin-bottom:      0.5em;
+    }
+
+    div.videoccdata
+    {
+        margin:             0.75em;
+    }
+
+        div.videoccdata img
+        {
+            border-width:   0px;
+            margin-left:    0.5em;
+            margin-right:   0.5em;
+            margin-top:     0.5em;
+        }
+
+    div.video-metadata
+    {
+        display:            inline-block;
+        line-height:        1.5em;
+        margin-left:        1.5em;
+        text-align:         left;
+        vertical-align:     top;
+        width:              256px;
+    }
+
+    div.videotitle
+    {
+        font-size:          1.5em;
+        margin-bottom:      0.5em;
+    }
+
+fieldset
+{
+    border-width:           0px;
+}
+
+    img.logo-big
+    {
+        padding-bottom:     0.5em;
+    }
+
+    img.openid-icon
+    {
+        padding-left:       0.2em;
+        vertical-align:     text-top;
+    }
+
+span.code
+{
+    font-family:    monospace;
+    font-weight:    normal;
+}
+
+span.heading
+{
+    font-size:      1.5em;
+}
+
+table.metadata,
+table.metadata-upload
+{
+    border-width:       0px;
+    border-collapse:    collapse;
+    width:              100%;
+}
+
+    table.metadata td.metadata-content,
+    table.metadata td.metadata-title,
+    table.metadata-upload td.metadata-content
+    {
+        text-align:     left;
+        width:          50%;
+    }
+
+    table.metadata td.metadata-title
+    {
+        width:          40%;
+    }
+
+    table.metadata-upload td.metadata-title
+    {
+        text-align:     right;
+        width:          50%;
+    }
+
+td.metadata-title
+{
+    color:              #606060;
+}
+
+ul[role="navigation"]
+{
+    display:            block;
+    height:             3em;
+}
+
+    ul[role="navigation"] li
+    {
+        float:              left;
+    }

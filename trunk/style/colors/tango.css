@@ -1,0 +1,117 @@
+/*
+Yolanda default stylesheet colors (using tango color palette)
+(c) 2007-2008 Nils Dagsson Moskopp
+
+This file is licensed under the WTF Public License
+(License terms: Do what the fuck you want.)
+
+Purpose of this file is to provide colors according to the Tango! palette.
+Protip: Use only CSS properties that contain "color" !
+
+Please replace the colors in this file with suitable Tango! equivalents.
+↑↑ Remove this notice as soon as this file holds only Tango! colors. ↑↑
+*/
+
+a
+{
+    /* what color is this ? */
+    color:              #3465a4;
+}
+
+a
+{
+}
+
+    a:focus
+    {
+        color:              #cc0000;
+    }
+
+    a:hover
+    {
+    }
+
+    a.footer,
+    a.header,
+    div.footer,
+    div.header
+    {
+        background-color:   #f0f0f0;
+        border-color:       #f0f0f0;
+    }
+
+    a.footer:hover,
+    a.header:hover
+    {
+        background-color:   #ffffff;
+        border-color:       #c0c0c0;
+    }
+
+div
+{
+}
+
+    div.footer,
+    div.header
+    {
+        border-color:       #c0c0c0;
+    }
+
+    div.messagebox
+    {
+        /* "Aluminium 5" */
+        border-color:   #555753;
+    }
+
+        div.messagebox#error
+        {
+            /* "Scarlet Red 1" + 30 luminosity */
+            background-color:   #f46060;
+        }
+
+        div.messagebox#warning
+        {
+            /* "Orange 1" */
+            background-color:   #fcaf3e;
+        }
+
+        div.messagebox#information
+        {
+            /* "Chameleon 1" + 30 luminosity */
+            background-color:   #a9ec68;
+        }
+
+    div.page-number
+    {
+        /* "Aluminium 5" */
+        border-color:   #555753;
+    }
+
+    div.tagcloud
+    {
+        /* Aluminium 1 */
+        background-color:   #eeeeec;
+        /* "Aluminium 5" */
+        border-color:   #555753;
+    }
+
+span
+{
+}
+
+    span.instruction,
+    span.protip
+    {
+        /* "Aluminium 5" */
+        color:   #555753;
+    }
+
+ul
+{
+}
+
+ul li:hover
+    {
+        /* Aluminium 1 */
+        background-color:   #eeeeec;
+    }

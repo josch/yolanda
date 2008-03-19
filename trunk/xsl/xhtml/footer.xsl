@@ -9,41 +9,36 @@
 
 <xsl:template name="footer">
 
-    <div class="footer">
+    <ul id="footer" role="navigation">
 
-        <a class="footer view-license">
-            <xsl:attribute name="href">
-                <xsl:value-of select="$site_strings[@id='path_license']" />
-            </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='footer_license']" />
-        </a>
+        <li>
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_license']" />
+                </xsl:attribute>
+                <xsl:value-of select="$locale_strings[@id='footer_license']" />
+            </a>
+        </li>
 
-        <a class="footer view-source-code">
-            <xsl:attribute name="href">
-                <xsl:value-of select="$site_strings[@id='path_source-code']" />
-            </xsl:attribute>
-        <xsl:value-of select="$locale_strings[@id='footer_source_code']" />
-        </a>
+        <li>
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_source-code']" />
+                </xsl:attribute>
+            <xsl:value-of select="$locale_strings[@id='footer_source_code']" />
+            </a>
+        </li>
 
-        <a class="footer report-bug">
-            <xsl:attribute name="href">
-                <xsl:value-of select="$site_strings[@id='path_report_bug']" />
-            </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='footer_report_bug']" />
-        </a>
+        <li>
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$site_strings[@id='path_report_bug']" />
+                </xsl:attribute>
+                <xsl:value-of select="$locale_strings[@id='footer_report_bug']" />
+            </a>
+        </li>
 
-        <a class="footer view-xml">
-            <xsl:attribute name="href">
-<!--
-        caveat: this currently does not work on root level
-        apache magic wanted
--->
-                ?xslt=null
-            </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='footer_view_xml']" />
-        </a>
-
-    </div>
+    </ul>
 
 <!--
     <br />

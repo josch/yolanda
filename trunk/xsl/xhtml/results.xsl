@@ -23,6 +23,18 @@
                         <xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
                     </xsl:attribute>
                 </img>
+<!--
+                postponed - css positioning fails it in firefox and konqueror
+
+                <img class="flag">
+                    <xsl:attribute name="src">
+                        <xsl:value-of select="concat('/images/flags/', $locale, '.png')" />
+                    </xsl:attribute>
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="$locale" />
+                    </xsl:attribute>
+                </img>
+-->
             </a>
             <br />
             <a>

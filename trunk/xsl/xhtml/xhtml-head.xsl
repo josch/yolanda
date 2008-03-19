@@ -10,33 +10,43 @@
 <xsl:template name="xhtml-head">
 
         <head>
-            <meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+            <meta
+                http-equiv="Content-Type"
+                content="application/xhtml+xml;charset=utf-8"
+            />
 
             <xsl:choose>
+
                 <xsl:when test="not(//@embed)">
-                    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-                    <link rel="stylesheet" type="text/css">
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="//@stylesheet" />
-                        </xsl:attribute>
-                    </link>
+                    <link
+                        rel="shortcut icon"
+                        type="image/x-icon"
+                        href="/images/favicon.ico"
+                    />
+                    <link
+                        rel="stylesheet"
+                        type="text/css"
+                        media="screen"
+                        href="/style/default.css"
+                    />
                 </xsl:when>
+
                 <xsl:when test="//@embed='video'">
-<!--
-                embedded stylesheet should rather be done through URL like
-                "http://localhost/video/4chan%20city/3/embed=true+stylesheet=embedded.css"
--->
-                    <link rel="stylesheet" type="text/css">
-                        <xsl:attribute name="href">
-                            /style/embedded.css
-                        </xsl:attribute>
-                    </link>
+                    <link
+                        rel="stylesheet"
+                        type="text/css"
+                        href="/style/embedded.css"
+                    />
                 </xsl:when>
+
             </xsl:choose>
 
             <xsl:if test="boolean(//results)">
 
-                <link rel="alternate" type="application/rss+xml">
+                <link
+                    rel="alternate"
+                    type="application/rss+xml"
+                >
                     <xsl:attribute name="title">
                         <xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
                     </xsl:attribute>
@@ -50,7 +60,10 @@
                     </xsl:attribute>
                 </link>
 
-                <link rel="alternate" type="application/rss+xml">
+                <link
+                    rel="alternate"
+                    type="application/rss+xml"
+                >
                     <xsl:attribute name="title">
                         <xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
                     </xsl:attribute>

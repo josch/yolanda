@@ -27,8 +27,6 @@
     <string id="footer_license">view license</string>
     <string id="footer_source_code">get source code</string>
     <string id="footer_report_bug">report bug</string>
-    <string id="footer_view_xml">view this page as xml</string>
-    
 
     <!-- front page -->
     <string id="button_find">Find</string>
