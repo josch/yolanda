@@ -10,22 +10,20 @@
 <xsl:template name="video">
 
     <!--
-    <xsl:if test="not(//@embed='true')">        
-        <div class="videotitle">
-            <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-            <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
-            <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
-            <xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
-            <xsl:choose>
-                <xsl:when test="$hours=0">
-                    (<xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
-                </xsl:when>
-                <xsl:otherwise>
-                    (<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
-                </xsl:otherwise>
-            </xsl:choose>
-        </div>
-    </xsl:if>
+    <div class="videotitle">
+        <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+        <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
+        <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
+        <xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
+        <xsl:choose>
+            <xsl:when test="$hours=0">
+                (<xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+            </xsl:when>
+            <xsl:otherwise>
+                (<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
+            </xsl:otherwise>
+        </xsl:choose>
+    </div>
 -->
 
     <script type="text/javascript">
@@ -41,154 +39,62 @@
         function hide_movie()
             {
             document.getElementById('video').style.display = 'none';
-            document.getElementById('container').style.display = 'block';
+            document.getElementById('preview').style.display = 'block';
             }
 
         function show_movie()
             {
             document.getElementById('video').style.display = 'inline';
-            document.getElementById('container').style.display = 'none';
+            document.getElementById('preview').style.display = 'none';
+            window.setTimeout("hide_movie()",
+        ]]>
+        </xsl:text>
+<!--
+        window.setTimeout is the stupidest hack i could imagine
+        it doesn't work reliably because of BUFFERING, but
+        3 seconds for initializing should be enough for now ...
+-->
+        <xsl:value-of select="(//video/@duration + 3) * 1000" />
+        <xsl:text disable-output-escaping="yes">
+        <![CDATA[
+            );
             }
-
         ]]]]></xsl:text>
         <xsl:text disable-output-escaping="yes">></xsl:text>
     </script>
 
-    <object type="application/ogg" id="video">
+    <xsl:call-template name="video-description" />
 
-        <xsl:attribute name="width">
-            <xsl:value-of select="//video/@width" />
-        </xsl:attribute>
-        <xsl:attribute name="height">
-            <xsl:value-of select="//video/@height" />
-        </xsl:attribute>
-        <xsl:attribute name="data">
-            <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
-        </xsl:attribute>
+    <xsl:call-template name="video-metadata" />
 
-        <div class="messagebox" id="error">
-            <img src="/images/tango/dialog-error.png" />
-            <xsl:value-of select="$locale_strings[@id='error_no_ogg_plugin']" />
-        </div>
+    <xsl:call-template name="video-actions" />
 
-        <div>
-            <img src="/images/vlc.png"/>
-            <img src="/images/mplayer.png"/>
-            <img src="/images/totem.png"/>
-        </div>
+    <xsl:call-template name="video-object" />
 
-    </object>
+    <xsl:call-template name="cclicense"/>
 
-    <div id="container" style="display: none;">
-
-        <img>
-            <xsl:attribute name="src">
-                <xsl:value-of select="//video/@thumbnail" />
-            </xsl:attribute>
-            <xsl:attribute name="alt">
-                <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-            </xsl:attribute>
-            <xsl:attribute name="height">
-                <xsl:value-of select="//video/@height" />
-            </xsl:attribute>
-            <xsl:attribute name="width">
-                <xsl:value-of select="//video/@width" />
-            </xsl:attribute>
-        </img>
-
-        <form>
-            <xsl:attribute name="action">
-                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-            </xsl:attribute>
-            <button
-                name="playback"
-                type="button"
-                value="playback"
-                onclick="show_movie()">
-                <img src="/images/tango/media-playback-start.png" alt="playback" />
-                <br />
-                <xsl:value-of select="$locale_strings[@id='video_playback']" />
-                <br />
-                <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
-                <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
-                <xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
-                <xsl:choose>
-                    <xsl:when test="$hours=0">
-                        (<xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
-                    </xsl:when>
-                    <xsl:otherwise>
-                        (<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
-                    </xsl:otherwise>
-                </xsl:choose>
-            </button>
-            <button
-                name="download"
-                type="submit"
-                value="download">
-                <img src="/images/tango/document-save.png" alt="download" />
-                <br />
-                <xsl:value-of select="$locale_strings[@id='video_download']" />
-                <br />
-                (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='megabytes']" />)
-            </button>
-        </form>
-
+    <div class="videostuff">
+        <span class="protip-embed">
+            <xsl:value-of select="$locale_strings[@id='protip_embed']" />
+            <br />
+            <code>
+                &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
+                    type="application/xml"
+                    width=<xsl:value-of select="//video/@width + 24" />
+                    height=<xsl:value-of select="//video/@height + 48" />
+                /&gt;
+            </code>
+        </span>
     </div>
 
-    <xsl:if test="not(//@embed='true')">
-
 <!--
-        <object type="application/xml" style="float: left">
-            <xsl:attribute name="data">
-                <xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=video')"/>
-            </xsl:attribute>
-            <xsl:attribute name="width">
-                75%
-            </xsl:attribute>
-        </object>
+    comment system is broken (similar to the german online petition system)
+    if a video ever gets OVER NEIN THOUSAND comments, the shit hits the fan
+
+    <xsl:call-template name="commentform"/>
+    <xsl:call-template name="comments"/>
 -->
 
-        <xsl:call-template name="videometadata"/>
-        <br />
-
-        <div class="button-download">
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-                </xsl:attribute>
-                <img src="/images/tango/document-save.png" />
-            </a>
-            <br />
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='video_download']" />
-            </a>
-            <br />
-            (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='megabytes']" />)
-        </div>
-
-        <xsl:call-template name="cclicense"/>
-
-        <div class="videostuff">
-            <span class="protip-embed">
-                <xsl:value-of select="$locale_strings[@id='protip_embed']" />
-                <br />
-                <span class="code">
-                    &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
-                        type="application/xml"
-                        width=<xsl:value-of select="//video/@width + 24" />
-                        height=<xsl:value-of select="//video/@height + 48" />
-                    /&gt;
-                </span>
-            </span>
-        </div>
-
-        <xsl:call-template name="commentform"/>
-        <xsl:call-template name="comments"/>
-    
-    </xsl:if>
 </xsl:template>
 
 <xsl:template name="comments">
@@ -307,13 +213,53 @@
 
 </xsl:template>
 
-<xsl:template name="videometadata">
+<xsl:template name="video-actions">
+    <div class="button-download">
+        <a>
+            <xsl:attribute name="href">
+                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+            </xsl:attribute>
+            <img src="/images/tango/document-save.png" />
+        </a>
+        <br />
+        <a>
+            <xsl:attribute name="href">
+                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+            </xsl:attribute>
+            <xsl:value-of select="$locale_strings[@id='video_download']" />
+        </a>
+        <br />
+        (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='unit_megabytes']" />)
+    </div>
+</xsl:template>
 
-    <div class="video-metadata">
+<xsl:template name="video-description">
 
+    <div class="description">
+        <h1>
+            <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+            <span class="duration">
+                <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
+                <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
+                <xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
+                <xsl:choose>
+                    <xsl:when test="$hours=0">
+                        <xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </h1>
         <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
+    </div>
 
-        <hr />
+</xsl:template>
+
+<xsl:template name="video-metadata">
+
+    <div class="metadata">
 
         <table class="metadata">
 
@@ -392,6 +338,90 @@
 
         </table>
         
+    </div>
+
+</xsl:template>
+
+<xsl:template name="video-object">
+
+    <object type="application/ogg" id="video">
+
+        <xsl:attribute name="width">
+            <xsl:value-of select="//video/@width" />
+        </xsl:attribute>
+        <xsl:attribute name="height">
+            <xsl:value-of select="//video/@height" />
+        </xsl:attribute>
+        <xsl:attribute name="data">
+            <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
+        </xsl:attribute>
+
+        <div class="messagebox" id="error">
+            <xsl:value-of select="$locale_strings[@id='error_no_ogg_plugin']" />
+        </div>
+
+        <div style="margin-right:22em;">
+<!--
+        TODO: we need a plugin download area
+        (has to contain download links for every system)
+-->
+            <img src="/images/vlc.png"/>
+            <img src="/images/mplayer.png"/>
+            <img src="/images/totem.png"/>
+        </div>
+
+    </object>
+
+    <div id="preview" style="display: none;">
+
+        <img>
+            <xsl:attribute name="src">
+                <xsl:value-of select="//video/@thumbnail" />
+            </xsl:attribute>
+            <xsl:attribute name="alt">
+                <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+            </xsl:attribute>
+            <xsl:attribute name="height">
+                <xsl:value-of select="//video/@height" />
+            </xsl:attribute>
+            <xsl:attribute name="width">
+                <xsl:value-of select="//video/@width" />
+            </xsl:attribute>
+        </img>
+
+        <form>
+            <xsl:attribute name="action">
+                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
+            </xsl:attribute>
+            <button
+                name="playback"
+                type="button"
+                onclick="show_movie()"
+            >
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$locale_strings[@id='video_playback']" />
+                </xsl:attribute>
+                <img src="/images/tango/128x128/player_play.png">
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="$locale_strings[@id='video_playback']" />
+                    </xsl:attribute>
+                </img>
+            </button>
+            <button
+                name="download"
+                type="submit"
+            >
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$locale_strings[@id='video_download']" />
+                </xsl:attribute>
+                <img src="/images/tango/128x128/document-save.png">
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="$locale_strings[@id='video_download']" />
+                    </xsl:attribute>
+                </img>
+            </button>
+        </form>
+
     </div>
 
 </xsl:template>

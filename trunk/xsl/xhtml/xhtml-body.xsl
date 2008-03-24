@@ -17,24 +17,38 @@
             </xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="not(//@embed)">
-
-            <xsl:call-template name="header"/>
-
-            <xsl:if test="//message">
-                <xsl:call-template name="message"/>
-            </xsl:if>
-
-            <xsl:if test="//search">
-                <xsl:call-template name="searchbar"/>
-            </xsl:if>
-
-        </xsl:if>
+        <xsl:call-template name="header"/>
 
         <xsl:choose>
             <xsl:when test="//frontpage">
-                <xsl:call-template name="frontpage"/>
+                <xsl:call-template name="searchbar" />
+                <xsl:call-template name="loginbox" />
+                <xsl:call-template name="tagcloud" />
+
+                <xsl:if test="//message">
+                    <xsl:call-template name="message"/>
+                </xsl:if>
+
+                <xsl:call-template name="splashbox" />
             </xsl:when>
+
+            <xsl:when test="//video">
+                <xsl:call-template name="searchbar" />
+
+                <xsl:if test="//message">
+                    <xsl:call-template name="message"/>
+                </xsl:if>
+
+                <xsl:call-template name="video"/>
+            </xsl:when>
+
+            <xsl:when test="//search">
+                <xsl:call-template name="searchbar" />
+                <xsl:call-template name="results"/>
+            </xsl:when>
+        </xsl:choose>
+
+        <xsl:choose>
             <xsl:when test="//registerform">
                 <xsl:call-template name="registerform"/>
             </xsl:when>
@@ -44,25 +58,15 @@
             <xsl:when test="//uploadform">
                 <xsl:call-template name="uploadform"/>
             </xsl:when>
-            <xsl:when test="//search">
-                <xsl:call-template name="results"/>
-            </xsl:when>
             <xsl:when test="//advancedsearch">
                 <xsl:call-template name="advancedsearch"/>
-            </xsl:when>
-            <xsl:when test="//video">
-                <xsl:call-template name="video"/>
             </xsl:when>
             <xsl:when test="//settings">
                 <xsl:call-template name="settings"/>
             </xsl:when>
         </xsl:choose>
 
-        <xsl:if test="not(//@embed)">
-
-            <xsl:call-template name="footer"/>
-
-        </xsl:if>
+        <xsl:call-template name="footer"/>
 
     </body>
 

@@ -16,7 +16,6 @@ Please clear this file of any CSS properties that do not define structure.
 body
 {
     min-height:         100%;
-    text-align:         center;
 }
 
 a
@@ -33,44 +32,44 @@ a
 
     a.tag
     {
-        display:        inline-block;
+        display:        block;
+        float:          left;
     }
 
 div
 {
 }
 
-    div.button-download,
-    div.button-edit,
-    div.button-junk
+    div.button-download
     {
-        display:        inline-block;
-    }
-
-    div#container
-    {
-            position: relative;
-    }
-
-        div#container form
-        {
-            position:       absolute;
-            top:            50%;
-            width:          100%
-        }
-
-    div.commentform,
-    div.loginform,
-    div.registerform,
-    div.settingsform,
-    div.uploadform
-    {
-        line-height:    2.5em;
-        margin:         1.5em;
+        clear:          right;
+        float:          right;
+        width:          20em;
     }
 
     div.comments
     {
+    }
+
+    div.description
+    {
+        clear:          right;
+        float:          right;
+        width:          20em;
+    }
+
+    div.loginbox
+    {
+        clear:          right;
+        float:          right;
+        width:          20em;
+    }
+
+    div.metadata
+    {
+        clear:          right;
+        float:          right;
+        width:          20em;
     }
 
     div.page-number
@@ -82,56 +81,68 @@ div
         overflow:       visible;
     }
 
-    div.result
+    div#preview
     {
-        display:        inline-block;
-        position:       relative;
-        vertical-align: top;
+        position: relative;
     }
 
-        div.result img
+        div#preview form
+        {
+            height:         100%;
+            width:          100%;
+        }
+
+            div#preview form button
+            {
+                /* crude center hack (second part in bridget.css) */
+                position:       absolute;
+                top:            50%;
+                left:           50%;
+                width:          15em;
+                height:         15em;
+            }
+
+        div#preview img
         {
         }
 
-/*
-        indefinitely postponed - does any major browser support absolute
-        positioning /inside inline-blocks/ ?
+    div.results
+    {
+    
+    }
 
-        div.result img.flag
+        div.results div.result
         {
-            position:       absolute;
-            bottom:         32px;
-            right:          10px;
+            float:          left;
+            position:       relative;
         }
-*/
 
-    div.search
+            div.results div.result img
+            {
+            }
+
+            div.results div.result img.flag
+            {
+                bottom:         3em;
+                position:       absolute;
+                right:          0.5em;
+            }
+
+    div.searchbar
     {
-        padding:            0.75em;
+        float:          right;
+        width:          20em;
     }
 
-    div.search-small
+    div.splashbox
     {
-        clear:              both;
-        float:              right;
-        height:             0em;
-        overflow:           visible;
-        text-align:         right;
-    }
-
-    div.toplists
-    {
-        padding:    0.75em;
     }
 
     div.tagcloud
     {
-        border-style:       solid;
-        border-width:       1px;
-        margin:             0.75em;
-        margin-left:        20%;
-        margin-right:       20%;
-        padding:            0.75em;
+        clear:          right;
+        float:          right;
+        width:          20em;
     }
 
     div.video
@@ -153,48 +164,46 @@ div
             margin-top:     0.5em;
         }
 
-    div.video-metadata
-    {
-        display:            inline-block;
-        line-height:        1.5em;
-        margin-left:        1.5em;
-        text-align:         left;
-        vertical-align:     top;
-        width:              256px;
-    }
-
     div.videotitle
     {
         font-size:          1.5em;
-        margin-bottom:      0.5em;
     }
 
-fieldset
+form
 {
-    border-width:           0px;
 }
 
-    img.logo-big
+    form fieldset
     {
-        padding-bottom:     0.5em;
     }
 
-    img.openid-icon
+        form fieldset input[type="text"]
+        {
+        }
+
+h1
+{
+}
+
+span
+{
+}
+
+    span.duration
     {
-        padding-left:       0.2em;
-        vertical-align:     text-top;
     }
 
-span.code
-{
-    font-family:    monospace;
-    font-weight:    normal;
-}
+    span.heading
+    {
+    }
 
-span.heading
-{
-    font-size:      1.5em;
-}
+    span.instruction
+    {
+    }
+
+    span.protip
+    {
+    }
 
 table.metadata,
 table.metadata-upload
@@ -225,16 +234,44 @@ table.metadata-upload
 
 td.metadata-title
 {
-    color:              #606060;
+    color:          #606060;
 }
 
-ul[role="navigation"]
+ul
 {
-    display:            block;
-    height:             3em;
 }
 
-    ul[role="navigation"] li
+    ul#footer,
+    ul#header
     {
-        float:              left;
+        clear:          both;
+        display:        block;
+        height:         3em;
     }
+
+        ul#footer li,
+        ul#header li
+        {
+            float:          left;
+        }
+
+            ul#footer li a,
+            ul#header li a
+            {
+            }
+
+    ul#queries
+    {
+    }
+
+        ul#queries li#latestadditions
+        {
+        }
+
+        ul#queries li#mostviews
+        {
+        }
+
+        ul#queries li#mostdownloads
+        {
+        }

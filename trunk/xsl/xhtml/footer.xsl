@@ -45,11 +45,15 @@
     <xsl:value-of select="$locale_strings[@id='footer_copyright']" />
 -->
 
-    <br />
-
     <span class="protip">
         <xsl:value-of select="$locale_strings[@id='footer_warranty']" />
     </span>
+    <br />
+    <img alt="AGPL 3 Free Software">
+        <xsl:attribute name="src">
+            <xsl:value-of select="$site_strings[@id='path_root']" />/images/agplv3-155x51.png
+        </xsl:attribute>
+    </img>
 
 </xsl:template>
 

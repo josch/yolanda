@@ -5,8 +5,8 @@ Yolanda default stylesheet colors (using tango color palette)
 This file is licensed under the WTF Public License
 (License terms: Do what the fuck you want.)
 
-Purpose of this file is to provide colors according to the Tango! palette.
-Protip: Use only CSS properties that contain "color" !
+Purpose of this file is to provide graphics according to the Tango! palette.
+Protip: Graphics are colors, background and pseudo-content images !
 
 Please replace the colors in this file with suitable Tango! equivalents.
 ↑↑ Remove this notice as soon as this file holds only Tango! colors. ↑↑
@@ -49,18 +49,37 @@ a
 
 div
 {
+    /* "Aluminium 5" */
+    border-color:   #555753;
 }
 
-    div.footer,
-    div.header
+    div.button-download
     {
-        border-color:       #c0c0c0;
     }
+
+        div.button-download img
+        {
+        }
+
+div.loginbox
+{
+}
+
+    div.loginbox form
+    {
+    }
+
+        div.loginbox form fieldset
+        {
+        }
+
+            div.loginbox form fieldset input:after
+            {
+                content:       url(../../images/openid-icon.png);
+            }
 
     div.messagebox
     {
-        /* "Aluminium 5" */
-        border-color:   #555753;
     }
 
         div.messagebox#error
@@ -69,10 +88,10 @@ div
             background-color:   #f46060;
         }
 
-        div.messagebox#warning
+        div.messagebox#error:before
         {
-            /* "Orange 1" */
-            background-color:   #fcaf3e;
+        /* TODO: find out how to set vertical-align:middle for this image */
+        content:        url(../../images/tango/32x32/dialog-error.png);
         }
 
         div.messagebox#information
@@ -81,25 +100,91 @@ div
             background-color:   #a9ec68;
         }
 
+        div.messagebox#information:before
+        {
+        /* TODO: find out how to set vertical-align:middle for this image */
+        content:        url(../../images/tango/32x32/dialog-information.png);
+        }
+
+        div.messagebox#warning
+        {
+            /* "Orange 1" */
+            background-color:   #fcaf3e;
+        }
+
+        div.messagebox#warning:before
+        {
+        /* TODO: find out how to set vertical-align:middle for this image */
+        content:        url(../../images/tango/32x32/dialog-warning.png);
+        }
+
     div.page-number
     {
         /* "Aluminium 5" */
         border-color:   #555753;
     }
 
+div#preview
+{
+}
+
+        div#preview form
+        {
+        }
+
+    div.result
+    {
+    }
+
+        div.result img
+        {
+            /* "Aluminium 5" */
+            border-color:   #555753;
+        }
+
+    div.searchbar
+    {
+    }
+
+    div.splashbox
+    {
+    }
+
     div.tagcloud
     {
-        /* Aluminium 1 */
-        background-color:   #eeeeec;
-        /* "Aluminium 5" */
-        border-color:   #555753;
     }
+
+
+form
+{
+}
+
+    form fieldset
+    {
+    }
+
+        form fieldset input[type="text"]
+        {
+        }
 
 span
 {
 }
 
-    span.instruction,
+    span.duration
+    {
+    }
+
+    span.heading
+    {
+    }
+
+    span.instruction
+    {
+        /* "Aluminium 5" */
+        color:   #555753;
+    }
+
     span.protip
     {
         /* "Aluminium 5" */
@@ -110,8 +195,40 @@ ul
 {
 }
 
-ul li:hover
+    ul#footer,
+    ul#header
     {
-        /* Aluminium 1 */
-        background-color:   #eeeeec;
+        /* "Aluminium 5" */
+        border-color:   #555753;
     }
+
+        ul#footer li:hover,
+        ul#header li:hover
+        {
+            /* Aluminium 1 */
+            background-color:   #eeeeec;
+        }
+
+            ul#footer li a,
+            ul#footer li a
+            {
+            }
+
+    ul#queries
+    {
+    }
+
+        ul#queries li#latestadditions
+        {
+            list-style-image:       url(../../images/tango/16x16/actions/document-new.png)
+        }
+
+        ul#queries li#mostviews
+        {
+            list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png)
+        }
+
+        ul#queries li#mostdownloads
+        {
+            list-style-image:       url(../../images/tango/16x16/actions/document-save.png)
+        }

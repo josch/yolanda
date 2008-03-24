@@ -17,19 +17,23 @@
     omit-xml-declaration="no"
 />
 
-<xsl:include href="./xhtml/advancedsearch.xsl"/>
-<xsl:include href="./xhtml/embedded.xsl"/>
-<xsl:include href="./xhtml/footer.xsl"/>
-<xsl:include href="./xhtml/frontpage.xsl"/>
-<xsl:include href="./xhtml/header.xsl"/>
-<xsl:include href="./xhtml/loginform.xsl"/>
-<xsl:include href="./xhtml/register.xsl"/>
-<xsl:include href="./xhtml/results.xsl"/>
-<xsl:include href="./xhtml/settings.xsl"/>
-<xsl:include href="./xhtml/upload.xsl"/>
-<xsl:include href="./xhtml/video.xsl"/>
-<xsl:include href="./xhtml/xhtml-body.xsl"/>
-<xsl:include href="./xhtml/xhtml-head.xsl"/>
+<!-- each xsl:template should have it's own file -->
+<xsl:include href="./xhtml/advancedsearch.xsl" />
+<xsl:include href="./xhtml/embedded.xsl" />
+<xsl:include href="./xhtml/footer.xsl" />
+<xsl:include href="./xhtml/header.xsl" />
+<xsl:include href="./xhtml/messagebox.xsl" />
+<xsl:include href="./xhtml/loginbox.xsl" />
+<xsl:include href="./xhtml/register.xsl" />
+<xsl:include href="./xhtml/results.xsl" />
+<xsl:include href="./xhtml/settings.xsl" />
+<xsl:include href="./xhtml/splash.xsl" />
+<xsl:include href="./xhtml/searchbar.xsl" />
+<xsl:include href="./xhtml/tagcloud.xsl" />
+<xsl:include href="./xhtml/upload.xsl" />
+<xsl:include href="./xhtml/video.xsl" />
+<xsl:include href="./xhtml/xhtml-body.xsl" />
+<xsl:include href="./xhtml/xhtml-head.xsl" />
 
 <xsl:variable name="locale">
     <xsl:choose>
@@ -43,8 +47,11 @@
 <xsl:variable name="site_strings" select="document('../site/main.xml')//strings/string" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
 
-<!-- this kills 99% of the processed XML... sorry Tim Bray.... -->
-<!-- had to look up Bray in Wikipedia, 2 points off my geek score -->
+<!--
+this kills 99% of the processed XML
+we have to do this because XHTML + CSS presentation is dependant on the order of XHTML elements
+hopefully, CSS 3 will fix this
+-->
 <xsl:template match="@*|node()">
     <xsl:if test="not(/)">
         <xsl:copy>
@@ -61,53 +68,6 @@
     <xsl:call-template name="xhtml-body" />
 
     </html>
-</xsl:template>
-
-<xsl:template name="searchbar">
-
-    <div class="search-small">
-        <form method="get" enctype="text/plain">
-            <xsl:attribute name="action">
-                <xsl:value-of select="$site_strings[@id='path_results']" />
-            </xsl:attribute>
-            <fieldset>
-                <xsl:value-of select="$locale_strings[@id='search']" />:
-                <input type="text" name="query" size="15">
-                    <xsl:attribute name="value">
-                        <xsl:if test="//results/@argument='query'">
-                            <xsl:value-of select="//results/@value" />
-                        </xsl:if>
-                    </xsl:attribute>
-                </input>
-            </fieldset>
-        </form>
-    </div>
-
-</xsl:template>
-
-<xsl:template name="message">
-
-    <div class="messagebox">
-        <xsl:attribute name="id">
-            <xsl:value-of select="/page/message/@type" />
-        </xsl:attribute>
-        <xsl:choose>
-            <xsl:when test="/page/message/@type='error'">
-                <img src="/images/tango/dialog-error.png" />
-            </xsl:when>
-            <xsl:when test="/page/message/@type='information'">
-                <img src="/images/tango/dialog-information.png" />
-            </xsl:when>
-            <xsl:when test="/page/message/@type='warning'">
-                <img src="/images/tango/dialog-warning.png" />
-            </xsl:when>
-        </xsl:choose>
-        <xsl:variable name="messagetext" select="/page/message/@text" />
-        <xsl:value-of select="$locale_strings[@id=$messagetext]" />
-        <xsl:value-of select="/page/message/@value" />
-        <!-- probably one can do this on one line, dunno how -->
-    </div>
-
 </xsl:template>
 
 </xsl:stylesheet>

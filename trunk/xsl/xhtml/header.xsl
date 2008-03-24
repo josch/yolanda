@@ -11,33 +11,6 @@
 
     <ul id="header" role="navigation">
 
-        <li>
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
-            </a>
-        </li>
-
-        <li>
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='query_mostviews']" />
-            </a>
-        </li>
-
-        <li>
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
-            </a>
-        </li>
-
         <xsl:choose>
             <xsl:when test="string-length(//@username)=0">
 
@@ -50,17 +23,8 @@
                     </a>
                 </li>
 
-                <li>
-                    <a>
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="$site_strings[@id='path_login']" />
-                        </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='login']" />
-                    </a>
-                </li>
-
 <!--
-                "login with openid" is fukken obsolete and will be removed in future iterations
+                "login with openid" is obsolete and will be removed in future iterations
 -->
 
                 <li>

@@ -198,7 +198,7 @@
                     </fieldset>
                 </form>
 
-                <xsl:call-template name="innerresults"/>
+                <xsl:call-template name="results-listing"/>
 
             </xsl:when>
 

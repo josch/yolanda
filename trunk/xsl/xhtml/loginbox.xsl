@@ -7,7 +7,47 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
 
+<xsl:template name="loginbox">
+    <div class="loginbox">
+        <form method="post">
+            <xsl:attribute name="action">
+                <xsl:value-of select="$site_strings[@id='path_login']" />
+            </xsl:attribute>
+            <fieldset>
+
+<!--
+                why do we need this hidden input ?
+-->
+                <input name="action" type="hidden" value="login" />
+
+                <label for="user">
+                    <xsl:value-of select="$locale_strings[@id='username']" />:
+                </label>
+                <br />                
+                <input name="user" type="text" />
+                <br />
+
+                <label for="pass">
+                    <xsl:value-of select="$locale_strings[@id='password']" />:
+                </label>
+                <br />
+                <input name="pass" type="password" />
+
+                <input type="submit" name="login" >
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="$locale_strings[@id='button_login']" />
+                    </xsl:attribute>
+                </input>
+            </fieldset>
+        </form>
+    </div>
+
+</xsl:template>
+
 <xsl:template name="loginform">
+<!--
+    the loginform template is deprecated
+-->
     <div class="loginform">
         <xsl:choose>
             <xsl:when test="//loginform/@action='openid'">

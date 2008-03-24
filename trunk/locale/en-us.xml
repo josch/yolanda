@@ -33,9 +33,9 @@
     <string id="button_lucky">Instant Access</string>
     <string id="button_advanced">Advanced Search</string>
 
-    <string id="query_latestadditions">latest additions</string>
+    <string id="query_latestadditions">new videos</string>
     <string id="query_mostdownloads">most downloaded</string>
-    <string id="query_mostviews">most viewed</string>
+    <string id="query_mostviews">popular videos</string>
 
     <!-- errors -->
     <string id="error_202c">Error 202c - Access forbidden by government.</string>
@@ -159,7 +159,6 @@
     <string id="video_playback">plackback</string>
     <string id="junk_video">mark as junk</string>
     <string id="edit_video">edit</string>
-    <string id="megabytes">MB</string>
     <string id="watch_browserplugin">use browser plugin</string>
     <string id="watch_cortadoapplet">use java applet</string>
     <string id="license_conditions">license conditions</string>
@@ -199,6 +198,12 @@
     <string id="rss_title_results_all_pages">all results</string>
     <string id="rss_description_1">This is an RSS Feed for the query "</string>
     <string id="rss_description_2">".</string>
+
+    <!-- units -->
+    <string id="unit_megabytes">MB</string>
+    <string id="unit_seconds">sec</string>
+    <string id="unit_minutes">min</string>
+    <string id="unit_hours">h</string>
 
 </strings>
 
