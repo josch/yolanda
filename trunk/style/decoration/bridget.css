@@ -67,16 +67,17 @@ div
     {
     }
 
-    div.button-download
+    div.cc-license
     {
         /* TODO: find out /why we do this/ (see div.searchbar) ! */
         margin-top:         0em;
         vertical-align:     top;
     }
 
-        div.button-download img
+        div.cc-license img
         {
-            margin:     0.5em;
+            border-width:   0px;
+            margin:         0.5em;
         }
 
     div.cc-license-chooser
@@ -107,6 +108,7 @@ div
 
     div.messagebox
     {
+        font-weight:        bold;
         /* correct spacing to avoid overlapping with float:right elements */
         margin-right:       22em;
     }
@@ -135,6 +137,12 @@ div
     {
         font-size:      40px;
         overflow:       visible;
+    }
+
+    div.protip-embed
+    {
+        /* correct spacing to avoid overlapping with float:right elements */
+        margin-right:       22em;
     }
 
 div#preview
@@ -167,11 +175,10 @@ div#preview
 
     div.results
     {
-/*        border-width:       0px;*/
+        border-width:       0px;
         /* correct spacing to avoid overlapping with float:right elements */
-        margin:             0em;
         margin-right:       22em !important;
-        padding:            0em;
+        padding:            0px;
     }
 
         div.results div.result
@@ -208,6 +215,10 @@ div#preview
         text-align:         justify;
     }
 
+    div.video
+    {
+    }
+
 form
 {
 }
@@ -221,11 +232,27 @@ form
         {
         }
 
-    h1
+h1
+{
+    font-weight:        normal;
+    font-size:          2em;
+    text-align:         center;
+}
+
+li
+{
+}
+
+    li#latestadditions
     {
-        font-weight:        normal;
-        font-size:          2em;
-        text-align:         center;
+    }
+
+    li#mostviews
+    {
+    }
+
+    li#mostdownloads
+    {
     }
 
 input
@@ -238,18 +265,24 @@ img
     border-width:       0;
 }
 
+p
+{
+    margin:         0.5em;
+    padding:        0.5em;
+}
+
 span
 {
 }
 
     span.duration:after
     {
-        content:            ") ";
+        content:            ")";
     }
 
     span.duration:before
     {
-        content:            " (";
+        content:            "(";
     }
 
     span.instruction
@@ -275,6 +308,10 @@ ul
 {
 }
 
+    ul#account-actions
+    {
+    }
+
     ul#footer,
     ul#header
     {
@@ -297,20 +334,9 @@ ul
                 padding:            1em;
             }
 
+    ul#account-actions,
     ul#queries
     {
         font-size:          1.5em;
         font-weight:        bold;
     }
-
-        ul#queries li#latestadditions
-        {
-        }
-
-        ul#queries li#mostviews
-        {
-        }
-
-        ul#queries li#mostdownloads
-        {
-        }

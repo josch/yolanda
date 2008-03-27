@@ -65,26 +65,26 @@
 
     <xsl:call-template name="video-description" />
 
+    <xsl:call-template name="video-cclicense"/>
+
     <xsl:call-template name="video-metadata" />
 
+<!--
     <xsl:call-template name="video-actions" />
+-->
 
     <xsl:call-template name="video-object" />
 
-    <xsl:call-template name="cclicense"/>
-
-    <div class="videostuff">
-        <span class="protip-embed">
-            <xsl:value-of select="$locale_strings[@id='protip_embed']" />
-            <br />
-            <code>
-                &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
-                    type="application/xml"
-                    width=<xsl:value-of select="//video/@width + 24" />
-                    height=<xsl:value-of select="//video/@height + 48" />
-                /&gt;
-            </code>
-        </span>
+    <div class="protip-embed">
+        <xsl:value-of select="$locale_strings[@id='protip_embed']" />
+        <br />
+        <code>
+            &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
+                type="application/xml"
+                width=<xsl:value-of select="//video/@width + 24" />
+                height=<xsl:value-of select="//video/@height + 48" />
+            /&gt;
+        </code>
     </div>
 
 <!--
@@ -149,9 +149,13 @@
 
 </xsl:template>
 
-<xsl:template name="cclicense">
+<xsl:template name="video-cclicense">
 
-    <div class="videoccdata">
+    <div class="cc-license">
+<!--
+    TODO: make image paths relative
+    TODO: internationalized alt attributes
+
         <a>
             <xsl:attribute name="href">
                 <xsl:value-of select="//video/rdf:RDF/cc:License/@rdf:about" />
@@ -159,6 +163,7 @@
             <xsl:value-of select="$locale_strings[@id='license_conditions']" />:
         </a>
         <br />
+-->
         <a>
             <xsl:attribute name="href">
                 <xsl:value-of select="//video/rdf:RDF/cc:License/@rdf:about" />
@@ -167,45 +172,46 @@
             unfinished bizness
             <xsl:value-of select="@rdf:about" />
             <xsl:if test="true()">
-                <img src="./images/cc/somerights.png" />
+                <img src="/images/cc/somerights.png" />
             </xsl:if>
 -->
             <xsl:for-each select="//video/rdf:RDF/cc:License/cc:permits">
 <!--
-                since we are talking about digital media here, distribution actually /is/ reproduction
-                (also, i was too stupid to figure out how to test for both conditions).
+                since we are talking about digital media here, distribution actually /is/ reproduction.
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Reproduction'">
-                    <img src="./images/cc/cc-share.png" />
+                    <img src="./images/cc/32x32/cc-share.png" />
                 </xsl:if>
 -->
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Distribution'">
-                    <img src="./images/cc/cc-share.png" />
+                    <img alt="share" src="/images/cc/32x32/cc-share.png" />
                 </xsl:if>
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
-                    <img src="./images/cc/cc-remix.png" />
+                    <img alt="remix" src="/images/cc/32x32/cc-remix.png" />
                 </xsl:if>
             </xsl:for-each>
-            <xsl:for-each select="rdf:RDF/cc:License/cc:requires">
+
+            <xsl:for-each select="//video/rdf:RDF/cc:License/cc:requires">
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/Notice'">
-                    <img src="./images/cc/cc-by.png" />
+                    <img alt="by" src="/images/cc/32x32/cc-by.png" />
                 </xsl:if>
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/ShareAlike'">
-                    <img src="./images/cc/cc-sharealike.png" />
+                    <img alt="sharealike" src="/images/cc/32x32/cc-sharealike.png" />
                 </xsl:if>
 <!--
-                source code doesn't make much sense in video context.
+                source code doesn't make much sense in video context
+                (the blender people probably would like it)
                 still, this is preserved for potential future use.
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/SourceCode'">
-                SOURCE
+                    <img src="/images/cc/32x32/cc-source-code.png" />
                 </xsl:if>
--->
-            </xsl:for-each>
-            <xsl:for-each select="rdf:RDF/cc:License/cc:prohibits">        
+-->            </xsl:for-each>
+
+            <xsl:for-each select="//video/rdf:RDF/cc:License/cc:prohibits">        
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/CommercialUse'">
-                    <img src="./images/cc/cc-noncommercial.png" />
+                    <img alt="noncommercial" src="/images/cc/32x32/cc-noncommercial.png" />
                 </xsl:if>
                 <xsl:if test="@rdf:resource = 'http://web.resource.org/cc/DerivativeWorks'">
-                    <img src="./images/cc/cc-noderivatives.png" />
+                    <img alt="noderivatives" src="/images/cc/32x32/cc-noderivatives.png" />
                 </xsl:if>
             </xsl:for-each>
         </a>
@@ -213,6 +219,7 @@
 
 </xsl:template>
 
+<!--
 <xsl:template name="video-actions">
     <div class="button-download">
         <a>
@@ -232,12 +239,13 @@
         (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='unit_megabytes']" />)
     </div>
 </xsl:template>
+-->
 
 <xsl:template name="video-description">
 
     <div class="description">
         <h1>
-            <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
+            <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />&#160;
             <span class="duration">
                 <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
                 <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
@@ -303,12 +311,7 @@
                 </td>
             </tr>
 
-        </table>
-
-        <hr />
-
-        <table class="metadata">
-
+<!--
             <tr>
                 <td class="metadata-title">
                     <xsl:value-of select="$locale_strings[@id='DC.Publisher']" />:
@@ -326,6 +329,7 @@
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:date" />
                 </td>
             </tr>
+-->
 
             <tr>
                 <td class="metadata-title">

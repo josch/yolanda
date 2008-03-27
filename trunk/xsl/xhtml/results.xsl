@@ -51,7 +51,6 @@
                             <xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
                         </xsl:attribute>
                     </img>
-
                     <img class="flag">
                         <xsl:attribute name="src">
                             <xsl:value-of select="concat('/images/flags/', rdf:RDF/cc:Work/dc:language, '.png')" />
@@ -60,7 +59,6 @@
                             <xsl:value-of select="rdf:RDF/cc:Work/dc:language" />
                         </xsl:attribute>
                     </img>
-
                 </a>
                 <br />
                 <a>

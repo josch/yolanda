@@ -40,12 +40,16 @@ div
 {
 }
 
-    div.button-download
+    div.cc-license
     {
         clear:          right;
         float:          right;
         width:          20em;
     }
+
+        div.cc-license img
+        {
+        }
 
     div.comments
     {
@@ -65,6 +69,22 @@ div
         width:          20em;
     }
 
+    div.messagebox
+    {
+    }
+
+        div.messagebox#error
+        {
+        }
+
+        div.messagebox#information
+        {
+        }
+
+        div.messagebox#warning
+        {
+        }
+
     div.metadata
     {
         clear:          right;
@@ -79,6 +99,10 @@ div
         height:         32px;
         width:          32px;
         overflow:       visible;
+    }
+
+    div.protip-embed
+    {
     }
 
     div#preview
@@ -113,8 +137,10 @@ div
 
         div.results div.result
         {
-            float:          left;
-            position:       relative;
+/*
+            at this point, browsers such as firefox 2.0 mess up
+*/
+            display:        inline-block;
         }
 
             div.results div.result img
@@ -123,9 +149,10 @@ div
 
             div.results div.result img.flag
             {
-                bottom:         3em;
-                position:       absolute;
-                right:          0.5em;
+                position:       relative;
+                /* flag is 32px wide and has 1px borders */
+                right:          34px;
+                margin-right:   -34px;
             }
 
     div.searchbar
@@ -148,20 +175,14 @@ div
     div.video
     {
         display:            inline-block;
-        margin-bottom:      0.5em;
     }
 
     div.videoccdata
     {
-        margin:             0.75em;
     }
 
         div.videoccdata img
         {
-            border-width:   0px;
-            margin-left:    0.5em;
-            margin-right:   0.5em;
-            margin-top:     0.5em;
         }
 
     div.videotitle
@@ -182,6 +203,26 @@ form
         }
 
 h1
+{
+}
+
+li
+{
+}
+
+    li#latestadditions
+    {
+    }
+
+    li#mostviews
+    {
+    }
+
+    li#mostdownloads
+    {
+    }
+
+p
 {
 }
 
@@ -241,6 +282,10 @@ ul
 {
 }
 
+    ul#account-actions
+    {
+    }
+
     ul#footer,
     ul#header
     {
@@ -263,15 +308,3 @@ ul
     ul#queries
     {
     }
-
-        ul#queries li#latestadditions
-        {
-        }
-
-        ul#queries li#mostviews
-        {
-        }
-
-        ul#queries li#mostdownloads
-        {
-        }

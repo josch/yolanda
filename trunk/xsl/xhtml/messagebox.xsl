@@ -22,11 +22,11 @@
             </xsl:when>
         </xsl:choose>
         <xsl:variable name="messagetext" select="/page/message/@text" />
-        <strong>
+        <span class="message">
             <xsl:value-of select="$locale_strings[@id=$messagetext]" />
             <xsl:value-of select="/page/message/@value" />
             <!-- probably one can do this on one line, dunno how -->
-        </strong>
+        </span>
     </div>
 
 </xsl:template>

@@ -34,36 +34,36 @@
             </fieldset>
         </form>
 
-    <ul id="queries" role="navigation">
+        <ul id="queries" role="navigation">
 
-        <li id="latestadditions">
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
-            </a>
-        </li>
+            <li id="latestadditions">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
+                    </xsl:attribute>
+                    <xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
+                </a>
+            </li>
 
-        <li id="mostviews">
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='query_mostviews']" />
-            </a>
-        </li>
+            <li id="mostviews">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
+                    </xsl:attribute>
+                    <xsl:value-of select="$locale_strings[@id='query_mostviews']" />
+                </a>
+            </li>
 
-        <li id="mostdownloads">
-            <a>
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
-                </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
-            </a>
-        </li>
+            <li id="mostdownloads">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
+                    </xsl:attribute>
+                    <xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
+                </a>
+            </li>
 
-    </ul>
+        </ul>
 
     </div>
 

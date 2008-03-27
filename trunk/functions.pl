@@ -214,7 +214,7 @@ sub output_page
         {
             return $session->header(
                 -status=>'402 Payment required',
-                -cost=>'$9000.00',
+                -cost=>'$9001.00',  # OVER NEIN THOUSAND
             )
         }
         else

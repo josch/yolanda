@@ -155,16 +155,16 @@
     <string id="language_de-de">German</string>
 
     <!-- video page -->
-    <string id="video_download">download</string>
-    <string id="video_playback">plackback</string>
+    <string id="video_download">Download</string>
+    <string id="video_playback">Plackback</string>
     <string id="junk_video">mark as junk</string>
     <string id="edit_video">edit</string>
     <string id="watch_browserplugin">use browser plugin</string>
     <string id="watch_cortadoapplet">use java applet</string>
     <string id="license_conditions">license conditions</string>
     <string id="protip_embed">To embed the video on another web page, use the following HTML code:</string>
-    <string id="login_to_comment">login to comment</string>
-    <string id="comment_post">post</string>
+    <string id="login_to_comment">Login to comment</string>
+    <string id="comment_post">Post</string>
 
     <!-- embedded video page-->
     <string id="backlink">backlink</string>

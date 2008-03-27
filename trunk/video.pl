@@ -187,7 +187,38 @@ elsif($query->url_param('title') or $query->url_param('id'))
                 },
                 'cc:License'    =>
                 {
-                    'rdf:about' => $license
+                    'rdf:about'     => $license,
+# ↓↓ dummy code because josch is too lazy for DOIN IT RITE ↓↓
+                    'cc:permits'    =>
+                        {
+                            'rdf:resource'     => "http://web.resource.org/cc/Reproduction"
+                        },
+                    'cc:permits'    =>
+                        {
+                            'rdf:resource'     => "http://web.resource.org/cc/Distribution"
+                        },
+                    'cc:permits'    =>
+                        {
+                            'rdf:resource'     => "http://web.resource.org/cc/DerivativeWorks"
+                        },
+                    'cc:requires'    =>
+                        {
+                            'rdf:resource'     => "http://web.resource.org/cc/Notice"
+                        },
+                    'cc:requires'    =>
+                        {
+                            'rdf:resource'     => "http://web.resource.org/cc/ShareAlike"
+                        },
+                    'cc:prohibits'    =>
+                        {
+                            'rdf:resource'     => "http://web.resource.org/cc/CommercialUse"
+                        },
+                    'cc:prohibits'    =>
+                        {
+                            'rdf:resource'     => "http://web.resource.org/cc/DerivativeWorks"
+                        }
+# ↑↑ dummy code because josch is too lazy for DOIN IT RITE ↑↑
+# sadly, i dunno how to add multiple tags 
                 }
             }
         };

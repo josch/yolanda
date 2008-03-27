@@ -53,11 +53,11 @@ div
     border-color:   #555753;
 }
 
-    div.button-download
+    div.cc-license
     {
     }
 
-        div.button-download img
+        div.cc-license img
         {
         }
 
@@ -92,6 +92,7 @@ div.loginbox
         {
         /* TODO: find out how to set vertical-align:middle for this image */
         content:        url(../../images/tango/32x32/dialog-error.png);
+        height:         200px;
         }
 
         div.messagebox#information
@@ -122,6 +123,10 @@ div.loginbox
     {
         /* "Aluminium 5" */
         border-color:   #555753;
+    }
+
+    div.protip-embed
+    {
     }
 
 div#preview
@@ -167,6 +172,39 @@ form
         {
         }
 
+li
+{
+}
+
+    li#latestadditions
+    {
+        list-style-image:       url(../../images/tango/16x16/actions/document-new.png)
+    }
+
+    li#logout
+    {
+        list-style-image:       url(../../images/tango/16x16/actions/system-log-out.png)
+    }
+
+    li#mostviews
+    {
+        list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png)
+    }
+
+    li#mostdownloads
+    {
+        list-style-image:       url(../../images/tango/16x16/actions/document-save.png)
+    }
+
+    li#upload
+    {
+        list-style-image:       url(../../images/tango/16x16/actions/go-up.png)
+    }
+
+p
+{
+}
+
 span
 {
 }
@@ -195,6 +233,10 @@ ul
 {
 }
 
+    ul#account-actions
+    {
+    }
+
     ul#footer,
     ul#header
     {
@@ -217,18 +259,3 @@ ul
     ul#queries
     {
     }
-
-        ul#queries li#latestadditions
-        {
-            list-style-image:       url(../../images/tango/16x16/actions/document-new.png)
-        }
-
-        ul#queries li#mostviews
-        {
-            list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png)
-        }
-
-        ul#queries li#mostdownloads
-        {
-            list-style-image:       url(../../images/tango/16x16/actions/document-save.png)
-        }
