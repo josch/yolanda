@@ -9,7 +9,7 @@ $session = new CGI::Session;
 
 @page = get_page_array(@userinfo);
 
-$page->{frontpage} = [''];    
+$page->{frontpage} = [''];
 
 if($query->param('information'))
 {

@@ -166,13 +166,11 @@ sub output_page
             -charset=>'UTF-8',
             -cookie=>@cookies
         ),
-        $parser->parse_string(
-            XMLout(
-                    $page,
-                    KeyAttr => {},
-                    RootName => 'page'
-            )
-        )->toString;
+        XMLout(
+                $page,
+                KeyAttr => {},
+                RootName => 'page'
+        );
     }
     else
     {
@@ -187,9 +185,6 @@ sub output_page
         
         my $stylesheet = $xslt->parse_stylesheet($parser->parse_file($xsltpath));
 
-        # TODO: this usage of libxsl omits the xsl:output definition (no ident of html) but outputs in UTF8
-        # TODO: later versions of XML::LibXSLT (>= 1.62) define output_as_bytes - this is what we want to use
-        # TODO: wait for debian packagers to update to 1.62 or later
         $output = $stylesheet->transform(
                 $parser->parse_string(
                     XMLout(
@@ -209,6 +204,7 @@ sub output_page
                 -cookie=>@cookies
             ),
             $output->toString;
+            #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
         }
         elsif($param_xslt eq "pr0n")
         {
@@ -225,6 +221,7 @@ sub output_page
                 -cookie=>@cookies
             ),
             $output->toString;
+            #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
         }
     }
 }

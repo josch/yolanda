@@ -50,58 +50,61 @@ if($query->param('id'))
         }
         
         #in both cases - do some slurp-eaze to the browser
-        #TODO: lol insecure!
-        open(FILE, "<$root/videos/".$query->param('id'));
+        $file = open(FILE, "<$root/videos/$videoid");
         
-        $filesize = -s "$root/videos/".$query->param('id');
-        $range = $query->http('range');
-        $range =~ s/bytes=([0-9]+)-/$1/;
-        
-        #if a specific range is requested send http partial content headers and seek in the inputfile
-        if($range)
+        if($file)
         {
-            #if $range is equal or more than filesize throw http 416 header
-            if($range >= $filesize)
+            $filesize = -s "$root/videos/".$query->param('id');
+            $range = $query->http('range');
+            $range =~ s/bytes=([0-9]+)-/$1/;
+            
+            #if a specific range is requested send http partial content headers and seek in the inputfile
+            if($range)
             {
-                print $query->header(-status=>'416 Requested Range Not Satisfiable');
+                #if $range is equal or more than filesize throw http 416 header
+                if($range >= $filesize)
+                {
+                    print $query->header(-status=>'416 Requested Range Not Satisfiable');
+                }
+                else
+                {
+                    print $query->header(-type=>'application/ogg',
+                            -content_length=> $filesize-$range,
+                            -status=>'206 Partial Content',
+                            -attachment=>$title.".ogv",
+                            -accept_ranges=> "bytes",
+                            -content_range=> "bytes $range-".($filesize-1)."/$filesize"
+                            );
+                        
+                    seek FILE, $range, 0;
+                }
             }
             else
             {
                 print $query->header(-type=>'application/ogg',
-                        -content_length=> $filesize-$range,
-                        -status=>'206 Partial Content',
-                        -attachment=>$title.".ogv",
-                        -accept_ranges=> "bytes",
-                        -content_range=> "bytes $range-".($filesize-1)."/$filesize"
+                        -content_length=> $filesize,
+                        -attachment=>$title.".ogv"
                         );
-                    
-                seek FILE, $range, 0;
             }
+            
+            while (my $BytesRead = read (FILE, $buff, 8192))
+            {
+                print $buff;
+            }
+            close(FILE);
         }
         else
         {
-            print $query->header(-type=>'application/ogg',
-                    -content_length=> $filesize,
-                    -attachment=>$title.".ogv"
-                    );
+            print $session->header(
+                -status=>'500 Internal Server Error'
+            )
         }
-        
-        while (my $BytesRead = read (FILE, $buff, 8192))
-        {
-            print $buff;
-        }
-        close(FILE);
     }
     else
     {
-        @userinfo = get_userinfo_from_sid($session->id);
-
-        @page = get_page_array(@userinfo);
-    
-        $page->{'message'}->{'type'} = "error";
-        $page->{'message'}->{'text'} = "error_202c";
-    
-        print output_page();
+        print $session->header(
+            -status=>'404 Not found'
+        )
     }
 }
 else

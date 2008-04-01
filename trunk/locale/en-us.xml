@@ -60,6 +60,7 @@
     <string id="error_repeat_password">Please repeat your password.</string>
     <string id="error_no_query">You passed no query string.</string>
     <string id="error_no_ogg_plugin">Your browser does not support Ogg Theora video playback.</string>
+    <string id="error_no_video">There is no video matching your request</string>
     <string id=""></string>
 
     <!-- information -->

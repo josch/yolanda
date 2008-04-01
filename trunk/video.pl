@@ -18,7 +18,7 @@ if($query->url_param('action') eq 'bookmark' and $query->url_param('id'))
     $page->{'message'}->{'type'} = "information";
 }
 #check if id or title is passed
-elsif($query->url_param('title') or $query->url_param('id'))
+if($query->url_param('title') or $query->url_param('id'))
 {
     if($query->url_param('id'))
     {
@@ -67,8 +67,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
     {
         #still no results
         #there is nothing we can do now - this video doesn't exist...    
-        $page->{'message'}->{'type'} = "error";
-        $page->{'message'}->{'text'} = "error_202c";
+        print $query->redirect("/index.pl?error=error_no_video");
     }
     elsif($rowcount == 1)
     {
@@ -249,6 +248,7 @@ elsif($query->url_param('title') or $query->url_param('id'))
                 'referer'   => $referer
             };
         }
+        print output_page();
     }
     else
     {
@@ -260,6 +260,5 @@ else
 {
     $page->{'message'}->{'type'} = "error";
     $page->{'message'}->{'text'} = "error_202c";
+    print output_page();
 }
-
-print output_page();
