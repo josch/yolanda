@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language_codes PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<language_codes>
+  <lang>
+    <short/>
+    <name lang="en"/>
+    <name lang=""/>
+  </lang>
+  <lang>
+    <short>aa</short>
+    <name lang="en">Afar</name>
+    <name lang="aa">Afaraf</name>
+  </lang>
+  <lang>
+    <short>ab</short>
+    <name lang="en">Abkhazian</name>
+    <name lang="ab">Аҧсуа</name>
+  </lang>
+  <lang>
+    <short>ae</short>
+    <name lang="en">Avestan</name>
+    <name lang="ae">avesta</name>
+  </lang>
+  <lang>
+    <short>af</short>
+    <name lang="en">Afrikaans</name>
+    <name lang="af">Afrikaans</name>
+  </lang>
+  <lang>
+    <short>ak</short>
+    <name lang="en">Akan</name>
+    <name lang="ak">Akan</name>
+  </lang>
+  <lang>
+    <short>am</short>
+    <name lang="en">Amharic</name>
+    <name lang="am">አማርኛ</name>
+  </lang>
+  <lang>
+    <short>an</short>
+    <name lang="en">Aragonese</name>
+    <name lang="an">Aragonés</name>
+  </lang>
+  <lang>
+    <short>ar</short>
+    <name lang="en">Arabic</name>
+    <name lang="ar">‫العربية</name>
+  </lang>
+  <lang>
+    <short>as</short>
+    <name lang="en">Assamese</name>
+    <name lang="as">অসমীয়া</name>
+  </lang>
+  <lang>
+    <short>av</short>
+    <name lang="en">Avaric</name>
+    <name lang="av">авар мацӀ; магӀарул мацӀ</name>
+  </lang>
+  <lang>
+    <short>ay</short>
+    <name lang="en">Aymara</name>
+    <name lang="ay">aymar aru</name>
+  </lang>
+  <lang>
+    <short>az</short>
+    <name lang="en">Azerbaijani</name>
+    <name lang="az">azərbaycan dili</name>
+  </lang>
+  <lang>
+    <short>ba</short>
+    <name lang="en">Bashkir</name>
+    <name lang="ba">башҡорт теле</name>
+  </lang>
+  <lang>
+    <short>be</short>
+    <name lang="en">Belarusian</name>
+    <name lang="be">Беларуская</name>
+  </lang>
+  <lang>
+    <short>bg</short>
+    <name lang="en">Bulgarian</name>
+    <name lang="bg">български език</name>
+  </lang>
+  <lang>
+    <short>bh</short>
+    <name lang="en">Bihari</name>
+    <name lang="bh">भोजपुरी</name>
+  </lang>
+  <lang>
+    <short>bi</short>
+    <name lang="en">Bislama</name>
+    <name lang="bi">Bislama</name>
+  </lang>
+  <lang>
+    <short>bm</short>
+    <name lang="en">Bambara</name>
+    <name lang="bm">bamanankan</name>
+  </lang>
+  <lang>
+    <short>bn</short>
+    <name lang="en">Bengali</name>
+    <name lang="bn">বাংলা</name>
+  </lang>
+  <lang>
+    <short>bo</short>
+    <name lang="en">Tibetan</name>
+    <name lang="bo">བོད་ཡིག</name>
+  </lang>
+  <lang>
+    <short>br</short>
+    <name lang="en">Breton</name>
+    <name lang="br">brezhoneg</name>
+  </lang>
+  <lang>
+    <short>bs</short>
+    <name lang="en">Bosnian</name>
+    <name lang="bs">bosanski jezik</name>
+  </lang>
+  <lang>
+    <short>ca</short>
+    <name lang="en">Catalan</name>
+    <name lang="ca">Català</name>
+  </lang>
+  <lang>
+    <short>ce</short>
+    <name lang="en">Chechen</name>
+    <name lang="ce">нохчийн мотт</name>
+  </lang>
+  <lang>
+    <short>ch</short>
+    <name lang="en">Chamorro</name>
+    <name lang="ch">Chamoru</name>
+  </lang>
+  <lang>
+    <short>co</short>
+    <name lang="en">Corsican</name>
+    <name lang="co">corsu; lingua corsa</name>
+  </lang>
+  <lang>
+    <short>cr</short>
+    <name lang="en">Cree</name>
+    <name lang="cr">ᓀᐦᐃᔭᐍᐏᐣ</name>
+  </lang>
+  <lang>
+    <short>cs</short>
+    <name lang="en">Czech</name>
+    <name lang="cs">česky; čeština</name>
+  </lang>
+  <lang>
+    <short>cu</short>
+    <name lang="en">Church Slavic</name>
+    <name lang="cu"/>
+  </lang>
+  <lang>
+    <short>cv</short>
+    <name lang="en">Chuvash</name>
+    <name lang="cv">чӑваш чӗлхи</name>
+  </lang>
+  <lang>
+    <short>cy</short>
+    <name lang="en">Welsh</name>
+    <name lang="cy">Cymraeg</name>
+  </lang>
+  <lang>
+    <short>da</short>
+    <name lang="en">Danish</name>
+    <name lang="da">dansk</name>
+  </lang>
+  <lang>
+    <short>de</short>
+    <name lang="en">German</name>
+    <name lang="de">Deutsch</name>
+  </lang>
+  <lang>
+    <short>dv</short>
+    <name lang="en">Divehi</name>
+    <name lang="dv">‫ދިވެހި</name>
+  </lang>
+  <lang>
+    <short>dz</short>
+    <name lang="en">Dzongkha</name>
+    <name lang="dz">རྫོང་ཁ</name>
+  </lang>
+  <lang>
+    <short>ee</short>
+    <name lang="en">Ewe</name>
+    <name lang="ee">Ɛʋɛgbɛ</name>
+  </lang>
+  <lang>
+    <short>el</short>
+    <name lang="en">Greek</name>
+    <name lang="el">Ελληνικά</name>
+  </lang>
+  <lang>
+    <short>en</short>
+    <name lang="en">English</name>
+    <name lang="en">English</name>
+  </lang>
+  <lang>
+    <short>eo</short>
+    <name lang="en">Esperanto</name>
+    <name lang="eo">Esperanto</name>
+  </lang>
+  <lang>
+    <short>es</short>
+    <name lang="en">Spanish</name>
+    <name lang="es">español; castellano</name>
+  </lang>
+  <lang>
+    <short>et</short>
+    <name lang="en">Estonian</name>
+    <name lang="et">Eesti keel</name>
+  </lang>
+  <lang>
+    <short>eu</short>
+    <name lang="en">Basque</name>
+    <name lang="eu">euskara</name>
+  </lang>
+  <lang>
+    <short>fa</short>
+    <name lang="en">Persian</name>
+    <name lang="fa">‫فارسی</name>
+  </lang>
+  <lang>
+    <short>ff</short>
+    <name lang="en">Fulah</name>
+    <name lang="ff">Fulfulde</name>
+  </lang>
+  <lang>
+    <short>fi</short>
+    <name lang="en">Finnish</name>
+    <name lang="fi">suomen kieli</name>
+  </lang>
+  <lang>
+    <short>fj</short>
+    <name lang="en">Fijian</name>
+    <name lang="fj">vosa Vakaviti</name>
+  </lang>
+  <lang>
+    <short>fo</short>
+    <name lang="en">Faroese</name>
+    <name lang="fo">Føroyskt</name>
+  </lang>
+  <lang>
+    <short>fr</short>
+    <name lang="en">French</name>
+    <name lang="fr">français; langue française</name>
+  </lang>
+  <lang>
+    <short>fy</short>
+    <name lang="en">Western Frisian</name>
+    <name lang="fy">Frysk</name>
+  </lang>
+  <lang>
+    <short>ga</short>
+    <name lang="en">Irish</name>
+    <name lang="ga">Gaeilge</name>
+  </lang>
+  <lang>
+    <short>gd</short>
+    <name lang="en">Scottish Gaelic</name>
+    <name lang="gd">Gàidhlig</name>
+  </lang>
+  <lang>
+    <short>gl</short>
+    <name lang="en">Galician</name>
+    <name lang="gl">Galego</name>
+  </lang>
+  <lang>
+    <short>gn</short>
+    <name lang="en">Guaraní</name>
+    <name lang="gn">Avañe'ẽ</name>
+  </lang>
+  <lang>
+    <short>gu</short>
+    <name lang="en">Gujarati</name>
+    <name lang="gu">ગુજરાતી</name>
+  </lang>
+  <lang>
+    <short>gv</short>
+    <name lang="en">Manx</name>
+    <name lang="gv">Ghaelg</name>
+  </lang>
+  <lang>
+    <short>ha</short>
+    <name lang="en">Hausa</name>
+    <name lang="ha">‫هَوُسَ</name>
+  </lang>
+  <lang>
+    <short>he</short>
+    <name lang="en">Hebrew</name>
+    <name lang="he">‫עברית</name>
+  </lang>
+  <lang>
+    <short>hi</short>
+    <name lang="en">Hindi</name>
+    <name lang="hi">हिन्दी; हिंदी</name>
+  </lang>
+  <lang>
+    <short>ho</short>
+    <name lang="en">Hiri Motu</name>
+    <name lang="ho">Hiri Motu</name>
+  </lang>
+  <lang>
+    <short>hr</short>
+    <name lang="en">Croatian</name>
+    <name lang="hr">Hrvatski</name>
+  </lang>
+  <lang>
+    <short>ht</short>
+    <name lang="en">Haitian</name>
+    <name lang="ht">Kreyòl ayisyen</name>
+  </lang>
+  <lang>
+    <short>hu</short>
+    <name lang="en">Hungarian</name>
+    <name lang="hu">Magyar</name>
+  </lang>
+  <lang>
+    <short>hy</short>
+    <name lang="en">Armenian</name>
+    <name lang="hy">Հայերեն</name>
+  </lang>
+  <lang>
+    <short>hz</short>
+    <name lang="en">Herero</name>
+    <name lang="hz">Otjiherero</name>
+  </lang>
+  <lang>
+    <short>ia</short>
+    <name lang="en">Interlingua (International Auxiliary Language Association)</name>
+    <name lang="ia">interlingua</name>
+  </lang>
+  <lang>
+    <short>id</short>
+    <name lang="en">Indonesian</name>
+    <name lang="id">Bahasa Indonesia</name>
+  </lang>
+  <lang>
+    <short>ie</short>
+    <name lang="en">Interlingue</name>
+    <name lang="ie">Interlingue</name>
+  </lang>
+  <lang>
+    <short>ig</short>
+    <name lang="en">Igbo</name>
+    <name lang="ig">Igbo</name>
+  </lang>
+  <lang>
+    <short>ii</short>
+    <name lang="en">Sichuan Yi</name>
+    <name lang="ii">ꆇꉙ</name>
+  </lang>
+  <lang>
+    <short>ik</short>
+    <name lang="en">Inupiaq</name>
+    <name lang="ik">Iñupiaq; Iñupiatun</name>
+  </lang>
+  <lang>
+    <short>io</short>
+    <name lang="en">Ido</name>
+    <name lang="io">Ido</name>
+  </lang>
+  <lang>
+    <short>is</short>
+    <name lang="en">Icelandic</name>
+    <name lang="is">Íslenska</name>
+  </lang>
+  <lang>
+    <short>it</short>
+    <name lang="en">Italian</name>
+    <name lang="it">Italiano</name>
+  </lang>
+  <lang>
+    <short>iu</short>
+    <name lang="en">Inuktitut</name>
+    <name lang="iu">ᐃᓄᒃᑎᑐᑦ</name>
+  </lang>
+  <lang>
+    <short>ja</short>
+    <name lang="en">Japanese</name>
+    <name lang="ja">日本語 (にほんご／にっぽんご)</name>
+  </lang>
+  <lang>
+    <short>jv</short>
+    <name lang="en">Javanese</name>
+    <name lang="jv">basa Jawa</name>
+  </lang>
+  <lang>
+    <short>ka</short>
+    <name lang="en">Georgian</name>
+    <name lang="ka">ქართული</name>
+  </lang>
+  <lang>
+    <short>kg</short>
+    <name lang="en">Kongo</name>
+    <name lang="kg">KiKongo</name>
+  </lang>
+  <lang>
+    <short>ki</short>
+    <name lang="en">Kikuyu</name>
+    <name lang="ki">Gĩkũyũ</name>
+  </lang>
+  <lang>
+    <short>kj</short>
+    <name lang="en">Kwanyama</name>
+    <name lang="kj">Kuanyama</name>
+  </lang>
+  <lang>
+    <short>kk</short>
+    <name lang="en">Kazakh</name>
+    <name lang="kk">Қазақ тілі</name>
+  </lang>
+  <lang>
+    <short>kl</short>
+    <name lang="en">Kalaallisut</name>
+    <name lang="kl">kalaallisut; kalaallit oqaasii</name>
+  </lang>
+  <lang>
+    <short>km</short>
+    <name lang="en">Khmer</name>
+    <name lang="km">ភាសាខ្មែរ</name>
+  </lang>
+  <lang>
+    <short>kn</short>
+    <name lang="en">Kannada</name>
+    <name lang="kn">ಕನ್ನಡ</name>
+  </lang>
+  <lang>
+    <short>ko</short>
+    <name lang="en">Korean</name>
+    <name lang="ko">한국어 (韓國語); 조선말 (朝鮮語)</name>
+  </lang>
+  <lang>
+    <short>kr</short>
+    <name lang="en">Kanuri</name>
+    <name lang="kr">Kanuri</name>
+  </lang>
+  <lang>
+    <short>ks</short>
+    <name lang="en">Kashmiri</name>
+    <name lang="ks">कश्मीरी; كشميري‎</name>
+  </lang>
+  <lang>
+    <short>ku</short>
+    <name lang="en">Kurdish</name>
+    <name lang="ku">Kurdî; كوردی‎</name>
+  </lang>
+  <lang>
+    <short>kv</short>
+    <name lang="en">Komi</name>
+    <name lang="kv">коми кыв</name>
+  </lang>
+  <lang>
+    <short>kw</short>
+    <name lang="en">Cornish</name>
+    <name lang="kw">Kernewek</name>
+  </lang>
+  <lang>
+    <short>ky</short>
+    <name lang="en">Kirghiz</name>
+    <name lang="ky">кыргыз тили</name>
+  </lang>
+  <lang>
+    <short>la</short>
+    <name lang="en">Latin</name>
+    <name lang="la">latine; lingua latina</name>
+  </lang>
+  <lang>
+    <short>lb</short>
+    <name lang="en">Luxembourgish</name>
+    <name lang="lb">Lëtzebuergesch</name>
+  </lang>
+  <lang>
+    <short>lg</short>
+    <name lang="en">Ganda</name>
+    <name lang="lg">Luganda</name>
+  </lang>
+  <lang>
+    <short>li</short>
+    <name lang="en">Limburgish</name>
+    <name lang="li">Limburgs</name>
+  </lang>
+  <lang>
+    <short>ln</short>
+    <name lang="en">Lingala</name>
+    <name lang="ln">Lingála</name>
+  </lang>
+  <lang>
+    <short>lo</short>
+    <name lang="en">Lao</name>
+    <name lang="lo">ພາສາລາວ</name>
+  </lang>
+  <lang>
+    <short>lt</short>
+    <name lang="en">Lithuanian</name>
+    <name lang="lt">lietuvių kalba</name>
+  </lang>
+  <lang>
+    <short>lu</short>
+    <name lang="en">Luba-Katanga</name>
+    <name lang="lu"/>
+  </lang>
+  <lang>
+    <short>lv</short>
+    <name lang="en">Latvian</name>
+    <name lang="lv">latviešu valoda</name>
+  </lang>
+  <lang>
+    <short>mg</short>
+    <name lang="en">Malagasy</name>
+    <name lang="mg">Malagasy fiteny</name>
+  </lang>
+  <lang>
+    <short>mh</short>
+    <name lang="en">Marshallese</name>
+    <name lang="mh">Kajin M̧ajeļ</name>
+  </lang>
+  <lang>
+    <short>mi</short>
+    <name lang="en">Māori</name>
+    <name lang="mi">te reo Māori</name>
+  </lang>
+  <lang>
+    <short>mk</short>
+    <name lang="en">Macedonian</name>
+    <name lang="mk">македонски јазик</name>
+  </lang>
+  <lang>
+    <short>ml</short>
+    <name lang="en">Malayalam</name>
+    <name lang="ml">മലയാളം</name>
+  </lang>
+  <lang>
+    <short>mn</short>
+    <name lang="en">Mongolian</name>
+    <name lang="mn">Монгол</name>
+  </lang>
+  <lang>
+    <short>mo</short>
+    <name lang="en">Moldavian</name>
+    <name lang="mo">лимба молдовеняскэ</name>
+  </lang>
+  <lang>
+    <short>mr</short>
+    <name lang="en">Marathi</name>
+    <name lang="mr">मराठी</name>
+  </lang>
+  <lang>
+    <short>ms</short>
+    <name lang="en">Malay</name>
+    <name lang="ms">bahasa Melayu; بهاس ملايو‎</name>
+  </lang>
+  <lang>
+    <short>mt</short>
+    <name lang="en">Maltese</name>
+    <name lang="mt">Malti</name>
+  </lang>
+  <lang>
+    <short>my</short>
+    <name lang="en">Burmese</name>
+    <name lang="my">ဗမာစာ</name>
+  </lang>
+  <lang>
+    <short>na</short>
+    <name lang="en">Nauru</name>
+    <name lang="na">Ekakairũ Naoero</name>
+  </lang>
+  <lang>
+    <short>nb</short>
+    <name lang="en">Norwegian Bokmål</name>
+    <name lang="nb">Norsk bokmål</name>
+  </lang>
+  <lang>
+    <short>nd</short>
+    <name lang="en">North Ndebele</name>
+    <name lang="nd">isiNdebele</name>
+  </lang>
+  <lang>
+    <short>ne</short>
+    <name lang="en">Nepali</name>
+    <name lang="ne">नेपाली</name>
+  </lang>
+  <lang>
+    <short>ng</short>
+    <name lang="en">Ndonga</name>
+    <name lang="ng">Owambo</name>
+  </lang>
+  <lang>
+    <short>nl</short>
+    <name lang="en">Dutch</name>
+    <name lang="nl">Nederlands</name>
+  </lang>
+  <lang>
+    <short>nn</short>
+    <name lang="en">Norwegian Nynorsk</name>
+    <name lang="nn">Norsk nynorsk</name>
+  </lang>
+  <lang>
+    <short>no</short>
+    <name lang="en">Norwegian</name>
+    <name lang="no">Norsk</name>
+  </lang>
+  <lang>
+    <short>nr</short>
+    <name lang="en">South Ndebele</name>
+    <name lang="nr">Ndébélé</name>
+  </lang>
+  <lang>
+    <short>nv</short>
+    <name lang="en">Navajo</name>
+    <name lang="nv">Diné bizaad; Dinékʼehǰí</name>
+  </lang>
+  <lang>
+    <short>ny</short>
+    <name lang="en">Chichewa</name>
+    <name lang="ny">chiCheŵa; chinyanja</name>
+  </lang>
+  <lang>
+    <short>oc</short>
+    <name lang="en">Occitan</name>
+    <name lang="oc">Occitan</name>
+  </lang>
+  <lang>
+    <short>oj</short>
+    <name lang="en">Ojibwa</name>
+    <name lang="oj">ᐊᓂᔑᓈᐯᒧᐎᓐ</name>
+  </lang>
+  <lang>
+    <short>om</short>
+    <name lang="en">Oromo</name>
+    <name lang="om">Afaan Oromoo</name>
+  </lang>
+  <lang>
+    <short>or</short>
+    <name lang="en">Oriya</name>
+    <name lang="or">ଓଡ଼ିଆ</name>
+  </lang>
+  <lang>
+    <short>os</short>
+    <name lang="en">Ossetian</name>
+    <name lang="os">Ирон æвзаг</name>
+  </lang>
+  <lang>
+    <short>pa</short>
+    <name lang="en">Panjabi</name>
+    <name lang="pa">ਪੰਜਾਬੀ; پنجابی‎</name>
+  </lang>
+  <lang>
+    <short>pi</short>
+    <name lang="en">Pāli</name>
+    <name lang="pi">पाऴि</name>
+  </lang>
+  <lang>
+    <short>pl</short>
+    <name lang="en">Polish</name>
+    <name lang="pl">polski</name>
+  </lang>
+  <lang>
+    <short>ps</short>
+    <name lang="en">Pashto</name>
+    <name lang="ps">‫پښتو</name>
+  </lang>
+  <lang>
+    <short>pt</short>
+    <name lang="en">Portuguese</name>
+    <name lang="pt">Português</name>
+  </lang>
+  <lang>
+    <short>qu</short>
+    <name lang="en">Quechua</name>
+    <name lang="qu">Runa Simi; Kichwa</name>
+  </lang>
+  <lang>
+    <short>rm</short>
+    <name lang="en">Raeto-Romance</name>
+    <name lang="rm">rumantsch grischun</name>
+  </lang>
+  <lang>
+    <short>rn</short>
+    <name lang="en">Kirundi</name>
+    <name lang="rn">kiRundi</name>
+  </lang>
+  <lang>
+    <short>ro</short>
+    <name lang="en">Romanian</name>
+    <name lang="ro">română</name>
+  </lang>
+  <lang>
+    <short>ru</short>
+    <name lang="en">Russian</name>
+    <name lang="ru">русский язык</name>
+  </lang>
+  <lang>
+    <short>rw</short>
+    <name lang="en">Kinyarwanda</name>
+    <name lang="rw">Kinyarwanda</name>
+  </lang>
+  <lang>
+    <short>sa</short>
+    <name lang="en">Sanskrit</name>
+    <name lang="sa">संस्कृतम्</name>
+  </lang>
+  <lang>
+    <short>sc</short>
+    <name lang="en">Sardinian</name>
+    <name lang="sc">sardu</name>
+  </lang>
+  <lang>
+    <short>sd</short>
+    <name lang="en">Sindhi</name>
+    <name lang="sd">सिन्धी; ‫سنڌي، سندھی‎</name>
+  </lang>
+  <lang>
+    <short>se</short>
+    <name lang="en">Northern Sami</name>
+    <name lang="se">Davvisámegiella</name>
+  </lang>
+  <lang>
+    <short>sg</short>
+    <name lang="en">Sango</name>
+    <name lang="sg">yângâ tî sängö</name>
+  </lang>
+  <lang>
+    <short>sh</short>
+    <name lang="en">Serbo-Croatian</name>
+    <name lang="sh">Srpskohrvatski; Српскохрватски</name>
+  </lang>
+  <lang>
+    <short>si</short>
+    <name lang="en">Sinhalese</name>
+    <name lang="si">සිංහල</name>
+  </lang>
+  <lang>
+    <short>sk</short>
+    <name lang="en">Slovak</name>
+    <name lang="sk">slovenčina</name>
+  </lang>
+  <lang>
+    <short>sl</short>
+    <name lang="en">Slovenian</name>
+    <name lang="sl">slovenščina</name>
+  </lang>
+  <lang>
+    <short>sm</short>
+    <name lang="en">Samoan</name>
+    <name lang="sm">gagana fa'a Samoa</name>
+  </lang>
+  <lang>
+    <short>sn</short>
+    <name lang="en">Shona</name>
+    <name lang="sn">chiShona</name>
+  </lang>
+  <lang>
+    <short>so</short>
+    <name lang="en">Somali</name>
+    <name lang="so">Soomaaliga; af Soomaali</name>
+  </lang>
+  <lang>
+    <short>sq</short>
+    <name lang="en">Albanian</name>
+    <name lang="sq">Shqip</name>
+  </lang>
+  <lang>
+    <short>sr</short>
+    <name lang="en">Serbian</name>
+    <name lang="sr">српски језик</name>
+  </lang>
+  <lang>
+    <short>ss</short>
+    <name lang="en">Swati</name>
+    <name lang="ss">SiSwati</name>
+  </lang>
+  <lang>
+    <short>st</short>
+    <name lang="en">Sotho</name>
+    <name lang="st">seSotho</name>
+  </lang>
+  <lang>
+    <short>su</short>
+    <name lang="en">Sundanese</name>
+    <name lang="su">Basa Sunda</name>
+  </lang>
+  <lang>
+    <short>sv</short>
+    <name lang="en">Swedish</name>
+    <name lang="sv">Svenska</name>
+  </lang>
+  <lang>
+    <short>sw</short>
+    <name lang="en">Swahili</name>
+    <name lang="sw">Kiswahili</name>
+  </lang>
+  <lang>
+    <short>ta</short>
+    <name lang="en">Tamil</name>
+    <name lang="ta">தமிழ்</name>
+  </lang>
+  <lang>
+    <short>te</short>
+    <name lang="en">Telugu</name>
+    <name lang="te">తెలుగు</name>
+  </lang>
+  <lang>
+    <short>tg</short>
+    <name lang="en">Tajik</name>
+    <name lang="tg">тоҷикӣ; toğikī; ‫تاجیکی‎</name>
+  </lang>
+  <lang>
+    <short>th</short>
+    <name lang="en">Thai</name>
+    <name lang="th">ไทย</name>
+  </lang>
+  <lang>
+    <short>ti</short>
+    <name lang="en">Tigrinya</name>
+    <name lang="ti">ትግርኛ</name>
+  </lang>
+  <lang>
+    <short>tk</short>
+    <name lang="en">Turkmen</name>
+    <name lang="tk">Türkmen; Түркмен</name>
+  </lang>
+  <lang>
+    <short>tl</short>
+    <name lang="en">Tagalog</name>
+    <name lang="tl">Tagalog</name>
+  </lang>
+  <lang>
+    <short>tn</short>
+    <name lang="en">Tswana</name>
+    <name lang="tn">seTswana</name>
+  </lang>
+  <lang>
+    <short>to</short>
+    <name lang="en">Tonga</name>
+    <name lang="to">faka Tonga</name>
+  </lang>
+  <lang>
+    <short>tr</short>
+    <name lang="en">Turkish</name>
+    <name lang="tr">Türkçe</name>
+  </lang>
+  <lang>
+    <short>ts</short>
+    <name lang="en">Tsonga</name>
+    <name lang="ts">xiTsonga</name>
+  </lang>
+  <lang>
+    <short>tt</short>
+    <name lang="en">Tatar</name>
+    <name lang="tt">татарча; tatarça; ‫تاتارچا‎</name>
+  </lang>
+  <lang>
+    <short>tw</short>
+    <name lang="en">Twi</name>
+    <name lang="tw">Twi</name>
+  </lang>
+  <lang>
+    <short>ty</short>
+    <name lang="en">Tahitian</name>
+    <name lang="ty">Reo Mā`ohi</name>
+  </lang>
+  <lang>
+    <short>ug</short>
+    <name lang="en">Uighur</name>
+    <name lang="ug">Uyƣurqə; ‫ئۇيغۇرچ ‎</name>
+  </lang>
+  <lang>
+    <short>uk</short>
+    <name lang="en">Ukrainian</name>
+    <name lang="uk">Українська</name>
+  </lang>
+  <lang>
+    <short>ur</short>
+    <name lang="en">Urdu</name>
+    <name lang="ur">‫اردو</name>
+  </lang>
+  <lang>
+    <short>uz</short>
+    <name lang="en">Uzbek</name>
+    <name lang="uz">O'zbek; Ўзбек; أۇزبېك‎</name>
+  </lang>
+  <lang>
+    <short>ve</short>
+    <name lang="en">Venda</name>
+    <name lang="ve">tshiVenḓa</name>
+  </lang>
+  <lang>
+    <short>vi</short>
+    <name lang="en">Vietnamese</name>
+    <name lang="vi">Tiếng Việt</name>
+  </lang>
+  <lang>
+    <short>vo</short>
+    <name lang="en">Volapük</name>
+    <name lang="vo">Volapük</name>
+  </lang>
+  <lang>
+    <short>wa</short>
+    <name lang="en">Walloon</name>
+    <name lang="wa">Walon</name>
+  </lang>
+  <lang>
+    <short>wo</short>
+    <name lang="en">Wolof</name>
+    <name lang="wo">Wollof</name>
+  </lang>
+  <lang>
+    <short>xh</short>
+    <name lang="en">Xhosa</name>
+    <name lang="xh">isiXhosa</name>
+  </lang>
+  <lang>
+    <short>yi</short>
+    <name lang="en">Yiddish</name>
+    <name lang="yi">‫ייִדיש</name>
+  </lang>
+  <lang>
+    <short>yo</short>
+    <name lang="en">Yoruba</name>
+    <name lang="yo">Yorùbá</name>
+  </lang>
+  <lang>
+    <short>za</short>
+    <name lang="en">Zhuang</name>
+    <name lang="za">Saɯ cueŋƅ; Saw cuengh</name>
+  </lang>
+  <lang>
+    <short>zh</short>
+    <name lang="en">Chinese</name>
+    <name lang="zh">中文, 汉语, 漢語</name>
+  </lang>
+  <lang>
+    <short>zu</short>
+    <name lang="en">Zulu</name>
+    <name lang="zu">isiZulu</name>
+  </lang>
+</language_codes>
