@@ -274,23 +274,23 @@
                         <xsl:value-of select="$locale_strings[@id='instruction_language']" />
                         <br />
 
-                        <select name="DC.Language" size="2">
-                            <option>
-                                <xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_en-us']">
-                                    <xsl:attribute name="selected">
-                                        selected
+                        <select name="DC.Language" size="1">
+                            <xsl:for-each select="$language_strings">
+                                <option>
+                                    <xsl:variable name="short" select="short" />
+                                    <xsl:if test="//uploadform/@DC.Language=short">
+                                        <!-- never executed, plz fix -->
+                                        <xsl:attribute name="selected">
+                                            selected
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="$short" />
                                     </xsl:attribute>
-                                </xsl:if>
-                                <xsl:value-of select="$locale_strings[@id='language_en-us']" />
-                            </option>
-                            <option>
-                                <xsl:if test="//uploadform/@DC.Language=$locale_strings[@id='language_de-de']">
-                                    <xsl:attribute name="selected">
-                                        selected
-                                    </xsl:attribute>
-                                </xsl:if>
-                                <xsl:value-of select="$locale_strings[@id='language_de-de']" />
-                            </option>
+                                    <xsl:value-of select="name[@lang='en']" /><!-- language hardcoded to en - plz fix this -->
+                                    (<xsl:value-of select="name[@lang=$short]" />)
+                                </option>
+                            </xsl:for-each>
                         </select>
                         <br />
 

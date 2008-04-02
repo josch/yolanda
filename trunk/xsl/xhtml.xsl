@@ -47,6 +47,8 @@
 <xsl:variable name="site_strings" select="document('../site/main.xml')//strings/string" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
 
+<xsl:variable name="language_strings" select="document('../locale/languages.xml')//languages/lang" />
+
 <!--
 this kills 99% of the processed XML
 we have to do this because XHTML + CSS presentation is dependant on the order of XHTML elements

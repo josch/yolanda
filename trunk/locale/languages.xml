@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE language_codes PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<language_codes>
-  <lang>
-    <short/>
-    <name lang="en"/>
-    <name lang=""/>
-  </lang>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<languages>
   <lang>
     <short>aa</short>
     <name lang="en">Afar</name>
@@ -328,7 +323,7 @@
   </lang>
   <lang>
     <short>ia</short>
-    <name lang="en">Interlingua (International Auxiliary Language Association)</name>
+    <name lang="en">Interlingua</name>
     <name lang="ia">interlingua</name>
   </lang>
   <lang>
@@ -936,4 +931,5 @@
     <name lang="en">Zulu</name>
     <name lang="zu">isiZulu</name>
   </lang>
-</language_codes>
+</languages>
+</xsl:stylesheet>
