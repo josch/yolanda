@@ -13,6 +13,7 @@
 
         <span class="heading">
             <xsl:value-of select="$locale_strings[@id='settings_heading']" />
+            <xsl:value-of select="//page/@username" />
         </span>
 
         <form method="POST">
@@ -56,11 +57,6 @@
             </input>
             <br />
 
-            <xsl:value-of select="$locale_strings[@id='settings_instruction_method']" />
-            <br />
-
-            <xsl:value-of select="$locale_strings[@id='watch_browserplugin']" />
-            <br />
             <input name="submit" type="submit" />
 
         </form>
