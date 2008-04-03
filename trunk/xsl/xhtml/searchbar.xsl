@@ -13,7 +13,7 @@
 
         <form method="get" enctype="text/plain">
             <xsl:attribute name="action">
-                <xsl:value-of select="$site_strings[@id='path_results']" />
+                <xsl:value-of select="$site_strings[@id='path_search']" />
             </xsl:attribute>
             <fieldset>
                 <label for="query">

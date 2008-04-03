@@ -141,8 +141,6 @@ sub output_page
     my $parser = XML::LibXML->new();
     my $xslt = XML::LibXSLT->new();
     
-    @cookies = [$session->cookie(-name=>$session_name, -value=>$session->id)];
-    
     #let the XSLT param choose other stylesheets or default to xhtml.xsl
     my $param_xslt = $query->param('xslt');
     $param_xslt =~ s/[^\w]//gi;
@@ -152,7 +150,6 @@ sub output_page
         return $session->header(
             -type=>'application/xml',
             -charset=>'UTF-8',
-            -cookie=>@cookies
         ),
         XMLout(
                 $page,
@@ -189,7 +186,6 @@ sub output_page
                 -type=>$stylesheet->media_type,
                 -charset=>$stylesheet->output_encoding,
                 -attachment=>$query->param('query').".xspf",
-                -cookie=>@cookies
             ),
             $output->toString;
             #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
@@ -206,7 +202,6 @@ sub output_page
             return $session->header(
                 -type=>$stylesheet->media_type,
                 -charset=>$stylesheet->output_encoding,
-                -cookie=>@cookies
             ),
             $output->toString;
             #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)

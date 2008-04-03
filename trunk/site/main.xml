@@ -17,6 +17,7 @@
     <string id="path_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</string>
     <string id="path_register">/register.pl</string>
     <string id="path_report_bug">http://yolanda.mister-muffin.de/trac/newticket</string>
+    <string id="path_search">/search.pl</string>
     <string id="path_results">/search.pl?query=</string>
     <string id="path_root">http://localhost/</string>
     <string id="path_upload">/upload.pl</string>

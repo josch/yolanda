@@ -22,9 +22,7 @@
                     font-size:<xsl:value-of select="round((32-12)*(number(count)-number($min))div (number($max)-number($min)))+12" />px
                 </xsl:attribute>
                 <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_results']" />
-                    tag:
-                    <xsl:value-of select="text" />
+                    <xsl:value-of select="concat($site_strings[@id='path_results'],'tag:',text)" />
                 </xsl:attribute>
                 
                 <xsl:value-of select="text" />

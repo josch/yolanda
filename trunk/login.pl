@@ -46,12 +46,21 @@ elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
             print $session->header();
             print "claim failed: ", $con->err;
         }
-        $check_url = $claimed->check_url(
-                return_to  => "$domain/login.pl?action=openid", #on success return to this address
-                trust_root => $domain); #this is the string the user will be asked to trust
-                
-        #redirect to openid server to check claim
-        print $query->redirect($check_url);
+        
+        #try to set the check_url
+        eval
+        {
+            $check_url = $claimed->check_url(
+                    return_to  => "$domain/login.pl?action=openid", #on success return to this address
+                    trust_root => $domain); #this is the string the user will be asked to trust
+                    
+            #redirect to openid server to check claim
+            print $query->redirect($check_url);
+        };
+        #if this fails
+        if ($@) {
+            print $query->redirect("/index.pl?error=error_202c");
+        }
     }
     else
     {
