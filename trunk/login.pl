@@ -26,7 +26,7 @@ elsif($userinfo->{'username'})
     print output_page();
 }
 #if password is empty and username begins with http:// or ret is specified, then it's an openid login
-elsif($query->param('pass') eq '' and ($query->param('user')=~m/^http:\/\// or $query->param('ret')))
+elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
 {
     #create our openid consumer object
     $con = Net::OpenID::Consumer->new(
@@ -47,53 +47,11 @@ elsif($query->param('pass') eq '' and ($query->param('user')=~m/^http:\/\// or $
             print "claim failed: ", $con->err;
         }
         $check_url = $claimed->check_url(
-                return_to  => "$domain/login.pl?action=login&ret=true", #on success return to this address
+                return_to  => "$domain/login.pl?action=openid", #on success return to this address
                 trust_root => $domain); #this is the string the user will be asked to trust
                 
         #redirect to openid server to check claim
         print $query->redirect($check_url);
-    }
-    #we return from an identity check
-    elsif($query->param('ret'))
-    {
-        if($setup_url = $con->user_setup_url)
-        {
-            #redirect to setup url - user will give confirmation there
-            print $query->redirect($setup_url);
-        }
-        elsif ($con->user_cancel)
-        {
-            #cancelled - redirect to login form
-            print $session->header();
-            print "cancelled";
-        }
-        elsif ($vident = $con->verified_identity)
-        {
-            #we are verified!!
-            my $verified_url = $vident->url;
-            
-            #check if this openid user already is in database
-            my $sth = $dbh->prepare(qq{select 1 from users where username = ? limit 1 });
-            $sth->execute($verified_url);
-            if($sth->fetchrow_array())
-            {
-                #store session id in database
-                $dbh->do(qq{update users set sid = ? where username = ? }, undef, $session->id, $verified_url) or die $dbh->errstr;
-            }
-            else
-            {
-                #add openid user to dabase
-                $dbh->do(qq{insert into users (username, sid) values ( ?, ? ) }, undef, $verified_url, $session->id) or die $dbh->errstr;
-            }
-            
-            print $query->redirect("index.pl?information=information_logged_in");
-        }
-        else
-        {
-            #an error occured
-            print $session->header();
-            print "error validating identity: ", $con->err;
-        }
     }
     else
     {
@@ -101,6 +59,56 @@ elsif($query->param('pass') eq '' and ($query->param('user')=~m/^http:\/\// or $
         $page->{'loginform'} = [''];
 
         print output_page();
+    }
+}
+#we return from an identity check
+elsif($query->param('action') eq 'openid')
+{
+    #create our openid consumer object
+    $con = Net::OpenID::Consumer->new(
+    ua => LWPx::ParanoidAgent->new, # FIXME - use LWPx::ParanoidAgent
+    cache => undef, # or File::Cache->new,
+    args => $query,
+    consumer_secret => $session->id, #is this save? don't know...
+    required_root => $domain );
+    
+    if($setup_url = $con->user_setup_url)
+    {
+        #redirect to setup url - user will give confirmation there
+        print $query->redirect($setup_url);
+    }
+    elsif ($con->user_cancel)
+    {
+        #cancelled - redirect to login form
+        print $session->header();
+        print "cancelled";
+    }
+    elsif ($vident = $con->verified_identity)
+    {
+        #we are verified!!
+        my $verified_url = $vident->url;
+        
+        #check if this openid user already is in database
+        my $sth = $dbh->prepare(qq{select 1 from users where username = ? limit 1 });
+        $sth->execute($verified_url);
+        if($sth->fetchrow_array())
+        {
+            #store session id in database
+            $dbh->do(qq{update users set sid = ? where username = ? }, undef, $session->id, $verified_url) or die $dbh->errstr;
+        }
+        else
+        {
+            #add openid user to dabase
+            $dbh->do(qq{insert into users (username, sid) values ( ?, ? ) }, undef, $verified_url, $session->id) or die $dbh->errstr;
+        }
+        
+        print $query->redirect("index.pl?information=information_logged_in");
+    }
+    else
+    {
+        #an error occured
+        print $session->header();
+        print "error validating identity: ", $con->err;
     }
 }
 #else it's a normal login
