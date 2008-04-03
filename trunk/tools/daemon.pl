@@ -15,7 +15,7 @@ $root = '/var/www/yolanda';
 #TODO: deamonize by uncommenting this line
 #Proc::Daemon::Init;
 
-$LOG = "$root/daemon.log";
+$LOG = "/dev/null";
 
 
 #TODO: maybe keep file open the whole time ?
