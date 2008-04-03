@@ -11,7 +11,7 @@ if($userinfo->{'username'})
 {
     if($query->param('submit'))
     {
-        $dbh->do(qq{update users set locale = ?, pagesize = ?, cortado = ? where id = ?}, undef, $query->param('locale'), $query->param('pagesize'), $query->param('cortado'), $userinfo->{'id'} ) or die $dbh->errstr;
+        $dbh->do(qq{update users set locale = ?, pagesize = ? where id = ?}, undef, $query->param('locale'), $query->param('pagesize'), $userinfo->{'id'} ) or die $dbh->errstr;
         
         $page->{'message'}->{'type'} = "information";
         $page->{'message'}->{'text'} = "information_settings_changed";
@@ -26,7 +26,6 @@ if($userinfo->{'username'})
 {
     $page->{'settings'}->{'locale'} = $userinfo->{'locale'};
     $page->{'settings'}->{'pagesize'} = $userinfo->{'pagesize'};
-    $page->{'settings'}->{'cortado'} = $userinfo->{'cortado'}
 }
 else
 {

@@ -6,13 +6,13 @@ sub get_userinfo_from_sid
     my ($sid) = @_;
     
     #prepare query
-    my $sth = $dbh->prepare(qq{select id, username, locale, pagesize, cortado from users where sid = ?}) or die $dbh->errstr;
+    my $sth = $dbh->prepare(qq{select id, username, locale, pagesize from users where sid = ?}) or die $dbh->errstr;
     
     #execute it
     $sth->execute($sid) or die $dbh->errstr;
     
     #save the resulting username
-    ($userinfo->{'id'}, $userinfo->{'username'}, $userinfo->{'locale'}, $userinfo->{'pagesize'}, $userinfo->{'cortado'}) = $sth->fetchrow_array();
+    ($userinfo->{'id'}, $userinfo->{'username'}, $userinfo->{'locale'}, $userinfo->{'pagesize'}) = $sth->fetchrow_array();
     
     #finish query
     $sth->finish() or die $dbh->errstr;
@@ -141,18 +141,7 @@ sub output_page
     my $parser = XML::LibXML->new();
     my $xslt = XML::LibXSLT->new();
     
-    if($query->param('cortado') eq 'true')
-    {
-        @cookies = [$session->cookie(-name=>$session_name, -value=>$session->id), $session->cookie(-name=>'cortado', -value=>'true')];
-    }
-    elsif($query->param('cortado') eq 'false')
-    {
-        @cookies = [$session->cookie(-name=>$session_name, -value=>$session->id), $session->cookie(-name=>'cortado', -value=>'false')];
-    }
-    else
-    {
-        @cookies = [$session->cookie(-name=>$session_name, -value=>$session->id)];
-    }
+    @cookies = [$session->cookie(-name=>$session_name, -value=>$session->id)];
     
     #let the XSLT param choose other stylesheets or default to xhtml.xsl
     my $param_xslt = $query->param('xslt');

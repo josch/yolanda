@@ -125,40 +125,10 @@ if($query->url_param('title') or $query->url_param('id'))
             }
         }
         
-        if($query->param('cortado') eq 'true')
-        {
-            $cortado = 'true';
-        }
-        elsif($query->param('cortado') eq 'false')
-        {
-            $cortado = 'false';
-        }
-        elsif($userinfo->{'cortado'} eq 'true')
-        {
-            $cortado = 'true';
-        }
-        elsif($userinfo->{'cortado'} eq 'false')
-        {
-            $cortado = 'false';
-        }
-        elsif($query->cookie('cortado') eq 'true')
-        {
-            $cortado = 'true';
-        }
-        elsif($query->cookie('cortado') eq 'false')
-        {
-            $cortado = 'false';
-        }
-        else
-        {
-            $cortado = 'true';
-        }
-        
         #before code cleanup, this was a really obfuscated array/hash creation
         push @{ $page->{'video'} },
         {
             'thumbnail'     => "$domain/video-stills/$id",
-            'cortado'       => $cortado,
             'filesize'      => $filesize,
             'duration'      => $duration,
             'width'         => $width,
