@@ -112,7 +112,7 @@ if($query->param('query'))
     {
         print $query->redirect("index.pl?warning=warning_no_results");
     }
-    elsif((@{$page->{'results'}->{'result'}} == 1 or $query->param('lucky')) and (not $query->param('page') or $query->param('page') == 1))
+    elsif((@{$page->{'results'}->{'result'}} == 1) and (not $query->param('page') or $query->param('page') == 1))
     {
         print $query->redirect($page->{'results'}->{'result'}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
     }
