@@ -166,7 +166,6 @@ if($query->url_param('title') or $query->url_param('id'))
             'fps'           => $fps,
             'viewcount'     => $viewcount,
             'downloadcount' => $downloadcount,
-            'edit'          => $userinfo->{'username'} eq $publisher ? "true" : "false",
             'rdf:RDF'       =>
             {
                 'cc:Work'       =>

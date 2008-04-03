@@ -96,7 +96,6 @@ sub fill_results
             'thumbnail' => $duration == 0 ? "/images/tango/video-x-generic.png" : "/video-stills/$id",
             'duration'  => $duration,
             'viewcount' => $viewcount,
-            'edit'      => $userinfo->{'username'} eq $publisher ? "true" : "false",
             'rdf:RDF'   =>
             {
                 'cc:Work'   =>
