@@ -30,10 +30,10 @@
                 <li>
                     <a>
                         <xsl:attribute name="href">
-                            <xsl:value-of select="$site_strings[@id='path_login-openid']" />
+                            <xsl:value-of select="$site_strings[@id='path_login']" />
                         </xsl:attribute>
 
-                        <xsl:value-of select="$locale_strings[@id='login_openid']" />
+                        <xsl:value-of select="$locale_strings[@id='login']" />
                     </a>
                 </li>
 

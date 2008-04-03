@@ -10,7 +10,6 @@
 
     <string id="register">register</string>
     <string id="login">login</string>
-    <string id="login_openid">login with OpenID</string>
 
     <string id="header_upload-video">upload video</string>
     <string id="settings_details">settings details</string>
