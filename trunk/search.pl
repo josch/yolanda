@@ -12,7 +12,6 @@ $session = new CGI::Session;
 #check if query is set
 if($query->param('query'))
 {
-    $page->{'search'} = [''];
     $page->{'results'}->{'query'} = $query->param('query');
     
     my @args = ();
