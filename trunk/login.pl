@@ -25,7 +25,7 @@ elsif($userinfo->{'username'})
     
     print output_page();
 }
-#if password is empty and username begins with http:// or ret is specified, then it's an openid login
+#if password is empty and username begins with http:// then it's an openid login
 elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
 {
     #create our openid consumer object
@@ -43,23 +43,17 @@ elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
         $claimed = $con->claimed_identity($query->param('user'));
         if(!defined($claimed))
         {
-            print $session->header();
-            print "claim failed: ", $con->err;
+            print $query->redirect("/index.pl?error=error_openid_".$con->errcode);
         }
-        
-        #try to set the check_url
-        eval
+        else
         {
+            #try to set the check_url
             $check_url = $claimed->check_url(
                     return_to  => "$domain/login.pl?action=openid", #on success return to this address
                     trust_root => $domain); #this is the string the user will be asked to trust
                     
             #redirect to openid server to check claim
             print $query->redirect($check_url);
-        };
-        #if this fails
-        if ($@) {
-            print $query->redirect("/index.pl?error=error_202c");
         }
     }
     else
@@ -89,8 +83,7 @@ elsif($query->param('action') eq 'openid')
     elsif ($con->user_cancel)
     {
         #cancelled - redirect to login form
-        print $session->header();
-        print "cancelled";
+        print $query->redirect("index.pl");
     }
     elsif ($vident = $con->verified_identity)
     {
@@ -117,7 +110,7 @@ elsif($query->param('action') eq 'openid')
     {
         #an error occured
         print $session->header();
-        print "error validating identity: ", $con->err;
+        print "error validating identity: ", $con->errcode;
     }
 }
 #else it's a normal login

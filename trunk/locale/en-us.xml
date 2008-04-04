@@ -60,6 +60,11 @@
     <string id="error_no_query">You passed no query string.</string>
     <string id="error_no_ogg_plugin">Your browser does not support Ogg Theora video playback.</string>
     <string id="error_no_video">There is no video matching your request</string>
+    <string id="error_openid_no_identity_server">The provided URL doesn't declare its OpenID identity server</string>
+    <string id="error_openid_empty_url">No URL entered</string>
+    <string id="error_openid_bogus_url">Invalid URL</string>
+    <string id="error_openid_no_head_tag">URL provided doesn't seem to have a head tag</string>
+    <string id="error_openid_url_fetch_error">Error fetching the provided URL</string>
     <string id=""></string>
 
     <!-- information -->
