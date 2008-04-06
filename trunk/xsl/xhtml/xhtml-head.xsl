@@ -9,113 +9,106 @@
 
 <xsl:template name="xhtml-head">
 
-        <head>
-            <meta
-                http-equiv="Content-Type"
-                content="application/xhtml+xml;charset=utf-8"
-            />
+    <head>
+        <meta
+            http-equiv="Content-Type"
+            content="application/xhtml+xml;charset=utf-8"
+        />
 
-            <xsl:choose>
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="/images/favicon.ico"
+        />
 
-                <xsl:when test="not(//@embed)">
-                    <link
-                        rel="shortcut icon"
-                        type="image/x-icon"
-                        href="/images/favicon.ico"
-                    />
-                    <link
-                        rel="stylesheet"
-                        type="text/css"
-                        media="screen"
-                        href="/style/default.css"
-                    />
-                </xsl:when>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            media="screen"
+            href="/style/default.css"
+        />
 
-                <xsl:when test="//@embed='video'">
-                    <link
-                        rel="stylesheet"
-                        type="text/css"
-                        href="/style/embedded.css"
-                    />
-                </xsl:when>
+        <link
+            rel="search"
+            type="application/opensearchdescription+xml"
+        >
+            <xsl:attribute name="href">
+                <xsl:value-of select="$site_strings[@id='path_root']" />?xslt=opensearch
+            </xsl:attribute>
+            <xsl:attribute name="title">
+                <xsl:value-of select="$site_strings[@id='site_name']" />
+            </xsl:attribute>
+        </link>
 
-            </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="//frontpage">
 
-            <xsl:if test="boolean(//results)">
-
-                <link
-                    rel="alternate"
-                    type="application/rss+xml"
-                >
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
-                    </xsl:attribute>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_root']" />
-                        <xsl:value-of select="$site_strings[@id='path_results']" />
-                        <xsl:value-of select="//results/@query" />
-                        &amp;pagesize=<xsl:value-of select="//results/@pagesize" />
-                        &amp;page=<xsl:value-of select="//results/@page" />
-                        &#38;xslt=rss
-                    </xsl:attribute>
-                </link>
-
-                <link
-                    rel="alternate"
-                    type="application/rss+xml"
-                >
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
-                    </xsl:attribute>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_root']" />
-                        <xsl:value-of select="$site_strings[@id='path_results']" />
-                        <xsl:value-of select="//results/@query" />
-                        &amp;pagesize=99999
-                        &amp;page=1
-                        &#38;xslt=rss
-                    </xsl:attribute>
-                </link>
-
-            </xsl:if>
-
-            <link
-                rel="search"
-                type="application/opensearchdescription+xml"
-            >
-                <xsl:attribute name="href">
-                    <xsl:value-of select="$site_strings[@id='path_root']" />?xslt=opensearch
-                </xsl:attribute>
-                <xsl:attribute name="title">
+                <title>
                     <xsl:value-of select="$site_strings[@id='site_name']" />
-                </xsl:attribute>
-            </link>
+                    -
+                    <xsl:value-of select="$site_strings[@id='site_motto']" />
+                </title>
 
-            <title>
-                <xsl:choose>
-                    <xsl:when test="boolean(//frontpage)">
-                        <xsl:value-of select="$site_strings[@id='site_name']" />
-                        -
-                        <xsl:value-of select="$site_strings[@id='site_motto']" />
-                    </xsl:when>
-                    <xsl:when test="boolean(//resultspage)">
+            </xsl:when>
+
+            <xsl:when test="//page/video">
+
+                <title>
+                    <xsl:value-of select="$site_strings[@id='site_name']" />
+                    -
+                    <xsl:value-of select="//page/video/rdf:RDF/cc:Work/dc:title" />
+                </title>
+
+            </xsl:when>
+
+            <xsl:when test="//page//results">
+
+                    <link
+                        rel="alternate"
+                        type="application/rss+xml"
+                    >
+                        <xsl:attribute name="title">
+                            <xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
+                        </xsl:attribute>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_root']" />
+                            <xsl:value-of select="$site_strings[@id='path_results']" />
+                            <xsl:value-of select="//results/@query" />
+                            &amp;pagesize=<xsl:value-of select="//results/@pagesize" />
+                            &amp;page=<xsl:value-of select="//results/@page" />
+                            &#38;xslt=rss
+                        </xsl:attribute>
+                    </link>
+
+                    <link
+                        rel="alternate"
+                        type="application/rss+xml"
+                    >
+                        <xsl:attribute name="title">
+                            <xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
+                        </xsl:attribute>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_root']" />
+                            <xsl:value-of select="$site_strings[@id='path_results']" />
+                            <xsl:value-of select="//results/@query" />
+                            &amp;pagesize=99999
+                            &amp;page=1
+                            &#38;xslt=rss
+                        </xsl:attribute>
+                    </link>
+
+                    <title>
                         <xsl:value-of select="$site_strings[@id='site_name']" />
                         -
                         <xsl:value-of select="$locale_strings[@id='results_for_query']" />
-                        "<xsl:value-of select="//resultspage/@query" />"
-                    </xsl:when>
-                    <xsl:otherwise>
-<!--
-                    this seems to be fail
-                    should be fixed somehow
--->
-                        <xsl:value-of select="$site_strings[@id='site_name']" />
-                        -
-                        <xsl:value-of select="$site_strings[@id='site_motto']" />
-                    </xsl:otherwise>
-                </xsl:choose>
-            </title>
-        </head>
+                        "<xsl:value-of select="//page/results/@query" />"
+                    </title>
+
+            </xsl:when>
+
+        </xsl:choose>
+
+    </head>
 
 </xsl:template>
 

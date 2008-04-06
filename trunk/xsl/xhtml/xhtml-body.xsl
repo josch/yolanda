@@ -32,8 +32,11 @@
                 <xsl:call-template name="splashbox" />
             </xsl:when>
 
-            <xsl:when test="//video">
+            <xsl:when test="//page/video">
                 <xsl:call-template name="searchbar" />
+<!--
+                <xsl:call-template name="tagbar" />
+-->
 
                 <xsl:if test="//message">
                     <xsl:call-template name="message"/>
@@ -42,7 +45,7 @@
                 <xsl:call-template name="video"/>
             </xsl:when>
 
-            <xsl:when test="//search">
+            <xsl:when test="//page//results">
                 <xsl:call-template name="searchbar" />
                 <xsl:call-template name="results"/>
             </xsl:when>

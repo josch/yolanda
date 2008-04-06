@@ -53,38 +53,6 @@
                 </a>
 -->
 
-                <ul id="account-actions" role="navigation">
-
-                    <li id="upload">
-                        <a>
-                            <xsl:attribute name="href">
-                                <xsl:value-of select="$site_strings[@id='path_upload']" />
-                            </xsl:attribute>
-                            <xsl:value-of select="$locale_strings[@id='header_upload-video']" />
-                        </a>
-                    </li>
-
-<!--
-                    <li id="">
-                        <a>
-                            <xsl:attribute name="href">
-                                <xsl:value-of select="$site_strings[@id='path_settings']" />
-                            </xsl:attribute>
-                            <xsl:value-of select="$locale_strings[@id='settings_details']" />
-                        </a>
-                    </li>
--->
-
-                    <li id="logout">
-                        <a>
-                            <xsl:attribute name="href">
-                                <xsl:value-of select="$site_strings[@id='path_logout']" />
-                            </xsl:attribute>
-                            <xsl:value-of select="$locale_strings[@id='logout']" />
-                        </a>
-                    </li>
-
-                </ul>
 
             </xsl:otherwise>
         </xsl:choose>
