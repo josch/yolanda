@@ -22,20 +22,7 @@ while(($subject) = $sth->fetchrow_array())
         $val =~ s/^\s*(.*?)\s*$/$1/;
         if(length($val) >= 4)
         {
-            #check if some clever guy has written a tag multiple times
-            $found = 0;
-            foreach my $tmpval (@subject)
-            {
-                if($val eq $tmpval)
-                {
-                    $found = 1;
-                }
-            }
-            #only add tag if it is not been entered twice or more
-            if(!$found)
-            {
-                %hash->{$val}++;
-            }
+            %hash->{$val}++;
         }
     }
 }

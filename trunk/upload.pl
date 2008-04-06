@@ -25,6 +25,15 @@ if($userinfo->{'username'})
     {
         if($query->param('DC.Title')&&$query->param('DC.Subject')&&$query->param('DC.Description'))
         {
+            #remove duplicates from tags
+            @subject = split(' ', $query->param('DC.Subject'));
+            @unique{ @subject } = ();
+            foreach $tag (keys %unique)
+            {
+                $subject.=$tag." ";
+            }
+            $page->{'uploadform'}->{'DC.Subject'} = $ubject;
+            
             $page->{'innerresults'} = [''];
     
             my @args = ();
