@@ -50,7 +50,7 @@ if($query->param('id'))
         }
         
         #in both cases - do some slurp-eaze to the browser
-        $file = open(FILE, "<$root/videos/$videoid");
+        $file = open(FILE, "<$root/videos/".$query->param('id'));
         
         if($file)
         {
