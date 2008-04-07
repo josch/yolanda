@@ -143,7 +143,8 @@ while(1)
                     $duration = int($1*3600 + $2*60 + $3 + $4/10 + .5);
                     
                     #create thumbnail
-                    $thumbnailsec = int($duration/3 + .5);
+                    $thumbnailsec = int(rand($duration));
+                    $previewsec = $thumbnailsec;
                     
                     #the width/height calculation could of course be much shorter but less readable then
                     #all thumbs have equal height
@@ -151,7 +152,8 @@ while(1)
                     $tnheight = $tnmaxheight;
                     $tnwidth = int($tnheight*($width/$height)/2 + .5)*2;
                     
-                    system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/$id";
+                    system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/thumbnails/$id";
+                    system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $previewsec $root/video-stills/previews/$id";
                     
                     $vmaxheight = 640;
                     

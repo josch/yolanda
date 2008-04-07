@@ -128,7 +128,8 @@ if($query->url_param('title') or $query->url_param('id'))
         #before code cleanup, this was a really obfuscated array/hash creation
         push @{ $page->{'video'} },
         {
-            'thumbnail'     => "$domain/video-stills/$id",
+            'thumbnail'     => "$domain/video-stills/thumbnails/$id",
+            'preview'       => "$domain/video-stills/previews/$id",
             'filesize'      => $filesize,
             'duration'      => $duration,
             'width'         => $width,

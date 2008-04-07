@@ -32,7 +32,7 @@ if($userinfo->{'username'})
             {
                 $subject.=$tag." ";
             }
-            $page->{'uploadform'}->{'DC.Subject'} = $ubject;
+            $page->{'uploadform'}->{'DC.Subject'} = $subject;
             
             $page->{'innerresults'} = [''];
     

@@ -93,7 +93,8 @@ sub fill_results
         #before code cleanup, this was a really obfuscated array/hash creation
         push @{ $page->{'results'}->{'result'} },
         {
-            'thumbnail' => $duration == 0 ? "/images/tango/video-x-generic.png" : "/video-stills/$id",
+            'thumbnail' => "$domain/video-stills/thumbnails/$id",
+            'preview'   => "$domain/video-stills/previews/$id",
             'duration'  => $duration,
             'viewcount' => $viewcount,
             'rdf:RDF'   =>
