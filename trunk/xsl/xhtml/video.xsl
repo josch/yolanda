@@ -380,7 +380,7 @@
 
         <img>
             <xsl:attribute name="src">
-                <xsl:value-of select="//video/@thumbnail" />
+                <xsl:value-of select="//video/@preview" />
             </xsl:attribute>
             <xsl:attribute name="alt">
                 <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
