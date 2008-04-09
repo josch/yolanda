@@ -18,56 +18,42 @@ if($query->url_param('action') eq 'bookmark' and $query->url_param('id'))
     $page->{'message'}->{'type'} = "information";
 }
 #check if id or title is passed
-if($query->url_param('title') or $query->url_param('id'))
+if($query->url_param('id'))
 {
-    if($query->url_param('id'))
-    {
-        #if id is passed ignore title and check for the id
-        $dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
-                            v.creator, v.subject, v.source, v.language, v.coverage, v.rights,
-                            v.license, filesize, duration, width, height, fps, viewcount, downloadcount
-                            from videos as v, users as u where v.id = ? and u.id=v.userid";
-                            
-        @args = ($query->url_param('id'));
-    }
-    else
-    {
-        #if no id was passed there has to be a title we search for
-        $dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
-                            v.creator, v.subject, v.source, v.language, v.coverage, v.rights,
-                            v.license, filesize, duration, width, height, fps, viewcount, downloadcount
-                            from videos as v, users as u where v.title = ? and u.id=v.userid";
-                            
-        @args = ($query->url_param('title'));
-    }
+    $dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
+                        v.creator, v.subject, v.source, v.language, v.coverage, v.rights,
+                        v.license, filesize, duration, width, height, fps, viewcount, downloadcount
+                        from videos as v, users as u where v.id = ? and u.id=v.userid";
+                        
+    @args = ($query->url_param('id'));
     
     $sth = $dbh->prepare($dbquery);
     $rowcount = $sth->execute(@args) or die $dbh->errstr;
     
-    #if the args are wrong there my be zero results
-    #if there was a title passed, then perform a search
-    if($rowcount == 0 and $query->url_param('title'))
-    {
-        $dbquery = "select v.id, v.title, v.description, u.username,
-            from_unixtime( v.timestamp ), v.creator, v.subject, 
-            v.source, v.language, v.coverage, v.rights, v.license, filesize,
-            duration, width, height, fps, viewcount, downloadcount, 1";
-        $dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
-        $dbquery .= " from videos as v, users as u where u.id = v.userid";
-        $dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
-        
-        @args = ($query->url_param('title'), $query->url_param('title'));
-        
-        $sth = $dbh->prepare($dbquery);
-        $rowcount = $sth->execute(@args) or die $dbh->errstr;
-    }
-    
-    #from this point on, do not use $query->param('id') anymore - we do not know what was given
+    #if there are still no results
     if($rowcount == 0)
     {
-        #still no results
-        #there is nothing we can do now - this video doesn't exist...    
-        print $query->redirect("/index.pl?error=error_no_video");
+        #check if maybe the video has not yet been converted
+        $dbquery = "select id from uploaded where id = ?";
+        $sth = $dbh->prepare($dbquery);
+        $rowcount = $sth->execute($query->url_param('id')) or die $dbh->errstr;
+        
+        #if id is found
+        if($rowcount == 1)
+        {
+            $sth = $dbh->prepare("select sum(duration) from uploaded");
+            $sth->execute() or die $dbh->errstr;
+            ($length) = $sth->fetchrow_array();
+            $h = int($length/3600);
+            $m = int($length/60-$h*60);
+            $s = int($length-$m*60-$h*3600);
+            print $query->redirect("/index.pl?information=information_video_not_yet_available&value=".$h."h ".$m."m ".$s."s");
+        }
+        else
+        {
+            #there is nothing we can do now - this video doesn't exist...    
+            print $query->redirect("/index.pl?error=error_no_video");
+        }
     }
     elsif($rowcount == 1)
     {
@@ -219,11 +205,6 @@ if($query->url_param('title') or $query->url_param('id'))
             };
         }
         print output_page();
-    }
-    else
-    {
-        #when an ambigous title was passed there may me many results
-        #redirect to an appropriate search or throw an error with a link to such a search
     }
 }
 else
