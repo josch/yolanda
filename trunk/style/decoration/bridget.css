@@ -262,8 +262,12 @@ input
 
 img
 {
-    border-width:       0;
+    border-width:       0px
 }
+
+    img#logo
+    {
+    }
 
 p
 {
@@ -310,6 +314,12 @@ ul
 
     ul#account-actions
     {
+    }
+
+    ul#header
+    {
+        /* don't overlapt with the site logo */
+        margin-left:    260px   !important;
     }
 
     ul#footer,

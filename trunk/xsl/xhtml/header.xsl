@@ -9,13 +9,11 @@
 
 <xsl:template name="header">
 
-<!--
-    <img>
+    <img id="logo">
         <xsl:attribute name="src">
-            <xsl:value-of select="$site_strings[@id='path_root']" />/images/logo-small.png
+            <xsl:value-of select="$site_strings[@id='path_root']" />/images/logo.png
         </xsl:attribute>
     </img>
--->
 
     <ul id="header" role="navigation" style="clear:right;">
 
