@@ -41,8 +41,8 @@ if($query->url_param('id'))
         #if id is found
         if($rowcount == 1)
         {
-            $sth = $dbh->prepare("select sum(duration) from uploaded");
-            $sth->execute() or die $dbh->errstr;
+            $sth = $dbh->prepare("select sum(duration) from uploaded where id < ?");
+            $sth->execute($query->url_param('id')) or die $dbh->errstr;
             ($length) = $sth->fetchrow_array();
             $h = int($length/3600);
             $m = int($length/60-$h*60);
