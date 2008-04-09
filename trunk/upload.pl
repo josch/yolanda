@@ -23,17 +23,21 @@ if($userinfo->{'username'})
     
     if($query->param('2'))
     {
-        if($query->param('DC.Title')&&$query->param('DC.Subject')&&$query->param('DC.Description'))
+        #remove duplicates from tags
+        @subject = split(' ', $query->param('DC.Subject'));
+        @unique{ @subject } = ();
+        foreach $tag (keys %unique)
         {
-            #remove duplicates from tags
-            @subject = split(' ', $query->param('DC.Subject'));
-            @unique{ @subject } = ();
-            foreach $tag (keys %unique)
+            if(length($tag) >= 3)
             {
                 $subject.=$tag." ";
             }
-            $page->{'uploadform'}->{'DC.Subject'} = $subject;
-            
+        }
+        $subject =~ s/\s*$//;
+        $page->{'uploadform'}->{'DC.Subject'} = $subject;
+        
+        if($query->param('DC.Title')&&$query->param('DC.Subject')&&$query->param('DC.Description'))
+        {
             $page->{'innerresults'} = [''];
     
             my @args = ();

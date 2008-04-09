@@ -20,7 +20,7 @@ while(($subject) = $sth->fetchrow_array())
     {
         #strip whitespaces
         $val =~ s/^\s*(.*?)\s*$/$1/;
-        if(length($val) >= 4)
+        if(length($val) >= 3)
         {
             %hash->{$val}++;
         }
