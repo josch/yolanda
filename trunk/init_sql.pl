@@ -34,15 +34,6 @@ $dbh->do(qq{insert into
 }) or die $dbh->errstr;
 
 $dbh->do(qq{create table
-    config
-    (
-        attribute   varchar(255)    not null,
-        value       varchar(255)    not null,
-        primary key (attribute)
-    )
-}) or die $dbh->errstr;
-
-$dbh->do(qq{create table
     users
     (
         id          int auto_increment  not null,
@@ -72,20 +63,25 @@ $dbh->do(qq{insert into
 $dbh->do(qq{create table
     uploaded
     (
-        id          int auto_increment  not null,
-        title       varchar(255)        not null,
-        description text                not null,
-        userid      int                 not null,
-        timestamp   bigint              not null,
-        creator     varchar(255)        not null,
-        subject     varchar(255)        not null,
-        source      varchar(255)        not null,
-        language    varchar(255)        not null,
-        coverage    varchar(255)        not null,
-        rights      varchar(255)        not null,
-        license     varchar(255)        not null,
-        status      int                 default 0,
-        primary key        (id)
+        id              int auto_increment  not null,
+        title           varchar(255)        not null,
+        description     text                not null,
+        userid          int                 not null,
+        timestamp       bigint              not null,
+        creator         varchar(255)        not null,
+        subject         varchar(255)        not null,
+        source          varchar(255)        not null,
+        language        varchar(255)        not null,
+        coverage        varchar(255)        not null,
+        rights          varchar(255)        not null,
+        license         varchar(255)        not null,
+        filesize        int                 not null,
+        duration        int                 not null,
+        width           smallint            not null,
+        height          smallint            not null,
+        fps             float               not null,
+        hash            char(64)            not null,
+        primary key     (id)
     )
 }) or die $dbh->errstr;
 

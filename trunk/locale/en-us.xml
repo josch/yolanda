@@ -65,6 +65,10 @@
     <string id="error_openid_bogus_url">Invalid URL</string>
     <string id="error_openid_no_head_tag">URL provided doesn't seem to have a head tag</string>
     <string id="error_openid_url_fetch_error">Error fetching the provided URL</string>
+    <string id="error_upload_invalid_stream">Invalid audio and/or video stream</string>
+    <string id="error_upload_io">Cannot read video file</string>
+    <string id="error_upload_not_a_video">File is not a video</string>
+    <string id="error_upload_duplicate">Video has already been uploaded</string>
     <string id=""></string>
 
     <!-- information -->

@@ -8,6 +8,7 @@ use Digest::SHA qw(sha256_hex);
 use LWPx::ParanoidAgent;
 use Net::OpenID::Consumer;
 use CGI::Carp qw(fatalsToBrowser set_message);
+use File::Copy;
 
 set_message("It's not a bug, it's a feature!!<br />(include this error message in your bugreport here: <a href=\"http://yolanda.mister-muffin.de/newticket\">Yolanda bugtracker</a>)");
 
