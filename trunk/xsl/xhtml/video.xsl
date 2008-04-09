@@ -38,14 +38,14 @@
 
         function hide_movie()
             {
-            document.getElementById('video').style.display = 'none';
-            document.getElementById('preview').style.display = 'block';
+            document.getElementById('video').style.display      = 'none';
+            document.getElementById('preview').style.display    = 'block';
             }
 
         function show_movie()
             {
-            document.getElementById('video').style.display = 'inline';
-            document.getElementById('preview').style.display = 'none';
+            document.getElementById('video').style.display      = 'inline';
+            document.getElementById('preview').style.display    = 'none';
             window.setTimeout("hide_movie()",
         ]]>
         </xsl:text>

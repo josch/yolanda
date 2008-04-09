@@ -8,56 +8,72 @@
 >
 
 <xsl:template name="loginbox">
+
     <div class="loginbox">
 
-        <xsl:choose>
-            <xsl:when test="string-length(//@username)=0">
+        <form method="post">
+            <xsl:attribute name="action">
+                <xsl:value-of select="$site_strings[@id='path_login']" />
+            </xsl:attribute>
+            <fieldset>
+                <label for="user">
+                    <xsl:value-of select="$locale_strings[@id='username_or_openid']" />:
+                </label>
+                <br />                
+                <input id="username" name="user" onkeyup="check_openid();" type="text" />
+                <br />
 
-                <form method="post">
-                    <xsl:attribute name="action">
-                        <xsl:value-of select="$site_strings[@id='path_login']" />
+                <label for="pass">
+                    <xsl:value-of select="$locale_strings[@id='password']" />:
+                </label>
+                <br />
+                <input id="password" name="pass" type="password" />
+
+                <input type="submit" name="login" >
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="$locale_strings[@id='button_login']" />
                     </xsl:attribute>
-                    <fieldset>
-                        <label for="user">
-                            <xsl:value-of select="$locale_strings[@id='username']" />:
-                        </label>
-                        <br />                
-                        <input name="user" type="text" />
-                        <br />
+                </input>
 
-                        <label for="pass">
-                            <xsl:value-of select="$locale_strings[@id='password']" />:
-                        </label>
-                        <br />
-                        <input name="pass" type="password" />
-
-                        <input type="submit" name="login" >
-                            <xsl:attribute name="value">
-                                <xsl:value-of select="$locale_strings[@id='button_login']" />
-                            </xsl:attribute>
-                        </input>
-
-                    </fieldset>
-                </form>
-
-            </xsl:when>
-            <xsl:otherwise>
-
-<!--
-                <xsl:value-of select="$locale_strings[@id='logged_in_as']" />
-                <a>
-                    <xsl:attribute name="href">
-                        user/<xsl:value-of select="//@username" />
-                    </xsl:attribute>
-                    <xsl:value-of select="//@username" />
-                </a>
--->
-
-
-            </xsl:otherwise>
-        </xsl:choose>
+            </fieldset>
+        </form>
 
     </div>
+
+    <script type="text/javascript">
+
+<!--
+    this looks awfully ugly, but nevertheless generates javascript inside _valid_ XHTML
+    kudos to toby white who details the solution on http://scispace.net/tow21/weblog/718.html
+-->
+    
+        <xsl:text disable-output-escaping="yes">&lt;![CDATA[
+        <![CDATA[
+
+        function check_openid()
+            {
+            password = document.getElementById('password');
+            if  (
+                document.getElementById('username').value.substring(7,0).toLowerCase() == "http://"
+                ||
+                document.getElementById('username').value.substring(8,0).toLowerCase() == "https://"
+                )
+                {
+                password.disabled   = true;
+                password.type       = 'input';
+                password.value      = ']]></xsl:text><xsl:value-of select="$locale_strings[@id='input_password_not_required']" /><xsl:text disable-output-escaping="yes"><![CDATA[';
+                }
+            else
+                {
+                password.disabled   = false;
+                password.type       = 'password';
+                password.value      = '';
+                }
+            }
+
+        ]]]]></xsl:text>
+        <xsl:text disable-output-escaping="yes">></xsl:text>
+    </script>
 
 </xsl:template>
 

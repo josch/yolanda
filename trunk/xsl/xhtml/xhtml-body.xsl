@@ -22,7 +22,12 @@
         <xsl:choose>
             <xsl:when test="//frontpage">
                 <xsl:call-template name="searchbar" />
-                <xsl:call-template name="loginbox" />
+
+                <xsl:if test="string-length(//@username)=0">
+                    <xsl:call-template name="loginbox" />
+                </xsl:if>
+
+
                 <xsl:call-template name="tagcloud" />
 
                 <xsl:if test="//message">

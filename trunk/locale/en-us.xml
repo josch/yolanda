@@ -112,10 +112,12 @@
     
     <!-- login / register page -->
     <string id="username">username</string>
-    <string id="password">password</string>
+    <string id="username_or_openid">Username or OpenID</string>
+    <string id="password">Password</string>
     <string id="password_repeat">repeat password</string>
-    <string id="button_register">register</string>
-    <string id="button_login">login</string>
+    <string id="input_password_not_required">No password required.</string>
+    <string id="button_register">Register</string>
+    <string id="button_login">Login</string>
 
     <!-- upload page -->
     <string id="file">file</string>
