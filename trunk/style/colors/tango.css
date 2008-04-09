@@ -80,43 +80,30 @@ div.loginbox
 
     div.messagebox
     {
+        line-height:    3em;
+        background-repeat:      no-repeat;
+        background-position:    1.5em center;
     }
 
         div.messagebox#error
         {
             /* "Scarlet Red 1" + 30 luminosity */
             background-color:   #f46060;
-        }
-
-        div.messagebox#error:before
-        {
-        /* TODO: find out how to set vertical-align:middle for this image */
-        content:        url(../../images/tango/32x32/dialog-error.png);
-        height:         200px;
+            background-image:   url(../../images/tango/32x32/status/dialog-error.png);
         }
 
         div.messagebox#information
         {
             /* "Chameleon 1" + 30 luminosity */
             background-color:   #a9ec68;
-        }
-
-        div.messagebox#information:before
-        {
-        /* TODO: find out how to set vertical-align:middle for this image */
-        content:        url(../../images/tango/32x32/dialog-information.png);
+            background-image:   url(../../images/tango/32x32/status/dialog-information.png);
         }
 
         div.messagebox#warning
         {
             /* "Orange 1" */
             background-color:   #fcaf3e;
-        }
-
-        div.messagebox#warning:before
-        {
-        /* TODO: find out how to set vertical-align:middle for this image */
-        content:        url(../../images/tango/32x32/dialog-warning.png);
+            background-image:    url(../../images/tango/32x32/status/dialog-warning.png);
         }
 
     div.page-number
