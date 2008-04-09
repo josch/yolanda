@@ -43,7 +43,7 @@ while(1)
 {
     #get fresh video id from db
     my $sth = $dbh->prepare(qq{select id, filesize, duration, width, height, fps, hash
-        from uploaded where duration != 0 and width != 0 and height != 0 limit 1}) or interrupt $dbh->errstr;
+        from uploaded where filesize != -1 and duration != -1 and width != -1 and height != -1 limit 1}) or interrupt $dbh->errstr;
         
     $sth->execute() or interrupt $dbh->errstr;
     my ($id,$filesize, $duration, $width, $height, $fps, $sha) = $sth->fetchrow_array();
