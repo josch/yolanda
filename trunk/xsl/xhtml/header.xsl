@@ -9,13 +9,18 @@
 
 <xsl:template name="header">
 
-    <img id="logo">
-        <xsl:attribute name="src">
-            <xsl:value-of select="$site_strings[@id='path_root']" />/images/logo.png
+    <a>
+        <xsl:attribute name="href">
+            <xsl:value-of select="$site_strings[@id='path_root']" />
         </xsl:attribute>
-    </img>
+        <img id="logo">
+            <xsl:attribute name="src">
+                <xsl:value-of select="$site_strings[@id='path_root']" />/images/logo.png
+            </xsl:attribute>
+        </img>
+    </a>
 
-    <ul id="header" role="navigation" style="clear:right;">
+    <ul id="header" role="navigation">
 
         <xsl:choose>
             <xsl:when test="string-length(//@username)=0">
@@ -49,15 +54,6 @@
                 <li>
                     <a>
                         <xsl:attribute name="href">
-                            <xsl:value-of select="$site_strings[@id='path_upload']" />
-                        </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='header_upload-video']" />
-                    </a>
-                </li>
-
-                <li>
-                    <a>
-                        <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_settings']" />
                         </xsl:attribute>
                         <xsl:value-of select="$locale_strings[@id='settings_details']" />
@@ -76,15 +72,6 @@
                     </a>
                 </li>
 -->
-
-                <li>
-                    <a>
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="$site_strings[@id='path_logout']" />
-                        </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='logout']" />
-                    </a>
-                </li>
 
                 <li id="upload">
                     <a>

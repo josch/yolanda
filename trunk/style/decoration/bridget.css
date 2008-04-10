@@ -108,21 +108,21 @@ div
 
     div.messagebox
     {
-        font-weight:        bold;
         /* correct spacing to avoid overlapping with float:right elements */
         margin-right:       22em;
     }
 
-        div.messagebox#error
+        div.messagebox span.message
         {
-        }
-
-        div.messagebox#information
-        {
-        }
-
-        div.messagebox#warning
-        {
+            font-weight:        bold;
+            line-height:        1.5em;
+            margin-bottom:      1em;
+            /* correct spacing to avoid overlapping with background icon */
+            margin-left:        33%;
+            margin-top:         1em;
+            /* the width of the icon */
+            padding-left:       32px;
+            text-align:         justify;
         }
 
     div.metadata
@@ -306,14 +306,6 @@ span
     span.protip:before
     {
         content:            "( ";
-    }
-
-ul
-{
-}
-
-    ul#account-actions
-    {
     }
 
     ul#header

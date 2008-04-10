@@ -80,9 +80,8 @@ div.loginbox
 
     div.messagebox
     {
-        line-height:    3em;
         background-repeat:      no-repeat;
-        background-position:    1.5em center;
+        background-position:    33% center;
     }
 
         div.messagebox#error
@@ -180,11 +179,6 @@ li
         list-style-image:       url(../../images/tango/16x16/actions/document-new.png)
     }
 
-    li#logout
-    {
-        list-style-image:       url(../../images/tango/16x16/actions/system-log-out.png)
-    }
-
     li#mostviews
     {
         list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png)
@@ -194,19 +188,6 @@ li
     {
         list-style-image:       url(../../images/tango/16x16/actions/document-save.png)
     }
-
-    li#upload
-    {
-        list-style-image:       url(../../images/tango/16x16/actions/go-up.png)
-    }
-
-p
-{
-}
-
-span
-{
-}
 
     span.duration
     {

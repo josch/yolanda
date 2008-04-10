@@ -73,16 +73,9 @@ div
     {
     }
 
-        div.messagebox#error
+        div.messagebox span.message
         {
-        }
-
-        div.messagebox#information
-        {
-        }
-
-        div.messagebox#warning
-        {
+            display:block;
         }
 
     div.metadata

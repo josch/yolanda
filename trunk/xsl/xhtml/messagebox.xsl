@@ -10,23 +10,28 @@
 <xsl:template name="message">
 
     <div class="messagebox">
+
         <xsl:attribute name="id">
             <xsl:value-of select="/page/message/@type" />
         </xsl:attribute>
-        <xsl:choose>
-            <xsl:when test="/page/message/@type='error'">
-            </xsl:when>
-            <xsl:when test="/page/message/@type='information'">
-            </xsl:when>
-            <xsl:when test="/page/message/@type='warning'">
-            </xsl:when>
-        </xsl:choose>
-        <xsl:variable name="messagetext" select="/page/message/@text" />
+
         <span class="message">
+            <xsl:variable name="messagetext" select="/page/message/@text" />
             <xsl:value-of select="$locale_strings[@id=$messagetext]" />
-            <xsl:value-of select="/page/message/@value" />
-            <!-- probably one can do this on one line, dunno how -->
+
+            <xsl:choose>
+
+                <xsl:when test="/page/message/@value">
+                </xsl:when>
+
+                <xsl:otherwise>
+                    <xsl:value-of select="/page/message/@value" />
+                </xsl:otherwise>
+
+            </xsl:choose>
+
         </span>
+
     </div>
 
 </xsl:template>
