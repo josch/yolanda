@@ -125,37 +125,52 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                 $tnheight = $tnmaxheight;
                 $tnwidth = int($tnheight*($width/$height)/2 + .5)*2;
                 
-                system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/thumbnails/$id";
-                system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $previewsec $root/video-stills/previews/$id";
+                $ffthumb = system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/thumbnails/$id";
+                $ffprev = system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $previewsec $root/video-stills/previews/$id";
                 
-                $vmaxheight = 640;
-                
-                #check if the upload already is in the right format and smaller/equal max-width/height
-                if ($container eq 'ogg' and $video eq 'theora' and ($audio eq 'vorbis' or not $audio) and $height <= $vmaxheight)
+                #if thumbnail was created successfully
+                if($ffthumb == 0 and $ffprev == 0)
                 {
-                    #add video to videos table
-                    $dbh->do(qq{insert into videos select id, title, description, userid, timestamp, creator,
-                                            subject, source, language, coverage, rights, license, ?, ?, ?, ?, ?, ?, 0, 0
-                                            from uploaded where id = ?}, undef, $filesize, $duration, $width,
-                                            $height, $fps, $sha, $id) or die $dbh->errstr;
-                                            
-                    #delete from uploaded table
-                    $dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or die $dbh->errstr;
+                    $vmaxheight = 640;
                     
-                    move("/tmp/$id", "$root/videos/$id");
+                    #check if the upload already is in the right format and smaller/equal max-width/height
+                    if ($container eq 'ogg' and $video eq 'theora' and ($audio eq 'vorbis' or not $audio) and $height <= $vmaxheight)
+                    {
+                        if(move("/tmp/$id", "$root/videos/$id"))
+                        {
+                            #add video to videos table
+                            $dbh->do(qq{insert into videos select id, title, description, userid, timestamp, creator,
+                                                    subject, source, language, coverage, rights, license, ?, ?, ?, ?, ?, ?, 0, 0
+                                                    from uploaded where id = ?}, undef, $filesize, $duration, $width,
+                                                    $height, $fps, $sha, $id) or die $dbh->errstr;
+                                                    
+                            #delete from uploaded table
+                            $dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or die $dbh->errstr;
+                        }
+                        else
+                        {
+                            #delete from uploaded table
+                            $dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or die $dbh->errstr;
+                            die "cannot move video to $root/videos/$id - check your permissions!"
+                        }
+                    }
+                    else
+                    {
+                        #write all valueable information to database so the daemon can fetch it
+                        $dbh->do(qq{update uploaded set filesize = ?, duration = ?, width = ?,
+                                height = ?, fps = ?, hash = ? where id = ?}, undef, $filesize, $duration, $width,
+                                $height, $fps, $sha, $id) or die $dbh->errstr;
+                    }
                     
-                    #TODO:create torrent file
+                    #print success to the user
+                    print $query->redirect("index.pl?information=information_uploaded&value=$domain/video/".urlencode($query->param("DC.Title"))."/$id/");
                 }
                 else
                 {
-                    #write all valueable information to database so the daemon can fetch it
-                    $dbh->do(qq{update uploaded set filesize = ?, duration = ?, width = ?,
-                            height = ?, fps = ?, hash = ? where id = ?}, undef, $filesize, $duration, $width,
-                            $height, $fps, $sha, $id) or die $dbh->errstr;
+                    #delete from uploaded table
+                    $dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or die $dbh->errstr;
+                    die "cannot create thumbnails - check your permissions!";
                 }
-                
-                #print success to the user
-                print $query->redirect("index.pl?information=information_uploaded&value=$domain/video/".urlencode($query->param("DC.Title"))."/$id/");
             }
         }
     }

@@ -60,27 +60,29 @@ while(1)
         $vwidth = int($vheight*($width/$height)/8 + .5)*8;
         
         $abitrate = 64;
-        $vbitrate = int(($filesize*8) / $duration + .5) - $abitrate;
+        $vbitrate = int((int(($filesize*8) / $duration + .5) - $abitrate)/1000);
+        #check if the bitrate is lower than 16000 (maximum for ffmpeg)
+        $vbitrate = $vbitrate <= 16000 ? $vbitrate : 16000;
         
         #TODO: add metadata information
-        system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id /tmp/$id";
+        $ffmpeg = system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id /tmp/$id";
         
-        appendlog $id, $audio, $video, $vwidth, $vheight, $fps, $duration, $sha;
+        appendlog $id, $vbitrate, $filesize, $vwidth, $vheight, $fps, $duration, $sha, $ffmpeg;
         
-        $filesize = -s "$root/videos/$id";
+        #only insert into videos table when everything went right
+        if($ffmpeg == 0)
+        {
+            $filesize = -s "$root/videos/$id";
+            
+            #add video to videos table
+            $dbh->do(qq{insert into videos select id, title, description, userid, timestamp, creator,
+                                    subject, source, language, coverage, rights, license, ?, duration, ?, ?, fps, hash, 0, 0
+                                    from uploaded where id = ?}, undef, $filesize, $vwidth,
+                                    $vheight, $id) or interrupt $dbh->errstr;
+        }
         
-        #add video to videos table
-        $dbh->do(qq{insert into videos select id, title, description, userid, timestamp, creator,
-                                subject, source, language, coverage, rights, license, ?, duration, ?, ?, fps, hash, 0, 0
-                                from uploaded where id = ?}, undef, $filesize, $vwidth,
-                                $vheight, $id) or interrupt $dbh->errstr;
-        
-        #delete temp file
+        #delete from uploaded table and from /tmp
         unlink "/tmp/$id";
-        
-        #TODO:create torrent file
-        
-        #delete from uploaded table
         $dbh->do(qq{delete from uploaded where id = ?}, undef, $id) or interrupt $dbh->errstr;
     }
     else
