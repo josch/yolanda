@@ -90,27 +90,6 @@ if($query->url_param('id'))
             }
         }
         
-        #if referer is not the local site update referer table
-        $referer = $query->referer() or $referer = '';
-        if($referer !~ /^$domain/)
-        {
-            #check if already in database
-            $sth = $dbh->prepare(qq{select 1 from referer where videoid = ? and referer = ? }) or die $dbh->errstr;
-            my $rowcount = $sth->execute($id, $referer) or die $dbh->errstr;
-            $sth->finish() or die $dbh->errstr;
-            
-            if($rowcount > 0)
-            {
-                #video is in database - increase referercount
-                $dbh->do(qq{update referer set count=count+1 where videoid = ? and referer = ? }, undef, $id, $referer) or die $dbh->errstr;
-            }
-            else
-            {
-                #add new referer
-                $dbh->do(qq{insert into referer (videoid, referer) values (?, ?) }, undef, $id, $referer) or die $dbh->errstr;
-            }
-        }
-        
         #before code cleanup, this was a really obfuscated array/hash creation
         push @{ $page->{'video'} },
         {
@@ -193,17 +172,6 @@ if($query->url_param('id'))
             };
         }
         
-        #get referers
-        $sth = $dbh->prepare(qq{select count, referer from referer where videoid=?}) or die $dbh->errstr;
-        $sth->execute($id) or die $dbh->errstr;
-        while (my ($count, $referer) = $sth->fetchrow_array())
-        {
-            $referer or $referer = 'no referer (refreshed, manually entered url or bookmark)';
-            push @{ $page->{'referers'}->{'referer'} }, {
-                'count'     => $count,
-                'referer'   => $referer
-            };
-        }
         print output_page();
     }
 }

@@ -14,8 +14,6 @@ $dbh->do(qq{drop table uploaded});
 
 $dbh->do(qq{drop table tagcloud});
 
-$dbh->do(qq{drop table referer});
-
 $dbh->do(qq{drop table comments});
 
 $dbh->do(qq{create table
@@ -110,15 +108,6 @@ $dbh->do(qq{create table
         downloadcount   int                 default 0,
         primary key     (id),
         fulltext        (title, description, subject)
-    )
-}) or die $dbh->errstr;
-
-$dbh->do(qq{create table
-    referer
-    (
-        videoid         int                 not null,
-        referer         varchar(255)        not null,
-        count           int                 default 1
     )
 }) or die $dbh->errstr;
 
