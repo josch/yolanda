@@ -24,9 +24,9 @@ sub appendlog
     if (open(FILE, ">>$LOG"))
     {
         print FILE scalar(localtime)." ".$$."\n";
-        print "------------------------------------\n";
-        print join("\n",@_)."\n";
-        print "------------------------------------\n\n";
+        #print "------------------------------------\n";
+        #print join("\n",@_)."\n";
+        #print "------------------------------------\n\n";
         close FILE;
     }
 }
