@@ -361,18 +361,12 @@
         </xsl:attribute>
 
         <div class="messagebox" id="error">
-            <xsl:value-of select="$locale_strings[@id='error_no_ogg_plugin']" />
+            <span class="message">
+                <xsl:value-of select="$locale_strings[@id='error_no_ogg_plugin']" />
+            </span>
         </div>
 
-        <div style="margin-right:22em;">
-<!--
-        TODO: we need a plugin download area
-        (has to contain download links for every system)
--->
-            <img src="/images/vlc.png"/>
-            <img src="/images/mplayer.png"/>
-            <img src="/images/totem.png"/>
-        </div>
+        <xsl:call-template name="pluginhelp" />
 
     </object>
 

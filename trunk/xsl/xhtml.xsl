@@ -24,6 +24,7 @@
 <xsl:include href="./xhtml/header.xsl" />
 <xsl:include href="./xhtml/messagebox.xsl" />
 <xsl:include href="./xhtml/loginbox.xsl" />
+<xsl:include href="./xhtml/pluginhelp.xsl" />
 <xsl:include href="./xhtml/register.xsl" />
 <xsl:include href="./xhtml/results.xsl" />
 <xsl:include href="./xhtml/settings.xsl" />

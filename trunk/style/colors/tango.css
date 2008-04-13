@@ -111,18 +111,6 @@ div.loginbox
         border-color:   #555753;
     }
 
-    div.protip-embed
-    {
-    }
-
-div#preview
-{
-}
-
-        div#preview form
-        {
-        }
-
     div.result
     {
     }
@@ -132,47 +120,6 @@ div#preview
             /* "Aluminium 5" */
             border-color:   #555753;
         }
-
-    div.searchbar
-    {
-    }
-
-    div.splashbox
-    {
-    }
-
-    div.tagcloud
-    {
-    }
-
-
-form
-{
-}
-
-    form fieldset
-    {
-    }
-
-        form fieldset input[type="text"]
-        {
-        }
-
-h1
-{
-}
-
-img
-{
-}
-
-    img#logo
-    {
-    }
-
-li
-{
-}
 
     li#latestadditions
     {
@@ -212,10 +159,6 @@ li
 ul
 {
 }
-
-    ul#account-actions
-    {
-    }
 
     ul#footer,
     ul#header

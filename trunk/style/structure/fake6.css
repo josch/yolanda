@@ -94,6 +94,15 @@ div
         overflow:       visible;
     }
 
+    div.pluginhelp
+    {
+    }
+
+        div.pluginhelp h3
+        {
+            clear:      left;
+        }
+
     div.protip-embed
     {
     }
@@ -205,7 +214,12 @@ img
 
     img#logo
     {
-    float:              left;
+    float:          left;
+    }
+
+    img.icon-mediaplayer
+    {
+    float:          left;
     }
 
 li

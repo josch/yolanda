@@ -38,7 +38,7 @@ if($userinfo->{'username'})
         
         if($query->param('DC.Title')&&$query->param('DC.Subject')&&$query->param('DC.Description'))
         {
-            $page->{'innerresults'} = [''];
+            $page->{'results-listing'} = [''];
     
             my @args = ();
 

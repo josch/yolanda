@@ -37,9 +37,14 @@ a
 
     a.tag
     {
-        margin-left:    0.25em;
-        margin-right:   0.25em;
+        margin-left:        0.25em;
+        margin-right:       0.25em;
     }
+
+code
+{
+    font-family:        monospace;
+}
 
 div
 {

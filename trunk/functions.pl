@@ -138,14 +138,15 @@ sub output_page
 {
     use XML::LibXSLT;
     use XML::LibXML;
-    
+
     my $parser = XML::LibXML->new();
     my $xslt = XML::LibXSLT->new();
-    
-    #let the XSLT param choose other stylesheets or default to xhtml.xsl
+
+    # let the XSLT param choose other stylesheets or default to xhtml.xsl
     my $param_xslt = $query->param('xslt');
     $param_xslt =~ s/[^\w]//gi;
-    
+
+    # "null" is a debuggin option, make it so that this doesn't show up in the final product
     if($param_xslt eq "null")
     {
         return $session->header(

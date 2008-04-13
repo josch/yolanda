@@ -9,6 +9,7 @@ $session = new CGI::Session;
 
 @page = get_page_array(@userinfo);
 
+# wtf is this shit ?
 if($query->url_param('action') eq 'edit' and $query->url_param('id'))
 {
     $page->{'message'}->{'type'} = "information";
@@ -51,8 +52,9 @@ if($query->url_param('id'))
         }
         else
         {
-            #there is nothing we can do now - this video doesn't exist...    
+            # there is nothing we can do now - this video doesn't exist...    
             print $query->redirect("/index.pl?error=error_no_video");
+            # this is a typical 404 situation, why is there no 404 ?
         }
     }
     elsif($rowcount == 1)
@@ -152,7 +154,7 @@ if($query->url_param('id'))
                             'rdf:resource'     => "http://web.resource.org/cc/DerivativeWorks"
                         }
 # ↑↑ dummy code because josch is too lazy for DOIN IT RITE ↑↑
-# sadly, i dunno how to add multiple tags 
+# sadly, i dunno how to add multiple tags with the same name
                 }
             }
         };
