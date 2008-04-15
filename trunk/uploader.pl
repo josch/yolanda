@@ -1,6 +1,6 @@
 require "functions.pl";
 
-CGI::Session->name($session_name);
+CGI::Session->name($config->{"page_cookie_name"});
 $query = CGI->new(\&hook);
 $session = new CGI::Session;
 

@@ -4,13 +4,13 @@ use Proc::Daemon;
 use DBI;
 use Digest::SHA;
 use File::Copy;
+use XML::Simple qw(:strict);
 
-#TODO: put this into central configuration file
-$database = 'yolanda';
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
 $root = '/var/www/yolanda';
+
+#set global config variable
+$config = XMLin("$root/config/backend.xml", KeyAttr => {string => 'id'}, ForceArray => [ 'string' ], ContentKey => '-content');
+$config = $config->{"strings"}->{"string"};
 
 #TODO: deamonize by uncommenting this line
 #Proc::Daemon::Init;
@@ -37,7 +37,7 @@ sub interrupt
     die;
 }
 
-$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass) or interrupt "could not connect to db";
+$dbh = DBI->connect("DBI:mysql:".$config->{"database_name"}.":".$config->{"database_host"}, $config->{"database_username"}, $config->{"database_password"}) or die $DBI::errstr;
 
 while(1)
 {
@@ -51,21 +51,26 @@ while(1)
     
     if($id)
     {
-        $vmaxheight = 640;
-        
         #video height is either the maximum video height
         #or (when the original is smaller than that) the original height
         #check for multiple by 8
-        $vheight = $vmaxheight <= $height ? $vmaxheight : int($height/8 + .5)*8;
+        $vheight = $height <= $config->{"video_height_max"} ? int($height/8 + .5)*8 : $config->{"video_height_max"};
         $vwidth = int($vheight*($width/$height)/8 + .5)*8;
         
-        $abitrate = 64;
-        $vbitrate = int((int(($filesize*8) / $duration + .5) - $abitrate)/1000);
-        #check if the bitrate is lower than 16000 (maximum for ffmpeg)
-        $vbitrate = $vbitrate <= 16000 ? $vbitrate : 16000;
+        #if calculated width is greater than max_width, recalculate height
+        if($vwidth > $config->{"video_width_max"})
+        {
+            $vwidth = $config->{"video_width_max"};
+            $vheight = int($vwidth*($height/$width)/8 + .5)*8;
+        }
+        
+        #calculate video bitrate - try to keep the original filesize
+        $vbitrate = int((int(($filesize*8) / $duration + .5) - $config->{"video_audio_bitrate"})/1000);
+        #check if the bitrate is lower than $config->{"video_bitrate_max"} and adjust if necessary
+        $vbitrate = $vbitrate <= $config->{"video_bitrate_max"} ? $vbitrate : $config->{"video_bitrate_max"};
         
         #TODO: add metadata information
-        $ffmpeg = system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate $abitrate --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id /tmp/$id";
+        $ffmpeg = system "ffmpeg2theora --optimize --videobitrate $vbitrate --audiobitrate ".$config->{"video_audio_bitrate"}." --sharpness 0 --width $vwidth --height $vheight --output $root/videos/$id /tmp/$id";
         
         appendlog $id, $vbitrate, $filesize, $vwidth, $vheight, $fps, $duration, $sha, $ffmpeg;
         

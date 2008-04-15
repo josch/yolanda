@@ -11,8 +11,6 @@
     
     <string id="url_root">http://localhost</string><!-- MUST NOT end with trailing slash -->
     
-    <string id="path_root">/var/www/yolanda/</string><!-- MUST end with trailing slash -->
-    
     <!-- general page settings -->
     <string id="page_locale">en-us</string>
     <string id="page_xslt">xhtml.xsl</string>
@@ -25,12 +23,13 @@
     <string id="page_cookie_name">sid</string>
     
     <!-- settings for video uploads -->
-    <string id="video_height_max">720</string><!-- in pixels -->
+    <string id="video_height_max">720</string><!-- in pixels - MUST be multiple of 8 -->
     <string id="video_height_min">240</string>
     <string id="video_width_max">1080</string>
     <string id="video_width_min">320</string>
     <string id="video_filesize_max">204800</string><!-- in bytes -->
     <string id="video_filesize_min">512</string>
+    <string id="video_bitrate_max">6000</string>
     <string id="video_audio_bitrate">64</string>
     
     <!-- settings for xml output -->

@@ -22,8 +22,5 @@ $config = XMLin("$root/config/backend.xml", KeyAttr => {string => 'id'}, ForceAr
 $config = $config->{"strings"}->{"string"};
 #set global variables
 
-$session_name = 'sid';
-$locale = "en-US";
-
 $dbh = DBI->connect("DBI:mysql:".$config->{"database_name"}.":".$config->{"database_host"}, $config->{"database_username"}, $config->{"database_password"}) or die $DBI::errstr;
 1;

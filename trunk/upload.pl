@@ -1,7 +1,7 @@
 require "functions.pl";
 
 #create or resume session
-CGI::Session->name($session_name);
+CGI::Session->name($config->{"page_cookie_name"});
 $query = new CGI;
 $session = new CGI::Session;
 

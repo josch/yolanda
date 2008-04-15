@@ -1,13 +1,15 @@
 #!/usr/bin/perl -w
 
 use DBI;
+use XML::Simple qw(:strict);
 
-$database = 'yolanda';
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
+$root = '/var/www/yolanda';
 
-$dbh = DBI->connect("DBI:mysql:$database:$dbhost", $dbuser, $dbpass);
+#set global config variable
+$config = XMLin("$root/config/backend.xml", KeyAttr => {string => 'id'}, ForceArray => [ 'string' ], ContentKey => '-content');
+$config = $config->{"strings"}->{"string"};
+
+$dbh = DBI->connect("DBI:mysql:".$config->{"database_name"}.":".$config->{"database_host"}, $config->{"database_username"}, $config->{"database_password"}) or die $DBI::errstr;
 
 $sth = $dbh->prepare("select subject from videos");
 $sth->execute();
@@ -20,7 +22,7 @@ while(($subject) = $sth->fetchrow_array())
     {
         #strip whitespaces
         $val =~ s/^\s*(.*?)\s*$/$1/;
-        if(length($val) >= 3)
+        if(length($val) >= $config->{"page_tag_lenght_min"})
         {
             %hash->{$val}++;
         }
@@ -33,8 +35,8 @@ $sth->finish();
 
 $dbh->do("delete from tagcloud");
 $sth = $dbh->prepare("insert into tagcloud (text, count) values (?, ?)");
-#insert first 20 tags into tagcloud table
-for($i=0;$i<20 and $i<=$#sorted;$i++)
+#insert  tags into tagcloud table
+for($i=0;$i<$config->{"page_tag_count"} and $i<=$#sorted;$i++)
 {
     $sth->execute( $sorted[$i], %hash->{$sorted[$i]} );
 }
