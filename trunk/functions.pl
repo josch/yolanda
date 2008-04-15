@@ -42,9 +42,10 @@ sub get_page_array
     }
     
     $page->{'username'} = $userinfo->{'username'};
-    $page->{'xmlns:dc'} = $xmlns_dc;
-    $page->{'xmlns:cc'} = $xmlns_cc;
-    $page->{'xmlns:rdf'} = $xmlns_rdf;
+    $page->{'xmlns:dc'} = $config->{"xml_namespace_dc"};
+    $page->{'xmlns:cc'} = $config->{"xml_namespace_cc"};
+    $page->{'xmlns:rdf'} = $config->{"xml_namespace_rdf"};
+
 }
 
 # called by video.pl (display ambiguous videos),
@@ -59,10 +60,10 @@ sub fill_results
     $resultcount = $sth->execute(@_) or die $dbh->errstr;
     
     #set pagesize by query or usersettings or default
-    $pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = $defaultpagesize;
+    $pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = $config->{"page_results_pagesize_default"};
     
     #if pagesize is more than maxpagesize reduce to maxpagesize
-    $pagesize = $pagesize > $maxpagesize ? $maxpagesize : $pagesize;
+    $pagesize = $pagesize > $config->{"page_results_pagesize_max"} ? $config->{"page_results_pagesize_max"} : $pagesize;
     
     #rediculous but funny round up, will fail with 100000000000000 results per page
     #on 0.0000000000001% of all queries - this is a risk we can handle
@@ -92,22 +93,22 @@ sub fill_results
         #before code cleanup, this was a really obfuscated array/hash creation
         push @{ $page->{'results'}->{'result'} },
         {
-            'thumbnail' => "$domain/video-stills/thumbnails/$id",
-            'preview'   => "$domain/video-stills/previews/$id",
+            'thumbnail' => $config->{"url_root"}."/video-stills/thumbnails/$id",
+            'preview'   => $config->{"url_root"}."/video-stills/previews/$id",
             'duration'  => $duration,
             'viewcount' => $viewcount,
             'rdf:RDF'   =>
             {
                 'cc:Work'   =>
                 {
-                    'rdf:about'         => "$domain/download/$id/",
+                    'rdf:about'         => $config->{"url_root"}."/download/$id/",
                     'dc:title'          => [$title],
                     'dc:creator'        => [$creator],
                     'dc:subject'        => [$subject],
                     'dc:description'    => [$description],
                     'dc:publisher'      => [$publisher],
                     'dc:date'           => [$timestamp],
-                    'dc:identifier'     => ["$domain/video/".urlencode($title)."/$id/" . ($duration == 0 ? "/action=edit" : "")],
+                    'dc:identifier'     => [$config->{"url_root"}."/video/".urlencode($title)."/$id/" . ($duration == 0 ? "/action=edit" : "")],
                     'dc:source'         => [$source],
                     'dc:language'       => [$language],
                     'dc:coverage'       => [$coverage],

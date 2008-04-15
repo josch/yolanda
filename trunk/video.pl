@@ -86,8 +86,8 @@ if($query->url_param('id'))
         #before code cleanup, this was a really obfuscated array/hash creation
         push @{ $page->{'video'} },
         {
-            'thumbnail'     => "$domain/video-stills/thumbnails/$id",
-            'preview'       => "$domain/video-stills/previews/$id",
+            'thumbnail'     => $config->{"url_root"}."/video-stills/thumbnails/$id",
+            'preview'       => $config->{"url_root"}."/video-stills/previews/$id",
             'filesize'      => $filesize,
             'duration'      => $duration,
             'width'         => $width,
@@ -99,14 +99,14 @@ if($query->url_param('id'))
             {
                 'cc:Work'       =>
                 {
-                    'rdf:about'         => "$domain/download/$id/",
+                    'rdf:about'         => $config->{"url_root"}."/download/$id/",
                     'dc:title'          => [$title],
                     'dc:creator'        => [$creator],
                     'dc:subject'        => [$subject],
                     'dc:description'    => [$description],
                     'dc:publisher'      => [$publisher],
                     'dc:date'           => [$timestamp],
-                    'dc:identifier'     => ["$domain/video/".urlencode($title)."/$id/"],
+                    'dc:identifier'     => [$config->{"url_root"}."/video/".urlencode($title)."/$id/"],
                     'dc:source'         => [$source],
                     'dc:language'       => [$language],
                     'dc:coverage'       => [$coverage],

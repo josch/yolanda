@@ -6,17 +6,18 @@
     <string id="database">mysql</string>
     <string id="database_host">localhost</string>
     <string id="database_name">yolanda</string>
-    <string id="database_username">yolanda</string>
-    <string id="database_password"><!-- put password here --></string>
+    <string id="database_username">root</string>
+    <!--<string id="database_password">password</string>--><!-- MUST NOT be empty -->
     
-    <string id="url_root">http://localhost/</string>
+    <string id="url_root">http://localhost</string><!-- MUST NOT end with trailing slash -->
     
-    <string id="path_root">/var/www/yolanda/</string>
+    <string id="path_root">/var/www/yolanda/</string><!-- MUST end with trailing slash -->
     
     <!-- general page settings -->
     <string id="page_locale">en-us</string>
     <string id="page_xslt">xhtml.xsl</string>
-    <string id="page_results_pagesize">10</string>
+    <string id="page_results_pagesize_default">10</string>
+    <string id="page_results_pagesize_max">500</string>
     <string id="page_tag_lenght_min">3</string>
     <string id="page_tag_count">20</string>
     <string id="page_openid">true</string>
@@ -31,5 +32,12 @@
     <string id="video_filesize_max">204800</string><!-- in bytes -->
     <string id="video_filesize_min">512</string>
     <string id="video_audio_bitrate">64</string>
+    
+    <!-- settings for xml output -->
+    <!--<string id="xml_namespace">http://feature.yolanda.namespace.tld</string>-->
+    <string id="xml_namespace_xsl">http://www.w3.org/1999/XSL/Transform</string>
+    <string id="xml_namespace_dc">http://purl.org/dc/elements/1.1/</string>
+    <string id="xml_namespace_cc">http://web.resource.org/cc/</string>
+    <string id="xml_namespace_rdf">http://www.w3.org/1999/02/22-rdf-syntax-ns#</string>
 </strings>
 </xsl:stylesheet>

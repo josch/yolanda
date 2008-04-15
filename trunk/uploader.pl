@@ -163,7 +163,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                     }
                     
                     #print success to the user
-                    print $query->redirect("index.pl?information=information_uploaded&value=$domain/video/".urlencode($query->param("DC.Title"))."/$id/");
+                    print $query->redirect("index.pl?information=information_uploaded&value=".$config->{"url_root"}."/video/".urlencode($query->param("DC.Title"))."/$id/");
                 }
                 else
                 {

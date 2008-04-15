@@ -34,7 +34,7 @@ elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
     cache => undef, # or File::Cache->new,
     args => $query,
     consumer_secret => $session->id, #is this save? don't know...
-    required_root => $domain );
+    required_root => $config->{"url_root"} );
     
     #is an openid passed?
     if($query->param('user'))
@@ -49,8 +49,8 @@ elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
         {
             #try to set the check_url
             $check_url = $claimed->check_url(
-                    return_to  => "$domain/login.pl?action=openid", #on success return to this address
-                    trust_root => $domain); #this is the string the user will be asked to trust
+                    return_to  => $config->{"url_root"}."login.pl?action=openid", #on success return to this address
+                    trust_root => $config->{"url_root"}); #this is the string the user will be asked to trust
                     
             #redirect to openid server to check claim
             print $query->redirect($check_url);
@@ -73,7 +73,7 @@ elsif($query->param('action') eq 'openid')
     cache => undef, # or File::Cache->new,
     args => $query,
     consumer_secret => $session->id, #is this save? don't know...
-    required_root => $domain );
+    required_root => $config->{"url_root"} );
     
     if($setup_url = $con->user_setup_url)
     {
