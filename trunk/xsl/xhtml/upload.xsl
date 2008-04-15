@@ -277,6 +277,13 @@
                         <!-- somehow one cannot access DC.Language from inside the for-each... -->
                         <xsl:variable name="language" select="//uploadform/@DC.Language" />
                         <select name="DC.Language" size="1">
+                            <option>
+                                <xsl:if test="not($language)">
+                                    <xsl:attribute name="selected">selected</xsl:attribute>
+                                </xsl:if>
+                                <xsl:attribute name="value"></xsl:attribute>
+                                Undefined
+                            </option>
                             <xsl:for-each select="$language_strings">
                                 <option>
                                     <xsl:variable name="short" select="short" />
