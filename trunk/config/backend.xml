@@ -2,29 +2,34 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <strings>
+    <!-- database settings -->
     <string id="database">mysql</string>
+    <string id="database_host">localhost</string>
+    <string id="database_name">yolanda</string>
     <string id="database_username">yolanda</string>
     <string id="database_password"><!-- put password here --></string>
-    <string id="page_locale_default">en-us</string>
-    <string id="page_xslt_default">xhtml.xsl</string>
-    <string id="path_root">http://localhost/</string>
+    
+    <string id="url_root">http://localhost/</string>
+    
+    <string id="path_root">/var/www/yolanda/</string>
+    
+    <!-- general page settings -->
+    <string id="page_locale">en-us</string>
+    <string id="page_xslt">xhtml.xsl</string>
+    <string id="page_results_pagesize">10</string>
+    <string id="page_tag_lenght_min">3</string>
+    <string id="page_tag_count">20</string>
+    <string id="page_openid">true</string>
+    <!--<string id="page_bittorrent">false</string>-->
+    <string id="page_cookie_name">sid</string>
+    
+    <!-- settings for video uploads -->
+    <string id="video_height_max">720</string><!-- in pixels -->
+    <string id="video_height_min">240</string>
+    <string id="video_width_max">1080</string>
+    <string id="video_width_min">320</string>
+    <string id="video_filesize_max">204800</string><!-- in bytes -->
+    <string id="video_filesize_min">512</string>
+    <string id="video_audio_bitrate">64</string>
 </strings>
-
-<ints>
-    <int id="page_results_pagesize">10</int>
-    <int id="page_tag_lenght_min">3</int>
-    <int id="page_tag_count">20</int>
-    <int id="video_height_max">720</int><!-- in pixels -->
-    <int id="video_height_min">240</int>
-    <int id="video_width_max">1080</int>
-    <int id="video_width_min">320</int>
-    <int id="video_filesize_max">204800</int><!-- in bytes -->
-    <int id="video_filesize_min">512</int>
-</ints>
-
-<bool>
-    <int id="page_openid">true</int>
-    <int id="page_bittorrent">true</int>
-</bool>
-
 </xsl:stylesheet>

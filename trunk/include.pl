@@ -25,9 +25,7 @@ $dbpass = '';
 $domain = 'http://localhost';
 $session_name = 'sid';
 $locale = "en-US";
-# remove stylesheet attribute, this is an XSLT job
-$stylesheet = "/style/default.css";
-# WHAT THE FUCK
+
 $xmlns_dc = "http://purl.org/dc/elements/1.1/";
 $xmlns_cc = "http://web.resource.org/cc/";
 $xmlns_rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";

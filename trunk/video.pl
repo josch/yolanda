@@ -9,15 +9,6 @@ $session = new CGI::Session;
 
 @page = get_page_array(@userinfo);
 
-# wtf is this shit ?
-if($query->url_param('action') eq 'edit' and $query->url_param('id'))
-{
-    $page->{'message'}->{'type'} = "information";
-}
-if($query->url_param('action') eq 'bookmark' and $query->url_param('id'))
-{
-    $page->{'message'}->{'type'} = "information";
-}
 #check if id or title is passed
 if($query->url_param('id'))
 {

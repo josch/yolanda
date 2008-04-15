@@ -42,7 +42,6 @@ sub get_page_array
     }
     
     $page->{'username'} = $userinfo->{'username'};
-    $page->{'stylesheet'} = $stylesheet;
     $page->{'xmlns:dc'} = $xmlns_dc;
     $page->{'xmlns:cc'} = $xmlns_cc;
     $page->{'xmlns:rdf'} = $xmlns_rdf;
