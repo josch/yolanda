@@ -27,10 +27,11 @@
     <string id="video_height_min">240</string>
     <string id="video_width_max">1080</string>
     <string id="video_width_min">320</string>
-    <string id="video_filesize_max">204800</string><!-- in bytes -->
+    <string id="video_filesize_max">86388736</string><!-- in bytes -->
     <string id="video_filesize_min">512</string>
     <string id="video_bitrate_max">6000</string>
     <string id="video_audio_bitrate">64</string>
+    <string id="video_thumbnail_height">120</string>
     
     <!-- settings for xml output -->
     <!--<string id="xml_namespace">http://feature.yolanda.namespace.tld</string>-->

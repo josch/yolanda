@@ -36,7 +36,7 @@ if($userinfo->{'username'})
         $subject =~ s/\s*$//;
         $page->{'uploadform'}->{'DC.Subject'} = $subject;
         
-        if($query->param('DC.Title')&&$query->param('DC.Subject')&&$query->param('DC.Description'))
+        if($query->param('DC.Title')&&$subject&&$query->param('DC.Description'))
         {
             $page->{'results-listing'} = [''];
     
