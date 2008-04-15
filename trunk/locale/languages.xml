@@ -2,6 +2,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <languages>
   <lang>
+    <short></short>
+    <name lang="en">Undefined</name>
+  </lang>
+  <lang>
     <short>aa</short>
     <name lang="en">Afar</name>
     <name lang="aa">Afaraf</name>

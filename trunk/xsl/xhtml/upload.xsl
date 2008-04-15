@@ -273,20 +273,17 @@
 
                         <xsl:value-of select="$locale_strings[@id='instruction_language']" />
                         <br />
-
+                        
+                        <!-- somehow one cannot access DC.Language from inside the for-each... -->
+                        <xsl:variable name="language" select="//uploadform/@DC.Language" />
                         <select name="DC.Language" size="1">
                             <xsl:for-each select="$language_strings">
                                 <option>
                                     <xsl:variable name="short" select="short" />
-                                    <xsl:if test="//uploadform/@DC.Language=short">
-                                        <!-- never executed, plz fix -->
-                                        <xsl:attribute name="selected">
-                                            selected
-                                        </xsl:attribute>
+                                    <xsl:if test="$short=$language">
+                                        <xsl:attribute name="selected">selected</xsl:attribute>
                                     </xsl:if>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="$short" />
-                                    </xsl:attribute>
+                                    <xsl:attribute name="value"><xsl:value-of select="$short" /></xsl:attribute>
                                     <xsl:value-of select="name[@lang='en']" /><!-- language hardcoded to en - plz fix this -->
                                     (<xsl:value-of select="name[@lang=$short]" />)
                                 </option>

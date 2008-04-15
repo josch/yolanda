@@ -28,7 +28,7 @@ if($userinfo->{'username'})
         @unique{ @subject } = ();
         foreach $tag (keys %unique)
         {
-            if(length($tag) >= 3)
+            if(length($tag) >= $config->{"page_tag_lenght_min"})
             {
                 $subject.=$tag." ";
             }

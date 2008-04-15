@@ -71,6 +71,8 @@
     <string id="error_upload_duplicate">Video has already been uploaded</string>
     <string id="error_upload_file_too_small">The filesize of the video you uploaded is too small</string>
     <string id="error_upload_file_too_big">The filesize of the video you uploaded is too big</string>
+    <string id="error_upload_video_width_too_small">The width of the video you uploaded is too small</string>
+    <string id="error_upload_video_height_too_small">The height of the video you uploaded is too small</string>
     <string id=""></string>
 
     <!-- information -->
