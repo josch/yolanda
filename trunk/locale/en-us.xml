@@ -149,6 +149,7 @@
     <string id="instruction_description">Describe the video in natural language.</string>
     <string id="instruction_source">Specify the source, preferably by URL.</string>
     <string id="instruction_language">State the language of the video.</string>
+    <string id="instruction_language_choose">choose a language</string>
     <string id="instruction_coverage">Specify the time and location covered.</string>
     <string id="instruction_rights">Specify the copyright owner of the video.</string>
     <string id="instruction_license">Specify the license, preferably by URL.</string>

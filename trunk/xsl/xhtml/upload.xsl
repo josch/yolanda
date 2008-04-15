@@ -282,7 +282,7 @@
                                     <xsl:attribute name="selected">selected</xsl:attribute>
                                 </xsl:if>
                                 <xsl:attribute name="value"></xsl:attribute>
-                                Undefined
+                                <xsl:value-of select="$locale_strings[@id='instruction_language_choose']" />
                             </option>
                             <xsl:for-each select="$language_strings">
                                 <option>
