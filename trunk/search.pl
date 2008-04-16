@@ -18,9 +18,9 @@ if($query->param('query'))
     
     $strquery = $query->param('query');
     $strquery =~ s/%([0-9A-F]{2})/chr(hex($1))/eg;
-    (@tags) = $strquery =~ /tag:(\w+)/gi;
-    ($orderby) = $strquery =~ /orderby:(\w+)/i;
-    ($sort) = $strquery =~ /sort:(\w+)/i;
+    (@tags) = $strquery =~ / tag:(\w+)/gi;
+    ($orderby) = $strquery =~ / orderby:(\w+)/i;
+    ($sort) = $strquery =~ / sort:(\w+)/i;
     #($title) = $strquery =~ /title:(\w+)/i;
     #($description) = $strquery =~ /description:(\w+)/i;
     #($creator) = $strquery =~ /creator:(\w+)/i;
@@ -31,7 +31,7 @@ if($query->param('query'))
     #($filesize) = $strquery =~ /filesize:([<>]?\w+)/i;
     #($duration) = $strquery =~ /duration:([<>]?\w+)/i;
     #($timestamp) = $strquery =~ /timestamp:([<>]?\w+)/i;
-    $strquery =~ s/(tag|orderby|sort):\w+//gi;
+    $strquery =~ s/ (tag|orderby|sort):\w+//gi;
     $strquery =~ s/^\s*(.*?)\s*$/$1/;
 
     #build mysql query
@@ -42,82 +42,89 @@ if($query->param('query'))
     
     if($strquery)
     {
-        $dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
-        $dbquery .= " from videos as v, users as u where u.id = v.userid";
-        $dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
-        push @args, $strquery, $strquery;
-    }
-    else
-    {
-        $dbquery .= " from videos as v, users as u where u.id = v.userid";
-    }
-    
-    if(@tags)
-    {
-        $dbquery .= " and match(v.subject) against (? in boolean mode)";
-        push @args, "@tags";
-    }
-    
-    if($publisher)
-    {
-        $dbquery .= " and match(u.username) against (? in boolean mode)";
-        push @args, "$publisher";
-    }
-    
-    if($orderby)
-    {
-        if($orderby eq 'filesize')
+        if($strquery eq "*")
         {
-            $dbquery .= " order by v.filesize";
-        }
-        elsif($orderby eq 'duration')
-        {
-            $dbquery .= " order by v.duration";
-        }
-        elsif($orderby eq 'viewcount')
-        {
-            $dbquery .= " order by v.viewcount";
-        }
-        elsif($orderby eq 'downloadcount')
-        {
-            $dbquery .= " order by v.downloadcount";
-        }
-        elsif($orderby eq 'timestamp')
-        {
-            $dbquery .= " order by v.timestamp";
-        }
-        elsif($orderby eq 'relevance' and $strquery)
-        {
-            $dbquery .= " order by relevance";
+            $dbquery .= " from videos as v, users as u where u.id = v.userid";
         }
         else
         {
-            $dbquery .= " order by v.id";
+            $dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
+            $dbquery .= " from videos as v, users as u where u.id = v.userid";
+            $dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
+            push @args, $strquery, $strquery;
         }
         
-        if($sort eq "ascending")
+        if(@tags)
         {
-            $dbquery .= " asc";
+            $dbquery .= " and match(v.subject) against (? in boolean mode)";
+            push @args, "@tags";
         }
-        elsif($sort eq "descending")
+        
+        if($publisher)
         {
-            $dbquery .= " desc";
+            $dbquery .= " and match(u.username) against (? in boolean mode)";
+            push @args, "$publisher";
         }
-    }
-    
-    fill_results(@args);
-    
-    if(@{$page->{'results'}->{'result'}} == 0)
-    {
-        print $query->redirect("index.pl?warning=warning_no_results");
-    }
-    elsif((@{$page->{'results'}->{'result'}} == 1) and (not $query->param('page') or $query->param('page') == 1))
-    {
-        print $query->redirect($page->{'results'}->{'result'}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
+        
+        if($orderby)
+        {
+            if($orderby eq 'filesize')
+            {
+                $dbquery .= " order by v.filesize";
+            }
+            elsif($orderby eq 'duration')
+            {
+                $dbquery .= " order by v.duration";
+            }
+            elsif($orderby eq 'viewcount')
+            {
+                $dbquery .= " order by v.viewcount";
+            }
+            elsif($orderby eq 'downloadcount')
+            {
+                $dbquery .= " order by v.downloadcount";
+            }
+            elsif($orderby eq 'timestamp')
+            {
+                $dbquery .= " order by v.timestamp";
+            }
+            elsif($orderby eq 'relevance' and $strquery)
+            {
+                $dbquery .= " order by relevance";
+            }
+            else
+            {
+                $dbquery .= " order by v.id";
+            }
+            
+            if($sort eq "ascending")
+            {
+                $dbquery .= " asc";
+            }
+            elsif($sort eq "descending")
+            {
+                $dbquery .= " desc";
+            }
+        }
+        
+        fill_results(@args);
+        
+        if(@{$page->{'results'}->{'result'}} == 0)
+        {
+            print $query->redirect("index.pl?warning=warning_no_results");
+        }
+        elsif((@{$page->{'results'}->{'result'}} == 1) and (not $query->param('page') or $query->param('page') == 1))
+        {
+            print $query->redirect($page->{'results'}->{'result'}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
+        }
+        else
+        {
+            print output_page();
+        }
     }
     else
     {
-        print output_page();
+        print $query->redirect("index.pl?error=error_no_query");
     }
 }
 elsif($query->param('advanced'))

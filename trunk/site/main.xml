@@ -22,9 +22,9 @@
     <string id="path_root">http://localhost/</string>
     <string id="path_upload">/upload.pl</string>
     <string id="path_uploader">/uploader.pl</string>
-    <string id="path_query_latestadditions">/search.pl?query=orderby:timestamp%20sort:descending</string>
-    <string id="path_query_mostdownloads">/search.pl?query=orderby:downloadcount%20sort:descending</string>
-    <string id="path_query_mostviews">/search.pl?query=orderby:viewcount%20sort:descending</string>
+    <string id="path_query_latestadditions">/search.pl?query=*%20orderby:timestamp%20sort:descending</string>
+    <string id="path_query_mostdownloads">/search.pl?query=*%20orderby:downloadcount%20sort:descending</string>
+    <string id="path_query_mostviews">/search.pl?query=*%20orderby:viewcount%20sort:descending</string>
 
 </strings>
 
