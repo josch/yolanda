@@ -48,16 +48,18 @@ sub get_page_array
 
 }
 
-# called by video.pl (display ambiguous videos),
+# index.pl (display custom search)
 # search.pl (display search results)
 # and upload.pl (display similar videos)
 sub fill_results
 {
+    my ($dbquery, @args) = @_;
+
     #prepare query
     my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
     
     #execute it
-    $resultcount = $sth->execute(@_) or die $dbh->errstr;
+    $resultcount = $sth->execute(@args) or die $dbh->errstr;
     
     #set pagesize by query or usersettings or default
     $pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = $config->{"page_results_pagesize_default"};
@@ -77,7 +79,7 @@ sub fill_results
     $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
     
     #execute it
-    $sth->execute(@_) or die $dbquery;
+    $sth->execute(@args) or die $dbquery;
     
     $page->{'results'}->{'lastpage'} = $lastpage;
     $page->{'results'}->{'currentpage'} = $currentpage;
@@ -108,7 +110,7 @@ sub fill_results
                     'dc:description'    => [$description],
                     'dc:publisher'      => [$publisher],
                     'dc:date'           => [$timestamp],
-                    'dc:identifier'     => [$config->{"url_root"}."/video/".urlencode($title)."/$id/" . ($duration == 0 ? "/action=edit" : "")],
+                    'dc:identifier'     => [$config->{"url_root"}."/video/".urlencode($title)."/$id/"],
                     'dc:source'         => [$source],
                     'dc:language'       => [$language],
                     'dc:coverage'       => [$coverage],
@@ -124,6 +126,103 @@ sub fill_results
     
     #finish query
     $sth->finish() or die $dbh->errstr;
+}
+
+sub get_sqlquery
+{
+    my $strquery = @_[0];
+    $strquery =~ s/%([0-9A-F]{2})/chr(hex($1))/eg;
+    (@tags) = $strquery =~ / tag:(\w+)/gi;
+    ($orderby) = $strquery =~ / orderby:(\w+)/i;
+    ($sort) = $strquery =~ / sort:(\w+)/i;
+    #($title) = $strquery =~ /title:(\w+)/i;
+    #($description) = $strquery =~ /description:(\w+)/i;
+    #($creator) = $strquery =~ /creator:(\w+)/i;
+    #($language) = $strquery =~ /language:(\w+)/i;
+    #($coverage) = $strquery =~ /coverage:(\w+)/i;
+    #($rights) = $strquery =~ /rights:(\w+)/i;
+    #($license) = $strquery =~ /license:(\w+)/i;
+    #($filesize) = $strquery =~ /filesize:([<>]?\w+)/i;
+    #($duration) = $strquery =~ /duration:([<>]?\w+)/i;
+    #($timestamp) = $strquery =~ /timestamp:([<>]?\w+)/i;
+    $strquery =~ s/ (tag|orderby|sort):\w+//gi;
+    $strquery =~ s/^\s*(.*?)\s*$/$1/;
+
+    #build mysql query
+    my $dbquery = "select v.id, v.title, v.description, u.username,
+        from_unixtime( v.timestamp ), v.creator, v.subject, 
+        v.source, v.language, v.coverage, v.rights, v.license, filesize,
+        duration, width, height, fps, viewcount, downloadcount";
+
+    if($strquery)
+    {
+        if($strquery eq "*")
+        {
+            $dbquery .= " from videos as v, users as u where u.id = v.userid";
+        }
+        else
+        {
+            $dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
+            $dbquery .= " from videos as v, users as u where u.id = v.userid";
+            $dbquery .= " and match(v.title, v.description, v.subject) against( ? in boolean mode)";
+            push @args, $strquery, $strquery;
+        }
+        
+        if(@tags)
+        {
+            $dbquery .= " and match(v.subject) against (? in boolean mode)";
+            push @args, "@tags";
+        }
+        
+        if($publisher)
+        {
+            $dbquery .= " and match(u.username) against (? in boolean mode)";
+            push @args, "$publisher";
+        }
+        
+        if($orderby)
+        {
+            if($orderby eq 'filesize')
+            {
+                $dbquery .= " order by v.filesize";
+            }
+            elsif($orderby eq 'duration')
+            {
+                $dbquery .= " order by v.duration";
+            }
+            elsif($orderby eq 'viewcount')
+            {
+                $dbquery .= " order by v.viewcount";
+            }
+            elsif($orderby eq 'downloadcount')
+            {
+                $dbquery .= " order by v.downloadcount";
+            }
+            elsif($orderby eq 'timestamp')
+            {
+                $dbquery .= " order by v.timestamp";
+            }
+            elsif($orderby eq 'relevance' and $strquery)
+            {
+                $dbquery .= " order by relevance";
+            }
+            else
+            {
+                $dbquery .= " order by v.id";
+            }
+            
+            if($sort eq "ascending")
+            {
+                $dbquery .= " asc";
+            }
+            elsif($sort eq "descending")
+            {
+                $dbquery .= " desc";
+            }
+        }
+        
+        return $dbquery, @args;
+    }
 }
 
 #replace chars in url according to RFC 1738 <http://www.rfc-editor.org/rfc/rfc1738.txt>

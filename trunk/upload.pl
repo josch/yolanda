@@ -43,7 +43,7 @@ if($userinfo->{'username'})
             my @args = ();
 
             #build mysql query
-            $dbquery = "select v.id, v.title, v.description, u.username,
+            my $dbquery = "select v.id, v.title, v.description, u.username,
                 from_unixtime( v.timestamp ), v.creator, v.subject,
                 v.source, v.language, v.coverage, v.rights,
                 v.license, filesize, duration, width, height, fps, viewcount,
@@ -55,7 +55,7 @@ if($userinfo->{'username'})
                 against( ? in boolean mode)";
             push @args, $query->param('DC.Title'), $query->param('DC.Title');
     
-            fill_results(@args);
+            fill_results($dbquery, @args);
             $page->{'uploadform'}->{'page'} = '2';
         }
         else
