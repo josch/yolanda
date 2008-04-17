@@ -80,29 +80,24 @@ div.loginbox
 
     div.messagebox
     {
-        background-repeat:      no-repeat;
-        background-position:    33% center;
     }
 
         div.messagebox#error
         {
             /* "Scarlet Red 1" + 30 luminosity */
             background-color:   #f46060;
-            background-image:   url(../../images/tango/32x32/status/dialog-error.png);
         }
 
         div.messagebox#information
         {
             /* "Chameleon 1" + 30 luminosity */
             background-color:   #a9ec68;
-            background-image:   url(../../images/tango/32x32/status/dialog-information.png);
         }
 
         div.messagebox#warning
         {
             /* "Orange 1" */
             background-color:   #fcaf3e;
-            background-image:    url(../../images/tango/32x32/status/dialog-warning.png);
         }
 
     div.page-number

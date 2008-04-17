@@ -82,7 +82,7 @@
     <string id="information_metainformation_rights"></string>
     <string id="information_comment_created">Your comment has been submitted.</string>
     <string id="information_registered">Your account has been created.</string>
-    <string id="information_uploaded">Your file has been uploaded.</string>
+    <string id="information_uploaded">Your file has been uploaded. It will be available at </string>
     <string id="information_settings_changed">Your successfully changed your settings.</string>
     <string id="information_video_not_yet_available">The video being requested is not yet available. The overall sum of video queued is:</string>
 

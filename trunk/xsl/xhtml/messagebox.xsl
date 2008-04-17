@@ -21,7 +21,13 @@
 
             <xsl:choose>
 
-                <xsl:when test="/page/message/@value">
+                <xsl:when test="starts-with(/page/message/@value,'http')">
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="/page/message/@value" />
+                        </xsl:attribute>
+                        <xsl:value-of select="/page/message/@value" />
+                    </a>
                 </xsl:when>
 
                 <xsl:otherwise>
