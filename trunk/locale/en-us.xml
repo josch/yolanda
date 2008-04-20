@@ -215,11 +215,16 @@
     <string id="rss_description_1">This is an RSS Feed for the query "</string>
     <string id="rss_description_2">".</string>
 
-    <!-- units -->
-    <string id="unit_megabytes">MB</string>
-    <string id="unit_seconds">sec</string>
-    <string id="unit_minutes">min</string>
+    <!-- units, singular -->
+    <string id="unit_day">day</string>
+    <string id="unit_month">month</string>
+    <string id="unit_year">year</string>
+
+    <!-- units, plural -->
     <string id="unit_hours">h</string>
+    <string id="unit_megabytes">MB</string>
+    <string id="unit_minutes">min</string>
+    <string id="unit_seconds">sec</string>
 
 </strings>
 
