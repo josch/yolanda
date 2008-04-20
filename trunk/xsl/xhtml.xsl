@@ -49,7 +49,6 @@
 
 <xsl:variable name="site_strings" select="document('../config/frontend.xml')//strings/string" />
 <xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
-
 <xsl:variable name="language_strings" select="document('../locale/languages.xml')//languages/lang" />
 
 <!--

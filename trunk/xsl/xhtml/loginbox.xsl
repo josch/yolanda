@@ -12,10 +12,13 @@
     <div class="loginbox">
 
         <form method="post">
+
             <xsl:attribute name="action">
                 <xsl:value-of select="$site_strings[@id='path_login']" />
             </xsl:attribute>
+
             <fieldset>
+
                 <label for="user">
                     <xsl:value-of select="$locale_strings[@id='username_or_openid']" />:
                 </label>
@@ -36,6 +39,7 @@
                 </input>
 
             </fieldset>
+
         </form>
 
     </div>

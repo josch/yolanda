@@ -13,9 +13,9 @@
 
             <xsl:when test="//uploadform/@page=1">
 
-                <span class="heading">
+                <h1>
                     <xsl:value-of select="$locale_strings[@id='title_page_1']" />
-                </span>
+                </h1>
                 <br />
 
                 <span class="instruction">
@@ -28,42 +28,6 @@
                     <xsl:attribute name="action">
                         <xsl:value-of select="$site_strings[@id='path_upload']" />
                     </xsl:attribute>
-
-                    <input name="DC.Creator" type="hidden">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="//uploadform/@DC.Creator" />
-                        </xsl:attribute>
-                    </input>
-
-                    <input name="DC.Source" type="hidden">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="//uploadform/@DC.Source" />
-                        </xsl:attribute>
-                    </input>
-
-                    <input name="DC.Language" type="hidden">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="//uploadform/@DC.Language" />
-                        </xsl:attribute>
-                    </input>
-
-                    <input name="DC.Coverage" type="hidden">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="//uploadform/@DC.Coverage" />
-                        </xsl:attribute>
-                    </input>
-
-                    <input name="DC.Rights" type="hidden">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="//uploadform/@DC.Rights" />
-                        </xsl:attribute>
-                    </input>
-
-                    <input name="DC.License" type="hidden">
-                        <xsl:attribute name="value">
-                            <xsl:value-of select="//uploadform/@DC.License" />
-                        </xsl:attribute>
-                    </input>
 
                     <fieldset>
 
@@ -95,6 +59,42 @@
                         </textarea>
                         <br />
 
+                        <!-- somehow one cannot access DC.Language from inside the for-each... -->
+                        <xsl:variable name="language" select="//@locale" />
+<!--
+                        <xsl:variable name="language" select="//uploadform/@DC.Language" />
+                            <option>
+                                <xsl:if test="not($language)">
+                                    <xsl:attribute name="selected">selected</xsl:attribute>
+                                </xsl:if>
+                                <xsl:attribute name="value"></xsl:attribute>
+                                <xsl:value-of select="$locale_strings[@id='instruction_language_choose']" />
+                            </option>
+-->
+                        <select name="DC.Language" size="1">
+
+                            <xsl:for-each select="$language_strings">
+
+                                <option>
+
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="short" />
+                                    </xsl:attribute>
+<!--
+                                    <xsl:if test="$short=$language">
+                                        <xsl:attribute name="selected">selected</xsl:attribute>
+                                    </xsl:if>
+-->
+                                    <xsl:value-of select="name[@lang='en']" /><!-- language hardcoded to en - this will be solved through simple if/else -->
+                                    <xsl:value-of select="name[@lang=$language]" />
+                                    <xsl:value-of select="$language" /><!-- debug debug debug -->
+                                </option>
+
+                            </xsl:for-each>
+
+                        </select>
+                        <br />
+
                         <input type="submit" name="2">
                             <xsl:attribute name="value">
                                 <xsl:value-of select="$locale_strings[@id='button_next_page']" />
@@ -110,7 +110,12 @@
                 </form>
 
             </xsl:when>
-            
+
+
+<!--
+    visual blockade between section that is being worked on (↑↑) and those that isn't (↓↓)
+-->
+
             <xsl:when test="//uploadform/@page=2">
 
                 <span class="heading">
@@ -272,30 +277,6 @@
                         <br />
 
                         <xsl:value-of select="$locale_strings[@id='instruction_language']" />
-                        <br />
-                        
-                        <!-- somehow one cannot access DC.Language from inside the for-each... -->
-                        <xsl:variable name="language" select="//uploadform/@DC.Language" />
-                        <select name="DC.Language" size="1">
-                            <option>
-                                <xsl:if test="not($language)">
-                                    <xsl:attribute name="selected">selected</xsl:attribute>
-                                </xsl:if>
-                                <xsl:attribute name="value"></xsl:attribute>
-                                <xsl:value-of select="$locale_strings[@id='instruction_language_choose']" />
-                            </option>
-                            <xsl:for-each select="$language_strings">
-                                <option>
-                                    <xsl:variable name="short" select="short" />
-                                    <xsl:if test="$short=$language">
-                                        <xsl:attribute name="selected">selected</xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:attribute name="value"><xsl:value-of select="$short" /></xsl:attribute>
-                                    <xsl:value-of select="name[@lang='en']" /><!-- language hardcoded to en - plz fix this -->
-                                    (<xsl:value-of select="name[@lang=$short]" />)
-                                </option>
-                            </xsl:for-each>
-                        </select>
                         <br />
 
                         <xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
