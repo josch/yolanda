@@ -113,7 +113,8 @@ if($query->url_param('id'))
                             #TODO: expand xml entities &lt; &gt; &amp; &quot; in $pingbackurl
                             
                             #contruct the xml-rpc request
-                            my $xmlpost->{"methodName"} = ["pingback.ping"];
+                            my $xmlpost = ();
+                            $xmlpost->{"methodName"} = ["pingback.ping"];
                             push @{$xmlpost->{'params'}->{'param'} },
                             {
                                 "value" =>
@@ -140,7 +141,6 @@ if($query->url_param('id'))
                                                 ));
                             $ua = LWP::UserAgent->new;
                             $response = $ua->request($request);
-                            print $response->content;
                             #TODO: maybe do something on success?
                         }
                     }

@@ -114,12 +114,18 @@ sub send_error
     push @{$xml->{'fault'}->{'value'}->{'struct'}->{'member'}},
     {
         "name" => ["faultCode"],
-        "value" => [$faultCode]
+        "value" =>
+        {
+            "int" => [$faultCode]
+        }
     };
     push @{$xml->{'fault'}->{'value'}->{'struct'}->{'member'}},
     {
         "name" => ["faultString"],
-        "value" => [$faultString]
+        "value" =>
+        {
+            "string" => [$faultString]
+        }
     };
     
     print $session->header(
