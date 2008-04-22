@@ -117,7 +117,19 @@ $dbh->do(qq{create table
         id              int auto_increment  not null,
         userid          int                 not null,
         videoid         int                 not null,
-        text            varchar(255)        not null,
+        text            text                not null,
+        timestamp       bigint              not null,
+        primary key     (id)
+    )
+}) or die $dbh->errstr;
+
+$dbh->do(qq{create table
+    pingbacks
+    (
+        id              int auto_increment  not null,
+        source          varchar(255)        not null,
+        videoid         int                 not null,
+        text            text                not null,
         timestamp       bigint              not null,
         primary key     (id)
     )

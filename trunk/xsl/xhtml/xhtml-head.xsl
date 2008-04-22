@@ -39,6 +39,9 @@
                 <xsl:value-of select="$site_strings[@id='site_name']" />
             </xsl:attribute>
         </link>
+        
+        <!-- TODO: get server root from config file-->
+        <link rel="pingback" href="http://localhost/pingback.pl" />
 
         <xsl:choose>
             <xsl:when test="//frontpage">

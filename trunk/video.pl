@@ -76,10 +76,75 @@ if($query->url_param('id'))
                 #output infobox
                 $page->{'message'}->{'type'} = "information";
                 $page->{'message'}->{'text'} = "information_comment_created";
-            
+                
                 #add to database
                 $dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef,
                         $userinfo->{'id'}, $id, $query->param('comment')) or die $dbh->errstr;
+                
+                #send pingbacks to every url in the comment
+                my (@matches) = $query->param('comment') =~ /(http:\/\/\S+)/gi;
+                foreach $match (@matches)
+                {
+                    #ask for http header only - if pingbacks are implemented right, then we wont need the full site
+                    my $request = HTTP::Request->new(HEAD => $match);
+                    my $ua = LWP::UserAgent->new;
+                    
+                    my $response = $ua->request($request);
+                    
+                    if ($response->is_success)
+                    {
+                        my $pingbackurl = $response->header("x-pingback");
+                        
+                        #if there was no x-pingback header, fetch the website and search for link element
+                        if (!$pingbackurl)
+                        {
+                            $request = HTTP::Request->new(GET => $match);
+                            $response = $ua->request($request);
+                            
+                            if ($response->is_success)
+                            {
+                                ($pingbackurl) = $response->content =~ /<link rel="pingback" href="([^"]+)" ?\/?>/;
+                            }
+                        }
+                        
+                        #if requests were successful, send the pingbacks
+                        if ($pingbackurl)
+                        {
+                            #TODO: expand xml entities &lt; &gt; &amp; &quot; in $pingbackurl
+                            
+                            #contruct the xml-rpc request
+                            my $xmlpost->{"methodName"} = ["pingback.ping"];
+                            push @{$xmlpost->{'params'}->{'param'} },
+                            {
+                                "value" =>
+                                {
+                                    "string" => [$config->{"url_root"}."/video/".urlencode($title)."/$id/"]
+                                }
+                            };
+                            push @{$xmlpost->{'params'}->{'param'} },
+                            {
+                                "value" =>
+                                {
+                                    "string" => [$match]
+                                }
+                            };
+                            
+                            #post a xml-rpc request
+                            $request = HTTP::Request->new(POST => $pingbackurl);
+                            $request->header('Content-Type' => "application/xml");
+                            $request->content(XMLout(
+                                                    $xmlpost,
+                                                    XMLDecl => 1,
+                                                    KeyAttr => {},
+                                                    RootName => 'methodCall'
+                                                ));
+                            $ua = LWP::UserAgent->new;
+                            $response = $ua->request($request);
+                            print $response->content;
+                            #TODO: maybe do something on success?
+                        }
+                    }
+                }
             }
         }
         

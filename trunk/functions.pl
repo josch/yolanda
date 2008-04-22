@@ -235,9 +235,6 @@ sub urlencode
 
 sub output_page
 {
-    use XML::LibXSLT;
-    use XML::LibXML;
-
     my $parser = XML::LibXML->new();
     my $xslt = XML::LibXSLT->new();
 
@@ -303,6 +300,7 @@ sub output_page
             return $session->header(
                 -type=>$stylesheet->media_type,
                 -charset=>$stylesheet->output_encoding,
+                "x-pingback"=>$config->{"url_root"}."/pingback.pl"
             ),
             $output->toString;
             #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
