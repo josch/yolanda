@@ -6,13 +6,13 @@ sub get_userinfo_from_sid
     my ($sid) = @_;
     
     #prepare query
-    my $sth = $dbh->prepare(qq{select id, username, locale, pagesize from users where sid = ?}) or die $dbh->errstr;
+    my $sth = $dbh->prepare(qq{select id, username, pagesize from users where sid = ?}) or die $dbh->errstr;
     
     #execute it
     $sth->execute($sid) or die $dbh->errstr;
     
     #save the resulting username
-    ($userinfo->{'id'}, $userinfo->{'username'}, $userinfo->{'locale'}, $userinfo->{'pagesize'}) = $sth->fetchrow_array();
+    ($userinfo->{'id'}, $userinfo->{'username'}, $userinfo->{'pagesize'}) = $sth->fetchrow_array();
     
     #finish query
     $sth->finish() or die $dbh->errstr;
@@ -26,19 +26,10 @@ sub get_page_array
     #get parameters
     my (@userinfo) = @_;
     
-    #if user is logged in, use his locale setting and check for new upload status
-    if($userinfo->{'username'})
+    ($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
+    if (!$page->{'locale'})
     {
-        $page->{'locale'} = $userinfo->{'locale'};
-    }
-    #else get the locale from the http server variable
-    else
-    {
-        ($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
-        unless($page->{'locale'})
-        {
-            $page->{'locale'} = "en_us";
-        }
+        $page->{'locale'} = "en_us";
     }
     
     $page->{'username'} = $userinfo->{'username'};

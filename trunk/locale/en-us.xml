@@ -205,7 +205,6 @@
 
     <!-- settings page -->
     <string id="settings_heading">account settings for </string>
-    <string id="settings_instruction_locale">locale</string>
     <string id="settings_instruction_pagesize">choose pagesize</string>
 
     <!-- rss feed -->

@@ -21,32 +21,6 @@
                 <xsl:value-of select="$site_strings[@id='path_settings']" />
             </xsl:attribute>
 
-            <xsl:value-of select="$locale_strings[@id='settings_instruction_locale']" />
-            <br />
-
-            <select name="locale" size="2">
-
-                <option value="en-us">
-                    <xsl:if test="//settings/@locale='en-us'">
-                        <xsl:attribute name="selected">
-                            selected
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:value-of select="$locale_strings[@id='language_en-us']" />
-                </option>
-
-                <option value="de-de">
-                    <xsl:if test="//settings/@locale='de-de'">
-                        <xsl:attribute name="selected">
-                            selected
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:value-of select="$locale_strings[@id='language_de-de']" />
-                </option>
-
-            </select>
-            <br />
-
             <xsl:value-of select="$locale_strings[@id='settings_instruction_pagesize']" />
             <br />
 

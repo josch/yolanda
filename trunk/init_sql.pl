@@ -39,7 +39,6 @@ $dbh->do(qq{create table
         password    char(41)            not null,
         sid         char(32)            not null,
         timestamp   bigint              not null,
-        locale      varchar(10)         not null,
         pagesize    tinyint unsigned    default 5,
         primary key    (id)
     )
