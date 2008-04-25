@@ -19,14 +19,14 @@
 
         <xsl:call-template name="header"/>
 
+        <xsl:call-template name="searchbar" />
+
+        <xsl:if test="string-length(//@username)=0">
+            <xsl:call-template name="loginbox" />
+        </xsl:if>
+
         <xsl:choose>
             <xsl:when test="//frontpage">
-                <xsl:call-template name="searchbar" />
-
-                <xsl:if test="string-length(//@username)=0">
-                    <xsl:call-template name="loginbox" />
-                </xsl:if>
-
 
                 <xsl:call-template name="tagcloud" />
 
@@ -35,10 +35,11 @@
                 </xsl:if>
 
                 <xsl:call-template name="splashbox" />
+
+                <xsl:call-template name="results"/>
             </xsl:when>
 
             <xsl:when test="//page/video">
-                <xsl:call-template name="searchbar" />
 <!--
                 <xsl:call-template name="tagbar" />
 -->
@@ -51,7 +52,6 @@
             </xsl:when>
 
             <xsl:when test="//page//results">
-                <xsl:call-template name="searchbar" />
                 <xsl:call-template name="results"/>
             </xsl:when>
         </xsl:choose>

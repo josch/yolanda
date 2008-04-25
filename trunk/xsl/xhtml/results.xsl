@@ -9,35 +9,39 @@
 
 <xsl:template name="results">
 
-    <h1>
-        <xsl:value-of select="$locale_strings[@id='results_heading_1']" />&#160;
-        <xsl:value-of select="//results/@pagesize * (//results/@currentpage - 1) + 1" />&#160;
-        <xsl:value-of select="$locale_strings[@id='results_heading_2']" />&#160;
-        <xsl:choose>
-            <xsl:when test="(//results/@pagesize * //results/@currentpage) &lt; //results/@resultcount">
-                <xsl:value-of select="//results/@pagesize * //results/@currentpage" />
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="//results/@resultcount" />
-            </xsl:otherwise>
-        </xsl:choose>&#160;
-        <xsl:value-of select="$locale_strings[@id='results_heading_3']" />&#160;
-        <xsl:value-of select="//results/@resultcount" />&#160;
-        <xsl:value-of select="$locale_strings[@id='results_heading_4']" />
-    </h1>
+    <xsl:for-each select="//page/results">
 
-    <xsl:call-template name="results-listing"/>
+        <h1>
+            <xsl:value-of select="$locale_strings[@id='results_heading_1']" />&#160;
+            <xsl:value-of select="//results/@pagesize * (//results/@currentpage - 1) + 1" />&#160;
+            <xsl:value-of select="$locale_strings[@id='results_heading_2']" />&#160;
+            <xsl:choose>
+                <xsl:when test="(//results/@pagesize * //results/@currentpage) &lt; //results/@resultcount">
+                    <xsl:value-of select="//results/@pagesize * //results/@currentpage" />
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="//results/@resultcount" />
+                </xsl:otherwise>
+            </xsl:choose>&#160;
+            <xsl:value-of select="$locale_strings[@id='results_heading_3']" />&#160;
+            <xsl:value-of select="//results/@resultcount" />&#160;
+            <xsl:value-of select="$locale_strings[@id='results_heading_4']" />
+        </h1>
 
-    <xsl:if test="//results/@lastpage &gt; 1">
-        <xsl:call-template name="pagination-arrows"/>
-    </xsl:if>
+        <xsl:call-template name="results-listing"/>
+
+        <xsl:if test="//results/@lastpage &gt; 1">
+            <xsl:call-template name="pagination-arrows"/>
+        </xsl:if>
+
+    </xsl:for-each>
 
 </xsl:template>
 
 
 <xsl:template name="results-listing">
     <div class="results">
-        <xsl:for-each select="//results/result">
+        <xsl:for-each select="result">
             <div class="result">
                 <a>
                     <xsl:attribute name="href">
