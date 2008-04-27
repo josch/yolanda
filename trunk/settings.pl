@@ -21,10 +21,7 @@ if($userinfo->{'username'})
         
         $page = get_page_array(@userinfo);
         
-        my $message = XML::LibXML::Element->new( "message" );
-        $message->setAttribute("type", "information");
-        $message->setAttribute("text", "information_settings_changed");
-        $page->appendChild($message);
+        $page->appendChild(message("information", "information_settings_changed"));
     }
 }
 
@@ -37,10 +34,7 @@ if($userinfo->{'username'})
 }
 else
 {
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "error");
-    $message->setAttribute("text", "error_202c");
-    $page->appendChild($message);
+    $page->appendChild(message("error", "error_202c"));
 }
 
 $doc->setDocumentElement($page);

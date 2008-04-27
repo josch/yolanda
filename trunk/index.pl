@@ -15,27 +15,15 @@ $page->appendChild(XML::LibXML::Element->new( "frontpage" ));
 
 if($query->param('information'))
 {
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "information");
-    $message->setAttribute("text", $query->param('information'));
-    $message->setAttribute("value",$query->param('value'));
-    $page->appendChild($message);
+    $page->appendChild(message("information", $query->param('information'), $query->param('value')));
 }
 elsif($query->param('error'))
 {
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "error");
-    $message->setAttribute("text", $query->param('error'));
-    $message->setAttribute("value",$query->param('value'));
-    $page->appendChild($message);
+    $page->appendChild(message("error", $query->param('error'), $query->param('value')));
 }
 elsif($query->param('warning'))
 {
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "warning");
-    $message->setAttribute("text", $query->param('warning'));
-    $message->setAttribute("value",$query->param('value'));
-    $page->appendChild($message);
+    $page->appendChild(message("warning", $query->param('warning'), $query->param('value')));
 }
 
 my $tagcloud = XML::LibXML::Element->new( "tagcloud" );

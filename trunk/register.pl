@@ -14,10 +14,7 @@ my $page = get_page_array(@userinfo);
 #check if user is logged in
 if($username)
 {
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "error");
-    $message->setAttribute("text", "error_already_registered");
-    $page->appendChild($message);
+    $page->appendChild(message("error", "error_already_registered"));
     
     $doc->setDocumentElement($page);
 
@@ -38,10 +35,7 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
         {
             $page->appendChild(XML::LibXML::Element->new( "registerform" ));
             
-            my $message = XML::LibXML::Element->new( "message" );
-            $message->setAttribute("type", "error");
-            $message->setAttribute("text", "error_username_already_registered");
-            $page->appendChild($message);
+            $page->appendChild(message("error", "error_username_already_registered"));
             
             $doc->setDocumentElement($page);
 
@@ -60,10 +54,7 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
     {
         $page->appendChild(XML::LibXML::Element->new( "registerform" ));
         
-        my $message = XML::LibXML::Element->new( "message" );
-        $message->setAttribute("type", "error");
-        $message->setAttribute("text", "error_passwords_do_not_match");
-        $page->appendChild($message);
+        $page->appendChild(message("error", "error_passwords_do_not_match"));
         
         $doc->setDocumentElement($page);
 
@@ -74,10 +65,7 @@ elsif(not $query->param('user') and ($query->param('pass') or $query->param('pas
 {
     $page->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "error");
-    $message->setAttribute("text", "error_insert_username");
-    $page->appendChild($message);
+    $page->appendChild(message("error", "error_insert_username"));
     
     $doc->setDocumentElement($page);
 
@@ -87,10 +75,7 @@ elsif(not $query->param('pass') and ($query->param('user') or $query->param('pas
 {
     $page->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "error");
-    $message->setAttribute("text", "error_insert_password");
-    $page->appendChild($message);
+    $page->appendChild(message("error", "error_insert_password"));
     
     $doc->setDocumentElement($page);
 
@@ -100,10 +85,7 @@ elsif(not $query->param('pass_repeat') and ($query->param('user') or $query->par
 {
     $page->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    my $message = XML::LibXML::Element->new( "message" );
-    $message->setAttribute("type", "error");
-    $message->setAttribute("text", "error_repeat_password");
-    $page->appendChild($message);
+    $page->appendChild(message("error", "error_repeat_password"));
     
     $doc->setDocumentElement($page);
 

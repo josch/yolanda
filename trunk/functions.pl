@@ -339,3 +339,16 @@ sub output_page
         #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
     }
 }
+
+sub message
+{
+    my ($type, $text, $value) = @_;
+    my $message = XML::LibXML::Element->new( "message" );
+    $message->setAttribute("type", $type);
+    $message->setAttribute("text", $text);
+    if ($value)
+    {
+        $message->setAttribute("value", $value);
+    }
+    return $message;
+}

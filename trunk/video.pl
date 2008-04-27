@@ -93,10 +93,7 @@ if($query->url_param('id'))
                     else
                     {
                         #output infobox
-                        my $message = XML::LibXML::Element->new( "message" );
-                        $message->setAttribute("type", "information");
-                        $message->setAttribute("text", "information_comment_created");
-                        $page->appendChild($message);
+                        $page->appendChild(message("information", "information_comment_created"));
                         
                         #add to database
                         $dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef,
