@@ -115,20 +115,21 @@ div.loginbox
             /* "Aluminium 5" */
             border-color:   #555753;
         }
-
-    li#latestadditions
+    
+    /* TODO: make images configureable (maybe via symlinks?) */
+    li#search_custom_one
     {
         list-style-image:       url(../../images/tango/16x16/actions/document-new.png)
     }
 
-    li#mostviews
-    {
-        list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png)
-    }
-
-    li#mostdownloads
+    li#search_custom_two
     {
         list-style-image:       url(../../images/tango/16x16/actions/document-save.png)
+    }
+
+    li#search_custom_three
+    {
+        list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png)
     }
 
     span.duration

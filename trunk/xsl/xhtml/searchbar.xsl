@@ -36,7 +36,7 @@
 
         <ul id="queries" role="navigation">
 
-            <li id="latestadditions">
+            <li id="search_custom_one">
                 <a>
                     <xsl:attribute name="href">
                         <xsl:value-of select="$site_strings[@id='path_query_custom_one']" />
@@ -45,7 +45,7 @@
                 </a>
             </li>
 
-            <li id="mostviews">
+            <li id="search_custom_two">
                 <a>
                     <xsl:attribute name="href">
                         <xsl:value-of select="$site_strings[@id='path_query_custom_two']" />
@@ -54,7 +54,7 @@
                 </a>
             </li>
 
-            <li id="mostdownloads">
+            <li id="search_custom_three">
                 <a>
                     <xsl:attribute name="href">
                         <xsl:value-of select="$site_strings[@id='path_query_custom_three']" />

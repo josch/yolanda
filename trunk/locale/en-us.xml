@@ -31,10 +31,6 @@
     <string id="button_find">Find</string>
     <string id="button_lucky">Instant Access</string>
     <string id="button_advanced">Advanced Search</string>
-
-    <string id="query_latestadditions">new videos</string>
-    <string id="query_mostdownloads">most downloaded</string>
-    <string id="query_mostviews">popular videos</string>
     
     <string id="search_frontpage_one">new videos</string>
     <string id="search_frontpage_two">most downloaded</string>
