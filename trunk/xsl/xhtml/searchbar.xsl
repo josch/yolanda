@@ -11,7 +11,7 @@
 
     <div class="searchbar">
 
-        <form method="get" enctype="text/plain">
+        <form method="get" enctype="application/x-www-form-urlencoded">
             <xsl:attribute name="action">
                 <xsl:value-of select="$site_strings[@id='path_search']" />
             </xsl:attribute>
