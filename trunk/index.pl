@@ -60,10 +60,7 @@ $sth->finish() or die $dbh->errstr;
 
 $root->appendChild($tagcloud);
 
-#TODO: make this configureable
-@querystrings = ("* orderby:timestamp sort:descending", "*", "*");
-
-foreach $strquery (@querystrings)
+foreach $strquery ($config->{"search_frontpage_one_query"}, $config->{"search_frontpage_two_query"}, $config->{"search_frontpage_three_query"})
 {
     #new results block
     my $results = XML::LibXML::Element->new( "results" );
@@ -71,13 +68,13 @@ foreach $strquery (@querystrings)
     
     #get query string and args
     my ($dbquery, @args) = get_sqlquery($strquery);
-    $dbquery .= " limit 0, 3";
+    $dbquery .= " limit 0, $config->{'search_frontpage_size'}";
     
     #prepare query
     $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
 
     #execute it
-    $sth->execute(@args) or die $dbquery;
+    $sth->execute(@args) or die @args;
     
     #foreach result, fill appropriate results hash
     while (my ($id, $title, $description, $publisher, $timestamp, $creator,

@@ -35,6 +35,13 @@
     <string id="query_latestadditions">new videos</string>
     <string id="query_mostdownloads">most downloaded</string>
     <string id="query_mostviews">popular videos</string>
+    
+    <string id="search_frontpage_one">new videos</string>
+    <string id="search_frontpage_two">most downloaded</string>
+    <string id="search_frontpage_three">popular videos</string>
+    <string id="search_custom_one">new videos</string>
+    <string id="search_custom_two">most downloaded</string>
+    <string id="search_custom_three">popular videos</string>
 
     <!-- errors -->
     <string id="error_202c">Error 202c - Access forbidden by government.</string>

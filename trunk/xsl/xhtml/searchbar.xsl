@@ -39,27 +39,27 @@
             <li id="latestadditions">
                 <a>
                     <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_query_latestadditions']" />
+                        <xsl:value-of select="$site_strings[@id='path_query_custom_one']" />
                     </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='query_latestadditions']" />
+                    <xsl:value-of select="$locale_strings[@id='search_custom_one']" />
                 </a>
             </li>
 
             <li id="mostviews">
                 <a>
                     <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_query_mostviews']" />
+                        <xsl:value-of select="$site_strings[@id='path_query_custom_two']" />
                     </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='query_mostviews']" />
+                    <xsl:value-of select="$locale_strings[@id='search_custom_two']" />
                 </a>
             </li>
 
             <li id="mostdownloads">
                 <a>
                     <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_query_mostdownloads']" />
+                        <xsl:value-of select="$site_strings[@id='path_query_custom_three']" />
                     </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='query_mostdownloads']" />
+                    <xsl:value-of select="$locale_strings[@id='search_custom_three']" />
                 </a>
             </li>
 

@@ -11,11 +11,19 @@
     
     <string id="url_root">http://localhost</string><!-- MUST NOT end with trailing slash -->
     
+    <!-- search options -->
+    <string id="search_frontpage_one_query">* order:timestamp sort:descending</string>
+    <string id="search_frontpage_two_query">* order:viewcount sort:descending</string>
+    <string id="search_frontpage_three_query">* order:downloadcount sort:descending</string>
+    <string id="search_frontpage_size">3</string>
+    <string id="search_results_default">10</string>
+    <string id="search_results_max">500</string>
+    <string id="search_order_default">relevance</string><!-- a v.column in the videos table or relevance -->
+    <string id="search_sort_default">desc</string><!-- asc or desc -->
+    
     <!-- general page settings -->
     <string id="page_locale">en-us</string>
     <string id="page_xslt">xhtml.xsl</string>
-    <string id="page_results_pagesize_default">10</string>
-    <string id="page_results_pagesize_max">500</string>
     <string id="page_tag_lenght_min">3</string>
     <string id="page_tag_count">20</string>
     <string id="page_openid">true</string>

@@ -56,10 +56,10 @@ sub fill_results
     $resultcount = $sth->execute(@args) or die $dbh->errstr;
     
     #set pagesize by query or usersettings or default
-    $pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = $config->{"page_results_pagesize_default"};
+    $pagesize = $query->param('pagesize') or $pagesize =  $userinfo->{'pagesize'} or $pagesize = $config->{"search_results_default"};
     
     #if pagesize is more than maxpagesize reduce to maxpagesize
-    $pagesize = $pagesize > $config->{"page_results_pagesize_max"} ? $config->{"page_results_pagesize_max"} : $pagesize;
+    $pagesize = $pagesize > $config->{"search_results_max"} ? $config->{"search_results_max"} : $pagesize;
     
     #rediculous but funny round up, will fail with 100000000000000 results per page
     #on 0.0000000000001% of all queries - this is a risk we can handle
@@ -73,7 +73,7 @@ sub fill_results
     $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
     
     #execute it
-    $sth->execute(@args) or die $dbquery;
+    $sth->execute(@args) or die $dbh->errstr;
     
     $results->setAttribute('lastpage', $lastpage);
     $results->setAttribute('currentpage', $currentpage);
@@ -179,7 +179,7 @@ sub get_sqlquery
     my $strquery = @_[0];
     $strquery =~ s/%([0-9A-F]{2})/chr(hex($1))/eg;
     (@tags) = $strquery =~ / tag:(\w+)/gi;
-    ($orderby) = $strquery =~ / orderby:(\w+)/i;
+    ($order) = $strquery =~ / order:(\w+)/i;
     ($sort) = $strquery =~ / sort:(\w+)/i;
     #($title) = $strquery =~ /title:(\w+)/i;
     #($description) = $strquery =~ /description:(\w+)/i;
@@ -191,7 +191,7 @@ sub get_sqlquery
     #($filesize) = $strquery =~ /filesize:([<>]?\w+)/i;
     #($duration) = $strquery =~ /duration:([<>]?\w+)/i;
     #($timestamp) = $strquery =~ /timestamp:([<>]?\w+)/i;
-    $strquery =~ s/ (tag|orderby|sort):\w+//gi;
+    $strquery =~ s/ (tag|order|sort):\w+//gi;
     $strquery =~ s/^\s*(.*?)\s*$/$1/;
 
     #build mysql query
@@ -226,35 +226,35 @@ sub get_sqlquery
             push @args, "$publisher";
         }
         
-        if($orderby)
+        if($order)
         {
-            if($orderby eq 'filesize')
+            if($order eq 'filesize')
             {
                 $dbquery .= " order by v.filesize";
             }
-            elsif($orderby eq 'duration')
+            elsif($order eq 'duration')
             {
                 $dbquery .= " order by v.duration";
             }
-            elsif($orderby eq 'viewcount')
+            elsif($order eq 'viewcount')
             {
                 $dbquery .= " order by v.viewcount";
             }
-            elsif($orderby eq 'downloadcount')
+            elsif($order eq 'downloadcount')
             {
                 $dbquery .= " order by v.downloadcount";
             }
-            elsif($orderby eq 'timestamp')
+            elsif($order eq 'timestamp')
             {
                 $dbquery .= " order by v.timestamp";
             }
-            elsif($orderby eq 'relevance' and $strquery)
+            elsif($order eq 'relevance')
             {
                 $dbquery .= " order by relevance";
             }
             else
             {
-                $dbquery .= " order by v.id";
+                $dbquery .= " order by $config->{'search_order_default'}";
             }
             
             if($sort eq "ascending")
@@ -264,6 +264,10 @@ sub get_sqlquery
             elsif($sort eq "descending")
             {
                 $dbquery .= " desc";
+            }
+            else
+            {
+                $dbquery .= " $config->{'search_sort_default'}";
             }
         }
         
