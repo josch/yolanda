@@ -30,7 +30,7 @@
                         <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_register']" />
                         </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='register']" />
+                        <xsl:value-of select="$lang_strings[@id='register']" />
                     </a>
                 </li>
 
@@ -44,7 +44,7 @@
                             <xsl:value-of select="$site_strings[@id='path_login']" />
                         </xsl:attribute>
 
-                        <xsl:value-of select="$locale_strings[@id='login']" />
+                        <xsl:value-of select="$lang_strings[@id='login']" />
                     </a>
                 </li>
 
@@ -56,12 +56,12 @@
                         <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_settings']" />
                         </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='settings_details']" />
+                        <xsl:value-of select="$lang_strings[@id='settings_details']" />
                     </a>
                 </li>
 
 <!--
-                <xsl:value-of select="$locale_strings[@id='logged_in_as']" />
+                <xsl:value-of select="$lang_strings[@id='logged_in_as']" />
 
                 <li>
                     <a>
@@ -78,7 +78,7 @@
                         <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_upload']" />
                         </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='header_upload-video']" />
+                        <xsl:value-of select="$lang_strings[@id='header_upload-video']" />
                     </a>
                 </li>
 
@@ -88,7 +88,7 @@
                         <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_settings']" />
                         </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='settings_details']" />
+                        <xsl:value-of select="$lang_strings[@id='settings_details']" />
                     </a>
                 </li>
 -->
@@ -98,7 +98,7 @@
                         <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_logout']" />
                         </xsl:attribute>
-                        <xsl:value-of select="$locale_strings[@id='logout']" />
+                        <xsl:value-of select="$lang_strings[@id='logout']" />
                     </a>
                 </li>
 

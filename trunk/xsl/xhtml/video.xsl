@@ -76,7 +76,7 @@
     <xsl:call-template name="video-object" />
 
     <div class="protip-embed">
-        <xsl:value-of select="$locale_strings[@id='protip_embed']" />
+        <xsl:value-of select="$lang_strings[@id='protip_embed']" />
         <br />
         <code>
             &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
@@ -132,7 +132,7 @@
                         <br />
                         <input type="submit" name="send">
                             <xsl:attribute name="value">
-                                <xsl:value-of select="$locale_strings[@id='comment_post']" />
+                                <xsl:value-of select="$lang_strings[@id='comment_post']" />
                             </xsl:attribute>
                         </input>
                     </fieldset>
@@ -142,7 +142,7 @@
         <xsl:otherwise>
             <div class="commentform">
                 <span class="protip">
-                    <xsl:value-of select="$locale_strings[@id='login_to_comment']" />
+                    <xsl:value-of select="$lang_strings[@id='login_to_comment']" />
                 </span>
             </div>
         </xsl:otherwise>
@@ -161,7 +161,7 @@
             <xsl:attribute name="href">
                 <xsl:value-of select="//video/rdf:RDF/cc:License/@rdf:about" />
             </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='license_conditions']" />:
+            <xsl:value-of select="$lang_strings[@id='license_conditions']" />:
         </a>
         <br />
 -->
@@ -234,10 +234,10 @@
             <xsl:attribute name="href">
                 <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
             </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='video_download']" />
+            <xsl:value-of select="$lang_strings[@id='video_download']" />
         </a>
         <br />
-        (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$locale_strings[@id='unit_megabytes']" />)
+        (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$lang_strings[@id='unit_megabytes']" />)
     </div>
 </xsl:template>
 -->
@@ -274,7 +274,7 @@
 
             <tr>
                 <td class="metadata-title">
-                    <xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
+                    <xsl:value-of select="$lang_strings[@id='DC.Creator']" />:
                 </td>
                 <td class="metadata-content">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:creator" />
@@ -286,7 +286,7 @@
 
             <tr>
                 <td class="metadata-title">
-                    <xsl:value-of select="$locale_strings[@id='DC.Contributor']" />:
+                    <xsl:value-of select="$lang_strings[@id='DC.Contributor']" />:
                 </td>
                 <td class="metadata-content">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:contributor" />
@@ -296,7 +296,7 @@
 
             <tr>
                 <td class="metadata-title">
-                    <xsl:value-of select="$locale_strings[@id='DC.Coverage']" />:
+                    <xsl:value-of select="$lang_strings[@id='DC.Coverage']" />:
                 </td>
                 <td class="metadata-content">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:coverage" />
@@ -305,7 +305,7 @@
 
             <tr>
                 <td class="metadata-title">
-                    <xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
+                    <xsl:value-of select="$lang_strings[@id='DC.Rights']" />:
                 </td>
                 <td class="metadata-content">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:rights" />
@@ -315,7 +315,7 @@
 <!--
             <tr>
                 <td class="metadata-title">
-                    <xsl:value-of select="$locale_strings[@id='DC.Publisher']" />:
+                    <xsl:value-of select="$lang_strings[@id='DC.Publisher']" />:
                 </td>
                 <td class="metadata-content">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:publisher" />
@@ -324,7 +324,7 @@
 
             <tr>
                 <td class="metadata-title">
-                    <xsl:value-of select="$locale_strings[@id='DC.Date']" />:
+                    <xsl:value-of select="$lang_strings[@id='DC.Date']" />:
                 </td>
                 <td class="metadata-content">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:date" />
@@ -334,7 +334,7 @@
 
             <tr>
                 <td class="metadata-title">
-                    <xsl:value-of select="$locale_strings[@id='DC.Source']" />:
+                    <xsl:value-of select="$lang_strings[@id='DC.Source']" />:
                 </td>
                 <td class="metadata-content">
                     <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:source" />
@@ -363,7 +363,7 @@
 
         <div class="messagebox" id="error">
             <span class="message">
-                <xsl:value-of select="$locale_strings[@id='error_no_ogg_plugin']" />
+                <xsl:value-of select="$lang_strings[@id='error_no_ogg_plugin']" />
             </span>
         </div>
 
@@ -398,11 +398,11 @@
                 onclick="show_movie()"
             >
                 <xsl:attribute name="value">
-                    <xsl:value-of select="$locale_strings[@id='video_playback']" />
+                    <xsl:value-of select="$lang_strings[@id='video_playback']" />
                 </xsl:attribute>
                 <img src="/images/tango/128x128/player_play.png">
                     <xsl:attribute name="alt">
-                        <xsl:value-of select="$locale_strings[@id='video_playback']" />
+                        <xsl:value-of select="$lang_strings[@id='video_playback']" />
                     </xsl:attribute>
                 </img>
             </button>
@@ -411,11 +411,11 @@
                 type="submit"
             >
                 <xsl:attribute name="value">
-                    <xsl:value-of select="$locale_strings[@id='video_download']" />
+                    <xsl:value-of select="$lang_strings[@id='video_download']" />
                 </xsl:attribute>
                 <img src="/images/tango/128x128/document-save.png">
                     <xsl:attribute name="alt">
-                        <xsl:value-of select="$locale_strings[@id='video_download']" />
+                        <xsl:value-of select="$lang_strings[@id='video_download']" />
                     </xsl:attribute>
                 </img>
             </button>

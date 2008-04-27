@@ -15,17 +15,17 @@
     omit-xml-declaration="no"
 />
 
-<xsl:variable name="locale">
+<xsl:variable name="lang">
     <xsl:choose>
-        <xsl:when test="document(concat('../locale/', //@locale, '.xml'))">
-            <xsl:value-of select="//@locale" />
+        <xsl:when test="document(concat('../lang/', //@lang, '.xml'))">
+            <xsl:value-of select="//@lang" />
         </xsl:when>
-        <xsl:otherwise>en-us</xsl:otherwise>
+        <xsl:otherwise>en</xsl:otherwise>
     </xsl:choose>
 </xsl:variable>
 
 <xsl:variable name="site_strings" select="document('../config/frontend.xml')//strings/string" />
-<xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
+<xsl:variable name="lang_strings" select="document(concat('../lang/', $lang, '.xml'))//strings/string" />
 
 <xsl:template match="/">
     <xsl:apply-templates />
@@ -43,7 +43,7 @@
             </xsl:attribute>
             <title>
                 <xsl:value-of select="$site_strings[@id='site_name']" />
-                <xsl:value-of select="$locale_strings[@id='rss_separator']" />
+                <xsl:value-of select="$lang_strings[@id='rss_separator']" />
                 <xsl:value-of select="//results/@query" />
             </title>
             <link>
@@ -52,9 +52,9 @@
                 <xsl:value-of select="//results/@query" />&#38;
             </link>
             <description>
-                <xsl:value-of select="$locale_strings[@id='rss_description_1']" />
+                <xsl:value-of select="$lang_strings[@id='rss_description_1']" />
                 <xsl:value-of select="//results/@query" />
-                <xsl:value-of select="$locale_strings[@id='rss_description_2']" />
+                <xsl:value-of select="$lang_strings[@id='rss_description_2']" />
             </description>
         </channel>
 

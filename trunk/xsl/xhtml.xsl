@@ -38,18 +38,18 @@
 <xsl:include href="./xhtml/xhtml-head.xsl" />
 
 
-<xsl:variable name="locale">
+<xsl:variable name="lang">
     <xsl:choose>
-        <xsl:when test="document(concat('../locale/', //@locale, '.xml'))">
-            <xsl:value-of select="//@locale" />
+        <xsl:when test="document(concat('../lang/', //@lang, '.xml'))">
+            <xsl:value-of select="//@lang" />
         </xsl:when>
-        <xsl:otherwise>en-us</xsl:otherwise>
+        <xsl:otherwise>en</xsl:otherwise>
     </xsl:choose>
 </xsl:variable>
 
 <xsl:variable name="site_strings" select="document('../config/frontend.xml')//strings/string" />
-<xsl:variable name="locale_strings" select="document(concat('../locale/', $locale, '.xml'))//strings/string" />
-<xsl:variable name="language_strings" select="document('../locale/languages.xml')//languages/lang" />
+<xsl:variable name="lang_strings" select="document(concat('../lang/', $lang, '.xml'))//strings/string" />
+<xsl:variable name="language_strings" select="document('../lang/languages.xml')//languages/lang" />
 
 <!--
 this kills 99% of the processed XML

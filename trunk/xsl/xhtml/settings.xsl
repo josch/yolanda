@@ -12,7 +12,7 @@
     <div class="settingsform">
 
         <span class="heading">
-            <xsl:value-of select="$locale_strings[@id='settings_heading']" />
+            <xsl:value-of select="$lang_strings[@id='settings_heading']" />
             <xsl:value-of select="//page/@username" />
         </span>
 
@@ -21,7 +21,7 @@
                 <xsl:value-of select="$site_strings[@id='path_settings']" />
             </xsl:attribute>
 
-            <xsl:value-of select="$locale_strings[@id='settings_instruction_pagesize']" />
+            <xsl:value-of select="$lang_strings[@id='settings_instruction_pagesize']" />
             <br />
 
             <input name="pagesize" type="text" size="7">

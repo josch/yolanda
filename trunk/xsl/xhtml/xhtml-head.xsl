@@ -71,7 +71,7 @@
                         type="application/rss+xml"
                     >
                         <xsl:attribute name="title">
-                            <xsl:value-of select="$locale_strings[@id='rss_title_results_this_page']" />
+                            <xsl:value-of select="$lang_strings[@id='rss_title_results_this_page']" />
                         </xsl:attribute>
                         <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_root']" />
@@ -88,7 +88,7 @@
                         type="application/rss+xml"
                     >
                         <xsl:attribute name="title">
-                            <xsl:value-of select="$locale_strings[@id='rss_title_results_all_pages']" />
+                            <xsl:value-of select="$lang_strings[@id='rss_title_results_all_pages']" />
                         </xsl:attribute>
                         <xsl:attribute name="href">
                             <xsl:value-of select="$site_strings[@id='path_root']" />
@@ -103,7 +103,7 @@
                     <title>
                         <xsl:value-of select="$site_strings[@id='site_name']" />
                         -
-                        <xsl:value-of select="$locale_strings[@id='results_for_query']" />
+                        <xsl:value-of select="$lang_strings[@id='results_for_query']" />
                         "<xsl:value-of select="//page/results/@query" />"
                     </title>
 

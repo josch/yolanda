@@ -28,8 +28,8 @@ sub get_page_array
 
     my $page = XML::LibXML::Element->new( "page" );
     
-    my ($locale) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
-    $page->setAttribute( "locale", $locale ? $locale : "en_us" );
+    my ($lang) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^[^,]+,([^;]*);/;
+    $page->setAttribute( "lang", $lang ? $lang : "en" );
     
     $page->setAttribute( "username", $userinfo->{'username'} );
     $page->setNamespace("http://www.w3.org/1999/xhtml", "xhtml", 0);

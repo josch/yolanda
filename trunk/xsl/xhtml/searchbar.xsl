@@ -17,7 +17,7 @@
             </xsl:attribute>
             <fieldset>
                 <label for="query">
-                    <xsl:value-of select="$locale_strings[@id='search']" />:<br />
+                    <xsl:value-of select="$lang_strings[@id='search']" />:<br />
                 </label>
                 <input type="text" name="query">
                     <xsl:attribute name="value">
@@ -28,7 +28,7 @@
                 </input>
                 <input type="submit">
                     <xsl:attribute name="value">
-                        <xsl:value-of select="$locale_strings[@id='button_find']" />
+                        <xsl:value-of select="$lang_strings[@id='button_find']" />
                     </xsl:attribute>
                 </input>
             </fieldset>
@@ -41,7 +41,7 @@
                     <xsl:attribute name="href">
                         <xsl:value-of select="$site_strings[@id='path_query_custom_one']" />
                     </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='search_custom_one']" />
+                    <xsl:value-of select="$lang_strings[@id='search_custom_one']" />
                 </a>
             </li>
 
@@ -50,7 +50,7 @@
                     <xsl:attribute name="href">
                         <xsl:value-of select="$site_strings[@id='path_query_custom_two']" />
                     </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='search_custom_two']" />
+                    <xsl:value-of select="$lang_strings[@id='search_custom_two']" />
                 </a>
             </li>
 
@@ -59,7 +59,7 @@
                     <xsl:attribute name="href">
                         <xsl:value-of select="$site_strings[@id='path_query_custom_three']" />
                     </xsl:attribute>
-                    <xsl:value-of select="$locale_strings[@id='search_custom_three']" />
+                    <xsl:value-of select="$lang_strings[@id='search_custom_three']" />
                 </a>
             </li>
 

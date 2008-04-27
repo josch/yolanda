@@ -20,21 +20,21 @@
             <fieldset>
 
                 <label for="user">
-                    <xsl:value-of select="$locale_strings[@id='username_or_openid']" />:
+                    <xsl:value-of select="$lang_strings[@id='username_or_openid']" />:
                 </label>
                 <br />                
                 <input id="username" name="user" onkeyup="check_openid();" type="text" />
                 <br />
 
                 <label for="pass">
-                    <xsl:value-of select="$locale_strings[@id='password']" />:
+                    <xsl:value-of select="$lang_strings[@id='password']" />:
                 </label>
                 <br />
                 <input id="password" name="pass" type="password" />
 
                 <input type="submit" name="login" >
                     <xsl:attribute name="value">
-                        <xsl:value-of select="$locale_strings[@id='button_login']" />
+                        <xsl:value-of select="$lang_strings[@id='button_login']" />
                     </xsl:attribute>
                 </input>
 
@@ -65,7 +65,7 @@
                 {
                 password.disabled   = true;
                 password.type       = 'input';
-                password.value      = ']]></xsl:text><xsl:value-of select="$locale_strings[@id='input_password_not_required']" /><xsl:text disable-output-escaping="yes"><![CDATA[';
+                password.value      = ']]></xsl:text><xsl:value-of select="$lang_strings[@id='input_password_not_required']" /><xsl:text disable-output-escaping="yes"><![CDATA[';
                 }
             else
                 {
@@ -91,17 +91,17 @@
                 <xsl:value-of select="$site_strings[@id='path_login']" />
             </xsl:attribute>
             <fieldset>
-                <xsl:value-of select="$locale_strings[@id='username']" />:
+                <xsl:value-of select="$lang_strings[@id='username']" />:
                 <br />                
                 <input name="user" type="text" size="30" maxlength="30" />
                 <br />
-                <xsl:value-of select="$locale_strings[@id='password']" />:
+                <xsl:value-of select="$lang_strings[@id='password']" />:
                 <br />
                 <input name="pass" type="password" size="30" maxlength="30" />
                 <br />
                 <input type="submit" name="login" >
                     <xsl:attribute name="value">
-                        <xsl:value-of select="$locale_strings[@id='button_login']" />
+                        <xsl:value-of select="$lang_strings[@id='button_login']" />
                     </xsl:attribute>
                 </input>
             </fieldset>

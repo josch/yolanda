@@ -12,9 +12,9 @@
     <xsl:for-each select="//page/results">
 
         <h1>
-            <xsl:value-of select="$locale_strings[@id='results_heading_1']" />&#160;
+            <xsl:value-of select="$lang_strings[@id='results_heading_1']" />&#160;
             <xsl:value-of select="//results/@pagesize * (//results/@currentpage - 1) + 1" />&#160;
-            <xsl:value-of select="$locale_strings[@id='results_heading_2']" />&#160;
+            <xsl:value-of select="$lang_strings[@id='results_heading_2']" />&#160;
             <xsl:choose>
                 <xsl:when test="(//results/@pagesize * //results/@currentpage) &lt; //results/@resultcount">
                     <xsl:value-of select="//results/@pagesize * //results/@currentpage" />
@@ -23,9 +23,9 @@
                     <xsl:value-of select="//results/@resultcount" />
                 </xsl:otherwise>
             </xsl:choose>&#160;
-            <xsl:value-of select="$locale_strings[@id='results_heading_3']" />&#160;
+            <xsl:value-of select="$lang_strings[@id='results_heading_3']" />&#160;
             <xsl:value-of select="//results/@resultcount" />&#160;
-            <xsl:value-of select="$locale_strings[@id='results_heading_4']" />
+            <xsl:value-of select="$lang_strings[@id='results_heading_4']" />
         </h1>
 
         <xsl:call-template name="results-listing"/>

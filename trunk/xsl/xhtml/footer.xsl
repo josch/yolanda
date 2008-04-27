@@ -16,7 +16,7 @@
                 <xsl:attribute name="href">
                     <xsl:value-of select="$site_strings[@id='path_license']" />
                 </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='footer_license']" />
+                <xsl:value-of select="$lang_strings[@id='footer_license']" />
             </a>
         </li>
 
@@ -25,7 +25,7 @@
                 <xsl:attribute name="href">
                     <xsl:value-of select="$site_strings[@id='path_source-code']" />
                 </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='footer_source_code']" />
+            <xsl:value-of select="$lang_strings[@id='footer_source_code']" />
             </a>
         </li>
 
@@ -34,7 +34,7 @@
                 <xsl:attribute name="href">
                     <xsl:value-of select="$site_strings[@id='path_report_bug']" />
                 </xsl:attribute>
-                <xsl:value-of select="$locale_strings[@id='footer_report_bug']" />
+                <xsl:value-of select="$lang_strings[@id='footer_report_bug']" />
             </a>
         </li>
 
@@ -42,11 +42,11 @@
 
 <!--
     <br />
-    <xsl:value-of select="$locale_strings[@id='footer_copyright']" />
+    <xsl:value-of select="$lang_strings[@id='footer_copyright']" />
 -->
 
     <span class="protip">
-        <xsl:value-of select="$locale_strings[@id='footer_warranty']" />
+        <xsl:value-of select="$lang_strings[@id='footer_warranty']" />
     </span>
     <br />
     <img alt="AGPL 3 Free Software">

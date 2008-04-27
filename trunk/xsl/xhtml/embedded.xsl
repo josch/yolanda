@@ -16,7 +16,7 @@
             <xsl:attribute name="href">
                 <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
             </xsl:attribute>
-            <xsl:value-of select="$locale_strings[@id='backlink']" />
+            <xsl:value-of select="$lang_strings[@id='backlink']" />
         </a>
     </div>
 

@@ -15,21 +15,21 @@
                 <xsl:value-of select="$site_strings[@id='path_register']" />
             </xsl:attribute>
             <fieldset>
-                <xsl:value-of select="$locale_strings[@id='username']" />:
+                <xsl:value-of select="$lang_strings[@id='username']" />:
                 <br />                
                 <input name="user" type="text" size="30" maxlength="30" />
                 <br />
-                <xsl:value-of select="$locale_strings[@id='password']" />:
+                <xsl:value-of select="$lang_strings[@id='password']" />:
                 <br />
                 <input name="pass" type="password" size="30" maxlength="30" />
                 <br />
-                <xsl:value-of select="$locale_strings[@id='password_repeat']" />:
+                <xsl:value-of select="$lang_strings[@id='password_repeat']" />:
                 <br />
                 <input name="pass_repeat" type="password" size="30" maxlength="30" />
                 <br />
                 <input type="submit" name="register" >
                     <xsl:attribute name="value">
-                        <xsl:value-of select="$locale_strings[@id='button_register']" />
+                        <xsl:value-of select="$lang_strings[@id='button_register']" />
                     </xsl:attribute>
                 </input>
             </fieldset>

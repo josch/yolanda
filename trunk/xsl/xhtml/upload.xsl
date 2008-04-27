@@ -14,12 +14,12 @@
             <xsl:when test="//uploadform/@page=1">
 
                 <h1>
-                    <xsl:value-of select="$locale_strings[@id='title_page_1']" />
+                    <xsl:value-of select="$lang_strings[@id='title_page_1']" />
                 </h1>
                 <br />
 
                 <span class="instruction">
-                    <xsl:value-of select="$locale_strings[@id='instruction_page_1']" />
+                    <xsl:value-of select="$lang_strings[@id='instruction_page_1']" />
                 </span>
                 <br />
 
@@ -31,7 +31,7 @@
 
                     <fieldset>
 
-                        <xsl:value-of select="$locale_strings[@id='instruction_title']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_title']" />
                         <br />
 
                         <input name="DC.Title" type="text">
@@ -41,7 +41,7 @@
                         </input>
                         <br />
 
-                        <xsl:value-of select="$locale_strings[@id='instruction_subject']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_subject']" />
                         <br />
 
                         <input name="DC.Subject" type="text">
@@ -51,7 +51,7 @@
                         </input>
                         <br />
 
-                        <xsl:value-of select="$locale_strings[@id='instruction_description']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_description']" />
                         <br />
 
                         <textarea name="DC.Description">
@@ -59,12 +59,12 @@
                         </textarea>
                         <br />
 
-                        <xsl:value-of select="$locale_strings[@id='instruction_coverage']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_coverage']" />
                         <br />
 
                         <select name="DC.Coverage.day"><!-- DC.Coverage.day is NOT an official qualifier -->
                             <option>
-                                <xsl:value-of select="$locale_strings[@id='unit_day']" />
+                                <xsl:value-of select="$lang_strings[@id='unit_day']" />
                             </option>
                             <xsl:call-template name="for-loop">
                                 <xsl:with-param name="start">1</xsl:with-param>
@@ -75,7 +75,7 @@
 
                         <select name="DC.Coverage.month"><!-- DC.Coverage.month is NOT an official qualifier -->
                             <option>
-                                <xsl:value-of select="$locale_strings[@id='unit_month']" />
+                                <xsl:value-of select="$lang_strings[@id='unit_month']" />
                             </option>
                             <xsl:call-template name="for-loop">
                                 <xsl:with-param name="start">1</xsl:with-param>
@@ -86,7 +86,7 @@
 
                         <select name="DC.Coverage.year"><!-- DC.Coverage.year is NOT an official qualifier -->
                             <option>
-                                <xsl:value-of select="$locale_strings[@id='unit_year']" />
+                                <xsl:value-of select="$lang_strings[@id='unit_year']" />
                             </option>
                             <xsl:call-template name="for-loop">
                                 <xsl:with-param name="start">1890</xsl:with-param><!-- Monkeyshines, No. 1 -->
@@ -103,7 +103,7 @@
                         </input>
                         <br />
 
-                        <xsl:value-of select="$locale_strings[@id='instruction_language']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_language']" />
                         <br />
 
                         <!-- one cannot access DC.Language from inside the for-each... -->
@@ -115,7 +115,7 @@
                                     <xsl:attribute name="selected">selected</xsl:attribute>
                                 </xsl:if>
                                 <xsl:attribute name="value"></xsl:attribute>
-                                <xsl:value-of select="$locale_strings[@id='instruction_language_choose']" />
+                                <xsl:value-of select="$lang_strings[@id='instruction_language_choose']" />
                             </option>
 -->
                         <select name="DC.Language" size="1">
@@ -144,18 +144,18 @@
 
                         <button type="submit" name="2">
                             <xsl:attribute name="value">
-                                <xsl:value-of select="$locale_strings[@id='button_next_page']" />
+                                <xsl:value-of select="$lang_strings[@id='button_next_page']" />
                             </xsl:attribute>
                             <img src="/images/tango/32x32/actions/go-next.png">
                                 <xsl:attribute name="alt">
-                                    <xsl:value-of select="$locale_strings[@id='button_next_page']" />
+                                    <xsl:value-of select="$lang_strings[@id='button_next_page']" />
                                 </xsl:attribute>
                             </img>
                         </button>
                         <br />
 
                         <span class="protip">
-                            <xsl:value-of select="$locale_strings[@id='this_is_page_1']" />
+                            <xsl:value-of select="$lang_strings[@id='this_is_page_1']" />
                         </span>
 
                     </fieldset>
@@ -171,12 +171,12 @@
             <xsl:when test="//uploadform/@page=2">
 
                 <span class="heading">
-                    <xsl:value-of select="$locale_strings[@id='title_page_2']" />
+                    <xsl:value-of select="$lang_strings[@id='title_page_2']" />
                 </span>
                 <br />
 
                 <span class="instruction">
-                    <xsl:value-of select="$locale_strings[@id='instruction_page_2']" />
+                    <xsl:value-of select="$lang_strings[@id='instruction_page_2']" />
                 </span>
 
                 <form method="post">
@@ -189,13 +189,13 @@
 
                         <input type="submit" name="3">
                             <xsl:attribute name="value">
-                                <xsl:value-of select="$locale_strings[@id='button_next_page']" />
+                                <xsl:value-of select="$lang_strings[@id='button_next_page']" />
                             </xsl:attribute>
                         </input>
                         <br />
 
                         <span class="protip">
-                            <xsl:value-of select="$locale_strings[@id='this_is_page_2']" />
+                            <xsl:value-of select="$lang_strings[@id='this_is_page_2']" />
                         </span>
 
                     </fieldset>
@@ -208,12 +208,12 @@
             <xsl:when test="//uploadform/@page=3">
 
                 <span class="heading">
-                    <xsl:value-of select="$locale_strings[@id='title_page_3']" />
+                    <xsl:value-of select="$lang_strings[@id='title_page_3']" />
                 </span>
                 <br />
 
                 <span class="instruction">
-                    <xsl:value-of select="$locale_strings[@id='instruction_page_3']" />
+                    <xsl:value-of select="$lang_strings[@id='instruction_page_3']" />
                 </span>
 
                 <form method="post">
@@ -224,7 +224,7 @@
 
                     <fieldset>
 
-                        <xsl:value-of select="$locale_strings[@id='instruction_creator']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_creator']" />
                         <br />
 
                         <input name="DC.Creator" type="text" size="30">
@@ -234,7 +234,7 @@
                         </input>
                         <br />
 
-                        <xsl:value-of select="$locale_strings[@id='instruction_source']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_source']" />
                         <br />
 
                         <input name="DC.Source" type="text" size="30">
@@ -246,12 +246,12 @@
 
                         <input type="submit" name="4">
                             <xsl:attribute name="value">
-                                <xsl:value-of select="$locale_strings[@id='button_next_page']" />
+                                <xsl:value-of select="$lang_strings[@id='button_next_page']" />
                             </xsl:attribute>
                         </input>
                         <br />
                         <span class="protip">
-                            <xsl:value-of select="$locale_strings[@id='this_is_page_3']" />
+                            <xsl:value-of select="$lang_strings[@id='this_is_page_3']" />
                         </span>
                     </fieldset>
                 </form>
@@ -259,11 +259,11 @@
             
             <xsl:when test="//uploadform/@page=4">
                 <span class="heading">
-                    <xsl:value-of select="$locale_strings[@id='title_page_4']" />
+                    <xsl:value-of select="$lang_strings[@id='title_page_4']" />
                 </span>
                 <br />
                 <span class="instruction">
-                    <xsl:value-of select="$locale_strings[@id='instruction_page_4']" />
+                    <xsl:value-of select="$lang_strings[@id='instruction_page_4']" />
                 </span>
                 <form method="post">
                     <xsl:attribute name="action">
@@ -271,7 +271,7 @@
                     </xsl:attribute>
  
                     <fieldset>
-                        <xsl:value-of select="$locale_strings[@id='instruction_rights']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_rights']" />
                         <br />
                         <input name="DC.Rights" type="text" size="30">
                             <xsl:attribute name="value">
@@ -279,7 +279,7 @@
                             </xsl:attribute>
                         </input>
                         <br />
-                        <xsl:value-of select="$locale_strings[@id='instruction_license']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_license']" />
                         <br />
                         <input name="DC.License" type="text" size="30">
                             <xsl:attribute name="value">
@@ -287,7 +287,7 @@
                             </xsl:attribute>
                         </input>
                         <br />
-                        <xsl:value-of select="$locale_strings[@id='instruction_license_cc']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_license_cc']" />
                         <br />
                         
                         <div class="cc-license-chooser">
@@ -302,7 +302,7 @@
                             </input>
                             <br />
                             <span class="protip">
-                                <xsl:value-of select="$locale_strings[@id='instruction_license_cc_remix']" />
+                                <xsl:value-of select="$lang_strings[@id='instruction_license_cc_remix']" />
                             </span>
                             <br />
 
@@ -316,7 +316,7 @@
                             </input>
                             <br />
                             <span class="protip">
-                                <xsl:value-of select="$locale_strings[@id='instruction_license_cc_sharealike']" />
+                                <xsl:value-of select="$lang_strings[@id='instruction_license_cc_sharealike']" />
                             </span>
                             <br />
 
@@ -330,7 +330,7 @@
                             </input>
                             <br />
                             <span class="protip">
-                                <xsl:value-of select="$locale_strings[@id='instruction_license_cc_noderivatives']" />
+                                <xsl:value-of select="$lang_strings[@id='instruction_license_cc_noderivatives']" />
                             </span>
                             <br />
 
@@ -344,19 +344,19 @@
                             </input>
                             <br />
                             <span class="protip">
-                                <xsl:value-of select="$locale_strings[@id='instruction_license_cc_noncommercial']" />
+                                <xsl:value-of select="$lang_strings[@id='instruction_license_cc_noncommercial']" />
                             </span>
 
                         </div>
 
                         <input type="submit" name="5">
                             <xsl:attribute name="value">
-                                <xsl:value-of select="$locale_strings[@id='button_next_page']" />
+                                <xsl:value-of select="$lang_strings[@id='button_next_page']" />
                             </xsl:attribute>
                         </input>
                         <br />
                         <span class="protip">
-                            <xsl:value-of select="$locale_strings[@id='this_is_page_4']" />
+                            <xsl:value-of select="$lang_strings[@id='this_is_page_4']" />
                         </span>
                     </fieldset>
                 </form>
@@ -364,11 +364,11 @@
             
             <xsl:when test="//uploadform/@page=5">
                 <span class="heading">
-                    <xsl:value-of select="$locale_strings[@id='title_page_5']" />
+                    <xsl:value-of select="$lang_strings[@id='title_page_5']" />
                 </span>
                 <br />
                 <span class="instruction">
-                    <xsl:value-of select="$locale_strings[@id='instruction_page_5']" />
+                    <xsl:value-of select="$lang_strings[@id='instruction_page_5']" />
                 </span>
                 <form method="post">
                     <xsl:attribute name="action">
@@ -380,7 +380,7 @@
                     <table class="metadata-upload">
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Title']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Title']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Title" />
@@ -388,7 +388,7 @@
                         </tr>
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Subject']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Subject']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Subject" />
@@ -396,7 +396,7 @@
                         </tr>
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Description']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Description']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Description" />
@@ -406,14 +406,14 @@
 
                     <input type="submit" name="1">
                         <xsl:attribute name="value">
-                            <xsl:value-of select="$locale_strings[@id='button_page_1']" />
+                            <xsl:value-of select="$lang_strings[@id='button_page_1']" />
                         </xsl:attribute>
                     </input>
 
                     <table class="metadata-upload">
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Creator']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Creator']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Creator" />
@@ -421,7 +421,7 @@
                         </tr>
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Source']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Source']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Source" />
@@ -429,7 +429,7 @@
                         </tr>
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Language']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Language']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Language" />
@@ -437,7 +437,7 @@
                         </tr>
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Coverage']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Coverage']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Coverage" />
@@ -447,14 +447,14 @@
 
                     <input type="submit" name="3">
                         <xsl:attribute name="value">
-                            <xsl:value-of select="$locale_strings[@id='button_page_3']" />
+                            <xsl:value-of select="$lang_strings[@id='button_page_3']" />
                         </xsl:attribute>
                     </input>
                     
                     <table class="metadata-upload">
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.Rights']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.Rights']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.Rights" />
@@ -462,7 +462,7 @@
                         </tr>
                         <tr>
                             <td class="metadata-title">
-                                <xsl:value-of select="$locale_strings[@id='DC.License']" />:
+                                <xsl:value-of select="$lang_strings[@id='DC.License']" />:
                             </td>
                             <td class="metadata-content">
                                 <xsl:value-of select="//uploadform/@DC.License" />
@@ -472,7 +472,7 @@
 
                     <input type="submit" name="4">
                         <xsl:attribute name="value">
-                            <xsl:value-of select="$locale_strings[@id='button_page_4']" />
+                            <xsl:value-of select="$lang_strings[@id='button_page_4']" />
                         </xsl:attribute>
                     </input>
 
@@ -484,18 +484,18 @@
                     </xsl:attribute>
 
                     <fieldset>
-                        <xsl:value-of select="$locale_strings[@id='instruction_file']" />
+                        <xsl:value-of select="$lang_strings[@id='instruction_file']" />
                         <br />
                         <input name="file" type="file" size="13" />
                         <br />
                         <input type="submit">
                             <xsl:attribute name="value">
-                                <xsl:value-of select="$locale_strings[@id='button_upload']" />
+                                <xsl:value-of select="$lang_strings[@id='button_upload']" />
                             </xsl:attribute>
                         </input>
                         <br />
                         <span class="protip">
-                            <xsl:value-of select="$locale_strings[@id='this_is_page_5']" />
+                            <xsl:value-of select="$lang_strings[@id='this_is_page_5']" />
                         </span>
                     </fieldset>
                 </form>
