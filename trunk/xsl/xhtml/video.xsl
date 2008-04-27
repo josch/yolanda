@@ -109,7 +109,8 @@
                     <xsl:value-of select="@username" />
                 </a>:
                 <br />
-                <xsl:copy-of select="." />
+                <!-- TODO: somehow use <xsl:element name="{local-name()}"> to remove the xhtml namespace prefix -->
+                <xsl:copy-of select="node()" />
             </div>
         </xsl:for-each>
     </div>
