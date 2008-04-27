@@ -252,6 +252,10 @@ sub get_sqlquery
             {
                 $dbquery .= " order by relevance";
             }
+            elsif($order eq 'random')
+            {
+                $dbquery .= " order by rand()";
+            }
             else
             {
                 $dbquery .= " order by $config->{'search_order_default'}";

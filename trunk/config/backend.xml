@@ -18,7 +18,7 @@
     <string id="search_frontpage_size">3</string>
     <string id="search_results_default">10</string>
     <string id="search_results_max">500</string>
-    <string id="search_order_default">relevance</string><!-- a v.column in the videos table or relevance -->
+    <string id="search_order_default">relevance</string><!-- a v.column in the videos table or relevance or random -->
     <string id="search_sort_default">desc</string><!-- asc or desc -->
     
     <!-- general page settings -->
