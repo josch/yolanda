@@ -7,7 +7,9 @@ $session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 
-@page = get_page_array(@userinfo);
+my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
+
+my $root = get_page_array(@userinfo);
 
 #check if id or title is passed
 if($query->url_param('id'))
@@ -52,11 +54,11 @@ if($query->url_param('id'))
     {
         if($query->param('embed') eq "video")
         {
-            $page->{'embed'} = "video";
+            $root->setAttribute( "embed", "video" );
         }
         elsif($query->param('embed') eq "preview")
         {
-            $page->{'embed'} = "preview";
+            $root->setAttribute( "embed", "preview" );
         }
     
         #if there was a single result, display the video
@@ -74,8 +76,10 @@ if($query->url_param('id'))
             if($query->param('comment'))
             {
                 #output infobox
-                $page->{'message'}->{'type'} = "information";
-                $page->{'message'}->{'text'} = "information_comment_created";
+                my $message = XML::LibXML::Element->new( "message" );
+                $message->setAttribute("type", "information");
+                $message->setAttribute("text", "information_comment_created");
+                $root->appendChild($message);
                 
                 #add to database
                 $dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef,
@@ -148,94 +152,117 @@ if($query->url_param('id'))
             }
         }
         
-        #before code cleanup, this was a really obfuscated array/hash creation
-        push @{ $page->{'video'} },
-        {
-            'thumbnail'     => $config->{"url_root"}."/video-stills/thumbnails/$id",
-            'preview'       => $config->{"url_root"}."/video-stills/previews/$id",
-            'filesize'      => $filesize,
-            'duration'      => $duration,
-            'width'         => $width,
-            'height'        => $height,
-            'fps'           => $fps,
-            'viewcount'     => $viewcount,
-            'downloadcount' => $downloadcount,
-            'rdf:RDF'       =>
-            {
-                'cc:Work'       =>
-                {
-                    'rdf:about'         => $config->{"url_root"}."/download/$id/",
-                    'dc:title'          => [$title],
-                    'dc:creator'        => [$creator],
-                    'dc:subject'        => [$subject],
-                    'dc:description'    => [$description],
-                    'dc:publisher'      => [$publisher],
-                    'dc:date'           => [$timestamp],
-                    'dc:identifier'     => [$config->{"url_root"}."/video/".urlencode($title)."/$id/"],
-                    'dc:source'         => [$source],
-                    'dc:language'       => [$language],
-                    'dc:coverage'       => [$coverage],
-                    'dc:rights'         => [$rights]
-                },
-                'cc:License'    =>
-                {
-                    'rdf:about'     => $license,
-# ↓↓ dummy code because josch is too lazy for DOIN IT RITE ↓↓
-                    'cc:permits'    =>
-                        {
-                            'rdf:resource'     => "http://web.resource.org/cc/Reproduction"
-                        },
-                    'cc:permits'    =>
-                        {
-                            'rdf:resource'     => "http://web.resource.org/cc/Distribution"
-                        },
-                    'cc:permits'    =>
-                        {
-                            'rdf:resource'     => "http://web.resource.org/cc/DerivativeWorks"
-                        },
-                    'cc:requires'    =>
-                        {
-                            'rdf:resource'     => "http://web.resource.org/cc/Notice"
-                        },
-                    'cc:requires'    =>
-                        {
-                            'rdf:resource'     => "http://web.resource.org/cc/ShareAlike"
-                        },
-                    'cc:prohibits'    =>
-                        {
-                            'rdf:resource'     => "http://web.resource.org/cc/CommercialUse"
-                        },
-                    'cc:prohibits'    =>
-                        {
-                            'rdf:resource'     => "http://web.resource.org/cc/DerivativeWorks"
-                        }
-# ↑↑ dummy code because josch is too lazy for DOIN IT RITE ↑↑
-# sadly, i dunno how to add multiple tags with the same name
-                }
-            }
-        };
+        my $video = XML::LibXML::Element->new( "video" );
+        $video->setAttribute('thumbnail', $config->{"url_root"}."/video-stills/thumbnails/$id");
+        $video->setAttribute('preview', $config->{"url_root"}."/video-stills/previews/$id");
+        $video->setAttribute('filesize', $filesize);
+        $video->setAttribute('duration', $duration);
+        $video->setAttribute('width', $width);
+        $video->setAttribute('height', $height);
+        $video->setAttribute('fps', $fps);
+        $video->setAttribute('viewcount', $viewcount);
+        $video->setAttribute('downloadcount', $downloadcount);
+            
+        my $rdf = XML::LibXML::Element->new( "RDF" );
+        $rdf->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
+        
+        my $work = XML::LibXML::Element->new( "Work" );
+        $work->setNamespace( "http://web.resource.org/cc/", "cc");
+        $work->setNamespace( "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
+        $work->setAttributeNS( "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about", $config->{"url_root"}."/download/$id/" );
+        
+        $node = XML::LibXML::Element->new( "coverage" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($coverage);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "creator" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($creator);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "date" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($date);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "description" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($description);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "identifier" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($config->{"url_root"}."/video/".urlencode($title)."/$id/");
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "language" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($language);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "publisher" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($publisher);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "rights" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($rights);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "source" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($source);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "subject" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($subjcet);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "title" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($title);
+        $work->appendChild($node);
+        
+        my $license = XML::LibXML::Element->new( "License" );
+        $license->setNamespace("http://web.resource.org/cc/", "cc");
+        $license->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
+        $license->setAttributeNS( "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about", "http://creativecommons.org/licenses/GPL/2.0/" );
+        
+        $rdf->appendChild($work);
+        $rdf->appendChild($license);
+        
+        $video->appendChild($rdf);
+        
+        $root->appendChild($video);
         
         #get comments
+        my $comments = XML::LibXML::Element->new( "comments" );
+        
         $sth = $dbh->prepare(qq{select comments.id, comments.text, users.username, from_unixtime( comments.timestamp )
                                 from comments, users where
                                 comments.videoid=? and users.id=comments.userid}) or die $dbh->errstr;
         $sth->execute($id) or die $dbh->errstr;
         while (my ($commentid, $text, $username, $timestamp) = $sth->fetchrow_array())
         {
-            push @{ $page->{'comments'}->{'comment'} }, {
-                'text'      => [$text],
-                'username'  => $username,
-                'timestamp' => $timestamp,
-                'id'        => $commentid
-            };
+            my $comment = XML::LibXML::Element->new( "comment" );
+            $comment->setAttribute('username', $username);
+            $comment->setAttribute('timestamp', $timestamp);
+            $comment->setAttribute('id', $commentid);
+            $comment->appendTextChild("text", $text);
+            $comments->appendChild($comment);
         }
         
-        print output_page();
+        $root->appendChild($comments);
+        
+        $doc->setDocumentElement($root);
+
+        output_page($doc);
     }
 }
 else
 {
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_202c";
-    print output_page();
+    print $query->redirect("index.pl?error=error_202c");
 }

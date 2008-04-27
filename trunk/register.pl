@@ -7,15 +7,21 @@ $session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 
-@page = get_page_array(@userinfo);
+my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
+
+my $root = get_page_array(@userinfo);
 
 #check if user is logged in
 if($username)
 {
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_already_registered";
+    my $message = XML::LibXML::Element->new( "message" );
+    $message->setAttribute("type", "error");
+    $message->setAttribute("text", "error_already_registered");
+    $root->appendChild($message);
     
-    print output_page();
+    $doc->setDocumentElement($root);
+
+    output_page($doc);
 }
 #if username and password are passed put them into the database
 elsif($query->param('user') and $query->param('pass') and $query->param('pass_repeat'))
@@ -30,11 +36,16 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
         #if something was returned the selected username already exists
         if($sth->fetchrow_array())
         {
-            $page->{'registerform'} = [''];
-            $page->{'message'}->{'type'} = "error";
-            $page->{'message'}->{'text'} = "error_username_already_registered";
-    
-            print output_page();
+            $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+            
+            my $message = XML::LibXML::Element->new( "message" );
+            $message->setAttribute("type", "error");
+            $message->setAttribute("text", "error_username_already_registered");
+            $root->appendChild($message);
+            
+            $doc->setDocumentElement($root);
+
+            output_page($doc);
         }
         else
         {
@@ -47,40 +58,62 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
     }
     else
     {
-        $page->{'registerform'} = [''];
-        $page->{'message'}->{'type'} = "error";
-        $page->{'message'}->{'text'} = "error_passwords_do_not_match";
-    
-        print output_page();
+        $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+        
+        my $message = XML::LibXML::Element->new( "message" );
+        $message->setAttribute("type", "error");
+        $message->setAttribute("text", "error_passwords_do_not_match");
+        $root->appendChild($message);
+        
+        $doc->setDocumentElement($root);
+
+        output_page($doc);
     }
 }
 elsif(not $query->param('user') and ($query->param('pass') or $query->param('pass_repeat')))
 {
-    $page->{'registerform'} = [''];
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_insert_username";
+    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    print output_page();
+    my $message = XML::LibXML::Element->new( "message" );
+    $message->setAttribute("type", "error");
+    $message->setAttribute("text", "error_insert_username");
+    $root->appendChild($message);
+    
+    $doc->setDocumentElement($root);
+
+    output_page($doc);
 }
 elsif(not $query->param('pass') and ($query->param('user') or $query->param('pass_repeat')))
 {
-    $page->{'registerform'} = [''];
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_insert_password";
+    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    print output_page();
+    my $message = XML::LibXML::Element->new( "message" );
+    $message->setAttribute("type", "error");
+    $message->setAttribute("text", "error_insert_password");
+    $root->appendChild($message);
+    
+    $doc->setDocumentElement($root);
+
+    output_page($doc);
 }
 elsif(not $query->param('pass_repeat') and ($query->param('user') or $query->param('pass')))
 {
-    $page->{'registerform'} = [''];
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_repeat_password";
+    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    print output_page();
+    my $message = XML::LibXML::Element->new( "message" );
+    $message->setAttribute("type", "error");
+    $message->setAttribute("text", "error_repeat_password");
+    $root->appendChild($message);
+    
+    $doc->setDocumentElement($root);
+
+    output_page($doc);
 }
 else
 {
-    $page->{'registerform'} = [''];
+    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    print output_page();
+    $doc->setDocumentElement($root);
+
+    output_page($doc);
 }

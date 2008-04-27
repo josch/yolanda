@@ -5,7 +5,11 @@ CGI::Session->name($config->{"page_cookie_name"});
 $query = new CGI;
 $session = new CGI::Session;
 
-@userinfo = get_userinfo_from_sid($session->id);
+my @userinfo = get_userinfo_from_sid($session->id);
+
+my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
+
+my $root = get_page_array(@userinfo);
 
 if($userinfo->{'username'})
 {
@@ -13,23 +17,32 @@ if($userinfo->{'username'})
     {
         $dbh->do(qq{update users set pagesize = ? where id = ?}, undef, $query->param('pagesize'), $userinfo->{'id'} ) or die $dbh->errstr;
         
-        $page->{'message'}->{'type'} = "information";
-        $page->{'message'}->{'text'} = "information_settings_changed";
+        @userinfo = get_userinfo_from_sid($session->id);
+        
+        $root = get_page_array(@userinfo);
+        
+        my $message = XML::LibXML::Element->new( "message" );
+        $message->setAttribute("type", "information");
+        $message->setAttribute("text", "information_settings_changed");
+        $root->appendChild($message);
     }
 }
 
-@userinfo = get_userinfo_from_sid($session->id);
-
-@page = get_page_array(@userinfo);
     
 if($userinfo->{'username'})
 {
-    $page->{'settings'}->{'pagesize'} = $userinfo->{'pagesize'};
+    my $settings = XML::LibXML::Element->new( "settings" );
+    $settings->setAttribute("pagesize", $userinfo->{'pagesize'});
+    $root->appendChild($settings);
 }
 else
 {
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_202c";
+    my $message = XML::LibXML::Element->new( "message" );
+    $message->setAttribute("type", "error");
+    $message->setAttribute("text", "error_202c");
+    $root->appendChild($message);
 }
 
-print output_page();
+$doc->setDocumentElement($root);
+
+output_page($doc);

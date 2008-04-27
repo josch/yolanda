@@ -25,18 +25,19 @@ sub get_page_array
 {
     #get parameters
     my (@userinfo) = @_;
-    
-    ($page->{'locale'}) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
-    if (!$page->{'locale'})
-    {
-        $page->{'locale'} = "en_us";
-    }
-    
-    $page->{'username'} = $userinfo->{'username'};
-    $page->{'xmlns:dc'} = $config->{"xml_namespace_dc"};
-    $page->{'xmlns:cc'} = $config->{"xml_namespace_cc"};
-    $page->{'xmlns:rdf'} = $config->{"xml_namespace_rdf"};
 
+    my $root = XML::LibXML::Element->new( "page" );
+    
+    my ($locale) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
+    $root->setAttribute( "locale", $locale ? $locale : "en_us" );
+    
+    $root->setAttribute( "username", $userinfo->{'username'} );
+    $root->setNamespace("http://www.w3.org/1999/xhtml", "xhtml", 0);
+    $root->setNamespace("http://web.resource.org/cc/", "cc", 0);
+    $root->setNamespace("http://purl.org/dc/elements/1.1/", "dc", 0);
+    $root->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
+    
+    return $root;
 }
 
 # index.pl (display custom search)
@@ -45,7 +46,9 @@ sub get_page_array
 sub fill_results
 {
     my ($dbquery, @args) = @_;
-
+    
+    my $results = XML::LibXML::Element->new( "results" );
+    
     #prepare query
     my $sth = $dbh->prepare($dbquery) or die $dbh->errstr;
     
@@ -72,10 +75,10 @@ sub fill_results
     #execute it
     $sth->execute(@args) or die $dbquery;
     
-    $page->{'results'}->{'lastpage'} = $lastpage;
-    $page->{'results'}->{'currentpage'} = $currentpage;
-    $page->{'results'}->{'resultcount'} = $resultcount eq '0E0' ? 0 : $resultcount;
-    $page->{'results'}->{'pagesize'} = $pagesize;
+    $results->setAttribute('lastpage', $lastpage);
+    $results->setAttribute('currentpage', $currentpage);
+    $results->setAttribute('resultcount', $resultcount eq '0E0' ? 0 : $resultcount);
+    $results->setAttribute('pagesize', $pagesize);
     
     #get every returned value
     while (my ($id, $title, $description, $publisher, $timestamp, $creator,
@@ -83,40 +86,92 @@ sub fill_results
         $license, $filesize, $duration, $width, $height, $fps, $viewcount,
         $downloadcount) = $sth->fetchrow_array())
     {
-        #before code cleanup, this was a really obfuscated array/hash creation
-        push @{ $page->{'results'}->{'result'} },
-        {
-            'thumbnail' => $config->{"url_root"}."/video-stills/thumbnails/$id",
-            'preview'   => $config->{"url_root"}."/video-stills/previews/$id",
-            'duration'  => $duration,
-            'viewcount' => $viewcount,
-            'rdf:RDF'   =>
-            {
-                'cc:Work'   =>
-                {
-                    'rdf:about'         => $config->{"url_root"}."/download/$id/",
-                    'dc:title'          => [$title],
-                    'dc:creator'        => [$creator],
-                    'dc:subject'        => [$subject],
-                    'dc:description'    => [$description],
-                    'dc:publisher'      => [$publisher],
-                    'dc:date'           => [$timestamp],
-                    'dc:identifier'     => [$config->{"url_root"}."/video/".urlencode($title)."/$id/"],
-                    'dc:source'         => [$source],
-                    'dc:language'       => [$language],
-                    'dc:coverage'       => [$coverage],
-                    'dc:rights'         => [$rights]
-                },
-                'cc:License'    =>
-                {
-                    'rdf:about'     => 'http://creativecommons.org/licenses/GPL/2.0/'
-                }
-            }
-        };
+        my $result = XML::LibXML::Element->new( "result" );
+        $result->setAttribute( "thumbnail", $config->{"url_root"}."/video-stills/thumbnails/$id" );
+        $result->setAttribute( "preview", $config->{"url_root"}."/video-stills/previews/$id" );
+        $result->setAttribute( "duration", $duration );
+        $result->setAttribute( "viewcount", $viewcount );
+        
+        my $rdf = XML::LibXML::Element->new( "RDF" );
+        $rdf->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf");
+        
+        my $work = XML::LibXML::Element->new( "Work" );
+        $work->setNamespace( "http://web.resource.org/cc/", "cc");
+        $work->setNamespace( "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
+        $work->setAttributeNS( "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about", $config->{"url_root"}."/download/$id/" );
+        
+        $node = XML::LibXML::Element->new( "coverage" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($coverage);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "creator" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($creator);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "date" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($date);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "description" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($description);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "identifier" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($config->{"url_root"}."/video/".urlencode($title)."/$id/");
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "language" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($language);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "publisher" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($publisher);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "rights" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($rights);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "source" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($source);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "subject" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($subjcet);
+        $work->appendChild($node);
+        
+        $node = XML::LibXML::Element->new( "title" );
+        $node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+        $node->appendText($title);
+        $work->appendChild($node);
+        
+        my $license = XML::LibXML::Element->new( "License" );
+        $license->setNamespace("http://web.resource.org/cc/", "cc");
+        $license->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
+        $license->setAttributeNS( "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about", "http://creativecommons.org/licenses/GPL/2.0/" );
+        
+        $rdf->appendChild($work);
+        $rdf->appendChild($license);
+        
+        $result->appendChild($rdf);
+        
+        $results->appendChild($result);
     }
     
     #finish query
     $sth->finish() or die $dbh->errstr;
+    
+    return $results;
 }
 
 sub get_sqlquery
@@ -226,6 +281,7 @@ sub urlencode
 
 sub output_page
 {
+    my $doc = shift;
     my $parser = XML::LibXML->new();
     my $xslt = XML::LibXSLT->new();
 
@@ -233,68 +289,45 @@ sub output_page
     my $param_xslt = $query->param('xslt');
     $param_xslt =~ s/[^\w]//gi;
 
-    # "null" is a debuggin option, make it so that this doesn't show up in the final product
-    if($param_xslt eq "null")
+    if( -f "$root/xsl/$param_xslt.xsl")
     {
-        return $session->header(
-            -type=>'application/xml',
-            -charset=>'UTF-8',
-        ),
-        XMLout(
-                $page,
-                KeyAttr => {},
-                RootName => 'page'
-        );
+        $xsltpath = "$root/xsl/$param_xslt.xsl"
     }
     else
     {
-        if( -f "$root/xsl/$param_xslt.xsl")
-        {
-            $xsltpath = "$root/xsl/$param_xslt.xsl"
-        }
-        else
-        {
-            $xsltpath = "$root/xsl/xhtml.xsl";
-        }
-        
-        my $stylesheet = $xslt->parse_stylesheet($parser->parse_file($xsltpath));
+        $xsltpath = "$root/xsl/xhtml.xsl";
+    }
+    
+    #TODO: preload xslt stylesheet
+    my $stylesheet = $xslt->parse_stylesheet($parser->parse_file($xsltpath));
 
-        $output = $stylesheet->transform(
-                $parser->parse_string(
-                    XMLout(
-                        $page,
-                        KeyAttr => {},
-                        RootName => 'page'
-                    )
-                )
-            );
-        
-        if($param_xslt eq "xspf")
-        {
-            return $session->header(
-                -type=>$stylesheet->media_type,
-                -charset=>$stylesheet->output_encoding,
-                -attachment=>$query->param('query').".xspf",
-            ),
-            $output->toString;
-            #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
-        }
-        elsif($param_xslt eq "pr0n")
-        {
-            return $session->header(
-                -status=>'402 Payment required',
-                -cost=>'$9001.00',  # OVER NEIN THOUSAND
-            )
-        }
-        else
-        {
-            return $session->header(
-                -type=>$stylesheet->media_type,
-                -charset=>$stylesheet->output_encoding,
-                "x-pingback"=>$config->{"url_root"}."/pingback.pl"
-            ),
-            $output->toString;
-            #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
-        }
+    $output = $stylesheet->transform($doc);
+    
+    if($param_xslt eq "xspf")
+    {
+        return $session->header(
+            -type=>$stylesheet->media_type,
+            -charset=>$stylesheet->output_encoding,
+            -attachment=>$query->param('query').".xspf",
+        ),
+        $output->toString;
+        #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
+    }
+    elsif($param_xslt eq "pr0n")
+    {
+        return $session->header(
+            -status=>'402 Payment required',
+            -cost=>'$9001.00',  # OVER NEIN THOUSAND
+        )
+    }
+    else
+    {
+        return $session->header(
+            -type=>$stylesheet->media_type,
+            -charset=>$stylesheet->output_encoding,
+            "x-pingback"=>$config->{"url_root"}."/pingback.pl"
+        ),
+        print $output->toString;
+        #$stylesheet->output_as_bytes($output); <= for future use with XML::LibXSLT (>= 1.62)
     }
 }

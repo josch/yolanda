@@ -7,30 +7,35 @@ $session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 
-@page = get_page_array(@userinfo);
+my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
+
+my $root = get_page_array(@userinfo);
 
 #check if query is set
 if($query->param('query'))
 {
-    $page->{'results'}->{'query'} = $query->param('query');
-    
     my ($dbquery, @args) = get_sqlquery($query->param('query'));
     
     if($dbquery)
     {
-        fill_results($dbquery, @args);
+        $root->appendChild(fill_results($dbquery, @args));
+        $root->setAttribute('query', $query->param('query'));
         
-        if(@{$page->{'results'}->{'result'}} == 0)
+        $doc->setDocumentElement($root);
+        
+        my @results = $doc->findnodes( "//results/result" );
+        
+        if($#results == -1)
         {
             print $query->redirect("index.pl?warning=warning_no_results");
         }
-        elsif((@{$page->{'results'}->{'result'}} == 1) and (not $query->param('page') or $query->param('page') == 1))
+        elsif(($#results == 0) and (not $query->param('page') or $query->param('page') == 1))
         {
-            print $query->redirect($page->{'results'}->{'result'}[0]->{'rdf:RDF'}->{'cc:Work'}->{'dc:identifier'}[0]);
+            print $query->redirect(@{$doc->findnodes( "//results/result/rdf:RDF/cc:Work/dc:identifier/text()" )}[0]->data);
         }
         else
         {
-            print output_page();
+            output_page($doc);
         }
     }
     else

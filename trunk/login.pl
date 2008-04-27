@@ -7,7 +7,9 @@ $session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 
-@page = get_page_array(@userinfo);
+my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
+
+my $root = get_page_array(@userinfo);
 
 if($query->param('action') eq "logout")
 {
@@ -20,10 +22,7 @@ if($query->param('action') eq "logout")
 #check if user is logged in
 elsif($userinfo->{'username'})
 {
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_already_logged_in";
-    
-    print output_page();
+    print $query->redirect("/index.pl?error=error_already_logged_in");
 }
 #if password is empty and username begins with http:// then it's an openid login
 elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
@@ -35,33 +34,22 @@ elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
     args => $query,
     consumer_secret => $session->id, #is this save? don't know...
     required_root => $config->{"url_root"} );
-    
-    #is an openid passed?
-    if($query->param('user'))
+
+    #claim identity
+    $claimed = $con->claimed_identity($query->param('user'));
+    if(!defined($claimed))
     {
-        #claim identity
-        $claimed = $con->claimed_identity($query->param('user'));
-        if(!defined($claimed))
-        {
-            print $query->redirect("/index.pl?error=error_openid_".$con->errcode);
-        }
-        else
-        {
-            #try to set the check_url
-            $check_url = $claimed->check_url(
-                    return_to  => $config->{"url_root"}."login.pl?action=openid", #on success return to this address
-                    trust_root => $config->{"url_root"}); #this is the string the user will be asked to trust
-                    
-            #redirect to openid server to check claim
-            print $query->redirect($check_url);
-        }
+        print $query->redirect("/index.pl?error=error_openid_".$con->errcode);
     }
     else
     {
-        #if not, print login form
-        $page->{'loginform'} = [''];
-
-        print output_page();
+        #try to set the check_url
+        $check_url = $claimed->check_url(
+                return_to  => $config->{"url_root"}."login.pl?action=openid", #on success return to this address
+                trust_root => $config->{"url_root"}); #this is the string the user will be asked to trust
+                
+        #redirect to openid server to check claim
+        print $query->redirect($check_url);
     }
 }
 #we return from an identity check
@@ -132,17 +120,10 @@ elsif($query->param('pass') ne '' and $query->param('user')!~m/^http:\/\// and $
     }
     else
     {
-        #if not, print error
-        $page->{'message'}->{'type'} = "error";
-        $page->{'message'}->{'text'} = "error_username_password_do_not_match";
-        
-        print output_page();
+        print $query->redirect("index.pl?error=error_username_password_do_not_match");
     }
 }
 else
 {
-    #if not, print login form
-    $page->{'loginform'} = [''];
-    
-    print output_page();
+    print $query->redirect("index.pl");
 }

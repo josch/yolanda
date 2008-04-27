@@ -86,12 +86,5 @@ if($query->param('id'))
 }
 else
 {
-    @userinfo = get_userinfo_from_sid($session->id);
-
-    @page = get_page_array(@userinfo);
-    
-    $page->{'message'}->{'type'} = "error";
-    $page->{'message'}->{'text'} = "error_202c";
-    
-    print output_page();
+    print $query->redirect("index.pl?error=error_202c");
 }
