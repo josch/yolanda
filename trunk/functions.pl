@@ -65,7 +65,7 @@ sub fill_results
     #on 0.0000000000001% of all queries - this is a risk we can handle
     $lastpage = int($resultcount/$pagesize+0.99999999999999);
     
-    $currentpage = $query->param('page') or $currentpage = 1;
+    $currentpage = int($query->param('page')) or $currentpage = 1;
     
     $dbquery .= " limit ".($currentpage-1)*$pagesize.", ".$pagesize;
     
