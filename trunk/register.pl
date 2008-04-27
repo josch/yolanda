@@ -9,7 +9,7 @@ $session = new CGI::Session;
 
 my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
-my $root = get_page_array(@userinfo);
+my $page = get_page_array(@userinfo);
 
 #check if user is logged in
 if($username)
@@ -17,9 +17,9 @@ if($username)
     my $message = XML::LibXML::Element->new( "message" );
     $message->setAttribute("type", "error");
     $message->setAttribute("text", "error_already_registered");
-    $root->appendChild($message);
+    $page->appendChild($message);
     
-    $doc->setDocumentElement($root);
+    $doc->setDocumentElement($page);
 
     output_page($doc);
 }
@@ -36,14 +36,14 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
         #if something was returned the selected username already exists
         if($sth->fetchrow_array())
         {
-            $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+            $page->appendChild(XML::LibXML::Element->new( "registerform" ));
             
             my $message = XML::LibXML::Element->new( "message" );
             $message->setAttribute("type", "error");
             $message->setAttribute("text", "error_username_already_registered");
-            $root->appendChild($message);
+            $page->appendChild($message);
             
-            $doc->setDocumentElement($root);
+            $doc->setDocumentElement($page);
 
             output_page($doc);
         }
@@ -58,62 +58,62 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
     }
     else
     {
-        $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+        $page->appendChild(XML::LibXML::Element->new( "registerform" ));
         
         my $message = XML::LibXML::Element->new( "message" );
         $message->setAttribute("type", "error");
         $message->setAttribute("text", "error_passwords_do_not_match");
-        $root->appendChild($message);
+        $page->appendChild($message);
         
-        $doc->setDocumentElement($root);
+        $doc->setDocumentElement($page);
 
         output_page($doc);
     }
 }
 elsif(not $query->param('user') and ($query->param('pass') or $query->param('pass_repeat')))
 {
-    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+    $page->appendChild(XML::LibXML::Element->new( "registerform" ));
     
     my $message = XML::LibXML::Element->new( "message" );
     $message->setAttribute("type", "error");
     $message->setAttribute("text", "error_insert_username");
-    $root->appendChild($message);
+    $page->appendChild($message);
     
-    $doc->setDocumentElement($root);
+    $doc->setDocumentElement($page);
 
     output_page($doc);
 }
 elsif(not $query->param('pass') and ($query->param('user') or $query->param('pass_repeat')))
 {
-    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+    $page->appendChild(XML::LibXML::Element->new( "registerform" ));
     
     my $message = XML::LibXML::Element->new( "message" );
     $message->setAttribute("type", "error");
     $message->setAttribute("text", "error_insert_password");
-    $root->appendChild($message);
+    $page->appendChild($message);
     
-    $doc->setDocumentElement($root);
+    $doc->setDocumentElement($page);
 
     output_page($doc);
 }
 elsif(not $query->param('pass_repeat') and ($query->param('user') or $query->param('pass')))
 {
-    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+    $page->appendChild(XML::LibXML::Element->new( "registerform" ));
     
     my $message = XML::LibXML::Element->new( "message" );
     $message->setAttribute("type", "error");
     $message->setAttribute("text", "error_repeat_password");
-    $root->appendChild($message);
+    $page->appendChild($message);
     
-    $doc->setDocumentElement($root);
+    $doc->setDocumentElement($page);
 
     output_page($doc);
 }
 else
 {
-    $root->appendChild(XML::LibXML::Element->new( "registerform" ));
+    $page->appendChild(XML::LibXML::Element->new( "registerform" ));
     
-    $doc->setDocumentElement($root);
+    $doc->setDocumentElement($page);
 
     output_page($doc);
 }

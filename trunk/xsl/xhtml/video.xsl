@@ -90,10 +90,10 @@
 <!--
     comment system is broken (similar to the german online petition system)
     if a video ever gets OVER NEIN THOUSAND comments, the shit hits the fan
-
+-->
     <xsl:call-template name="commentform"/>
     <xsl:call-template name="comments"/>
--->
+
 
 </xsl:template>
 
@@ -109,7 +109,7 @@
                     <xsl:value-of select="@username" />
                 </a>:
                 <br />
-                <xsl:value-of select="." />
+                <xsl:copy-of select="." />
             </div>
         </xsl:for-each>
     </div>

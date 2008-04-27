@@ -9,7 +9,7 @@ my @userinfo = get_userinfo_from_sid($session->id);
 
 my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
-my $root = get_page_array(@userinfo);
+my $page = get_page_array(@userinfo);
 
 if($userinfo->{'username'})
 {
@@ -19,12 +19,12 @@ if($userinfo->{'username'})
         
         @userinfo = get_userinfo_from_sid($session->id);
         
-        $root = get_page_array(@userinfo);
+        $page = get_page_array(@userinfo);
         
         my $message = XML::LibXML::Element->new( "message" );
         $message->setAttribute("type", "information");
         $message->setAttribute("text", "information_settings_changed");
-        $root->appendChild($message);
+        $page->appendChild($message);
     }
 }
 
@@ -33,16 +33,16 @@ if($userinfo->{'username'})
 {
     my $settings = XML::LibXML::Element->new( "settings" );
     $settings->setAttribute("pagesize", $userinfo->{'pagesize'});
-    $root->appendChild($settings);
+    $page->appendChild($settings);
 }
 else
 {
     my $message = XML::LibXML::Element->new( "message" );
     $message->setAttribute("type", "error");
     $message->setAttribute("text", "error_202c");
-    $root->appendChild($message);
+    $page->appendChild($message);
 }
 
-$doc->setDocumentElement($root);
+$doc->setDocumentElement($page);
 
 output_page($doc);

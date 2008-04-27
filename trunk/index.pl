@@ -9,9 +9,9 @@ $session = new CGI::Session;
 
 my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
-my $root = get_page_array(@userinfo);
+my $page = get_page_array(@userinfo);
 
-$root->appendChild(XML::LibXML::Element->new( "frontpage" ));
+$page->appendChild(XML::LibXML::Element->new( "frontpage" ));
 
 if($query->param('information'))
 {
@@ -19,7 +19,7 @@ if($query->param('information'))
     $message->setAttribute("type", "information");
     $message->setAttribute("text", $query->param('information'));
     $message->setAttribute("value",$query->param('value'));
-    $root->appendChild($message);
+    $page->appendChild($message);
 }
 elsif($query->param('error'))
 {
@@ -27,7 +27,7 @@ elsif($query->param('error'))
     $message->setAttribute("type", "error");
     $message->setAttribute("text", $query->param('error'));
     $message->setAttribute("value",$query->param('value'));
-    $root->appendChild($message);
+    $page->appendChild($message);
 }
 elsif($query->param('warning'))
 {
@@ -35,7 +35,7 @@ elsif($query->param('warning'))
     $message->setAttribute("type", "warning");
     $message->setAttribute("text", $query->param('warning'));
     $message->setAttribute("value",$query->param('value'));
-    $root->appendChild($message);
+    $page->appendChild($message);
 }
 
 my $tagcloud = XML::LibXML::Element->new( "tagcloud" );
@@ -58,7 +58,7 @@ while (my ($text, $count) = $sth->fetchrow_array())
 #finish query
 $sth->finish() or die $dbh->errstr;
 
-$root->appendChild($tagcloud);
+$page->appendChild($tagcloud);
 
 foreach $strquery ($config->{"search_frontpage_one_query"}, $config->{"search_frontpage_two_query"}, $config->{"search_frontpage_three_query"})
 {
@@ -163,9 +163,9 @@ foreach $strquery ($config->{"search_frontpage_one_query"}, $config->{"search_fr
         
         $results->appendChild($result);
     }
-    $root->appendChild($results);
+    $page->appendChild($results);
 }
 
-$doc->setDocumentElement($root);
+$doc->setDocumentElement($page);
 
 output_page($doc);

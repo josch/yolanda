@@ -9,7 +9,7 @@ $session = new CGI::Session;
 
 my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
-my $root = get_page_array(@userinfo);
+my $page = get_page_array(@userinfo);
 
 #check if id or title is passed
 if($query->url_param('id'))
@@ -54,11 +54,11 @@ if($query->url_param('id'))
     {
         if($query->param('embed') eq "video")
         {
-            $root->setAttribute( "embed", "video" );
+            $page->setAttribute( "embed", "video" );
         }
         elsif($query->param('embed') eq "preview")
         {
-            $root->setAttribute( "embed", "preview" );
+            $page->setAttribute( "embed", "preview" );
         }
     
         #if there was a single result, display the video
@@ -75,77 +75,96 @@ if($query->url_param('id'))
             #check if a comment is about to be created
             if($query->param('comment'))
             {
-                #output infobox
-                my $message = XML::LibXML::Element->new( "message" );
-                $message->setAttribute("type", "information");
-                $message->setAttribute("text", "information_comment_created");
-                $root->appendChild($message);
-                
-                #add to database
-                $dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef,
-                        $userinfo->{'id'}, $id, $query->param('comment')) or die $dbh->errstr;
-                
-                #send pingbacks to every url in the comment
-                my (@matches) = $query->param('comment') =~ /(http:\/\/\S+)/gi;
-                foreach $match (@matches)
+                my $dtd = XML::LibXML::Dtd->new(0, "$root/site/comment.dtd");
+                $dom = XML::LibXML->new;
+                $dom->clean_namespaces(1);
+                eval { $doc = $dom->parse_string("<comment>".$query->param('comment')."</comment>") };
+                if ($@)
                 {
-                    #ask for http header only - if pingbacks are implemented right, then we wont need the full site
-                    my $request = HTTP::Request->new(HEAD => $match);
-                    my $ua = LWP::UserAgent->new;
-                    
-                    my $response = $ua->request($request);
-                    
-                    if ($response->is_success)
+                    die $@;
+                }
+                else
+                {
+                    eval { $doc->validate($dtd) };
+                    if ($@)
                     {
-                        my $pingbackurl = $response->header("x-pingback");
+                        die $@;
+                    }
+                    else
+                    {
+                        #output infobox
+                        my $message = XML::LibXML::Element->new( "message" );
+                        $message->setAttribute("type", "information");
+                        $message->setAttribute("text", "information_comment_created");
+                        $page->appendChild($message);
                         
-                        #if there was no x-pingback header, fetch the website and search for link element
-                        if (!$pingbackurl)
+                        #add to database
+                        $dbh->do(qq{insert into comments (userid, videoid, text, timestamp) values (?, ?, ?, unix_timestamp())}, undef,
+                                $userinfo->{'id'}, $id, $query->param('comment')) or die $dbh->errstr;
+                        
+                        #send pingbacks to every url in the comment
+                        my (@matches) = $query->param('comment') =~ /<a[^>]+href="(http:\/\/\S+)"[^>]*>.+?<\/a>/gi;
+                        foreach $match (@matches)
                         {
-                            $request = HTTP::Request->new(GET => $match);
-                            $response = $ua->request($request);
+                            #ask for http header only - if pingbacks are implemented right, then we wont need the full site
+                            my $request = HTTP::Request->new(HEAD => $match);
+                            my $ua = LWP::UserAgent->new;
+                            
+                            my $response = $ua->request($request);
                             
                             if ($response->is_success)
                             {
-                                ($pingbackurl) = $response->content =~ /<link rel="pingback" href="([^"]+)" ?\/?>/;
+                                my $pingbackurl = $response->header("x-pingback");
+                                
+                                #if there was no x-pingback header, fetch the website and search for link element
+                                if (!$pingbackurl)
+                                {
+                                    $request = HTTP::Request->new(GET => $match);
+                                    $response = $ua->request($request);
+                                    
+                                    if ($response->is_success)
+                                    {
+                                        ($pingbackurl) = $response->content =~ /<link rel="pingback" href="([^"]+)" ?\/?>/;
+                                    }
+                                }
+                                
+                                #if requests were successful, send the pingbacks
+                                if ($pingbackurl)
+                                {
+                                    #TODO: expand xml entities &lt; &gt; &amp; &quot; in $pingbackurl
+                                    
+                                    #contruct the xml-rpc request
+                                    my $xmlpost = ();
+                                    $xmlpost->{"methodName"} = ["pingback.ping"];
+                                    push @{$xmlpost->{'params'}->{'param'} },
+                                    {
+                                        "value" =>
+                                        {
+                                            "string" => [$config->{"url_root"}."/video/".urlencode($title)."/$id/"]
+                                        }
+                                    };
+                                    push @{$xmlpost->{'params'}->{'param'} },
+                                    {
+                                        "value" =>
+                                        {
+                                            "string" => [$match]
+                                        }
+                                    };
+                                    
+                                    #post a xml-rpc request
+                                    $request = HTTP::Request->new(POST => $pingbackurl);
+                                    $request->header('Content-Type' => "application/xml");
+                                    $request->content(XMLout(
+                                                            $xmlpost,
+                                                            XMLDecl => 1,
+                                                            KeyAttr => {},
+                                                            RootName => 'methodCall'
+                                                        ));
+                                    $ua = LWP::UserAgent->new;
+                                    $response = $ua->request($request);
+                                    #TODO: maybe do something on success?
+                                }
                             }
-                        }
-                        
-                        #if requests were successful, send the pingbacks
-                        if ($pingbackurl)
-                        {
-                            #TODO: expand xml entities &lt; &gt; &amp; &quot; in $pingbackurl
-                            
-                            #contruct the xml-rpc request
-                            my $xmlpost = ();
-                            $xmlpost->{"methodName"} = ["pingback.ping"];
-                            push @{$xmlpost->{'params'}->{'param'} },
-                            {
-                                "value" =>
-                                {
-                                    "string" => [$config->{"url_root"}."/video/".urlencode($title)."/$id/"]
-                                }
-                            };
-                            push @{$xmlpost->{'params'}->{'param'} },
-                            {
-                                "value" =>
-                                {
-                                    "string" => [$match]
-                                }
-                            };
-                            
-                            #post a xml-rpc request
-                            $request = HTTP::Request->new(POST => $pingbackurl);
-                            $request->header('Content-Type' => "application/xml");
-                            $request->content(XMLout(
-                                                    $xmlpost,
-                                                    XMLDecl => 1,
-                                                    KeyAttr => {},
-                                                    RootName => 'methodCall'
-                                                ));
-                            $ua = LWP::UserAgent->new;
-                            $response = $ua->request($request);
-                            #TODO: maybe do something on success?
                         }
                     }
                 }
@@ -236,7 +255,7 @@ if($query->url_param('id'))
         
         $video->appendChild($rdf);
         
-        $root->appendChild($video);
+        $page->appendChild($video);
         
         #get comments
         my $comments = XML::LibXML::Element->new( "comments" );
@@ -247,17 +266,22 @@ if($query->url_param('id'))
         $sth->execute($id) or die $dbh->errstr;
         while (my ($commentid, $text, $username, $timestamp) = $sth->fetchrow_array())
         {
-            my $comment = XML::LibXML::Element->new( "comment" );
+            my $dom = XML::LibXML->new;
+            my $doc = $dom->parse_string("<comment>".$text."</comment>");
+            my $comment = $doc->documentElement();
+            foreach $node ($comment->getElementsByTagName("*"))
+            {
+                $node->setNamespace("http://www.w3.org/1999/xhtml", "xhtml");
+            }
             $comment->setAttribute('username', $username);
             $comment->setAttribute('timestamp', $timestamp);
             $comment->setAttribute('id', $commentid);
-            $comment->appendTextChild("text", $text);
             $comments->appendChild($comment);
         }
         
-        $root->appendChild($comments);
+        $page->appendChild($comments);
         
-        $doc->setDocumentElement($root);
+        $doc->setDocumentElement($page);
 
         output_page($doc);
     }

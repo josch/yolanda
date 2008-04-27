@@ -9,7 +9,7 @@ $session = new CGI::Session;
 
 my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
-my $root = get_page_array(@userinfo);
+my $page = get_page_array(@userinfo);
 
 #check if query is set
 if($query->param('query'))
@@ -18,10 +18,10 @@ if($query->param('query'))
     
     if($dbquery)
     {
-        $root->appendChild(fill_results($dbquery, @args));
-        $root->setAttribute('query', $query->param('query'));
+        $page->appendChild(fill_results($dbquery, @args));
+        $page->setAttribute('query', $query->param('query'));
         
-        $doc->setDocumentElement($root);
+        $doc->setDocumentElement($page);
         
         my @results = $doc->findnodes( "//results/result" );
         

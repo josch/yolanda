@@ -7,9 +7,7 @@ $session = new CGI::Session;
 
 @userinfo = get_userinfo_from_sid($session->id);
 
-my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
-
-my $root = get_page_array(@userinfo);
+#TODO: use $query->http("HTTP_REFERER"); to redirect to the site last visited
 
 if($query->param('action') eq "logout")
 {

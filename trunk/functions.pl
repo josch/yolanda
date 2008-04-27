@@ -26,18 +26,18 @@ sub get_page_array
     #get parameters
     my (@userinfo) = @_;
 
-    my $root = XML::LibXML::Element->new( "page" );
+    my $page = XML::LibXML::Element->new( "page" );
     
     my ($locale) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^([^,]+),.*$/;
-    $root->setAttribute( "locale", $locale ? $locale : "en_us" );
+    $page->setAttribute( "locale", $locale ? $locale : "en_us" );
     
-    $root->setAttribute( "username", $userinfo->{'username'} );
-    $root->setNamespace("http://www.w3.org/1999/xhtml", "xhtml", 0);
-    $root->setNamespace("http://web.resource.org/cc/", "cc", 0);
-    $root->setNamespace("http://purl.org/dc/elements/1.1/", "dc", 0);
-    $root->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
+    $page->setAttribute( "username", $userinfo->{'username'} );
+    $page->setNamespace("http://www.w3.org/1999/xhtml", "xhtml", 0);
+    $page->setNamespace("http://web.resource.org/cc/", "cc", 0);
+    $page->setNamespace("http://purl.org/dc/elements/1.1/", "dc", 0);
+    $page->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
     
-    return $root;
+    return $page;
 }
 
 # index.pl (display custom search)
