@@ -101,7 +101,8 @@ div
     div.uploadform
     {
         line-height:    2.5em;
-        margin:         1.5em;
+        /* correct spacing to avoid overlapping with float:right elements */
+        margin-right:       22em;
     }
 
     div.loginbox

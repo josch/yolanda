@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:cc="http://web.resource.org/cc/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xforms="http://www.w3.org/2002/xforms"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 >
 
 <xsl:template name="xhtml-body">
@@ -25,14 +28,14 @@
             <xsl:call-template name="loginbox" />
         </xsl:if>
 
+        <xsl:if test="//message">
+            <xsl:call-template name="message"/>
+        </xsl:if>
+
         <xsl:choose>
+
             <xsl:when test="//frontpage">
-
                 <xsl:call-template name="tagcloud" />
-
-                <xsl:if test="//message">
-                    <xsl:call-template name="message"/>
-                </xsl:if>
 
                 <xsl:call-template name="splashbox" />
 
@@ -40,20 +43,17 @@
             </xsl:when>
 
             <xsl:when test="//page/video">
-<!--
-                <xsl:call-template name="tagbar" />
--->
-
-                <xsl:if test="//message">
-                    <xsl:call-template name="message"/>
-                </xsl:if>
-
                 <xsl:call-template name="video"/>
             </xsl:when>
 
-            <xsl:when test="//page//results">
+            <xsl:when test="//page/results">
                 <xsl:call-template name="results"/>
             </xsl:when>
+
+            <xsl:when test="//page/xforms:instance">
+                <xsl:call-template name="uploadform"/>
+            </xsl:when>
+
         </xsl:choose>
 
         <xsl:choose>
@@ -62,9 +62,6 @@
             </xsl:when>
             <xsl:when test="//loginform">
                 <xsl:call-template name="loginform"/>
-            </xsl:when>
-            <xsl:when test="//uploadform">
-                <xsl:call-template name="uploadform"/>
             </xsl:when>
             <xsl:when test="//advancedsearch">
                 <xsl:call-template name="advancedsearch"/>

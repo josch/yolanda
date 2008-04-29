@@ -1,13 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:cc="http://web.resource.org/cc/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xforms="http://www.w3.org/2002/xforms"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 >
 <xsl:template name="uploadform">
     <div class="uploadform">
+
+        <form method="post">
+            <xsl:for-each select="/page/xforms:instance/*/*">
+                    <xsl:choose>
+
+                        <xsl:when test="@xsi:type='xsd:normalizedString'">
+                            <input type="text">
+                                <xsl:attribute name="value">
+                                    <xsl:value-of select="name()"/>
+                                </xsl:attribute>
+                            </input>
+                        </xsl:when>
+
+                        <xsl:when test="@xsi:type='xsd:string'">
+                            <textarea>
+                                <xsl:value-of select="name()"/>
+                            </textarea>
+                        </xsl:when>
+
+                        <xsl:when test="@xsi:type='xsd:gDay'">
+                            <select>
+                                <option>
+                                    <xsl:value-of select="name()"/>
+                                </option>
+                                <xsl:call-template name="for-loop">
+                                    <xsl:with-param name="start">1</xsl:with-param>
+                                    <xsl:with-param name="end">31</xsl:with-param>
+                                    <xsl:with-param name="element">option</xsl:with-param>
+                                </xsl:call-template>
+                            </select>
+                        </xsl:when>
+
+                        <xsl:when test="@xsi:type='xsd:gMonth'">
+                            <select>
+                                <option>
+                                    <xsl:value-of select="name()"/>
+                                </option>
+                                <xsl:call-template name="for-loop">
+                                    <xsl:with-param name="start">1</xsl:with-param>
+                                    <xsl:with-param name="end">12</xsl:with-param>
+                                    <xsl:with-param name="element">option</xsl:with-param>
+                                </xsl:call-template>
+                            </select>
+                        </xsl:when>
+
+                        <xsl:when test="@xsi:type='xsd:gYear'">
+                            <select>
+                                <option>
+                                    <xsl:value-of select="name()"/>
+                                </option>
+                                <xsl:call-template name="for-loop">
+                                    <xsl:with-param name="start">1890</xsl:with-param>
+                                    <xsl:with-param name="end">2008</xsl:with-param>
+                                    <xsl:with-param name="element">option</xsl:with-param>
+                                </xsl:call-template>
+                            </select>
+                        </xsl:when>
+
+                        <xsl:when test="@xsi:type='xsd:language'">
+                            <select>
+                                <option>
+                                    <xsl:value-of select="name()"/>
+                                </option>
+
+                                <xsl:variable name="language" select="//@locale" />
+
+
+                                <xsl:for-each select="$language_strings">
+
+                                    <option>
+
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of select="short" />
+                                        </xsl:attribute>
+    <!--
+                                        <xsl:if test="$short=$language">
+                                            <xsl:attribute name="selected">selected</xsl:attribute>
+                                        </xsl:if>
+    -->
+                                        <xsl:value-of select="name[@lang='en']" /><!-- language hardcoded to en - this will be solved through simple if/else -->
+                                        <xsl:value-of select="name[@lang=$language]" />
+                                        <xsl:value-of select="$language" /><!-- debug debug debug -->
+                                    </option>
+
+                                </xsl:for-each>
+
+                            </select>
+                        </xsl:when>
+
+                    </xsl:choose>
+                    <br />
+            </xsl:for-each>
+
+        </form>
+
+<!--
+    information below this line won't match anything anytime soon.
+    this code will be removed in furute revisions but is kept for reference reasons.
+-->
 
         <xsl:choose>
 

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:cc="http://web.resource.org/cc/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xforms="http://www.w3.org/2002/xforms"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 >
 
 <xsl:output
@@ -17,7 +20,10 @@
     omit-xml-declaration="no"
 />
 
-<!-- each xsl:template should have it's own file -->
+<!--
+    each xsl template should have it's own file
+    exception: templates which are only use by ONE other template may reside in that templates file
+ -->
 <xsl:include href="./xhtml/advancedsearch.xsl" />
 <xsl:include href="./xhtml/embedded.xsl" />
 <xsl:include href="./xhtml/footer.xsl" />
