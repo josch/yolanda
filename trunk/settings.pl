@@ -1,5 +1,7 @@
 require "functions.pl";
 
+#TODO: are settings obsolete?
+
 #initialize session data
 CGI::Session->name($config->{"page_cookie_name"});
 $query = new CGI;

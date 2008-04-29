@@ -11,21 +11,20 @@ $config = $config->{"strings"}->{"string"};
 
 $dbh = DBI->connect("DBI:mysql:".$config->{"database_name"}.":".$config->{"database_host"}, $config->{"database_username"}, $config->{"database_password"}) or die $DBI::errstr;
 
+#get all subjects
 $sth = $dbh->prepare("select subject from videos");
 $sth->execute();
+
 #cycle through all video subjects
 while(($subject) = $sth->fetchrow_array())
 {
+    #TODO: make split char configureable
     @subject = split(' ', $subject);
     #cycle through all tags of video
     foreach my $val (@subject)
     {
-        #strip whitespaces
-        $val =~ s/^\s*(.*?)\s*$/$1/;
-        if(length($val) >= $config->{"page_tag_lenght_min"})
-        {
-            %hash->{$val}++;
-        }
+        #add/increment correct hash value
+        %hash->{$val}++;
     }
 }
 $sth->finish();
@@ -33,9 +32,11 @@ $sth->finish();
 #sort by count
 @sorted = sort {$hash{$b} cmp $hash{$a}} keys %hash;
 
+#clean tagcloud
 $dbh->do("delete from tagcloud");
+
 $sth = $dbh->prepare("insert into tagcloud (text, count) values (?, ?)");
-#insert  tags into tagcloud table
+#insert "page_tag_count" tags into tagcloud table
 for($i=0;$i<$config->{"page_tag_count"} and $i<=$#sorted;$i++)
 {
     $sth->execute( $sorted[$i], %hash->{$sorted[$i]} );

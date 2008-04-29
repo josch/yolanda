@@ -28,9 +28,11 @@ sub get_page_array
 
     my $page = XML::LibXML::Element->new( "page" );
     
+    #get user language from browser http_accept string
     my ($lang) = $query->http('HTTP_ACCEPT_LANGUAGE') =~ /^[^,]+,([^;]*);/;
     $page->setAttribute( "lang", $lang ? $lang : "en" );
     
+    #TODO: set namespace for each site on its own
     $page->setAttribute( "username", $userinfo->{'username'} );
     $page->setNamespace("http://www.w3.org/1999/xhtml", "xhtml", 0);
     $page->setNamespace("http://web.resource.org/cc/", "cc", 0);
@@ -86,6 +88,7 @@ sub fill_results
         $license, $filesize, $duration, $width, $height, $fps, $viewcount,
         $downloadcount) = $sth->fetchrow_array())
     {
+        #build xml node structure
         my $result = XML::LibXML::Element->new( "result" );
         $result->setAttribute( "thumbnail", $config->{"url_root"}."/video-stills/thumbnails/$id" );
         $result->setAttribute( "preview", $config->{"url_root"}."/video-stills/previews/$id" );
@@ -181,6 +184,7 @@ sub get_sqlquery
     (@tags) = $strquery =~ / tag:(\w+)/gi;
     ($order) = $strquery =~ / order:(\w+)/i;
     ($sort) = $strquery =~ / sort:(\w+)/i;
+    #TODO: add those options
     #($title) = $strquery =~ /title:(\w+)/i;
     #($description) = $strquery =~ /description:(\w+)/i;
     #($creator) = $strquery =~ /creator:(\w+)/i;
@@ -199,13 +203,16 @@ sub get_sqlquery
         from_unixtime( v.timestamp ), v.creator, v.subject, 
         v.source, v.language, v.coverage, v.rights, v.license, filesize,
         duration, width, height, fps, viewcount, downloadcount";
-
+    
+    #only continue with a valid query string
     if($strquery)
     {
+        #select all videos
         if($strquery eq "*")
         {
             $dbquery .= " from videos as v, users as u where u.id = v.userid";
         }
+        #search
         else
         {
             $dbquery .= ", match(v.title, v.description, v.subject) against( ? in boolean mode) as relevance";
@@ -214,18 +221,21 @@ sub get_sqlquery
             push @args, $strquery, $strquery;
         }
         
+        #match tags if present
         if(@tags)
         {
             $dbquery .= " and match(v.subject) against (? in boolean mode)";
             push @args, "@tags";
         }
         
+        #match publisher
         if($publisher)
         {
             $dbquery .= " and match(u.username) against (? in boolean mode)";
             push @args, "$publisher";
         }
         
+        #give results the right order
         if($order)
         {
             if($order eq 'filesize')
@@ -340,6 +350,7 @@ sub output_page
     }
 }
 
+#output info message
 sub message
 {
     my ($type, $text, $value) = @_;

@@ -53,7 +53,7 @@ while(1)
     {
         #video height is either the maximum video height
         #or (when the original is smaller than that) the original height
-        #check for multiple by 8
+        #check for multiple of 8
         $vheight = $height <= $config->{"video_height_max"} ? int($height/8 + .5)*8 : $config->{"video_height_max"};
         $vwidth = int($vheight*($width/$height)/8 + .5)*8;
         

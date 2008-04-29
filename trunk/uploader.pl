@@ -92,6 +92,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
         }
         else
         {
+            #generate unique hash
             $sha = new Digest::SHA(256);
             $sha->addfile("/tmp/$id");
             $sha = $sha->hexdigest;
@@ -112,12 +113,15 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
             }
             else
             {
+                #get video container and duration
                 ($container, $duration) = $info =~ /Input \#0, (\w+),.+?\n.+?Duration: (\d{2}:\d{2}:\d{2}\.\d)/;
                 
+                #get audio, video, idth, height and fps
                 #these two regexes have to be applied seperately because nobody knows which stream (audio or video) comes first
                 ($audio) = $info =~ /Audio: (\w+)/;
                 ($video, $width, $height, $fps) = $info =~ /Video: ([\w\d]+),.+?(\d+)x(\d+),.+?(\d+\.\d+) fps/;
                 
+                #if there is no video stream or no duration
                 if(!$video or !$duration)
                 {
                     #delete from uploaded table
@@ -125,6 +129,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                     unlink "/tmp/$id";
                     print $query->redirect("index.pl?error=error_upload_invalid_stream");
                 }
+                #if the video width is smaller than allowed
                 elsif($width < $config->{"video_width_min"})
                 {
                     #delete from uploaded table
@@ -132,6 +137,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                     unlink "/tmp/$id";
                     print $query->redirect("index.pl?error=error_upload_video_width_too_small&value=".$config->{"video_width_min"});
                 }
+                #if the video height is smaller than allowed
                 elsif($height < $config->{"video_height_min"})
                 {
                     #delete from uploaded table
@@ -141,6 +147,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                 }
                 else
                 {
+                    #get video filesize
                     $filesize = -s "/tmp/$id";
                     
                     #convert hh:mm:ss.s duration to full seconds - thanks perl for making this so damn easy!
@@ -148,7 +155,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                     $duration =~ /^(\d{2}):(\d{2}):(\d{2})\.(\d)$/;
                     $duration = int($1*3600 + $2*60 + $3 + $4/10 + .5);
                     
-                    #create thumbnail
+                    #get thumbnail position
                     $thumbnailsec = int(rand($duration));
                     $previewsec = $thumbnailsec;
                     
@@ -157,6 +164,7 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                     $tnheight = $config->{"video_thumbnail_height"};
                     $tnwidth = int($tnheight*($width/$height)/2 + .5)*2;
                     
+                    #create thumbnail and preview in original size
                     $ffthumb = system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $thumbnailsec -s ".$tnwidth."x$tnheight $root/video-stills/thumbnails/$id";
                     $ffprev = system "ffmpeg -i /tmp/$id -vcodec mjpeg -vframes 1 -an -f rawvideo -ss $previewsec $root/video-stills/previews/$id";
                     
@@ -166,8 +174,10 @@ if($userinfo->{'id'} && $query->param("DC.Title") &&
                         #check if the upload already is in the right format and smaller/equal max-width/height
                         if ($container eq 'ogg' and $video eq 'theora' and ($audio eq 'vorbis' or not $audio) and $height <= $config->{"video_height_max"} and $width <= $config->{"video_width_max"})
                         {
+                            #if so, move to destination
                             if(move("/tmp/$id", "$root/videos/$id"))
                             {
+                                #if move was successful
                                 #add video to videos table
                                 $dbh->do(qq{insert into videos select id, title, description, userid, timestamp, creator,
                                                         subject, source, language, coverage, rights, license, ?, ?, ?, ?, ?, ?, 0, 0

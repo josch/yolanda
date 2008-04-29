@@ -11,8 +11,10 @@ my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
 my $page = get_page_array(@userinfo);
 
+#TODO: make the <frontpage> element unneccesary
 $page->appendChild(XML::LibXML::Element->new( "frontpage" ));
 
+#if a message box is to be shown
 if($query->param('information'))
 {
     $page->appendChild(message("information", $query->param('information'), $query->param('value')));
@@ -26,6 +28,7 @@ elsif($query->param('warning'))
     $page->appendChild(message("warning", $query->param('warning'), $query->param('value')));
 }
 
+#new tagcloud xml element
 my $tagcloud = XML::LibXML::Element->new( "tagcloud" );
 
 #prepare query
@@ -34,9 +37,10 @@ my $sth = $dbh->prepare(qq{select text, count from tagcloud }) or die $dbh->errs
 #execute it
 $sth->execute() or die $dbh->errstr;
 
-#get every returned value
+#get every returned value and append it to tagcloud
 while (my ($text, $count) = $sth->fetchrow_array())
 {
+    #TODO: why not use <tag count="">text</tag>
     my $tag = XML::LibXML::Element->new( "tag" );
     $tag->appendTextChild("text", $text);
     $tag->appendTextChild("count", $count);
@@ -48,6 +52,7 @@ $sth->finish() or die $dbh->errstr;
 
 $page->appendChild($tagcloud);
 
+#now get the frontpage video queries from config and process them
 foreach $strquery ($config->{"search_frontpage_one_query"}, $config->{"search_frontpage_two_query"}, $config->{"search_frontpage_three_query"})
 {
     #new results block
@@ -70,6 +75,7 @@ foreach $strquery ($config->{"search_frontpage_one_query"}, $config->{"search_fr
             $license, $filesize, $duration, $width, $height, $fps, $viewcount,
             $downloadcount) = $sth->fetchrow_array())
     {
+        #construct xml
         my $result = XML::LibXML::Element->new( "result" );
         $result->setAttribute( "thumbnail", $config->{"url_root"}."/video-stills/thumbnails/$id" );
         $result->setAttribute( "preview", $config->{"url_root"}."/video-stills/previews/$id" );

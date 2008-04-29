@@ -14,6 +14,7 @@ my $page = get_page_array(@userinfo);
 #check if id or title is passed
 if($query->url_param('id'))
 {
+    #initiate database query
     $dbquery = "select v.id, v.title, v.description, u.username, from_unixtime( v.timestamp ),
                         v.creator, v.subject, v.source, v.language, v.coverage, v.rights,
                         v.license, filesize, duration, width, height, fps, viewcount, downloadcount
@@ -22,9 +23,11 @@ if($query->url_param('id'))
     @args = ($query->url_param('id'));
     
     $sth = $dbh->prepare($dbquery);
+    
+    #test wether the video exists
     $rowcount = $sth->execute(@args) or die $dbh->errstr;
     
-    #if there are still no results
+    #if there are no results
     if($rowcount == 0)
     {
         #check if maybe the video has not yet been converted
@@ -35,12 +38,16 @@ if($query->url_param('id'))
         #if id is found
         if($rowcount == 1)
         {
+            #calculate the overall length of video to be encoded
             $sth = $dbh->prepare("select sum(duration) from uploaded where id < ?");
             $sth->execute($query->url_param('id')) or die $dbh->errstr;
             ($length) = $sth->fetchrow_array();
+            
+            #convert hours, minutes and seconds fromoverall seconds
             $h = int($length/3600);
             $m = int($length/60-$h*60);
             $s = int($length-$m*60-$h*3600);
+            
             print $query->redirect("/index.pl?information=information_video_not_yet_available&value=".$h."h ".$m."m ".$s."s");
         }
         else
@@ -52,6 +59,7 @@ if($query->url_param('id'))
     }
     elsif($rowcount == 1)
     {
+        #set embed attribute if requested
         if($query->param('embed') eq "video")
         {
             $page->setAttribute( "embed", "video" );
@@ -60,14 +68,6 @@ if($query->url_param('id'))
         {
             $page->setAttribute( "embed", "preview" );
         }
-    
-        #if there was a single result, display the video
-        my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
-            $source, $language, $coverage, $rights, $license,
-            $filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array();
-        
-        #finish query
-        $sth->finish() or die $dbh->errstr;
         
         #if user is logged in
         if($userinfo->{'username'})
@@ -75,17 +75,25 @@ if($query->url_param('id'))
             #check if a comment is about to be created
             if($query->param('comment'))
             {
+                #prepare new dtd
                 my $dtd = XML::LibXML::Dtd->new(0, "$root/site/comment.dtd");
                 $dom = XML::LibXML->new;
                 $dom->clean_namespaces(1);
+                
+                #try to parse user's comment
                 eval { $doc = $dom->parse_string("<comment>".$query->param('comment')."</comment>") };
+                
+                #die if error
                 if ($@)
                 {
                     die $@;
                 }
                 else
                 {
+                    #try to validate against dtd
                     eval { $doc->validate($dtd) };
+                    
+                    #die if error
                     if ($@)
                     {
                         die $@;
@@ -100,7 +108,9 @@ if($query->url_param('id'))
                                 $userinfo->{'id'}, $id, $query->param('comment')) or die $dbh->errstr;
                         
                         #send pingbacks to every url in the comment
-                        my (@matches) = $query->param('comment') =~ /<a[^>]+href="(http:\/\/\S+)"[^>]*>.+?<\/a>/gi;
+                        my (@matches) = $query->param('comment') =~ /<a\s[^>]*href="(http:\/\/\S+)"[^>]*>.+?<\/a>/gi;
+                        
+                        #for every match send a pingback
                         foreach $match (@matches)
                         {
                             #ask for http header only - if pingbacks are implemented right, then we wont need the full site
@@ -109,6 +119,7 @@ if($query->url_param('id'))
                             
                             my $response = $ua->request($request);
                             
+                            #if successful response
                             if ($response->is_success)
                             {
                                 my $pingbackurl = $response->header("x-pingback");
@@ -119,6 +130,7 @@ if($query->url_param('id'))
                                     $request = HTTP::Request->new(GET => $match);
                                     $response = $ua->request($request);
                                     
+                                    #get the link if response was successful
                                     if ($response->is_success)
                                     {
                                         ($pingbackurl) = $response->content =~ /<link rel="pingback" href="([^"]+)" ?\/?>/;
@@ -131,6 +143,7 @@ if($query->url_param('id'))
                                     #TODO: expand xml entities &lt; &gt; &amp; &quot; in $pingbackurl
                                     
                                     #contruct the xml-rpc request
+                                    #TODO: do this with xml::libxml
                                     my $xmlpost = ();
                                     $xmlpost->{"methodName"} = ["pingback.ping"];
                                     push @{$xmlpost->{'params'}->{'param'} },
@@ -167,7 +180,16 @@ if($query->url_param('id'))
                 }
             }
         }
+    
+        #if there was a single result, display the video
+        my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
+            $source, $language, $coverage, $rights, $license,
+            $filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array();
         
+        #finish query
+        $sth->finish() or die $dbh->errstr;
+        
+        #construct video xml
         my $video = XML::LibXML::Element->new( "video" );
         $video->setAttribute('thumbnail', $config->{"url_root"}."/video-stills/thumbnails/$id");
         $video->setAttribute('preview', $config->{"url_root"}."/video-stills/previews/$id");
@@ -242,6 +264,7 @@ if($query->url_param('id'))
         $node->appendText($title);
         $work->appendChild($node);
         
+        #TODO: add license conditions
         my $license = XML::LibXML::Element->new( "License" );
         $license->setNamespace("http://web.resource.org/cc/", "cc");
         $license->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
@@ -254,18 +277,27 @@ if($query->url_param('id'))
         
         $page->appendChild($video);
         
-        #get comments
+        #get comments - this will also include newly created comments
         my $comments = XML::LibXML::Element->new( "comments" );
         
         $sth = $dbh->prepare(qq{select comments.id, comments.text, users.username, from_unixtime( comments.timestamp )
                                 from comments, users where
                                 comments.videoid=? and users.id=comments.userid}) or die $dbh->errstr;
+                                
         $sth->execute($id) or die $dbh->errstr;
+        
+        #for every comment in the db
         while (my ($commentid, $text, $username, $timestamp) = $sth->fetchrow_array())
         {
+            #create new xml node
             my $dom = XML::LibXML->new;
+            
+            #parse database string to xml
             my $doc = $dom->parse_string("<comment>".$text."</comment>");
+            
             my $comment = $doc->documentElement();
+            
+            #add xhtml namespace prefix to every node
             foreach $node ($comment->getElementsByTagName("*"))
             {
                 $node->setNamespace("http://www.w3.org/1999/xhtml", "xhtml");

@@ -26,12 +26,17 @@ if($query->param('id'))
             $dbh->do(qq{update videos set downloadcount=downloadcount+1 where id = ? }, undef, $query->param('id')) or die $dbh->errstr;
         }
         
-        #in both cases - do some slurp-eaze to the browser
+        #open video file
         $file = open(FILE, "<$root/videos/".$query->param('id'));
         
         if($file)
         {
+            #TODO: replace all of this with fastcgi x-sendfile
+            #get video filesize
             $filesize = -s "$root/videos/".$query->param('id');
+            
+            #get http query range
+            #TODO: also allow range end
             $range = $query->http('range');
             $range =~ s/bytes=([0-9]+)-/$1/;
             
@@ -45,6 +50,7 @@ if($query->param('id'))
                 }
                 else
                 {
+                    #print correct http partial header
                     print $query->header(-type=>'application/ogg',
                             -content_length=> $filesize-$range,
                             -status=>'206 Partial Content',
@@ -52,18 +58,21 @@ if($query->param('id'))
                             -accept_ranges=> "bytes",
                             -content_range=> "bytes $range-".($filesize-1)."/$filesize"
                             );
-                        
+                    
+                    #seek file to the requested position
                     seek FILE, $range, 0;
                 }
             }
             else
             {
+                #print normal header
                 print $query->header(-type=>'application/ogg',
                         -content_length=> $filesize,
                         -attachment=>$title.".ogv"
                         );
             }
             
+            #in both cases - do some slurp-eaze to the browser
             while (my $BytesRead = read (FILE, $buff, 8192))
             {
                 print $buff;
@@ -72,6 +81,7 @@ if($query->param('id'))
         }
         else
         {
+            #the requested file should be there but is not - throw server error
             print $session->header(
                 -status=>'500 Internal Server Error'
             )
@@ -79,6 +89,7 @@ if($query->param('id'))
     }
     else
     {
+        #no such video exists - 404
         print $session->header(
             -status=>'404 Not found'
         )
@@ -86,5 +97,6 @@ if($query->param('id'))
 }
 else
 {
+    #no if was supplied
     print $query->redirect("index.pl?error=error_202c");
 }

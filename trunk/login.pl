@@ -15,6 +15,7 @@ if($query->param('action') eq "logout")
     #remove sid from database
     $dbh->do(qq{update users set sid = '' where id = ?}, undef, $userinfo->{'id'}) or die $dbh->errstr;
     $session->delete();
+    
     print $query->redirect("index.pl?information=information_logged_out");
 }
 #check if user is logged in
@@ -27,14 +28,17 @@ elsif($query->param('pass') eq '' and $query->param('user')=~m/^http:\/\//)
 {
     #create our openid consumer object
     $con = Net::OpenID::Consumer->new(
-    ua => LWPx::ParanoidAgent->new, # FIXME - use LWPx::ParanoidAgent
-    cache => undef, # or File::Cache->new,
-    args => $query,
-    consumer_secret => $session->id, #is this save? don't know...
-    required_root => $config->{"url_root"} );
+        ua              => LWPx::ParanoidAgent->new,
+        cache           => undef, # or File::Cache->new,
+        args            => $query,
+        consumer_secret => $session->id, #is this save? don't know...
+        required_root   => $config->{"url_root"}
+    );
 
     #claim identity
     $claimed = $con->claimed_identity($query->param('user'));
+    
+    #if claim failed, redirect
     if(!defined($claimed))
     {
         print $query->redirect("/index.pl?error=error_openid_".$con->errcode);
@@ -55,22 +59,26 @@ elsif($query->param('action') eq 'openid')
 {
     #create our openid consumer object
     $con = Net::OpenID::Consumer->new(
-    ua => LWPx::ParanoidAgent->new, # FIXME - use LWPx::ParanoidAgent
-    cache => undef, # or File::Cache->new,
-    args => $query,
-    consumer_secret => $session->id, #is this save? don't know...
-    required_root => $config->{"url_root"} );
+        ua              => LWPx::ParanoidAgent->new,
+        cache           => undef, # or File::Cache->new,
+        args            => $query,
+        consumer_secret => $session->id, #is this save? don't know...
+        required_root   => $config->{"url_root"}
+    );
     
+    #redirect to setup url
     if($setup_url = $con->user_setup_url)
     {
         #redirect to setup url - user will give confirmation there
         print $query->redirect($setup_url);
     }
+    #or cancel process
     elsif ($con->user_cancel)
     {
         #cancelled - redirect to login form
         print $query->redirect("index.pl");
     }
+    #or verify identity
     elsif ($vident = $con->verified_identity)
     {
         #we are verified!!
@@ -79,6 +87,7 @@ elsif($query->param('action') eq 'openid')
         #check if this openid user already is in database
         my $sth = $dbh->prepare(qq{select 1 from users where username = ? limit 1 });
         $sth->execute($verified_url);
+        
         if($sth->fetchrow_array())
         {
             #store session id in database
@@ -100,9 +109,10 @@ elsif($query->param('action') eq 'openid')
     }
 }
 #else it's a normal login
+#check if password is not empty and username is neither beginning with http nor empty
 elsif($query->param('pass') ne '' and $query->param('user')!~m/^http:\/\// and $query->param('user') ne '')
 {
-    #prepare query - empty password are openid users so omit those entries
+    #prepare query
     my $sth = $dbh->prepare(qq{select id from users
             where password = password( ? ) and username = ? limit 1 });
             
