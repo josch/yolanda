@@ -68,6 +68,47 @@ $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
 $node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:language" );
 $video->appendChild($node);
 
+$node = XML::LibXML::Element->new( "Creator" );
+$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "Contributor" );
+$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "Publisher" );
+$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "Relation" );
+$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:anyURI" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "Rights" );
+$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:anyURI" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "Source" );
+$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:anyURI" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "data" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:base64Binary" );
+$video->appendChild($node);
+
 $instance->appendChild($video);
 
 $page->appendChild($instance);
