@@ -14,34 +14,49 @@
 
         <form method="post">
             <xsl:for-each select="/page/xforms:instance/*/*">
+
+                    <label>
+                        <xsl:attribute name="for">
+                                <xsl:value-of select="local-name()"/>
+                        </xsl:attribute>
+                        <xsl:value-of select="local-name()"/>
+                    </label>
+
+                    <br />
+
                     <xsl:choose>
 
                         <xsl:when test="@xsi:type='xsd:base64Binary'">
                             <input type="file">
-                                <xsl:attribute name="value">
-                                    <xsl:value-of select="name()"/>
+                                <xsl:attribute name="name">
+                                    <xsl:value-of select="local-name()"/>
                                 </xsl:attribute>
                             </input>
                         </xsl:when>
 
                         <xsl:when test="@xsi:type='xsd:normalizedString'">
                             <input type="text">
-                                <xsl:attribute name="value">
-                                    <xsl:value-of select="name()"/>
+                                <xsl:attribute name="name">
+                                    <xsl:value-of select="local-name()"/>
                                 </xsl:attribute>
                             </input>
                         </xsl:when>
 
                         <xsl:when test="@xsi:type='xsd:string'">
                             <textarea>
-                                <xsl:value-of select="name()"/>
+                                <xsl:attribute name="name">
+                                    <xsl:value-of select="local-name()"/>
+                                </xsl:attribute>
                             </textarea>
                         </xsl:when>
 
                         <xsl:when test="@xsi:type='xsd:date'">
                             <select>
+                                <xsl:attribute name="name">
+                                    <xsl:value-of select="local-name()"/>
+                                </xsl:attribute>
                                 <option>
-                                    <xsl:value-of select="name()"/>
+                                    <xsl:value-of select="local-name()"/>
                                 </option>
                                 <xsl:call-template name="for-loop">
                                     <xsl:with-param name="start">1</xsl:with-param>
@@ -51,7 +66,7 @@
                             </select>
                             <select>
                                 <option>
-                                    <xsl:value-of select="name()"/>
+                                    <xsl:value-of select="local-name()"/>
                                 </option>
                                 <xsl:call-template name="for-loop">
                                     <xsl:with-param name="start">1</xsl:with-param>
@@ -61,7 +76,7 @@
                             </select>
                             <select>
                                 <option>
-                                    <xsl:value-of select="name()"/>
+                                    <xsl:value-of select="local-name()"/>
                                 </option>
                                 <xsl:call-template name="for-loop">
                                     <xsl:with-param name="start">1890</xsl:with-param>
@@ -73,8 +88,11 @@
 
                         <xsl:when test="@xsi:type='xsd:language'">
                             <select>
+                                <xsl:attribute name="name">
+                                    <xsl:value-of select="local-name()"/>
+                                </xsl:attribute>
                                 <option>
-                                    <xsl:value-of select="name()"/>
+                                    <xsl:value-of select="local-name()"/>
                                 </option>
 
                                 <xsl:variable name="language" select="//@locale" />
@@ -102,8 +120,21 @@
                         </xsl:when>
 
                     </xsl:choose>
+
                     <br />
+
             </xsl:for-each>
+
+            <button type="submit" name="submit">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$lang_strings[@id='button_next_page']" />
+                </xsl:attribute>
+                <img src="/images/tango/32x32/actions/go-next.png">
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="$lang_strings[@id='button_next_page']" />
+                    </xsl:attribute>
+                </img>
+            </button>
 
         </form>
 
