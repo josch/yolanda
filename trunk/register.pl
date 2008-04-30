@@ -44,8 +44,8 @@ elsif($query->param('user') and $query->param('pass') and $query->param('pass_re
         else
         {
             #insert new user
-            $dbh->do(qq{insert into users (username, password, timestamp) values ( ?, password( ? ), unix_timestamp(), ?)}, undef,
-                    $query->param("user"), $query->param("pass")) or die $dbh->errstr;
+            $dbh->do(qq{insert into users (username, password, timestamp, sid) values ( ?, password( ? ), unix_timestamp(), ?)}, undef,
+                    $query->param("user"), $query->param("pass"), $session->id) or die $dbh->errstr;
         
             print $query->redirect("index.pl?information=information_registered");
         }
