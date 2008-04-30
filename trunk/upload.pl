@@ -20,88 +20,112 @@ $instance->setNamespace("http://www.w3.org/2002/xforms", "xforms");
 
 my $video = XML::LibXML::Element->new( "video" );
 
-my $node = XML::LibXML::Element->new( "Title" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
-$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
-$video->appendChild($node);
-
-$node = XML::LibXML::Element->new( "Subject" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
-$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
-$video->appendChild($node);
-
-$node = XML::LibXML::Element->new( "Description" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+my $node = XML::LibXML::Element->new( "abstract" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
 $node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:string" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Coverage.day" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
-$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:gDay" );
-$video->appendChild($node);
-
-$node = XML::LibXML::Element->new( "Coverage.month" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
-$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:gMonth" );
-$video->appendChild($node);
-
-$node = XML::LibXML::Element->new( "Coverage.year" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
-$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:gYear" );
-$video->appendChild($node);
-
-$node = XML::LibXML::Element->new( "Coverage.placeName" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "alternative" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
 $node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Language" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "contributor" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "created" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:date" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "creator" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "hasFormat" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "isFormatOf" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "isPartOf" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "language" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
 $node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:language" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Creator" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "license" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
 $node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Contributor" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "references" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
 $node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Publisher" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "replaces" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
 $node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Relation" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "rightsHolder" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:anyURI" );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Rights" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "source" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:anyURI" );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
 $video->appendChild($node);
 
-$node = XML::LibXML::Element->new( "Source" );
-$node->setNamespace( "http://purl.org/dc/elements/1.1/", "dc" );
+$node = XML::LibXML::Element->new( "spatial" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
 $node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
-$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:anyURI" );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "subject" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "temporal" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:date" );
+$video->appendChild($node);
+
+$node = XML::LibXML::Element->new( "title" );
+$node->setNamespace( "http://purl.org/dc/terms/", "dcterms" );
+$node->setNamespace( "http://www.w3.org/2001/XMLSchema-instance", "xsi", 0 );
+$node->setAttributeNS( "http://www.w3.org/2001/XMLSchema-instance", "type", "xsd:normalizedString" );
 $video->appendChild($node);
 
 $node = XML::LibXML::Element->new( "data" );

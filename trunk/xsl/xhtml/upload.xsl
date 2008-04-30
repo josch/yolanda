@@ -30,7 +30,7 @@
                             </textarea>
                         </xsl:when>
 
-                        <xsl:when test="@xsi:type='xsd:gDay'">
+                        <xsl:when test="@xsi:type='xsd:date'">
                             <select>
                                 <option>
                                     <xsl:value-of select="name()"/>
@@ -41,9 +41,6 @@
                                     <xsl:with-param name="element">option</xsl:with-param>
                                 </xsl:call-template>
                             </select>
-                        </xsl:when>
-
-                        <xsl:when test="@xsi:type='xsd:gMonth'">
                             <select>
                                 <option>
                                     <xsl:value-of select="name()"/>
@@ -54,9 +51,6 @@
                                     <xsl:with-param name="element">option</xsl:with-param>
                                 </xsl:call-template>
                             </select>
-                        </xsl:when>
-
-                        <xsl:when test="@xsi:type='xsd:gYear'">
                             <select>
                                 <option>
                                     <xsl:value-of select="name()"/>
@@ -76,7 +70,6 @@
                                 </option>
 
                                 <xsl:variable name="language" select="//@locale" />
-
 
                                 <xsl:for-each select="$language_strings">
 
