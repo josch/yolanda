@@ -11,6 +11,10 @@ my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
 my $page = get_page_array(@userinfo);
 
+$page->setNamespace( $config->{"xml_namespace_cc"}, "cc", 0);
+$page->setNamespace( $config->{"xml_namespace_dc"}, "dc", 0);
+$page->setNamespace( $config->{"xml_namespace_rdf"}, "rdf", 0);
+
 #TODO: make the <frontpage> element unneccesary
 $page->appendChild(XML::LibXML::Element->new( "frontpage" ));
 

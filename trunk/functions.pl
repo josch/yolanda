@@ -34,10 +34,6 @@ sub get_page_array
     
     #TODO: set namespace for each site on its own
     $page->setAttribute( "username", $userinfo->{'username'} );
-    $page->setNamespace("http://www.w3.org/1999/xhtml", "xhtml", 0);
-    $page->setNamespace("http://web.resource.org/cc/", "cc", 0);
-    $page->setNamespace("http://purl.org/dc/elements/1.1/", "dc", 0);
-    $page->setNamespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf", 0);
     
     return $page;
 }

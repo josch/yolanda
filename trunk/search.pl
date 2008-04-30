@@ -11,6 +11,10 @@ my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
 my $page = get_page_array(@userinfo);
 
+$page->setNamespace( $config->{"xml_namespace_cc"}, "cc", 0);
+$page->setNamespace( $config->{"xml_namespace_dc"}, "dc", 0);
+$page->setNamespace( $config->{"xml_namespace_rdf"}, "rdf", 0);
+
 #check if query is set
 if($query->param('query'))
 {

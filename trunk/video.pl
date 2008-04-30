@@ -11,6 +11,10 @@ my $doc = XML::LibXML::Document->new( "1.0", "UTF-8" );
 
 my $page = get_page_array(@userinfo);
 
+$page->setNamespace( $config->{"xml_namespace_cc"}, "cc", 0);
+$page->setNamespace( $config->{"xml_namespace_dc"}, "dc", 0);
+$page->setNamespace( $config->{"xml_namespace_rdf"}, "rdf", 0);
+
 #check if id or title is passed
 if($query->url_param('id'))
 {
@@ -68,6 +72,14 @@ if($query->url_param('id'))
         {
             $page->setAttribute( "embed", "preview" );
         }
+        
+        #if there was a single result, display the video
+        my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
+            $source, $language, $coverage, $rights, $license,
+            $filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array();
+        
+        #finish query
+        $sth->finish() or die $dbh->errstr;
         
         #if user is logged in
         if($userinfo->{'username'})
@@ -180,14 +192,6 @@ if($query->url_param('id'))
                 }
             }
         }
-    
-        #if there was a single result, display the video
-        my ($id, $title, $description, $publisher, $timestamp, $creator, $subject,
-            $source, $language, $coverage, $rights, $license,
-            $filesize, $duration, $width, $height, $fps, $viewcount, $downloadcount) = $sth->fetchrow_array();
-        
-        #finish query
-        $sth->finish() or die $dbh->errstr;
         
         #construct video xml
         my $video = XML::LibXML::Element->new( "video" );

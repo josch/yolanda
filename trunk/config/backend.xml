@@ -41,11 +41,16 @@
     <string id="video_audio_bitrate">64</string>
     <string id="video_thumbnail_height">120</string>
     
-    <!-- settings for xml output -->
+    <!-- xml namespace URIs -->
     <!--<string id="xml_namespace">http://feature.yolanda.namespace.tld</string>-->
     <string id="xml_namespace_xsl">http://www.w3.org/1999/XSL/Transform</string>
     <string id="xml_namespace_dc">http://purl.org/dc/elements/1.1/</string>
+    <string id="xml_namespace_dcterms">http://purl.org/dc/terms/</string>
     <string id="xml_namespace_cc">http://web.resource.org/cc/</string>
     <string id="xml_namespace_rdf">http://www.w3.org/1999/02/22-rdf-syntax-ns#</string>
+    <string id="xml_namespace_xforms">http://www.w3.org/2002/xforms</string>
+    <string id="xml_namespace_xsd">http://www.w3.org/2001/XMLSchema</string>
+    <string id="xml_namespace_xsi">http://www.w3.org/2001/XMLSchema-instance</string>
+    <string id="xml_namespace_xhtml">"http://www.w3.org/1999/xhtml"</string>
 </strings>
 </xsl:stylesheet>
