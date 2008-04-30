@@ -16,6 +16,14 @@
             <xsl:for-each select="/page/xforms:instance/*/*">
                     <xsl:choose>
 
+                        <xsl:when test="@xsi:type='xsd:base64Binary'">
+                            <input type="file">
+                                <xsl:attribute name="value">
+                                    <xsl:value-of select="name()"/>
+                                </xsl:attribute>
+                            </input>
+                        </xsl:when>
+
                         <xsl:when test="@xsi:type='xsd:normalizedString'">
                             <input type="text">
                                 <xsl:attribute name="value">
