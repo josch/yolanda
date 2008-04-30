@@ -45,15 +45,27 @@
     <xsl:value-of select="$lang_strings[@id='footer_copyright']" />
 -->
 
+    <a href="http://validator.w3.org/">
+        <img alt="XHTML 1.1" src="/images/badges/xhtml 1.1.png" />
+    </a>
+
+    <a href="http://jigsaw.w3.org/css-validator/">
+        <img alt="CSS" src="/images/badges/css.png" />
+    </a>
+
+    <a href="http://www.theora.org/">
+        <img alt="Ogg Theora" src="/images/badges/ogg theora.png" />
+    </a>
+
+    <a href="http://www.opensource.org/">
+        <img alt="Open Source" src="/images/badges/open source.png" />
+    </a>
+
+    <br />
+
     <span class="protip">
         <xsl:value-of select="$lang_strings[@id='footer_warranty']" />
     </span>
-    <br />
-    <img alt="AGPL 3 Free Software">
-        <xsl:attribute name="src">
-            <xsl:value-of select="$site_strings[@id='path_root']" />/images/agplv3-155x51.png
-        </xsl:attribute>
-    </img>
 
 </xsl:template>
 
