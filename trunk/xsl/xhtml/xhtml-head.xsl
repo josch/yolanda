@@ -39,9 +39,12 @@
                 <xsl:value-of select="$site_strings[@id='site_name']" />
             </xsl:attribute>
         </link>
-        
-        <!-- TODO: get server root from config file-->
-        <link rel="pingback" href="http://localhost/pingback.pl" />
+
+        <link rel="pingback">
+            <xsl:attribute name="href">
+                <xsl:value-of select="$site_strings[@id='path_root']" />pingback.pl
+            </xsl:attribute>
+        </link>
 
         <xsl:choose>
             <xsl:when test="//frontpage">
@@ -54,7 +57,7 @@
 
             </xsl:when>
 
-            <xsl:when test="//page/video">
+            <xsl:when test="/page/video">
 
                 <title>
                     <xsl:value-of select="$site_strings[@id='site_name']" />
@@ -64,7 +67,7 @@
 
             </xsl:when>
 
-            <xsl:when test="//page//results">
+            <xsl:when test="/page/results">
 
                     <link
                         rel="alternate"

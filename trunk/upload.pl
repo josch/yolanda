@@ -30,25 +30,28 @@ sub getElementDC
     return $node;
 }
 
-$video->appendChild( getElementDC( "abstract", "xsd:string") );
+$video->appendChild( getElementDC( "title", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "alternative", "xsd:normalizedString") );
+$video->appendChild( getElementDC( "abstract", "xsd:string") );
+$video->appendChild( getElementDC( "spatial", "xsd:normalizedString") );
+$video->appendChild( getElementDC( "subject", "xsd:normalizedString") );
+$video->appendChild( getElementDC( "temporal", "xsd:date") );
+$video->appendChild( getElementDC( "language", "xsd:language") );
+
+$video->appendChild( getElementDC( "creator", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "contributor", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "created", "xsd:date") );
-$video->appendChild( getElementDC( "creator", "xsd:normalizedString") );
+
 $video->appendChild( getElementDC( "hasFormat", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "hasPart", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "isFormatOf", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "isPartOf", "xsd:normalizedString") );
-$video->appendChild( getElementDC( "language", "xsd:language") );
-$video->appendChild( getElementDC( "license", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "references", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "replaces", "xsd:normalizedString") );
+
 $video->appendChild( getElementDC( "rightsHolder", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "source", "xsd:normalizedString") );
-$video->appendChild( getElementDC( "spatial", "xsd:normalizedString") );
-$video->appendChild( getElementDC( "subject", "xsd:normalizedString") );
-$video->appendChild( getElementDC( "temporal", "xsd:date") );
-$video->appendChild( getElementDC( "title", "xsd:normalizedString") );
+$video->appendChild( getElementDC( "license", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "data", "xsd:base64Binary") );
 
 $instance->appendChild($video);

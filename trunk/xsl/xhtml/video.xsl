@@ -400,7 +400,7 @@
                 <xsl:attribute name="value">
                     <xsl:value-of select="$lang_strings[@id='video_playback']" />
                 </xsl:attribute>
-                <img src="/images/tango/128x128/player_play.png">
+                <img src="/images/tango/128x128/actions/player_play.png">
                     <xsl:attribute name="alt">
                         <xsl:value-of select="$lang_strings[@id='video_playback']" />
                     </xsl:attribute>
@@ -413,7 +413,7 @@
                 <xsl:attribute name="value">
                     <xsl:value-of select="$lang_strings[@id='video_download']" />
                 </xsl:attribute>
-                <img src="/images/tango/128x128/document-save.png">
+                <img src="/images/tango/128x128/actions/document-save.png">
                     <xsl:attribute name="alt">
                         <xsl:value-of select="$lang_strings[@id='video_download']" />
                     </xsl:attribute>

@@ -9,40 +9,40 @@
 
 <xsl:template name="loginbox">
 
-    <div class="loginbox">
+    <form method="post">
 
-        <form method="post">
+        <xsl:attribute name="action">
+            <xsl:value-of select="$site_strings[@id='path_login']" />
+        </xsl:attribute>
 
-            <xsl:attribute name="action">
-                <xsl:value-of select="$site_strings[@id='path_login']" />
-            </xsl:attribute>
+        <fieldset id="loginbox">
 
-            <fieldset>
+            <legend>
+                <xsl:value-of select="$lang_strings[@id='login']" />
+            </legend>
 
-                <label for="user">
-                    <xsl:value-of select="$lang_strings[@id='username_or_openid']" />:
-                </label>
-                <br />                
-                <input id="username" name="user" onkeyup="check_openid();" type="text" />
-                <br />
+            <label for="user">
+                <xsl:value-of select="$lang_strings[@id='username_or_openid']" />:
+            </label>
+            <br />                
+            <input id="username" name="user" onkeyup="check_openid();" type="text" />
+            <br />
 
-                <label for="pass">
-                    <xsl:value-of select="$lang_strings[@id='password']" />:
-                </label>
-                <br />
-                <input id="password" name="pass" type="password" />
+            <label for="pass">
+                <xsl:value-of select="$lang_strings[@id='password']" />:
+            </label>
+            <br />
+            <input id="password" name="pass" type="password" />
 
-                <input type="submit" name="login" >
-                    <xsl:attribute name="value">
-                        <xsl:value-of select="$lang_strings[@id='button_login']" />
-                    </xsl:attribute>
-                </input>
+            <input type="submit" name="login" >
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$lang_strings[@id='button_login']" />
+                </xsl:attribute>
+            </input>
 
-            </fieldset>
+        </fieldset>
 
         </form>
-
-    </div>
 
     <script type="text/javascript">
 
@@ -50,7 +50,7 @@
     this looks awfully ugly, but nevertheless generates javascript inside _valid_ XHTML
     kudos to toby white who details the solution on http://scispace.net/tow21/weblog/718.html
 -->
-    
+
         <xsl:text disable-output-escaping="yes">&lt;![CDATA[
         <![CDATA[
 

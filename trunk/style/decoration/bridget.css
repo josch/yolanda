@@ -51,14 +51,8 @@ div
     border-style:       solid;
     border-width:       1px;
     margin:             0.5em;
-    padding:            0.5em;
+    padding:            1em;
 }
-
-    div.button-download
-    {
-        /* TODO: find out /why we do this/ (see div.searchbar) ! */
-        margin-top:         0em;
-    }
 
     div.description
     {
@@ -100,12 +94,11 @@ div
     div.settingsform,
     div.uploadform
     {
-        line-height:    2.5em;
         /* correct spacing to avoid overlapping with float:right elements */
         margin-right:       22em;
     }
 
-    div.loginbox
+    #loginbox
     {
         /* TODO: find out /why we do this/ (see div.searchbar) ! */
         margin-top:         0em;
@@ -193,7 +186,7 @@ div#preview
                 border-width:   1px;
             }
 
-    div.searchbar
+    #searchbar
     {
         /* TODO: find out /why we do this/ !
         does float make zero top margin really necessary or is it a bug ?
@@ -220,18 +213,13 @@ div#preview
     {
     }
 
-form
+fieldset
 {
+    border-style:       solid;
+    border-width:       1px;
+    margin:             0.5em;
+    padding:            1em;
 }
-
-    form fieldset
-    {
-        border-width:       0px;
-    }
-
-        form fieldset input[type="text"]
-        {
-        }
 
 h1
 {
@@ -256,10 +244,13 @@ li
     {
     }
 
-input
+input,
+textarea
 {
     text-align:         left;
+    vertical-align:     middle;
 }
+
 
 img
 {
@@ -308,6 +299,11 @@ span
     {
         content:            "( ";
     }
+
+table
+{
+    text-align:         justify;
+}
 
     ul#header
     {

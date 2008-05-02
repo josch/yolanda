@@ -53,31 +53,6 @@ div
     border-color:   #555753;
 }
 
-    div.cc-license
-    {
-    }
-
-        div.cc-license img
-        {
-        }
-
-div.loginbox
-{
-}
-
-    div.loginbox form
-    {
-    }
-
-        div.loginbox form fieldset
-        {
-        }
-
-            div.loginbox form fieldset input:after
-            {
-                content:       url(../../images/openid-icon.png);
-            }
-
     div.messagebox
     {
     }
@@ -115,7 +90,13 @@ div.loginbox
             /* "Aluminium 5" */
             border-color:   #555753;
         }
-    
+
+fieldset
+{
+    /* "Aluminium 5" */
+    border-color:   #555753;
+}
+
     /* TODO: make images configureable (maybe via symlinks?) */
     li#search_custom_one
     {

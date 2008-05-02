@@ -14,7 +14,7 @@
 
     <body>
 
-        <xsl:if test="//video">
+        <xsl:if test="/page/video">
             <xsl:attribute name="onload">
                  hide_movie()
             </xsl:attribute>

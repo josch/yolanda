@@ -9,63 +9,64 @@
 
 <xsl:template name="searchbar">
 
-    <div class="searchbar">
+    <form method="get" enctype="application/x-www-form-urlencoded">
 
-        <form method="get" enctype="application/x-www-form-urlencoded">
-            <xsl:attribute name="action">
-                <xsl:value-of select="$site_strings[@id='path_search']" />
-            </xsl:attribute>
-            <fieldset>
-                <label for="query">
-                    <xsl:value-of select="$lang_strings[@id='search']" />:<br />
-                </label>
-                <input type="text" name="query">
-                    <xsl:attribute name="value">
-                        <xsl:if test="//results/@argument='query'">
-                            <xsl:value-of select="//results/@value" />
-                        </xsl:if>
-                    </xsl:attribute>
-                </input>
-                <input type="submit">
-                    <xsl:attribute name="value">
-                        <xsl:value-of select="$lang_strings[@id='button_find']" />
-                    </xsl:attribute>
-                </input>
-            </fieldset>
-        </form>
+        <xsl:attribute name="action">
+            <xsl:value-of select="$site_strings[@id='path_search']" />
+        </xsl:attribute>
 
-        <ul id="queries" role="navigation">
+        <fieldset id="searchbar">
 
-            <li id="search_custom_one">
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_query_custom_one']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$lang_strings[@id='search_custom_one']" />
-                </a>
-            </li>
+            <legend>
+                <xsl:value-of select="$lang_strings[@id='search']" />
+            </legend>
 
-            <li id="search_custom_two">
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_query_custom_two']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$lang_strings[@id='search_custom_two']" />
-                </a>
-            </li>
+            <input type="text" name="query">
+                <xsl:attribute name="value">
+                    <xsl:if test="//results/@argument='query'">
+                        <xsl:value-of select="//results/@value" />
+                    </xsl:if>
+                </xsl:attribute>
+            </input>
+            <input type="submit">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$lang_strings[@id='button_find']" />
+                </xsl:attribute>
+            </input>
 
-            <li id="search_custom_three">
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="$site_strings[@id='path_query_custom_three']" />
-                    </xsl:attribute>
-                    <xsl:value-of select="$lang_strings[@id='search_custom_three']" />
-                </a>
-            </li>
+            <ul id="queries" role="navigation">
 
-        </ul>
+                <li id="search_custom_one">
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_query_custom_one']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$lang_strings[@id='search_custom_one']" />
+                    </a>
+                </li>
 
-    </div>
+                <li id="search_custom_two">
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_query_custom_two']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$lang_strings[@id='search_custom_two']" />
+                    </a>
+                </li>
+
+                <li id="search_custom_three">
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$site_strings[@id='path_query_custom_three']" />
+                        </xsl:attribute>
+                        <xsl:value-of select="$lang_strings[@id='search_custom_three']" />
+                    </a>
+                </li>
+
+            </ul>
+
+        </fieldset>
+    </form>
 
 </xsl:template>
 

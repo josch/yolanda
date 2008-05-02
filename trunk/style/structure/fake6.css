@@ -44,7 +44,7 @@ div
     {
         clear:          right;
         float:          right;
-        width:          20em;
+        width:          18em;
     }
 
         div.cc-license img
@@ -59,14 +59,14 @@ div
     {
         clear:          right;
         float:          right;
-        width:          20em;
+        width:          18em;
     }
 
-    div.loginbox
+    #loginbox
     {
         clear:          right;
         float:          right;
-        width:          20em;
+        width:          18em;
     }
 
     div.messagebox
@@ -82,7 +82,7 @@ div
     {
         clear:          right;
         float:          right;
-        width:          20em;
+        width:          18em;
     }
 
     div.page-number
@@ -157,10 +157,10 @@ div
                 margin-right:   -34px;
             }
 
-    div.searchbar
+    #searchbar
     {
         float:          right;
-        width:          20em;
+        width:          18em;
     }
 
     div.splashbox
@@ -171,7 +171,7 @@ div
     {
         clear:          right;
         float:          right;
-        width:          20em;
+        width:          18em;
     }
 
     div.video
@@ -204,9 +204,11 @@ form
         {
         }
 
-h1
-{
-}
+        form fieldset button[name="upload"]
+        {
+            width:          15em;
+            height:         15em;
+        }
 
 img
 {
@@ -215,6 +217,7 @@ img
     img#logo
     {
     float:          left;
+    height:         3em;
     }
 
     img.icon-mediaplayer
