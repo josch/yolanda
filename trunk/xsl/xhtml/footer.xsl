@@ -46,19 +46,19 @@
 -->
 
     <a href="http://validator.w3.org/">
-        <img alt="XHTML 1.1" src="/images/badges/xhtml 1.1.png" />
+        <img alt="XHTML 1.1" class="antipixel" src="/images/badges/xhtml 1.1.png" />
     </a>
 
     <a href="http://jigsaw.w3.org/css-validator/">
-        <img alt="CSS" src="/images/badges/css.png" />
+        <img alt="CSS" class="antipixel" src="/images/badges/css.png" />
     </a>
 
     <a href="http://www.theora.org/">
-        <img alt="Ogg Theora" src="/images/badges/ogg theora.png" />
+        <img alt="Ogg Theora" class="antipixel" src="/images/badges/ogg theora.png" />
     </a>
 
     <a href="http://www.opensource.org/">
-        <img alt="Open Source" src="/images/badges/open source.png" />
+        <img alt="Open Source" class="antipixel" src="/images/badges/open source.png" />
     </a>
 
     <br />

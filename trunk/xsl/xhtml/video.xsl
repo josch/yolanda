@@ -9,23 +9,6 @@
 
 <xsl:template name="video">
 
-    <!--
-    <div class="videotitle">
-        <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />
-        <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
-        <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
-        <xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
-        <xsl:choose>
-            <xsl:when test="$hours=0">
-                (<xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
-            </xsl:when>
-            <xsl:otherwise>
-                (<xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />)
-            </xsl:otherwise>
-        </xsl:choose>
-    </div>
--->
-
     <script type="text/javascript">
 
 <!--
@@ -44,7 +27,7 @@
 
         function show_movie()
             {
-            document.getElementById('video').style.display      = 'inline';
+            document.getElementById('video').style.display      = 'block';
             document.getElementById('preview').style.display    = 'none';
             window.setTimeout("hide_movie()",
         ]]>
@@ -52,7 +35,7 @@
 <!--
         window.setTimeout is the stupidest hack i could imagine
         it doesn't work reliably because of BUFFERING, but
-        3 seconds for initializing should be enough for now ...
+        3 seconds for initializing should be enough for short video ...
 -->
         <xsl:value-of select="(//video/@duration + 3) * 1000" />
         <xsl:text disable-output-escaping="yes">
@@ -69,29 +52,14 @@
 
     <xsl:call-template name="video-metadata" />
 
-<!--
-    <xsl:call-template name="video-actions" />
--->
-
     <xsl:call-template name="video-object" />
 
-    <div class="protip-embed">
-        <xsl:value-of select="$lang_strings[@id='protip_embed']" />
-        <br />
-        <code>
-            &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
-                type="application/xml"
-                width=<xsl:value-of select="//video/@width + 24" />
-                height=<xsl:value-of select="//video/@height + 48" />
-            /&gt;
-        </code>
-    </div>
+    <xsl:call-template name="video-protip-embed" />
 
 <!--
     comment system is broken (similar to the german online petition system)
     if a video ever gets OVER NEIN THOUSAND comments, the shit hits the fan
 -->
-    <xsl:call-template name="commentform"/>
     <xsl:call-template name="comments"/>
 
 
@@ -99,21 +67,29 @@
 
 <xsl:template name="comments">
 
-    <div class="comments">
+    <xsl:call-template name="commentform"/>
+
+    <fieldset id="comments">
+
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_comments']" />
+        </legend>
+
         <xsl:for-each select="//comments/comment">
-            <div class="comment">
-                <a>
-                    <xsl:attribute name="href">
-                        /user/<xsl:value-of select="@username" />
-                    </xsl:attribute>
-                    <xsl:value-of select="@username" />
-                </a>:
-                <br />
+            <fieldset class="comment">
+                <legend>
+                    <a>
+                        <xsl:attribute name="href">
+                            /user/<xsl:value-of select="@username" />
+                        </xsl:attribute>
+                        <xsl:value-of select="@username" />
+                    </a>
+                </legend>
                 <!-- TODO: somehow use <xsl:element name="{local-name()}"> to remove the xhtml namespace prefix -->
                 <xsl:copy-of select="node()" />
-            </div>
+            </fieldset>
         </xsl:for-each>
-    </div>
+    </fieldset>
 
 </xsl:template>
 
@@ -121,30 +97,28 @@
 
     <xsl:choose>
         <xsl:when test="not(//@username='')">
-            <div class="commentform">
-                <form method="post">
-                    <xsl:attribute name="action">
-                        <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
-                    </xsl:attribute>
-                    <fieldset>
-                        <br />
-                        <textarea name="comment" cols="30" rows="3" />
-                        <br />
-                        <input type="submit" name="send">
-                            <xsl:attribute name="value">
-                                <xsl:value-of select="$lang_strings[@id='comment_post']" />
-                            </xsl:attribute>
-                        </input>
-                    </fieldset>
-                </form>
-            </div>
+            <form method="post">
+                <xsl:attribute name="action">
+                    <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:identifier" />
+                </xsl:attribute>
+                <fieldset>
+                    <br />
+                    <textarea name="comment" cols="30" rows="3" />
+                    <br />
+                    <input type="submit" name="send">
+                        <xsl:attribute name="value">
+                            <xsl:value-of select="$lang_strings[@id='comment_post']" />
+                        </xsl:attribute>
+                    </input>
+                </fieldset>
+            </form>
         </xsl:when>
         <xsl:otherwise>
-            <div class="commentform">
+            <fieldset id="commentform">
                 <span class="protip">
                     <xsl:value-of select="$lang_strings[@id='login_to_comment']" />
                 </span>
-            </div>
+            </fieldset>
         </xsl:otherwise>
     </xsl:choose>
 
@@ -152,7 +126,12 @@
 
 <xsl:template name="video-cclicense">
 
-    <div class="cc-license">
+    <fieldset id="license">
+
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_license']" />
+        </legend>
+
 <!--
     TODO: make image paths relative
     TODO: internationalized alt attributes
@@ -216,35 +195,24 @@
                 </xsl:if>
             </xsl:for-each>
         </a>
-    </div>
+    </fieldset>
 
 </xsl:template>
 
 <!--
-<xsl:template name="video-actions">
-    <div class="button-download">
-        <a>
-            <xsl:attribute name="href">
-                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-            </xsl:attribute>
-            <img src="/images/tango/document-save.png" />
-        </a>
-        <br />
-        <a>
-            <xsl:attribute name="href">
-                <xsl:value-of select="//video/rdf:RDF/cc:Work/@rdf:about" />
-            </xsl:attribute>
-            <xsl:value-of select="$lang_strings[@id='video_download']" />
-        </a>
-        <br />
-        (<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$lang_strings[@id='unit_megabytes']" />)
-    </div>
-</xsl:template>
+filesize
+
+<xsl:value-of select="format-number(number(round(//video/@filesize) div 1048576), '0.0#')" />&#160;<xsl:value-of select="$lang_strings[@id='unit_megabytes']" />)
 -->
 
 <xsl:template name="video-description">
 
-    <div class="description">
+    <fieldset id="description">
+
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_description']" />
+        </legend>
+
         <h1>
             <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />&#160;
             <span class="duration">
@@ -262,13 +230,17 @@
             </span>
         </h1>
         <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
-    </div>
+    </fieldset>
 
 </xsl:template>
 
 <xsl:template name="video-metadata">
 
-    <div class="metadata">
+    <fieldset id="metadata">
+
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_metadata']" />
+        </legend>
 
         <table class="metadata">
 
@@ -343,35 +315,48 @@
 
         </table>
         
-    </div>
+    </fieldset>
 
 </xsl:template>
 
 <xsl:template name="video-object">
 
-    <object type="application/ogg" id="video">
+    <fieldset id="video">
 
-        <xsl:attribute name="width">
-            <xsl:value-of select="//video/@width" />
-        </xsl:attribute>
-        <xsl:attribute name="height">
-            <xsl:value-of select="//video/@height" />
-        </xsl:attribute>
-        <xsl:attribute name="data">
-            <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
-        </xsl:attribute>
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_video']" />
+        </legend>
 
-        <div class="messagebox" id="error">
-            <span class="message">
-                <xsl:value-of select="$lang_strings[@id='error_no_ogg_plugin']" />
-            </span>
-        </div>
+        <object type="application/ogg">
 
-        <xsl:call-template name="pluginhelp" />
+            <xsl:attribute name="width">
+                <xsl:value-of select="//video/@width" />
+            </xsl:attribute>
+            <xsl:attribute name="height">
+                <xsl:value-of select="//video/@height" />
+            </xsl:attribute>
+            <xsl:attribute name="data">
+                <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
+            </xsl:attribute>
 
-    </object>
+            <fieldset class="messagebox" id="error">
 
-    <div id="preview" style="display: none;">
+                <span class="message">
+                    <xsl:value-of select="$lang_strings[@id='error_no_ogg_plugin']" />
+                </span>
+            </fieldset>
+
+            <xsl:call-template name="pluginhelp" />
+
+        </object>
+
+    </fieldset>
+
+    <fieldset id="preview" style="display: none;">
+
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_preview']" />
+        </legend>
 
         <img>
             <xsl:attribute name="src">
@@ -421,7 +406,28 @@
             </button>
         </form>
 
-    </div>
+    </fieldset>
+
+</xsl:template>
+
+<xsl:template name="video-protip-embed">
+
+    <fieldset id="protip-embed">
+
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_embed']" />
+        </legend>
+
+        <xsl:value-of select="$lang_strings[@id='protip_embed']" />
+        <br />
+        <code>
+            &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
+                type="application/xml"
+                width=<xsl:value-of select="//video/@width + 24" />
+                height=<xsl:value-of select="//video/@height + 48" />
+            /&gt;
+        </code>
+    </fieldset>
 
 </xsl:template>
 

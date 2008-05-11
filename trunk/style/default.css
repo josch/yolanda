@@ -9,5 +9,5 @@ Purpose of this file is to import color, decoration and structure stylesheets.
 */
 
 @import "colors/tango.css";
-@import "decoration/bridget.css";
 @import "structure/fake6.css";
+

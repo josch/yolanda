@@ -10,4 +10,6 @@
 <xsl:template name="tagbar">
 </xsl:template>
 
+<!-- here be tags -->
+
 </xsl:stylesheet>

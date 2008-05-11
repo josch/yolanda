@@ -12,6 +12,12 @@ Please replace the colors in this file with suitable Tango! equivalents.
 ↑↑ Remove this notice as soon as this file holds only Tango! colors. ↑↑
 */
 
+/*
+links       "Sky Blue 2"        #3465a4
+borders     "Aluminium 5"       #555753;
+
+*/
+
 a
 {
     /* what color is this ? */
@@ -25,10 +31,6 @@ a
     a:focus
     {
         color:              #cc0000;
-    }
-
-    a:hover
-    {
     }
 
     a.footer,
@@ -47,115 +49,53 @@ a
         border-color:       #c0c0c0;
     }
 
-div
-{
-    /* "Aluminium 5" */
-    border-color:   #555753;
-}
-
-    div.messagebox
-    {
-    }
-
-        div.messagebox#error
+        .messagebox#error
         {
             /* "Scarlet Red 1" + 30 luminosity */
             background-color:   #f46060;
         }
 
-        div.messagebox#information
+        .messagebox#information
         {
             /* "Chameleon 1" + 30 luminosity */
             background-color:   #a9ec68;
         }
 
-        div.messagebox#warning
+        .messagebox#warning
         {
             /* "Orange 1" */
             background-color:   #fcaf3e;
         }
 
-    div.page-number
-    {
-        /* "Aluminium 5" */
-        border-color:   #555753;
-    }
-
-    div.result
-    {
-    }
-
-        div.result img
-        {
-            /* "Aluminium 5" */
-            border-color:   #555753;
-        }
-
-fieldset
+div,
+div.result img,
+fieldset,
+#footer,
+#header
 {
-    /* "Aluminium 5" */
     border-color:   #555753;
 }
 
-    /* TODO: make images configureable (maybe via symlinks?) */
+    /* TODO: make images configurable (maybe via symlinks?) */
     li#search_custom_one
     {
-        list-style-image:       url(../../images/tango/16x16/actions/document-new.png)
+        list-style-image:       url(../../images/tango/16x16/actions/document-new.png) !important;
     }
 
     li#search_custom_two
     {
-        list-style-image:       url(../../images/tango/16x16/actions/document-save.png)
+        list-style-image:       url(../../images/tango/16x16/actions/document-save.png) !important;
     }
 
     li#search_custom_three
     {
-        list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png)
+        list-style-image:       url(../../images/tango/16x16/emblems/emblem-favorite.png) !important;
     }
 
-    span.duration
-    {
-    }
 
-    span.heading
-    {
-    }
-
-    span.instruction
-    {
-        /* "Aluminium 5" */
-        color:   #555753;
-    }
-
+    span.instruction,
     span.protip
     {
         /* "Aluminium 5" */
         color:   #555753;
-    }
-
-ul
-{
-}
-
-    ul#footer,
-    ul#header
-    {
-        /* "Aluminium 5" */
-        border-color:   #555753;
-    }
-
-        ul#footer li:hover,
-        ul#header li:hover
-        {
-            /* Aluminium 1 */
-            background-color:   #eeeeec;
-        }
-
-            ul#footer li a,
-            ul#footer li a
-            {
-            }
-
-    ul#queries
-    {
     }

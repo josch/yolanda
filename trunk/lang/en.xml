@@ -31,6 +31,20 @@
     <string id="footer_source_code">get source code</string>
     <string id="footer_report_bug">report bug</string>
 
+    <!-- fieldset captions -->
+    <string id="fieldset_comments">Comments</string>
+    <string id="fieldset_description">Description</string>
+    <string id="fieldset_embed">Embedding</string>
+    <string id="fieldset_license">License</string>
+    <string id="fieldset_login">Login</string>
+    <string id="fieldset_metadata">Metadata</string>
+    <string id="fieldset_pluginhelp">Plugin Help</string>
+    <string id="fieldset_preview">Preview</string>
+    <string id="fieldset_results">Results</string>
+    <string id="fieldset_search">Search</string>
+    <string id="fieldset_upload">Upload form</string>
+    <string id="fieldset_video">Video</string>
+
     <!-- front page -->
     <string id="button_find">Find</string>
     <string id="button_lucky">Instant Access</string>
@@ -90,8 +104,8 @@
     <string id="information_comment_created">Your comment has been submitted.</string>
     <string id="information_registered">Your account has been created.</string>
     <string id="information_uploaded">Your file has been uploaded. It will be available at </string>
-    <string id="information_settings_changed">Your successfully changed your settings.</string>
-    <string id="information_video_not_yet_available">The video being requested is not yet available. The overall sum of video queued is:</string>
+    <string id="information_settings_changed">Your settings have been updated.</string>
+    <string id="information_video_not_yet_available">The video being requested is not yet available. The Server has to convert </string>
 
     <!-- warnings -->
     <string id="warning_no_results">There are no results satisfying your query.</string>
@@ -161,23 +175,27 @@
     <string id="instruction_rights">Specify the copyright owner of the video.</string>
     <string id="instruction_license">Specify the license, preferably by URL.</string>
     <string id="instruction_license_cc">Optionally, choose Creative Commons licensing.</string>
-    <string id="instruction_license_cc_remix">Modification is <xhtml:em>allowed</xhtml:em>.</string>
-    <string id="instruction_license_cc_sharealike">Modification is <xhtml:em>allowed</xhtml:em>, as long as derivatives use the same license.</string>
-    <string id="instruction_license_cc_noderivatives">Modification is <xhtml:em>not allowed</xhtml:em>.</string>
+    <string id="instruction_license_cc_remix_question">
+        Is <xhtml:em>modification</xhtml:em> of the video allowed ?
+    </string>
+    <string id="instruction_license_cc_remix">
+        Modification is <xhtml:em>allowed</xhtml:em>.
+    </string>
+    <string id="instruction_license_cc_sharealike">
+        Modification is <xhtml:em>allowed</xhtml:em>, as long as others share alike.
+    </string>
+    <string id="instruction_license_cc_noderivatives">
+        Modification is <xhtml:em>not allowed</xhtml:em>.
+    </string>
+    <string id="instruction_license_cc_commercial_question">
+        Is <xhtml:em>commercial use</xhtml:em> of the video allowed ?
+    </string>
     <string id="instruction_license_cc_commercial">
         Commercial use is <xhtml:em>allowed</xhtml:em>.
     </string>
     <string id="instruction_license_cc_noncommercial">
         Commercial use is <xhtml:em>not allowed</xhtml:em>.
     </string>
-    <string id="this_is_page_1">This is page 1 of 5.</string>
-    <string id="this_is_page_2">This is page 2 of 5.</string>
-    <string id="this_is_page_3">This is page 3 of 5.</string>
-    <string id="this_is_page_4">This is page 4 of 5.</string>
-    <string id="this_is_page_5">This is page 5 of 5.</string>
-    <string id="button_page_1">back to page 1</string>
-    <string id="button_page_3">back to page 3</string>
-    <string id="button_page_4">back to page 4</string>
 
     <!-- languages -->
     <string id="language_en-us">English</string>
@@ -194,22 +212,22 @@
     <string id="comment_post">Post</string>
 
     <string id="video_plugin_help">
-        <h1>Common Questions</h1>
+        <xhtml:h1>Common Questions</xhtml:h1>
 
-         <h2>Why Not Use Flash ?</h2>
-            <p>
-                Many video sharing sites use the <a href="http://www.adobe.com/de/products/flashplayer/"><em>Adobe Flash Plugin</em></a> to play embedded video.
-                We disapprove of that because <em>Flash</em> is <em>proprietary</em> (not <a href="http://www.gnu.org/philosophy/free-sw.html"><em>free software</em></a>).
-            </p>
-            <p>
+         <xhtml:h2>Why Not Use Flash ?</xhtml:h2>
+            <xhtml:p>
+                Many video sharing sites use the <xhtml:a href="http://www.adobe.com/de/products/flashplayer/"><xhtml:em>Adobe Flash Plugin</xhtml:em></xhtml:a> to play embedded video.
+                We disapprove of that because <xhtml:em>Flash</xhtml:em> is <xhtml:em>proprietary</xhtml:em> (not <xhtml:a href="http://www.gnu.org/philosophy/free-sw.html"><xhtml:em>free software</xhtml:em></xhtml:a>).
+            </xhtml:p>
+            <xhtml:p>
                 Additionally, well-known video formats like <a href="http://en.wikipedia.org/wiki/Divx"><em>DivX</em></a> or <a href="http://en.wikipedia.org/wiki/H264"><em>H.264</em></a> are <a href="http://en.wikipedia.org/wiki/H264#Patent_licensing">patent-encumbered</a> in many countries.
                 Because license fees have to be paid for usage, it might be a legal risk to include them in free software:
                 <a href="http://www.gnu.org/"><em>GNU</em></a>/<a href="http://kernel.org/"><em>Linux</em></a> distributions like <a href="http://www.debian.org/"><em>Debian</em></a> or <a href="http://www.ubuntu.com/"><em>Ubuntu</em></a> do not include them in their default installation.
-            </p>
-            <p>
+            </xhtml:p>
+            <xhtml:p>
                 Therefore, Yolanda uses the <a href="http://en.wikipedia.org/wiki/Ogg"><em>Ogg</em></a> container format containing the codecs <a href="http://www.theora.org/"><em>Theora</em></a> and <a href="http://www.vorbis.com/"><em>Vorbis</em></a>, which are maintained by <a href="http://www.xiph.org/"><em>Xiph.org</em></a>.
                 As of 2008, <em>Ogg</em> and <em>Vorbis</em> are free of patent claims and all known patents regarding <em>Theora</em> have been donated to the public.
-            </p>
+            </xhtml:p>
 
             <h2>Which Plugins Do I Have to Download ?</h2>
             <p>

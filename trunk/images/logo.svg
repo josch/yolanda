@@ -9,8 +9,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="156"
-   height="64"
+   width="180"
+   height="40"
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.45.1"
@@ -61,7 +61,7 @@
        xlink:href="#linearGradient9183"
        id="linearGradient2275"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(3.22852,34.8125)"
+       gradientTransform="translate(11.22852,34.8125)"
        x1="43.5"
        y1="30.257181"
        x2="43.5"
@@ -95,19 +95,19 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.2214934"
-     inkscape:cx="91.101066"
-     inkscape:cy="36.70651"
+     inkscape:cx="88.688928"
+     inkscape:cy="24.166553"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     width="156px"
-     height="64px"
+     width="180px"
+     height="44px"
      borderlayer="true"
      showborder="true"
      inkscape:showpageshadow="false"
      showgrid="true"
-     gridspacingx="1px"
-     gridspacingy="1px"
-     gridempspacing="4"
+     gridspacingx="0.5px"
+     gridspacingy="0.5px"
+     gridempspacing="2"
      objecttolerance="10000"
      gridtolerance="10000"
      inkscape:grid-points="true"
@@ -132,28 +132,28 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-1.6015625,-31.15625)">
+     transform="translate(-2.5097656,-31)">
     <rect
        rx="10"
        ry="10"
        y="32.5"
-       x="47.5"
-       height="37.5"
-       width="104.5"
+       x="55"
+       height="37"
+       width="106"
        id="rect9191"
        style="fill:none;fill-opacity:1;stroke:#5e0606;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <rect
        style="fill:#ef2929;fill-opacity:1;stroke:url(#linearGradient2275);stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect3347"
-       width="104.5"
-       height="37.5"
-       x="47.5"
+       width="106"
+       height="37"
+       x="55"
        y="32.5"
        ry="10"
        rx="10" />
     <g
        id="g8236"
-       transform="translate(0,-2)">
+       transform="translate(8,-2)">
       <text
          xml:space="preserve"
          style="font-size:64px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Sans"
@@ -181,7 +181,7 @@
     </g>
     <g
        id="g8242"
-       transform="translate(0,-2)">
+       transform="translate(8,-2)">
       <text
          sodipodi:linespacing="125%"
          id="text3337"
@@ -207,17 +207,5 @@
            y="66.664062"
            style="font-size:36px;font-weight:normal;fill:#eeeeec;fill-opacity:1;stroke:url(#linearGradient6241);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">landa</tspan></text>
     </g>
-    <text
-       xml:space="preserve"
-       style="font-size:36px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#555753;fill-opacity:1;stroke:#31580c;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-family:Sans"
-       x="155.2373"
-       y="85.536133"
-       id="text4175"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4177"
-         x="155.2373"
-         y="85.536133"
-         style="font-size:15px;text-align:end;text-anchor:end;fill:#555753;stroke:none">Placeholder Logo™</tspan></text>
   </g>
 </svg>

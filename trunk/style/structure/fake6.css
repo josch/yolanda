@@ -8,322 +8,251 @@ This file is licensed under the WTF Public License
 Purpose of this file is to provide the structure of the layout, such as:
     - display style (block, inline, inline-block etc.)
     - size of (width, height)
+    - spacing (margin, padding)
 
 Please clear this file of any CSS properties that do not define structure.
 ↑↑ Remove this notice as soon as this file holds only structural CSS. ↑↑
 */
 
-body
-{
-    min-height:         100%;
-}
-
 a
 {
+    text-decoration:    underline;
 }
 
-    a:focus
+blockquote
+{
+    width:          15em;
+}
+
+    blockquote:before
     {
+        content:        open-quote;
+        font-size:      2em;
+        margin-left:    7.5em;
     }
 
-    a:hover
+    blockquote:after
     {
+        content:        close-quote;
+        font-size:      2em;
+        margin-right:   7.5em;
     }
 
-    a.tag
+body
+{
+    font-family:        sans-serif;
+    font-size:          10pt;
+    margin:             1.5em;
+    min-height:         100%;
+    min-width:          40em;
+    text-align:         center;
+}
+
+code
+{
+    font-family:        monospace;
+}
+
+fieldset
+{
+    border-style:       solid;
+    border-width:       1px;
+    margin:             0.5em;
+    padding:            1em;
+}
+
+    q:before
     {
-        display:        block;
-        float:          left;
+        content:        open-quote;
     }
 
-div
+    q:after
+    {
+        content:        close-quote;
+    }
+
+/* ids */
+
+#license,
+#description,
+#loginbox,
+#metadata,
+#tagcloud,
+#searchbar
+{
+    clear:          right;
+    float:          right;
+    width:          15em;
+    text-align:     left;
+}
+
+#searchbar
+{
+    margin-top:     0em;
+}
+
+/* classes */
+
+.result
+{
+    display:        inline-block;
+}
+
+
+/* forms */
+
+    button[name="upload"]
+    {
+        width:          15em;
+        height:         15em;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea
+    {
+        width:          15em;
+    }
+
+    textarea
+    {
+        height:         10em;
+    }
+
+form fieldset
 {
 }
 
-    div.cc-license
+form ol
+{
+    display:        inline-block;
+    text-align:     left;
+}
+
+    form li
     {
-        clear:          right;
-        float:          right;
-        width:          18em;
+        list-style:     none;
     }
 
-        div.cc-license img
-        {
-        }
-
-    div.comments
-    {
-    }
-
-    div.description
-    {
-        clear:          right;
-        float:          right;
-        width:          18em;
-    }
-
-    #loginbox
-    {
-        clear:          right;
-        float:          right;
-        width:          18em;
-    }
-
-    div.messagebox
-    {
-    }
-
-        div.messagebox span.message
-        {
-            display:block;
-        }
-
-    div.metadata
-    {
-        clear:          right;
-        float:          right;
-        width:          18em;
-    }
-
-    div.page-number
-    {
-        display:        inline-block;
-        font-size:      40px;
-        height:         32px;
-        width:          32px;
-        overflow:       visible;
-    }
-
-    div.pluginhelp
-    {
-    }
-
-        div.pluginhelp h3
-        {
-            clear:      left;
-        }
-
-    div.protip-embed
-    {
-    }
-
-    div#preview
-    {
-        position: relative;
-    }
-
-        div#preview form
-        {
-            height:         100%;
-            width:          100%;
-        }
-
-            div#preview form button
-            {
-                /* crude center hack (second part in bridget.css) */
-                position:       absolute;
-                top:            50%;
-                left:           50%;
-                width:          15em;
-                height:         15em;
-            }
-
-        div#preview img
-        {
-        }
-
-    div.results
-    {
-    
-    }
-
-        div.results div.result
-        {
-/*
-            at this point, browsers such as firefox 2.0 mess up
-*/
-            display:        inline-block;
-        }
-
-            div.results div.result img
-            {
-            }
-
-            div.results div.result img.flag
-            {
-                position:       relative;
-                /* flag is 32px wide and has 1px borders */
-                right:          34px;
-                margin-right:   -34px;
-            }
-
-    #searchbar
-    {
-        float:          right;
-        width:          18em;
-    }
-
-    div.splashbox
-    {
-    }
-
-    div.tagcloud
-    {
-        clear:          right;
-        float:          right;
-        width:          18em;
-    }
-
-    div.video
+    form label
     {
         display:            inline-block;
+        margin-bottom:      0.5em;
+        margin-top:         0.5em;
+        padding:            0px;
+        vertical-align:     top;
+        width:              15em;
     }
 
-    div.videoccdata
+    form fieldset fieldset
     {
+        border:             none;
+        margin-bottom:      0.5em;
+        margin-right:       0px;        
+        margin-left:        0px;
+        margin-top:         0.5em;
+        padding:            0px;
     }
 
-        div.videoccdata img
-        {
-        }
-
-    div.videotitle
+    form fieldset fieldset label
     {
-        font-size:          1.5em;
+        display:            block;
+        margin:             0px;
+        /* padding of outer fieldset needs to be substracted */
+        margin-left:        14.5em;
+        padding:            0px;
+        width:              auto;
     }
 
-form
+#preview
 {
+    position:           relative;
 }
 
-    form fieldset
+    #preview form
     {
+        height:             100%;
+        width:              100%;
     }
 
-        form fieldset input[type="text"]
+        #preview form button
         {
+            /* crude center hack (second part in bridget.css) */
+            position:          absolute;
+            top:                50%;
+            left:               50%;
+            width:              15em;
+            height:             15em;
         }
 
-        form fieldset button[name="upload"]
+        #preview form button[name="playback"]
         {
-            width:          15em;
-            height:         15em;
+            /* crude center hack (second part in fake6.css) */
+            margin-left:    -15em;
+            margin-top:     -7.5em;
         }
 
-img
-{
-}
+        #preview form button[name="download"]
+        {
+            /* crude center hack (second part in fake6.css) */
+            margin-left:    0em;
+            margin-top:     -7.5em;
+        }
+
+/* images */
 
     img#logo
     {
-    float:          left;
-    height:         3em;
+    float:              left;
+    border-width:       0px;
+    }
+
+    img.antipixel
+    {
+    padding:            1em;
+    border-width:       0px;
     }
 
     img.icon-mediaplayer
     {
-    float:          left;
+    float:              left;
     }
 
-li
+/* header and footer */
+
+#footer,
+#header
 {
+    border-style:       solid;
+    border-width:       1px;
+    clear:              right;
+    display:            block;
+    height:             3em;
+    font-weight:        bold;
+    list-style-type:    none;
+    margin:             0.5em;
 }
 
-    li#search_custom_one
-    {
-    }
-
-    li#search_custom_two
-    {
-    }
-
-    li#search_custom_three
-    {
-    }
-
-p
+#header
 {
+    margin-left:        180px;
 }
 
-span
-{
-}
-
-    span.duration
+    #footer > *,
+    #header > *
     {
+        float:              left;
+        margin-left:        0.5em;
+        margin-right:       0.5em;
     }
 
-    span.heading
+    #footer > * a,
+    #header > * a
     {
+        display:            block;
+        line-height:        3em;
+        padding-left:       0.5em;
+        padding-right:      0.5em;
     }
 
-    span.instruction
-    {
-    }
 
-    span.protip
-    {
-    }
-
-table.metadata,
-table.metadata-upload
-{
-    border-width:       0px;
-    border-collapse:    collapse;
-    width:              100%;
-}
-
-    table.metadata td.metadata-content,
-    table.metadata td.metadata-title,
-    table.metadata-upload td.metadata-content
-    {
-        text-align:     left;
-        width:          50%;
-    }
-
-    table.metadata td.metadata-title
-    {
-        width:          40%;
-    }
-
-    table.metadata-upload td.metadata-title
-    {
-        text-align:     right;
-        width:          50%;
-    }
-
-td.metadata-title
-{
-    color:          #606060;
-}
-
-ul
-{
-}
-
-    ul#account-actions
-    {
-    }
-
-    ul#footer,
-    ul#header
-    {
-        clear:          right;
-        display:        block;
-        height:         3em;
-    }
-
-        ul#footer li,
-        ul#header li
-        {
-            float:          left;
-        }
-
-            ul#footer li a,
-            ul#header li a
-            {
-            }
-
-    ul#queries
-    {
-    }

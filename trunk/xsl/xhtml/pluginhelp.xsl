@@ -9,11 +9,15 @@
 
 <xsl:template name="pluginhelp">
 
-        <fieldset class="pluginhelp">
+    <fieldset class="pluginhelp">
 
-            <xsl:copy-of select="$lang_strings[@id='video_plugin_help']/node()" />
+        <legend>
+            <xsl:value-of select="$lang_strings[@id='fieldset_pluginhelp']" />
+        </legend>
 
-        </fieldset>
+        <xsl:copy-of select="$lang_strings[@id='video_plugin_help']/node()" />
+
+    </fieldset>
 
 </xsl:template>
 

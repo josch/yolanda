@@ -34,20 +34,6 @@
                     </a>
                 </li>
 
-<!--
-                "login with openid" is obsolete and will be removed in future iterations
--->
-
-                <li>
-                    <a>
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="$site_strings[@id='path_login']" />
-                        </xsl:attribute>
-
-                        <xsl:value-of select="$lang_strings[@id='login']" />
-                    </a>
-                </li>
-
             </xsl:when>
             <xsl:otherwise>
 

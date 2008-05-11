@@ -11,28 +11,36 @@
 
     <xsl:for-each select="//page/results">
 
-        <h1>
-            <xsl:value-of select="$lang_strings[@id='results_heading_1']" />&#160;
-            <xsl:value-of select="//results/@pagesize * (//results/@currentpage - 1) + 1" />&#160;
-            <xsl:value-of select="$lang_strings[@id='results_heading_2']" />&#160;
-            <xsl:choose>
-                <xsl:when test="(//results/@pagesize * //results/@currentpage) &lt; //results/@resultcount">
-                    <xsl:value-of select="//results/@pagesize * //results/@currentpage" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="//results/@resultcount" />
-                </xsl:otherwise>
-            </xsl:choose>&#160;
-            <xsl:value-of select="$lang_strings[@id='results_heading_3']" />&#160;
-            <xsl:value-of select="//results/@resultcount" />&#160;
-            <xsl:value-of select="$lang_strings[@id='results_heading_4']" />
-        </h1>
+       <fieldset class="results">
 
-        <xsl:call-template name="results-listing"/>
+            <legend>
+                <xsl:value-of select="$lang_strings[@id='fieldset_results']" />
+            </legend>
 
-        <xsl:if test="//results/@lastpage &gt; 1">
-            <xsl:call-template name="pagination-arrows"/>
-        </xsl:if>
+            <h1>
+                <xsl:value-of select="$lang_strings[@id='results_heading_1']" />&#160;
+                <xsl:value-of select="//results/@pagesize * (//results/@currentpage - 1) + 1" />&#160;
+                <xsl:value-of select="$lang_strings[@id='results_heading_2']" />&#160;
+                <xsl:choose>
+                    <xsl:when test="(//results/@pagesize * //results/@currentpage) &lt; //results/@resultcount">
+                        <xsl:value-of select="//results/@pagesize * //results/@currentpage" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="//results/@resultcount" />
+                    </xsl:otherwise>
+                </xsl:choose>&#160;
+                <xsl:value-of select="$lang_strings[@id='results_heading_3']" />&#160;
+                <xsl:value-of select="//results/@resultcount" />&#160;
+                <xsl:value-of select="$lang_strings[@id='results_heading_4']" />
+            </h1>
+
+            <xsl:call-template name="results-listing"/>
+
+            <xsl:if test="//results/@lastpage &gt; 1">
+                <xsl:call-template name="pagination-arrows"/>
+            </xsl:if>
+
+        </fieldset>
 
     </xsl:for-each>
 
@@ -40,54 +48,44 @@
 
 
 <xsl:template name="results-listing">
-    <div class="results">
-        <xsl:for-each select="result">
-            <div class="result">
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+    <xsl:for-each select="result">
+        <div class="result">
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+                </xsl:attribute>
+                <img>
+                    <xsl:attribute name="src">
+                        <xsl:value-of select="@thumbnail" />
                     </xsl:attribute>
-                    <img>
-                        <xsl:attribute name="src">
-                            <xsl:value-of select="@thumbnail" />
-                        </xsl:attribute>
-                        <xsl:attribute name="alt">
-                            <xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
-                        </xsl:attribute>
-                    </img>
-                    <img class="flag">
-                        <xsl:attribute name="src">
-                            <xsl:value-of select="concat('/images/flags/', rdf:RDF/cc:Work/dc:language, '.png')" />
-                        </xsl:attribute>
-                        <xsl:attribute name="alt">
-                            <xsl:value-of select="rdf:RDF/cc:Work/dc:language" />
-                        </xsl:attribute>
-                    </img>
-                </a>
-                <br />
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
                     </xsl:attribute>
-                    <xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
-                </a>
-                <br />
-                <span class="duration">
-                    <xsl:variable name="hours" select="floor(@duration div 3600)" />
-                    <xsl:variable name="minutes" select="floor((@duration - $hours*3600) div 60)" />
-                    <xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
-                    <xsl:choose>
-                        <xsl:when test="$hours=0">
-                            <xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </span>
-            </div>
-        </xsl:for-each>
-    </div>
+                </img>
+            </a>
+            <br />
+            <a>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="rdf:RDF/cc:Work/dc:identifier" />
+                </xsl:attribute>
+                <xsl:value-of select="rdf:RDF/cc:Work/dc:title" />
+            </a>
+            <br />
+            <span class="duration">
+                <xsl:variable name="hours" select="floor(@duration div 3600)" />
+                <xsl:variable name="minutes" select="floor((@duration - $hours*3600) div 60)" />
+                <xsl:variable name="seconds" select="@duration - $minutes*60 - $hours*3600" />
+                <xsl:choose>
+                    <xsl:when test="$hours=0">
+                        <xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </div>
+    </xsl:for-each>
 </xsl:template>
 
 <xsl:template name="pagination-arrows">
@@ -116,6 +114,7 @@
             <img src="./images/tango/go-previous.png" />
         </a>
 
+<!-- divitis, this div is not necessary -->
         <div class="page-number">
             <xsl:value-of select="//results/@currentpage" />
         </div>

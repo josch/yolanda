@@ -9,7 +9,7 @@
 
 <xsl:template name="message">
 
-    <div class="messagebox">
+    <fieldset class="messagebox">
 
         <xsl:attribute name="id">
             <xsl:value-of select="/page/message/@type" />
@@ -38,7 +38,7 @@
 
         </span>
 
-    </div>
+    </fieldset>
 
 </xsl:template>
 

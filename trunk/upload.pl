@@ -52,6 +52,8 @@ $video->appendChild( getElementDC( "replaces", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "rightsHolder", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "source", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "license", "xsd:normalizedString") );
+
+# this is absolutely wrong, there is no dcterms:data
 $video->appendChild( getElementDC( "data", "xsd:base64Binary") );
 
 $instance->appendChild($video);
