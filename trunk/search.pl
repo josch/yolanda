@@ -38,11 +38,6 @@ if($query->param('query'))
         {
             print $query->redirect("index.pl?warning=warning_no_results");
         }
-        #if there is only one results, redirect to video directly
-        elsif(($#results == 0) and (not $query->param('page') or $query->param('page') == 1))
-        {
-            print $query->redirect(@{$doc->findnodes( "//results/result/rdf:RDF/cc:Work/dc:identifier/text()" )}[0]->data);
-        }
         else
         {
             output_page($doc);
