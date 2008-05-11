@@ -178,7 +178,7 @@ form ol
 
         #preview form button
         {
-            /* crude center hack (second part in bridget.css) */
+            /* crude center hack */
             position:          absolute;
             top:                50%;
             left:               50%;
@@ -188,14 +188,14 @@ form ol
 
         #preview form button[name="playback"]
         {
-            /* crude center hack (second part in fake6.css) */
+            /* crude center hack */
             margin-left:    -15em;
             margin-top:     -7.5em;
         }
 
         #preview form button[name="download"]
         {
-            /* crude center hack (second part in fake6.css) */
+            /* crude center hack */
             margin-left:    0em;
             margin-top:     -7.5em;
         }

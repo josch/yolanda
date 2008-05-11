@@ -421,10 +421,10 @@ filesize
         <xsl:value-of select="$lang_strings[@id='protip_embed']" />
         <br />
         <code>
-            &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'embed=true')" />"
+            &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'xslt=xhtml-embed')" />"
                 type="application/xml"
-                width=<xsl:value-of select="//video/@width + 24" />
-                height=<xsl:value-of select="//video/@height + 48" />
+                width="<xsl:value-of select="//video/@width" />"
+                height="<xsl:value-of select="//video/@height + 16" />"
             /&gt;
         </code>
     </fieldset>

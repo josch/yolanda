@@ -1,21 +1,35 @@
 body
 {
-    font-family:        sans-serif;
-    font-size:          8pt;
-    font-weight:        bold;
-    overflow:           visible;
+    margin:         0px;
+    padding:        0px;
 }
 
-div.watch-browserplugin, div.watch-cortadoapplet
+form
 {
-    float:              left;
-    text-align:         left;
-    width:              50%;
+height:             100%;
+width:              100%;
 }
 
-div.embedded-backlink
+button
 {
-    float:              right;
-    text-align:         right;
-    width:              50%;
+    /* crude center hack */
+    position:          absolute;
+    top:                50%;
+    left:               50%;
+    width:              15em;
+    height:             15em;
 }
+
+    button[name="playback"]
+    {
+        /* crude center hack */
+        margin-left:    -15em;
+        margin-top:     -7.5em;
+    }
+
+    button[name="download"]
+    {
+        /* crude center hack */
+        margin-left:    0em;
+        margin-top:     -7.5em;
+    }
