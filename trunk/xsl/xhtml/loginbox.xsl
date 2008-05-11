@@ -22,7 +22,7 @@
             </legend>
 
             <label for="user">
-                <xsl:value-of select="$lang_strings[@id='username_or_openid']" />:
+                <xsl:copy-of select="$lang_strings[@id='username_or_openid']/node()" />:
             </label>
             <br />                
             <input id="username" name="user" onkeyup="check_openid();" type="text" />

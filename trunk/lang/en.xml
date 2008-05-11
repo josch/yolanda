@@ -142,7 +142,7 @@
     
     <!-- login / register page -->
     <string id="username">Username</string>
-    <string id="username_or_openid">Username or OpenID</string>
+    <string id="username_or_openid">Username or <xhtml:a href="http://openid.net/">OpenID</xhtml:a></string>
     <string id="password">Password</string>
     <string id="password_repeat">repeat password</string>
     <string id="input_password_not_required">No password required.</string>

@@ -119,9 +119,10 @@ fieldset
         height:         10em;
     }
 
-form fieldset
-{
-}
+/*
+we use "prettier accessible forms", an idea by Nick Rigby
+http://www.alistapart.com/articles/prettyaccessibleforms
+*/
 
 form ol
 {
