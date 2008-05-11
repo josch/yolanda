@@ -301,8 +301,9 @@ sub output_page
 
     # let the XSLT param choose other stylesheets or default to xhtml.xsl
     my $param_xslt = $query->param('xslt');
-    $param_xslt =~ s/[^\w]//gi;
-
+    
+    $param_xslt =~ s/[^a-z0-9\$\-_.+!*'(),]//gi;
+    
     if( -f "$root/xsl/$param_xslt.xsl")
     {
         $xsltpath = "$root/xsl/$param_xslt.xsl"
