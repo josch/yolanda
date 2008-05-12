@@ -17,7 +17,6 @@
     omit-xml-declaration="no"
 />
 
-<!--
 <xsl:variable name="lang">
     <xsl:choose>
         <xsl:when test="document(concat('../lang/', //@lang, '.xml'))">
@@ -28,7 +27,6 @@
 </xsl:variable>
 
 <xsl:variable name="lang_strings" select="document(concat('../lang/', $lang, '.xml'))//strings/string" />
--->
 
 <xsl:template match="/">
     <html>
@@ -110,11 +108,24 @@
             <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
         </xsl:attribute>
 
-        enjoy your NOT OGG
+        <fieldset class="messagebox" id="error">
+            <span class="message">Your browser does not support <em>Ogg Theora</em> video playback.</span>
+        </fieldset>
+        <p>
+            To view this video, install
+            <a href="http://www.videolan.org/vlc/">VLC</a>,
+            <a href="http://www.mplayerhq.hu/design7/dload.html">mplayer</a> or
+            <a href="http://wiki.xiph.org/index.php/TheoraSoftwarePlayers">another player</a> capable of playing
+            <a href="http://theora.org/faq/#what">Ogg Theora</a>
+            videos.
+        </p>
+        <p>
+            For installation instructions, see the <a href="http://en.wikipedia.org/wiki/Wikipedia:Media_help_(Ogg)">Wikipedia Media Help</a>.
+        </p>
 
     </object>
 
-    <div id="preview">
+    <div id="preview" style="display: none;">
 
         <img>
             <xsl:attribute name="src">
@@ -141,11 +152,11 @@
                 onclick="show_movie()"
             >
                 <xsl:attribute name="value">
-    <!--                    <xsl:value-of select="$lang_strings[@id='video_playback']" />-->
+                    <xsl:value-of select="$lang_strings[@id='video_playback']" />
                 </xsl:attribute>
                 <img src="/images/tango/128x128/actions/player_play.png">
                     <xsl:attribute name="alt">
-    <!--                        <xsl:value-of select="$lang_strings[@id='video_playback']" />-->
+                        <xsl:value-of select="$lang_strings[@id='video_playback']" />
                     </xsl:attribute>
                 </img>
             </button>
@@ -154,11 +165,11 @@
                 type="submit"
             >
                 <xsl:attribute name="value">
-    <!--                    <xsl:value-of select="$lang_strings[@id='video_download']" />-->
+                    <xsl:value-of select="$lang_strings[@id='video_download']" />
                 </xsl:attribute>
                 <img src="/images/tango/128x128/actions/document-save.png">
                     <xsl:attribute name="alt">
-    <!--                        <xsl:value-of select="$lang_strings[@id='video_download']" />-->
+                        <xsl:value-of select="$lang_strings[@id='video_download']" />
                     </xsl:attribute>
                 </img>
             </button>
