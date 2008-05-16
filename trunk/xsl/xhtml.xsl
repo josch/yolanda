@@ -36,7 +36,6 @@
 <xsl:include href="./xhtml/settings.xsl" />
 <xsl:include href="./xhtml/splash.xsl" />
 <xsl:include href="./xhtml/searchbar.xsl" />
-<xsl:include href="./xhtml/tagbar.xsl" />
 <xsl:include href="./xhtml/tagcloud.xsl" />
 <xsl:include href="./xhtml/upload.xsl" />
 <xsl:include href="./xhtml/video.xsl" />

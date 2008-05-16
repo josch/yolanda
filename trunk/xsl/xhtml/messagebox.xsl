@@ -17,7 +17,7 @@
 
         <span class="message">
             <xsl:variable name="messagetext" select="/page/message/@text" />
-            <xsl:value-of select="$lang_strings[@id=$messagetext]" />
+            <xsl:copy-of select="$lang_strings[@id=$messagetext]/node()" />
 
             <xsl:choose>
 

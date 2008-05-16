@@ -48,9 +48,9 @@
 
     <xsl:call-template name="video-description" />
 
-    <xsl:call-template name="video-cclicense"/>
-
     <xsl:call-template name="video-metadata" />
+
+    <xsl:call-template name="video-cclicense"/>
 
     <xsl:call-template name="video-object" />
 
@@ -215,19 +215,6 @@ filesize
 
         <h1>
             <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:title" />&#160;
-            <span class="duration">
-                <xsl:variable name="hours" select="floor(//video/@duration div 3600)" />
-                <xsl:variable name="minutes" select="floor((//video/@duration - $hours*3600) div 60)" />
-                <xsl:variable name="seconds" select="//video/@duration - $minutes*60 - $hours*3600" />
-                <xsl:choose>
-                    <xsl:when test="$hours=0">
-                        <xsl:value-of select="concat(format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="concat($hours, ':', format-number($minutes, '00'), ':', format-number($seconds, '00'))" />
-                    </xsl:otherwise>
-                </xsl:choose>
-            </span>
         </h1>
         <xsl:value-of select="//video/rdf:RDF/cc:Work/dc:description" />
     </fieldset>
@@ -339,13 +326,6 @@ filesize
                 <xsl:value-of select="concat(//video/rdf:RDF/cc:Work/@rdf:about,'view=true')" />
             </xsl:attribute>
 
-            <fieldset class="messagebox" id="error">
-
-                <span class="message">
-                    <xsl:value-of select="$lang_strings[@id='error_no_ogg_plugin']" />
-                </span>
-            </fieldset>
-
             <xsl:call-template name="pluginhelp" />
 
         </object>
@@ -404,6 +384,20 @@ filesize
                     </xsl:attribute>
                 </img>
             </button>
+           <button
+                disabled="disabled"
+                name="bittorrent"
+                type="submit"
+            >
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$lang_strings[@id='video_download']" />
+                </xsl:attribute>
+                <img src="/images/tango/128x128/apps/bittorrent.png">
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="$lang_strings[@id='video_download']" />
+                    </xsl:attribute>
+                </img>
+            </button>
         </form>
 
     </fieldset>
@@ -422,7 +416,7 @@ filesize
         <br />
         <code>
             &lt;object data="<xsl:value-of select="concat(//rdf:RDF/cc:Work/dc:identifier, 'xslt=xhtml-embed')" />"
-                type="application/xml"
+                type="application/xhtml+xml"
                 width="<xsl:value-of select="//video/@width" />"
                 height="<xsl:value-of select="//video/@height + 16" />"
             /&gt;

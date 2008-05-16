@@ -11,7 +11,13 @@
 
     <xsl:variable name="max" select="//tagcloud/tag/count[not(//tagcloud/tag/count &gt; .)]" />
     <xsl:variable name="min" select="//tagcloud/tag/count[not(//tagcloud/tag/count &lt; .)]" />
-    <div class="tagcloud">
+
+    <fieldset id="tagcloud">
+
+    <legend>
+        <xsl:value-of select="$lang_strings[@id='fieldset_tagcloud']" />
+    </legend>
+
         <xsl:for-each select="//tagcloud/tag">
             <xsl:sort select="text" order="ascending" data-type="text" />
             <a class="tag">
@@ -33,7 +39,8 @@
             </a>
             &#8204;
         </xsl:for-each>
-    </div>
+
+    </fieldset>
 
 </xsl:template>
 

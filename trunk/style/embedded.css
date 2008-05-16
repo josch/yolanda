@@ -29,20 +29,13 @@ button
     position:          absolute;
     top:                50%;
     left:               50%;
-    width:              15em;
-    height:             15em;
+    width:              164px;
+    height:             164px;
 }
 
     button[name="playback"]
     {
         /* crude center hack */
-        margin-left:    -15em;
-        margin-top:     -7.5em;
-    }
-
-    button[name="download"]
-    {
-        /* crude center hack */
-        margin-left:    0em;
-        margin-top:     -7.5em;
+        margin-left:    -82px;
+        margin-top:     -82px;
     }

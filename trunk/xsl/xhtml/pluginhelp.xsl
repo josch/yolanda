@@ -9,6 +9,12 @@
 
 <xsl:template name="pluginhelp">
 
+    <fieldset class="messagebox" id="error">
+        <span class="message">
+            <xsl:copy-of select="$lang_strings[@id='error_no_ogg_plugin']/node()" />
+        </span>
+    </fieldset>
+
     <fieldset class="pluginhelp">
 
         <legend>
