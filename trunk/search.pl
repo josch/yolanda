@@ -26,12 +26,14 @@ if($query->param('query'))
     {
         #fill xml with search results
         $page->appendChild(fill_results($dbquery, @args));
-        $page->setAttribute('query', $query->param('query'));
         
         $doc->setDocumentElement($page);
         
-        #get all results
+        #get all found results
         my @results = $doc->findnodes( "//results/result" );
+        
+        #set result query in result's parent
+        $results[0]->parentNode->setAttribute('query', $query->param('query'));
         
         #if result count is zero
         if($#results == -1)
