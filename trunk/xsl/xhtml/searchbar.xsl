@@ -23,8 +23,8 @@
 
             <input type="text" name="query">
                 <xsl:attribute name="value">
-                    <xsl:if test="//results/@argument='query'">
-                        <xsl:value-of select="//results/@value" />
+                    <xsl:if test="/page/results/@query">
+                        <xsl:value-of select="/page/results/@query" />
                     </xsl:if>
                 </xsl:attribute>
             </input>

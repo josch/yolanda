@@ -11,6 +11,127 @@
 >
 <xsl:template name="uploadform">
 
+    <script type="text/javascript">
+
+<!--
+    this looks awfully ugly, but nevertheless generates javascript inside _valid_ XHTML
+    kudos to toby white who details the solution on http://scispace.net/tow21/weblog/718.html
+-->
+    
+        <xsl:text disable-output-escaping="yes">&lt;![CDATA[
+        <![CDATA[
+
+        // stupid and quick hack, paging information should be provided via xforms
+
+        function show_page_1()
+            {
+            document.getElementById('data').parentNode.style.display                    = 'none';
+
+            document.getElementById('dcterms:abstract').parentNode.style.display        = 'block';
+            document.getElementById('dcterms:alternative').parentNode.style.display     = 'block';
+            document.getElementById('dcterms:created').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:creator').parentNode.style.display         = 'block';
+            document.getElementById('dcterms:contributor').parentNode.style.display     = 'block';
+            document.getElementById('dcterms:hasFormat').parentNode.style.display       = 'none';
+            document.getElementById('dcterms:hasPart').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:isFormatOf').parentNode.style.display      = 'none';
+            document.getElementById('dcterms:isPartOf').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:language').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:license').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:references').parentNode.style.display      = 'none';
+            document.getElementById('dcterms:replaces').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:rightsHolder').parentNode.style.display    = 'none';
+            document.getElementById('dcterms:source').parentNode.style.display          = 'none';
+            document.getElementById('dcterms:spatial').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:subject').parentNode.style.display         = 'block';
+            document.getElementById('dcterms:temporal').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:title').parentNode.style.display           = 'block';
+
+            document.getElementById('commercial').parentNode.parentNode.style.display   = 'none';
+            document.getElementById('remix').parentNode.parentNode.style.display        = 'none';
+
+            document.getElementById('next').removeAttribute('disabled');
+            document.getElementById('next').setAttribute('onclick', 'show_page_2()');
+            document.getElementById('previous').removeAttribute('onclick');
+            document.getElementById('previous').setAttribute('disabled', 'disabled');
+
+            document.getElementById('upload').setAttribute('disabled', 'disabled');
+            }
+
+        function show_page_2()
+            {
+            document.getElementById('data').parentNode.style.display                    = 'none';
+
+            document.getElementById('dcterms:abstract').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:alternative').parentNode.style.display     = 'none';
+            document.getElementById('dcterms:created').parentNode.style.display         = 'block';
+            document.getElementById('dcterms:creator').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:contributor').parentNode.style.display     = 'none';
+            document.getElementById('dcterms:hasFormat').parentNode.style.display       = 'block';
+            document.getElementById('dcterms:hasPart').parentNode.style.display         = 'block';
+            document.getElementById('dcterms:isFormatOf').parentNode.style.display      = 'block';
+            document.getElementById('dcterms:isPartOf').parentNode.style.display        = 'block';
+            document.getElementById('dcterms:language').parentNode.style.display        = 'block';
+            document.getElementById('dcterms:license').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:references').parentNode.style.display      = 'none';
+            document.getElementById('dcterms:replaces').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:rightsHolder').parentNode.style.display    = 'none';
+            document.getElementById('dcterms:source').parentNode.style.display          = 'none';
+            document.getElementById('dcterms:spatial').parentNode.style.display         = 'block';
+            document.getElementById('dcterms:subject').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:temporal').parentNode.style.display        = 'block';
+            document.getElementById('dcterms:title').parentNode.style.display           = 'none';
+
+            document.getElementById('commercial').parentNode.parentNode.style.display   = 'none';
+            document.getElementById('remix').parentNode.parentNode.style.display        = 'none';
+
+            document.getElementById('next').removeAttribute('disabled');
+            document.getElementById('next').setAttribute('onclick', 'show_page_3()');
+            document.getElementById('previous').removeAttribute('disabled');
+            document.getElementById('previous').setAttribute('onclick', 'show_page_1()');
+
+            document.getElementById('upload').setAttribute('disabled', 'disabled');
+            }
+
+        function show_page_3()
+            {
+            document.getElementById('data').parentNode.style.display                    = 'none';
+
+            document.getElementById('dcterms:abstract').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:alternative').parentNode.style.display     = 'none';
+            document.getElementById('dcterms:created').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:creator').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:contributor').parentNode.style.display     = 'none';
+            document.getElementById('dcterms:hasFormat').parentNode.style.display       = 'none';
+            document.getElementById('dcterms:hasPart').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:isFormatOf').parentNode.style.display      = 'none';
+            document.getElementById('dcterms:isPartOf').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:language').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:license').parentNode.style.display         = 'block';
+            document.getElementById('dcterms:references').parentNode.style.display      = 'none';
+            document.getElementById('dcterms:replaces').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:rightsHolder').parentNode.style.display    = 'block';
+            document.getElementById('dcterms:source').parentNode.style.display          = 'none';
+            document.getElementById('dcterms:spatial').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:subject').parentNode.style.display         = 'none';
+            document.getElementById('dcterms:temporal').parentNode.style.display        = 'none';
+            document.getElementById('dcterms:title').parentNode.style.display           = 'none';
+
+            document.getElementById('commercial').parentNode.parentNode.style.display   = 'block';
+            document.getElementById('remix').parentNode.parentNode.style.display        = 'block';
+
+            document.getElementById('next').removeAttribute('onclick');
+            document.getElementById('next').setAttribute('disabled', 'disabled');
+            document.getElementById('previous').removeAttribute('disabled');
+            document.getElementById('previous').setAttribute('onclick', 'show_page_2()');
+
+            document.getElementById('upload').removeAttribute('disabled');
+            }
+
+        ]]]]></xsl:text>
+        <xsl:text disable-output-escaping="yes">></xsl:text>
+    </script>
+
     <form method="post">
 
         <xsl:attribute name="action">
@@ -192,11 +313,33 @@
 
             <br />
 
-            <button name="upload" type="submit">
+            <button disabled="disabled" id="previous" type="button" >
                 <xsl:attribute name="value">
                     <xsl:value-of select="$lang_strings[@id='button_next_page']" />
                 </xsl:attribute>
-                <img src="/images/tango/128x128/actions/document-send.png">
+                <img src="/images/tango/48x48/actions/go-previous.png">
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="$lang_strings[@id='button_upload_send_file']" />
+                    </xsl:attribute>
+                </img>
+            </button>
+
+            <button disabled="disabled" id="next" type="button" >
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$lang_strings[@id='button_next_page']" />
+                </xsl:attribute>
+                <img src="/images/tango/48x48/actions/go-next.png">
+                    <xsl:attribute name="alt">
+                        <xsl:value-of select="$lang_strings[@id='button_upload_send_file']" />
+                    </xsl:attribute>
+                </img>
+            </button>
+
+            <button id="upload" type="submit">
+                <xsl:attribute name="value">
+<!--                    <xsl:value-of select="$lang_strings[@id='button_next_page']" />-->
+                </xsl:attribute>
+                <img src="/images/tango/48x48/actions/document-send.png">
                     <xsl:attribute name="alt">
                         <xsl:value-of select="$lang_strings[@id='button_upload_send_file']" />
                     </xsl:attribute>

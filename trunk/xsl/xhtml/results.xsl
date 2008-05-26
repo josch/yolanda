@@ -36,9 +36,7 @@
 
             <xsl:call-template name="results-listing"/>
 
-            <xsl:if test="//results/@lastpage &gt; 1">
-                <xsl:call-template name="pagination-arrows"/>
-            </xsl:if>
+            <xsl:call-template name="pagination-arrows"/>
 
         </fieldset>
 
@@ -89,59 +87,153 @@
 </xsl:template>
 
 <xsl:template name="pagination-arrows">
-    <xsl:variable name="query_string" select="concat($site_strings[@id='path_results'], //results/@query, '&amp;pagesize=', //results/@pagesize)" />
+
     <div>
-        <a>
-            <xsl:attribute name="href">
-                <xsl:value-of select="concat($query_string, '&amp;page=1')" />
-            </xsl:attribute>
-            <xsl:if test="//results/@currentpage&lt;=1">
-                <xsl:attribute name="style">
-                    visibility: hidden;
-                </xsl:attribute>
-            </xsl:if>
-            <img src="./images/tango/go-first.png" />
-        </a>
-        <a>
-            <xsl:attribute name="href">
-                <xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage - 1)" />
-            </xsl:attribute>
-            <xsl:if test="//results/@currentpage&lt;=1">
-                <xsl:attribute name="style">
-                    visibility: hidden;
-                </xsl:attribute>
-            </xsl:if>
-            <img src="./images/tango/go-previous.png" />
-        </a>
 
-<!-- divitis, this div is not necessary -->
-        <div class="page-number">
-            <xsl:value-of select="//results/@currentpage" />
-        </div>
+        <form class="pagination" method="get" enctype="application/x-www-form-urlencoded">
+            <xsl:attribute name="action">
+                <xsl:value-of select="$site_strings[@id='path_search']" />
+            </xsl:attribute>
 
-        <a>
-            <xsl:attribute name="href">
-                <xsl:value-of select="concat($query_string, '&amp;page=', //results/@currentpage + 1)" />
+            <fieldset>
+
+                <input type="hidden" name="query">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@query" />
+                    </xsl:attribute>
+                </input>
+                <input type="hidden" name="page">
+                    <xsl:attribute name="value">1</xsl:attribute>
+                </input>
+                <input type="hidden" name="pagesize">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@pagesize" />
+                    </xsl:attribute>
+                </input>
+                <button>
+                    <xsl:if test="//results/@currentpage&lt;=1">
+                        <xsl:attribute name="disabled">
+                            disabled
+                        </xsl:attribute>
+                    </xsl:if>
+                    <img src="/images/tango/48x48/actions/go-first.png" />
+                </button>
+
+            </fieldset>
+
+        </form>
+
+        <form class="pagination" method="get" enctype="application/x-www-form-urlencoded">
+            <xsl:attribute name="action">
+                <xsl:value-of select="$site_strings[@id='path_search']" />
             </xsl:attribute>
-            <xsl:if test="//results/@lastpage&lt;=//results/@currentpage">
-                <xsl:attribute name="style">
-                    visibility: hidden;
-                </xsl:attribute>
-            </xsl:if>
-            <img src="./images/tango/go-next.png" />
-        </a>
-        <a>
-            <xsl:attribute name="href">
-                <xsl:value-of select="concat($query_string, '&amp;page=', //results/@lastpage)" />
+
+            <fieldset>
+
+                <input type="hidden" name="query">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@query" />
+                    </xsl:attribute>
+                </input>
+                <input type="hidden" name="page">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@currentpage - 1" />
+                    </xsl:attribute>
+                </input>
+                <input type="hidden" name="pagesize">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@pagesize" />
+                    </xsl:attribute>
+                </input>
+                <button>
+                    <xsl:if test="//results/@currentpage&lt;=1">
+                        <xsl:attribute name="disabled">
+                            disabled
+                        </xsl:attribute>
+                    </xsl:if>
+                    <img src="/images/tango/48x48/actions/go-previous.png" />
+                </button>
+
+            </fieldset>
+
+        </form>
+
+        <form class="pagination" method="get" enctype="application/x-www-form-urlencoded">
+            <xsl:attribute name="action">
+                <xsl:value-of select="$site_strings[@id='path_search']" />
             </xsl:attribute>
-            <xsl:if test="//results/@lastpage&lt;=//results/@currentpage">
-                <xsl:attribute name="style">
-                    visibility: hidden;
-                </xsl:attribute>
-            </xsl:if>
-            <img src="./images/tango/go-last.png" />
-        </a>
+
+           <fieldset>
+
+                <input type="hidden" name="query">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@query" />
+                    </xsl:attribute>
+                </input>
+                <input type="hidden" name="page">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@currentpage + 1" />
+                    </xsl:attribute>
+                </input>
+                <input type="hidden" name="pagesize">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@pagesize" />
+                    </xsl:attribute>
+                </input>
+                <button>
+                    <xsl:if test="//results/@lastpage&lt;=//results/@currentpage">
+                        <xsl:attribute name="disabled">
+                            disabled
+                        </xsl:attribute>
+                    </xsl:if>
+                    <img src="/images/tango/48x48/actions/go-next.png" />
+                </button>
+
+            </fieldset>
+
+        </form>
+
+        <form class="pagination" method="get" enctype="application/x-www-form-urlencoded">
+            <xsl:attribute name="action">
+                <xsl:value-of select="$site_strings[@id='path_search']" />
+            </xsl:attribute>
+
+           <fieldset>
+
+                <input type="hidden" name="query">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@query" />
+                    </xsl:attribute>
+                </input>
+                <input type="hidden" name="page">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@lastpage" />
+                    </xsl:attribute>
+                </input>
+                <input type="hidden" name="pagesize">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="/page/results/@pagesize" />
+                    </xsl:attribute>
+                </input>
+                <button>
+                    <xsl:if test="//results/@lastpage&lt;=//results/@currentpage">
+                        <xsl:attribute name="disabled">
+                            disabled
+                        </xsl:attribute>
+                    </xsl:if>
+                    <img src="/images/tango/48x48/actions/go-last.png" />
+                </button>
+
+            </fieldset>
+
+        </form>
+
+        <br />
+
+        <xsl:value-of select="//results/@currentpage" />
+
     </div>
+
 </xsl:template>
 
 </xsl:stylesheet>

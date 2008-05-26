@@ -76,6 +76,13 @@ fieldset,
     border-color:   #555753;
 }
 
+    ul#queries
+    {
+        margin-bottom:          0.5em;
+        margin-left:            2em;
+        margin-top:             1em;
+    }
+
     /* TODO: make images configurable (maybe via symlinks?) */
     li#search_custom_one
     {

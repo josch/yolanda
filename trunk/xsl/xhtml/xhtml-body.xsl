@@ -20,6 +20,12 @@
             </xsl:attribute>
         </xsl:if>
 
+        <xsl:if test="/page/xforms:instance">
+            <xsl:attribute name="onload">
+                 show_page_1()
+            </xsl:attribute>
+        </xsl:if>
+
         <xsl:call-template name="header"/>
 
         <xsl:call-template name="searchbar" />
@@ -42,15 +48,15 @@
                 <xsl:call-template name="results"/>
             </xsl:when>
 
-            <xsl:when test="//page/video">
+            <xsl:when test="/page/video">
                 <xsl:call-template name="video"/>
             </xsl:when>
 
-            <xsl:when test="//page/results">
+            <xsl:when test="/page/results">
                 <xsl:call-template name="results"/>
             </xsl:when>
 
-            <xsl:when test="//page/xforms:instance">
+            <xsl:when test="/page/xforms:instance">
                 <xsl:call-template name="uploadform"/>
             </xsl:when>
 
