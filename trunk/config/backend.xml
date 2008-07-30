@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-16"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<strings>
+    <!-- database settings -->
+    <string id="database">mysql</string>
+    <string id="database_host">localhost</string>
+    <string id="database_name">yolanda</string>
+    <string id="database_username">root</string>
+    <!--<string id="database_password">password</string>--><!-- MUST NOT be empty -->
+    
+    <string id="url_root">http://localhost</string><!-- MUST NOT end with trailing slash -->
+    
+    <!-- search options -->
+    <string id="search_frontpage_one_query">* order:timestamp sort:descending</string>
+    <string id="search_frontpage_two_query">* order:viewcount sort:descending</string>
+    <string id="search_frontpage_three_query">* order:downloadcount sort:descending</string>
+    <string id="search_frontpage_size">3</string>
+    <string id="search_results_default">10</string>
+    <string id="search_results_max">500</string>
+    <string id="search_order_default">relevance</string><!-- a v.column in the videos table or relevance or random -->
+    <string id="search_sort_default">desc</string><!-- asc or desc -->
+    
+    <!-- general page settings -->
+    <string id="page_locale">en-us</string>
+    <string id="page_xslt">xhtml.xsl</string>
+    <string id="page_tag_lenght_min">3</string>
+    <string id="page_tag_count">20</string>
+    <string id="page_openid">true</string>
+    <!--<string id="page_bittorrent">false</string>-->
+    <string id="page_cookie_name">sid</string>
+    
+    <!-- settings for video uploads -->
+    <string id="video_height_max">720</string><!-- in pixels - MUST be multiple of 8 -->
+    <string id="video_height_min">240</string>
+    <string id="video_width_max">1080</string>
+    <string id="video_width_min">320</string>
+    <string id="video_filesize_max">86388736</string><!-- in bytes -->
+    <string id="video_filesize_min">512</string>
+    <string id="video_bitrate_max">6000</string>
+    <string id="video_audio_bitrate">64</string>
+    <string id="video_thumbnail_height">120</string>
+    
+    <!-- xml namespace URIs -->
+    <!--<string id="xml_namespace">http://feature.yolanda.namespace.tld</string>-->
+    <string id="xml_namespace_xsl">http://www.w3.org/1999/XSL/Transform</string>
+    <string id="xml_namespace_dc">http://purl.org/dc/elements/1.1/</string>
+    <string id="xml_namespace_dcterms">http://purl.org/dc/terms/</string>
+    <string id="xml_namespace_cc">http://web.resource.org/cc/</string>
+    <string id="xml_namespace_rdf">http://www.w3.org/1999/02/22-rdf-syntax-ns#</string>
+    <string id="xml_namespace_xforms">http://www.w3.org/2002/xforms</string>
+    <string id="xml_namespace_xsd">http://www.w3.org/2001/XMLSchema</string>
+    <string id="xml_namespace_xsi">http://www.w3.org/2001/XMLSchema-instance</string>
+    <string id="xml_namespace_xhtml">"http://www.w3.org/1999/xhtml"</string>
+</strings>
+</xsl:stylesheet>

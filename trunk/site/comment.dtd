@@ -1,0 +1,219 @@
+<!--================== Imported Names ====================================-->
+
+<!ENTITY % LanguageCode "NMTOKEN">
+    <!-- a language code, as per [RFC3066] -->
+
+<!ENTITY % URI "CDATA">
+    <!-- a Uniform Resource Identifier, see [RFC2396] -->
+
+<!ENTITY % Datetime "CDATA">
+    <!-- date and time information. ISO date format -->
+
+<!ENTITY % Text "CDATA">
+    <!-- used for titles etc. -->
+
+<!--=================== Generic Attributes ===============================-->
+
+<!ENTITY % attrs
+ "title       %Text;         #IMPLIED
+  lang        %LanguageCode; #IMPLIED
+  xml:lang    %LanguageCode; #IMPLIED
+  dir         (ltr|rtl)      #IMPLIED"
+  >
+
+<!--=================== Text Elements ====================================-->
+
+<!ENTITY % phrase "em | strong | dfn | code | q |
+                   samp | kbd | var | cite | abbr | acronym ">
+
+<!-- these can only occur at block level -->
+<!ENTITY % misc "ins | del ">
+
+<!ENTITY % inline "a | bdo | %phrase;">
+
+<!-- %Inline; covers inline or "text-level" elements -->
+<!ENTITY % Inline "(#PCDATA | %inline; | %misc;)*">
+
+<!--================== Block level elements ==============================-->
+
+<!ENTITY % lists "ul | ol | dl">
+
+<!ENTITY % block
+     "p | %lists; | pre | blockquote | address ">
+
+<!ENTITY % Block "(%block; | %misc;)*">
+
+<!-- %Flow; mixes block and inline and is used for list items etc. -->
+<!ENTITY % Flow "(#PCDATA | %block; | %inline; | %misc;)*">
+
+<!--================== Content models for exclusions =====================-->
+
+<!-- a elements use %Inline; excluding a -->
+
+<!ENTITY % a.content
+   "(#PCDATA | bdo | %phrase; | %misc;)*">
+
+<!-- pre uses %Inline excluding big, small, sup or sup -->
+
+<!ENTITY % pre.content
+   "(#PCDATA | a | %phrase; | bdo | %misc;)*">
+
+<!--================ Document Structure ==================================-->
+
+<!-- the namespace URI designates the document profile -->
+
+<!ELEMENT comment %Flow;>
+<!ATTLIST comment
+  >
+
+<!--=================== Paragraphs =======================================-->
+
+<!ELEMENT p %Inline;>
+<!ATTLIST p
+  %attrs;
+  >
+
+<!--=================== Lists ============================================-->
+
+<!-- Unordered list -->
+
+<!ELEMENT ul (li)+>
+<!ATTLIST ul
+  %attrs;
+  >
+
+<!-- Ordered (numbered) list -->
+
+<!ELEMENT ol (li)+>
+<!ATTLIST ol
+  %attrs;
+  >
+
+<!-- list item -->
+
+<!ELEMENT li %Flow;>
+<!ATTLIST li
+  %attrs;
+  >
+
+<!-- definition lists - dt for term, dd for its definition -->
+
+<!ELEMENT dl (dt|dd)+>
+<!ATTLIST dl
+  %attrs;
+  >
+
+<!ELEMENT dt %Inline;>
+<!ATTLIST dt
+  %attrs;
+  >
+
+<!ELEMENT dd %Flow;>
+<!ATTLIST dd
+  %attrs;
+  >
+
+<!--=================== Address ==========================================-->
+
+<!-- information on author -->
+
+<!ELEMENT address %Inline;>
+<!ATTLIST address
+  %attrs;
+  >
+
+<!--=================== Preformatted Text ================================-->
+
+<!-- content is %Inline; excluding "img|object|big|small|sub|sup" -->
+
+<!ELEMENT pre %pre.content;>
+<!ATTLIST pre
+  %attrs;
+  xml:space (preserve) #FIXED 'preserve'
+  >
+
+<!--=================== Block-like Quotes ================================-->
+
+<!ELEMENT blockquote %Block;>
+<!ATTLIST blockquote
+  %attrs;
+  cite        %URI;          #IMPLIED
+  >
+
+<!--=================== Inserted/Deleted Text ============================-->
+
+<!--
+  ins/del are allowed in block and inline content, but its
+  inappropriate to include block content within an ins element
+  occurring in inline content.
+-->
+<!ELEMENT ins %Flow;>
+<!ATTLIST ins
+  %attrs;
+  cite        %URI;          #IMPLIED
+  datetime    %Datetime;     #IMPLIED
+  >
+
+<!ELEMENT del %Flow;>
+<!ATTLIST del
+  %attrs;
+  cite        %URI;          #IMPLIED
+  datetime    %Datetime;     #IMPLIED
+  >
+
+<!--================== The Anchor Element ================================-->
+
+<!-- content is %Inline; except that anchors shouldn't be nested -->
+
+<!ELEMENT a %a.content;>
+<!ATTLIST a
+  %attrs;
+  name        NMTOKEN        #IMPLIED
+  href        %URI;          #IMPLIED
+  >
+
+<!--===================== Inline Elements ================================-->
+
+<!ELEMENT bdo %Inline;>  <!-- I18N BiDi over-ride -->
+<!ATTLIST bdo
+  %coreattrs;
+  lang        %LanguageCode; #IMPLIED
+  xml:lang    %LanguageCode; #IMPLIED
+  dir         (ltr|rtl)      #REQUIRED
+  >
+
+<!ELEMENT em %Inline;>   <!-- emphasis -->
+<!ATTLIST em %attrs;>
+
+<!ELEMENT strong %Inline;>   <!-- strong emphasis -->
+<!ATTLIST strong %attrs;>
+
+<!ELEMENT dfn %Inline;>   <!-- definitional -->
+<!ATTLIST dfn %attrs;>
+
+<!ELEMENT code %Inline;>   <!-- program code -->
+<!ATTLIST code %attrs;>
+
+<!ELEMENT samp %Inline;>   <!-- sample -->
+<!ATTLIST samp %attrs;>
+
+<!ELEMENT kbd %Inline;>  <!-- something user would type -->
+<!ATTLIST kbd %attrs;>
+
+<!ELEMENT var %Inline;>   <!-- variable -->
+<!ATTLIST var %attrs;>
+
+<!ELEMENT cite %Inline;>   <!-- citation -->
+<!ATTLIST cite %attrs;>
+
+<!ELEMENT abbr %Inline;>   <!-- abbreviation -->
+<!ATTLIST abbr %attrs;>
+
+<!ELEMENT acronym %Inline;>   <!-- acronym -->
+<!ATTLIST acronym %attrs;>
+
+<!ELEMENT q %Inline;>   <!-- inlined quote -->
+<!ATTLIST q
+  %attrs;
+  cite        %URI;          #IMPLIED
+  >

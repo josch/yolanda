@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsl:stylesheet version="1.0"
+    xmlns=""
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+
+<strings>
+
+    <string id="separator">&#160;|&#160;</string>
+
+    <!-- header -->
+    <string id="header_login-to-upload">to upload videos, log in first.</string>
+
+    <string id="register">Register</string>
+    <string id="login">Login</string>
+
+    <string id="header_upload-video">Upload video</string>
+    <string id="settings_details">Settings</string>
+
+    <string id="logged_in_as">logged in as&#160;</string>
+    <string id="logout">Logout</string>
+
+    <!-- footer -->
+    <string id="footer_copyright">&#169; 2007 - 2008 Yolanda Team</string>
+    <string id="footer_warranty">
+    This software comes WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the license for details.
+    </string>
+    <string id="footer_license">view license</string>
+    <string id="footer_source_code">get source code</string>
+    <string id="footer_report_bug">report bug</string>
+
+    <!-- fieldset captions -->
+    <string id="fieldset_comments">Comments</string>
+    <string id="fieldset_description">Description</string>
+    <string id="fieldset_embed">Embedding</string>
+    <string id="fieldset_license">License</string>
+    <string id="fieldset_login">Login</string>
+    <string id="fieldset_metadata">Metadata</string>
+    <string id="fieldset_pluginhelp">Plugin Help</string>
+    <string id="fieldset_preview">Preview</string>
+    <string id="fieldset_results">Results</string>
+    <string id="fieldset_search">Search</string>
+    <string id="fieldset_tagcloud">Tagcloud</string>
+    <string id="fieldset_upload">Upload form</string>
+    <string id="fieldset_video">Video</string>
+
+    <!-- front page -->
+    <string id="button_find">Find</string>
+    <string id="button_lucky">Instant Access</string>
+    <string id="button_advanced">Advanced Search</string>
+    
+    <string id="search_frontpage_one">new videos</string>
+    <string id="search_frontpage_two">most downloaded</string>
+    <string id="search_frontpage_three">popular videos</string>
+    <string id="search_custom_one">new videos</string>
+    <string id="search_custom_two">most downloaded</string>
+    <string id="search_custom_three">popular videos</string>
+
+    <!-- errors -->
+    <string id="error_202c">Error 202c - Access forbidden by government.</string>
+    <string id="error_missing_file">You did not supply a file.</string>
+    <string id="error_missing_DC.Title">You did not supply a title.</string>
+    <string id="error_missing_DC.Creator">You did not supply a creator.</string>
+    <string id="error_missing_DC.Subject">You did not supply any keywords.</string>
+    <string id="error_missing_DC.Description">You did not supply a description.</string>
+    <string id="error_missing_DC.Publisher">You did not supply a publisher.</string>
+    <string id="error_missing_DC.Title">You did not supply a title.</string>
+    <string id="error_missing_DC.Source">You did not supply a source.</string>
+    <string id="error_missing_DC.Language">You did not supply a language.</string>
+    <string id="error_missing_DC.Coverage">You did not supply a coverage.</string>
+    <string id="error_missing_DC.Rights">You did not supply a rights holder.</string>
+    <string id="error_already_registered">You seem to be already registered. Please log out to create a new account.</string>
+    <string id="error_already_logged_in">You seem to be already logged in. Please log out to log in again.</string>
+    <string id="error_username_password_do_not_match">Username and / or password do not match.</string>
+    <string id="error_passwords_do_not_match">Passwords do not match.</string>
+    <string id="error_username_already_registered">Your desired Username was already registered</string>
+    <string id="error_insert_username">Please insert a username.</string>
+    <string id="error_insert_password">Please insert a password.</string>
+    <string id="error_repeat_password">Please repeat your password.</string>
+    <string id="error_no_query">You passed no query string.</string>
+    <string id="error_no_ogg_plugin">Your browser does not support <xhtml:em>Ogg Theora</xhtml:em> video playback.</string>
+    <string id="error_no_video">There is no video matching your request</string>
+    <string id="error_openid_no_identity_server">The provided URL doesn't declare its OpenID identity server</string>
+    <string id="error_openid_empty_url">No URL entered</string>
+    <string id="error_openid_bogus_url">Invalid URL</string>
+    <string id="error_openid_no_head_tag">URL provided doesn't seem to have a head tag</string>
+    <string id="error_openid_url_fetch_error">Error fetching the provided URL</string>
+    <string id="error_upload_invalid_stream">Invalid audio and/or video stream</string>
+    <string id="error_upload_io">Cannot read video file</string>
+    <string id="error_upload_not_a_video">File is not a video</string>
+    <string id="error_upload_duplicate">Video has already been uploaded</string>
+    <string id="error_upload_file_too_small">The filesize of the video you uploaded is too small</string>
+    <string id="error_upload_file_too_big">The filesize of the video you uploaded is too big</string>
+    <string id="error_upload_video_width_too_small">The width of the video you uploaded is too small</string>
+    <string id="error_upload_video_height_too_small">The height of the video you uploaded is too small</string>
+    <string id=""></string>
+
+    <!-- information -->
+    <string id="information_logged_in">You are now logged in.</string>
+    <string id="information_logged_out">You are now logged out.</string>
+    <string id="information_metainformation_needed">To put the video into context, additional metainformation is needed.</string>
+    <string id="information_metainformation_rights"></string>
+    <string id="information_comment_created">Your comment has been submitted.</string>
+    <string id="information_registered">Your account has been created.</string>
+    <string id="information_uploaded">Your file has been uploaded. It will be available at </string>
+    <string id="information_settings_changed">Your settings have been updated.</string>
+    <string id="information_video_not_yet_available">The video being requested is not yet available. The Server has to convert </string>
+
+    <!-- warnings -->
+    <string id="warning_no_results">There are no results satisfying your query.</string>
+
+    <!-- results page-->
+    <string id="results_heading_1">results</string>
+    <string id="results_heading_2">to</string>
+    <string id="results_heading_3">out of</string>
+    <string id="results_heading_4"></string>    <!-- this may be needed for other languages -->
+    <string id="ordered_by">ordered by</string>
+    <string id="ascending">ascending</string>
+    <string id="descending">descending</string>
+    <string id="videos_oldest">oldest first</string>
+    <string id="videos_newest">most recent first</string>
+    <string id="videos_downloaded_least">least downloaded first</string>
+    <string id="videos_downloaded_most">most downloaded first</string>
+    <string id="videos_viewed_least">least viewed first</string>
+    <string id="videos_viewed_most">most viewed first</string>
+    <string id="videos_shortest">shortest first</string>
+    <string id="videos_lengthest">lenghtest first</string>
+    <string id="videos_smallest">smallest first</string>
+    <string id="videos_biggest">biggest first</string>
+    <string id="results_on">results on</string>
+    <string id="pages">pages</string>
+    <string id="relevance">relevance</string>
+    <string id="duration">duration</string>
+    <string id="filesize">filesize</string>
+    <string id="viewcount">views</string>
+    <string id="downloadcount">downloads</string>
+    <string id="timestamp">timestamp</string>
+    
+    <!-- search bar-->
+    <string id="search">Search</string>
+    
+    <!-- login / register page -->
+    <string id="username">Username</string>
+    <string id="username_or_openid">Username or <xhtml:a href="http://openid.net/">OpenID</xhtml:a></string>
+    <string id="password">Password</string>
+    <string id="password_repeat">repeat password</string>
+    <string id="input_password_not_required">No password required.</string>
+    <string id="button_register">Register</string>
+    <string id="button_login">Login</string>
+
+    <!-- upload page -->
+    <string id="file">file</string>
+    <string id="button_next_page">Continue</string>
+    <string id="button_upload_send_file">Upload</string>
+    <string id="title_page_1">Basic Information</string>
+    <string id="title_page_2">Similar Videos</string>
+    <string id="title_page_3">Additional Metainformation</string>
+    <string id="title_page_4">Licensing</string>
+    <string id="title_page_5">Summary / Upload</string>
+    <string id="instruction_page_1">Describe the video you want to upload.</string>
+    <string id="instruction_page_2">Similar videos have already been uploaded. If none of these videos matches yours, continue.</string>
+    <string id="instruction_page_3">Providing these infos helps us to put the video into context.</string>
+    <string id="instruction_page_4">Describe the video's license.</string>
+    <string id="instruction_page_5">Double-check the data and correct mistakes, if necessary.</string>
+    <string id="instruction_file">Specify the file you want to upload.</string>
+    <string id="instruction_title">State the title of the video.</string>
+    <string id="instruction_creator">Specify the creator of the video.</string>
+    <string id="instruction_subject">State some keywords, separated by spaces.</string>
+    <string id="instruction_description">Describe the video in natural language.</string>
+    <string id="instruction_source">Specify the source, preferably by URL.</string>
+    <string id="instruction_language">State the language of the video.</string>
+    <string id="instruction_language_choose">choose a language</string>
+    <string id="instruction_coverage">Specify the time and location covered.</string>
+    <string id="instruction_rights">Specify the copyright owner of the video.</string>
+    <string id="instruction_license">Specify the license, preferably by URL.</string>
+    <string id="instruction_license_cc">Optionally, choose Creative Commons licensing.</string>
+    <string id="instruction_license_cc_remix_question">
+        Is <xhtml:em>modification</xhtml:em> of the video allowed ?
+    </string>
+    <string id="instruction_license_cc_remix">
+        Modification is <xhtml:em>allowed</xhtml:em>.
+    </string>
+    <string id="instruction_license_cc_sharealike">
+        Modification is <xhtml:em>allowed</xhtml:em>, as long as others share alike.
+    </string>
+    <string id="instruction_license_cc_noderivatives">
+        Modification is <xhtml:em>not allowed</xhtml:em>.
+    </string>
+    <string id="instruction_license_cc_commercial_question">
+        Is <xhtml:em>commercial use</xhtml:em> of the video allowed ?
+    </string>
+    <string id="instruction_license_cc_commercial">
+        Commercial use is <xhtml:em>allowed</xhtml:em>.
+    </string>
+    <string id="instruction_license_cc_noncommercial">
+        Commercial use is <xhtml:em>not allowed</xhtml:em>.
+    </string>
+
+    <!-- languages -->
+    <string id="language_en">English</string>
+    <string id="language_de">German</string>
+
+    <!-- video page -->
+    <string id="video_download">Download</string>
+    <string id="video_playback">Plackback</string>
+    <string id="watch_browserplugin">use browser plugin</string>
+    <string id="watch_cortadoapplet">use java applet</string>
+    <string id="license_conditions">license conditions</string>
+    <string id="protip_embed">To embed the video on another web page, use the following HTML code:</string>
+    <string id="login_to_comment">Login to comment</string>
+    <string id="comment_post">Post</string>
+
+    <string id="video_plugin_help">
+        <p>
+            To view this video, install
+            <a href="http://www.videolan.org/vlc/">VLC</a>,
+            <a href="http://www.mplayerhq.hu/design7/dload.html">mplayer</a> or
+            <a href="http://wiki.xiph.org/index.php/TheoraSoftwarePlayers">another player</a> capable of playing
+            <a href="http://theora.org/faq/#what">Ogg Theora</a>
+            videos.
+        </p>
+        <p>
+            For installation instructions, see the <a href="http://en.wikipedia.org/wiki/Wikipedia:Media_help_(Ogg)">Wikipedia Media Help</a>.
+        </p>
+    </string>
+
+    <!-- embedded video page-->
+    <string id="backlink">backlink</string>
+
+    <!-- dublin core entities -->
+    <string id="DC.Title">title</string>
+    <string id="DC.Creator">author</string>
+    <string id="DC.Subject">keywords</string>
+    <string id="DC.Description">description</string>
+    <string id="DC.Publisher">uploader</string>
+    <string id="DC.Contributor">contributor</string>
+    <string id="DC.Date">upload date</string>
+    <string id="DC.Source">source</string>
+    <string id="DC.Language">language</string>
+    <string id="DC.Coverage">coverage</string>
+    <string id="DC.Rights">rights holder</string>
+    <string id="DC.License">license</string>
+
+    <string id="duration">duration</string>
+    <string id="viewcount">viewcount</string>
+
+    <!-- settings page -->
+    <string id="settings_heading">account settings for </string>
+    <string id="settings_instruction_pagesize">choose pagesize</string>
+
+    <!-- rss feed -->
+    <string id="rss_separator">&#160;-&#160;</string>
+    <string id="rss_title_results_this_page">this page</string>
+    <string id="rss_title_results_all_pages">all results</string>
+    <string id="rss_description_1">This is an RSS Feed for the query "</string>
+    <string id="rss_description_2">".</string>
+
+    <!-- units, singular -->
+    <string id="unit_day">day</string>
+    <string id="unit_month">month</string>
+    <string id="unit_year">year</string>
+
+    <!-- units, plural -->
+    <string id="unit_hours">h</string>
+    <string id="unit_megabytes">MB</string>
+    <string id="unit_minutes">min</string>
+    <string id="unit_seconds">sec</string>
+
+</strings>
+
+</xsl:stylesheet>
