@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-16"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<strings>
+
+    <!-- visible -->
+    <string id="site_name">Yolanda</string>
+    <string id="site_motto">WebTV free as in Speech</string>
+
+    <!-- invisible -->
+    <string id="path_settings">/settings.pl</string>
+    <string id="path_login">/login.pl</string>
+    <string id="path_login-openid">/login.pl?action=openid</string>
+    <string id="path_logout">/login.pl?action=logout</string>
+    <string id="path_authors">http://yolanda.mister-muffin.de/trac</string>
+    <string id="path_license">/LICENSE</string>
+    <string id="path_source-code">http://yolanda.mister-muffin.de/trac/browser/trunk</string>
+    <string id="path_register">/register.pl</string>
+    <string id="path_report_bug">http://yolanda.mister-muffin.de/trac/newticket</string>
+    <string id="path_search">/search.pl</string>
+    <string id="path_results">/search.pl?query=</string>
+    <string id="path_root">http://localhost/</string>
+    <string id="path_upload">/upload.pl</string>
+    <string id="path_uploader">/uploader.pl</string>
+    <string id="path_query_custom_one">/search.pl?query=*%20order:timestamp%20sort:descending</string>
+    <string id="path_query_custom_two">/search.pl?query=*%20order:downloadcount%20sort:descending</string>
+    <string id="path_query_custom_three">/search.pl?query=*%20order:viewcount%20sort:descending</string>
+
+</strings>
+
+</xsl:stylesheet>
