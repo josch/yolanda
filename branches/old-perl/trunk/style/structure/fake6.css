@@ -1,0 +1,277 @@
+/*
+Yolanda default stylesheet colors (using tango color palette)
+(c) 2007-2008 Nils Dagsson Moskopp
+
+This file is licensed under the WTF Public License
+(License terms: Do what the fuck you want.)
+
+Purpose of this file is to provide the structure of the layout, such as:
+    - display style (block, inline, inline-block etc.)
+    - size of (width, height)
+    - spacing (margin, padding)
+
+Please clear this file of any CSS properties that do not define structure.
+↑↑ Remove this notice as soon as this file holds only structural CSS. ↑↑
+*/
+
+a
+{
+    text-decoration:    underline;
+}
+
+blockquote
+{
+    width:          15em;
+}
+
+    blockquote:before
+    {
+        content:        open-quote;
+        font-size:      2em;
+        margin-left:    7.5em;
+    }
+
+    blockquote:after
+    {
+        content:        close-quote;
+        font-size:      2em;
+        margin-right:   7.5em;
+    }
+
+body
+{
+    font-family:        sans-serif;
+    font-size:          10pt;
+    margin:             1.5em;
+    min-height:         100%;
+    min-width:          40em;
+    text-align:         center;
+}
+
+code
+{
+    font-family:        monospace;
+}
+
+fieldset
+{
+    border-style:       solid;
+    border-width:       1px;
+    margin:             0.5em;
+    padding:            1em;
+}
+
+    q:before
+    {
+        content:        open-quote;
+    }
+
+    q:after
+    {
+        content:        close-quote;
+    }
+
+/* ids */
+
+#license,
+#description,
+#loginbox,
+#metadata,
+#tagcloud,
+#searchbar
+{
+    clear:          right;
+    float:          right;
+    width:          15em;
+    text-align:     left;
+}
+
+#searchbar
+{
+    margin-top:     0em;
+}
+
+/* classes */
+
+.result
+{
+    display:        inline-block;
+}
+
+
+/* forms */
+
+    form.pagination
+    {
+        /*
+        works with Firefox 2 (for demonstration purposes only)
+        === REMOVE THIS IN FINAL BUILD ===
+        */
+        display:        -moz-inline-box;
+        display:        inline-block;
+    }
+
+    form.pagination fieldset
+    {
+        border-width:   0px !important;
+        margin:         0px !important;
+        padding:        0px !important;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea
+    {
+        width:          15em;
+    }
+
+    textarea
+    {
+        height:         10em;
+    }
+
+/*
+we use "prettier accessible forms", an idea by Nick Rigby
+http://www.alistapart.com/articles/prettyaccessibleforms
+*/
+
+form ol
+{
+    display:        inline-block;
+    text-align:     left;
+}
+
+    form li
+    {
+        list-style:     none;
+    }
+
+    form label
+    {
+        display:            inline-block;
+        margin-bottom:      0.5em;
+        margin-top:         0.5em;
+        padding:            0px;
+        vertical-align:     top;
+        width:              15em;
+    }
+
+    form fieldset fieldset
+    {
+        border:             none;
+        margin-bottom:      0.5em;
+        margin-right:       0px;        
+        margin-left:        0px;
+        margin-top:         0.5em;
+        padding:            0px;
+    }
+
+    form fieldset fieldset label
+    {
+        display:            block;
+        margin:             0px;
+        /* padding of outer fieldset needs to be substracted */
+        margin-left:        14.5em;
+        padding:            0px;
+        width:              auto;
+    }
+
+#preview
+{
+    position:           relative;
+}
+
+    #preview form
+    {
+        height:             100%;
+        width:              100%;
+    }
+
+        #preview form button
+        {
+            /* crude center hack */
+            position:          absolute;
+            top:                50%;
+            left:               50%;
+            width:              164px;
+            height:             164px;
+        }
+
+        #preview form button[name="playback"]
+        {
+            /* crude center hack */
+            margin-left:    -246px;
+            margin-top:     -82px;
+        }
+
+        #preview form button[name="download"]
+        {
+            /* crude center hack */
+            margin-left:    -82px;
+            margin-top:     -82px;
+        }
+
+        #preview form button[name="bittorrent"]
+        {
+            /* crude center hack */
+            margin-left:    82px;
+            margin-top:     -82px;
+        }
+
+/* images */
+
+    img#logo
+    {
+    float:              left;
+    border-width:       0px;
+    }
+
+    img.antipixel
+    {
+    padding:            1em;
+    border-width:       0px;
+    }
+
+    img.icon-mediaplayer
+    {
+    float:              left;
+    }
+
+/* header and footer */
+
+#footer,
+#header
+{
+    border-style:       solid;
+    border-width:       1px;
+    clear:              right;
+    display:            block;
+    height:             3em;
+    font-weight:        bold;
+    list-style-type:    none;
+    margin:             0.5em;
+}
+
+#header
+{
+    margin-left:        180px;
+}
+
+    #footer > *,
+    #header > *
+    {
+        float:              left;
+        margin-left:        0.5em;
+        margin-right:       0.5em;
+    }
+
+    #footer > * a,
+    #header > * a
+    {
+        display:            block;
+        line-height:        3em;
+        padding-left:       0.5em;
+        padding-right:      0.5em;
+    }
+
+
