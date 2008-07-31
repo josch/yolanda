@@ -1,0 +1,2 @@
+recursive-include yolanda/public *
+recursive-include yolanda/templates *

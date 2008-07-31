@@ -1,0 +1,97 @@
+/* reset */
+*
+{
+    margin:                 0px;
+    padding:                0px;
+}
+
+/* re/b/oot */
+body
+{
+    padding-bottom:         0.5em;
+    text-align:             center;
+}
+
+div
+{
+    background-color:       #eeeeec;
+    color:                  black;
+    border:                 1px solid black;
+    margin:                 0.5em;
+    padding:                0.5em;
+}
+
+form
+{
+    padding:                0.5em;
+}
+
+    form input
+    {
+        font-size:              1.2em;
+        width:                  11em;
+    }
+
+    form input[type="text"]
+    {
+        text-align:             left;
+    }
+
+h1
+{
+    font-size:              1.2em;
+    font-weight:            normal;
+}
+
+ol, ul[role="navigation"]
+{
+    list-style-position:    inside;
+    list-style-type:        none;
+}
+
+    ol#results
+    {
+        margin:                 0.5em;
+        padding:                0.5em;
+    }
+
+        ol#results li
+        {
+            display:                inline-block;
+            padding:                0.5em;
+            vertical-align:         top;
+            width:                  227px;
+        }
+
+            ol#results li img
+            {
+                border:                 1px solid black;
+            }
+
+    #antipixel li, #footer li
+    {
+                display:                inline-block;
+    }
+
+        #antipixel li
+        {
+                    padding:                0.5em;
+        }
+
+#copyright
+{
+    background-color:       #eeeeec;
+    clear:                  right;
+    color:                  black;
+    border:                 1px solid black;
+    margin:                 0.5em;
+    padding:                0.5em;
+    font-family:            monospace;
+}
+
+#heading-box, #search-box
+{
+    clear:                  right;
+    float:                  right;
+    width:                  15em;
+}
