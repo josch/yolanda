@@ -1,7 +1,7 @@
 from mako import runtime, filters, cache
 UNDEFINED = runtime.UNDEFINED
 _magic_number = 2
-_modified_time = 1217192310.2031181
+_modified_time = 1218464716.3410029
 _template_filename='/home/nils/src/yolanda/trunk/yolanda/templates/xhtml/results.mako'
 _template_uri='/xhtml/results.mako'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -53,7 +53,7 @@ def render_results_listing(context,results):
         # SOURCE LINE 13
         for result in c.results:
             # SOURCE LINE 14
-            context.write(u'        <li id="result">\n            <a href="')
+            context.write(u'        <li>\n            <a href="')
             # SOURCE LINE 15
             context.write(unicode(h.url_for('video_page', video=result)))
             context.write(u'">\n                <img src="')
@@ -64,7 +64,7 @@ def render_results_listing(context,results):
             context.write(u'"\'/>\n            </a>\n            <br />\n            <a href="')
             # SOURCE LINE 19
             context.write(unicode(h.url_for('video_page', video=result)))
-            context.write(u'">\n                ')
+            context.write(u'" class="title">\n                ')
             # SOURCE LINE 20
             context.write(unicode(result['title']))
             context.write(u'\n            </a>\n        </li>\n')

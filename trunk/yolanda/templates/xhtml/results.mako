@@ -11,12 +11,12 @@
 <%def name="results_listing(results)">
     <ol id="results">
     % for result in c.results:
-        <li id="result">
+        <li>
             <a href="${h.url_for('video_page', video=result)}">
                 <img src="${result['thumbnail']}" alt='thumbnail for "${result['title']}"'/>
             </a>
             <br />
-            <a href="${h.url_for('video_page', video=result)}">
+            <a href="${h.url_for('video_page', video=result)}" class="title">
                 ${result['title']}
             </a>
         </li>

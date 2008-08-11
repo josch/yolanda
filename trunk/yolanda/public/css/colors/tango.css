@@ -1,0 +1,176 @@
+/*
+Yolanda default decoration stylesheet (using tango color palette)
+(c) 2007-2008 Nils Dagsson Moskopp
+
+This file is licensed under the WTF Public License.
+
+Purpose of this file is to provide decoration, such as:
+    - borders
+    - colors
+    - images (background, list bullets etc.)
+    - generated content
+    - text attributes
+*/
+
+a
+    {
+    color:              #88D9F3;
+    text-decoration:    none;
+    }
+
+a:hover
+    {
+    text-decoration:    underline;
+    }
+
+body {
+    background-color:   #000000;
+    color:              #E5E5E5;
+    font-size:          12px;
+    font-family:        sans-serif;
+}
+
+blockquote:before
+{
+    content:            open-quote;
+    font-size:          2em;
+    margin-left:        7.5em;
+}
+
+blockquote:after
+{
+    content:            close-quote;
+    font-size:          2em;
+    margin-right:       7.5em;
+}
+
+code
+{
+    font-family:        monospace;
+}
+
+em
+{
+    font-style:         italic;
+}
+
+h1
+{
+    font-size:          1.5em;
+    line-height:        1.25em;
+}
+
+h2
+{
+    font-size:          1.25em;
+    line-height:        1.125em;
+}
+
+h3
+{
+    font-size:          1.125em;
+    line-height:        1.0625em;
+}
+
+input
+{
+    background-color:                  #E5E5E5;
+    color:       #131313;
+    border-color:           #363636;
+    border-style:           solid;
+}
+
+    input#query
+    {
+        background-image:       url(/images/tango/16x16/actions/system-search.png);
+        background-position:    0.5em center;
+        background-repeat:      no-repeat;
+    }
+
+    input#username
+    {
+        background-image:       url(/images/openid-icon.png);
+        background-position:    0.5em center;
+        background-repeat:      no-repeat;
+    }
+
+ol#results
+{
+}
+
+    ol#results li
+    {
+    }
+
+        ol#results li img
+        {
+            border-color:           #363636;
+            border-style:           solid;
+        }
+
+        ol#results li a.title
+        {
+            font-weight:            bold;
+        }
+
+q:before
+{
+    content:        open-quote;
+}
+
+q:after
+{
+    content:        close-quote;
+}
+
+ul#queries
+{
+    list-style-position:    inside;
+}
+
+    ul#queries li
+    {
+        font-size:          1.5em;
+        line-height:        1.25em;
+        text-transform:         uppercase;
+    }
+
+    ul#queries li#important
+    {
+        list-style-image:url(/images/tango/16x16/emblems/emblem-important.png)
+    }
+
+    ul#queries li#new
+    {
+        list-style-image:url(/images/tango/16x16/actions/document-new.png)
+    }
+
+    ul#queries li#popular
+    {
+        list-style-image:url(/images/tango/16x16/emblems/emblem-favorite.png)
+    }
+
+        ul#queries li a
+        {
+            color:                  #FFD95A;
+        }
+
+/* ids */
+
+#copyright
+{
+    background-color:       #131313;
+    border-color:           #363636;
+    border-style:           dotted;
+    font-family:            monospace;
+}
+
+#heading-box,
+#login-box,
+#search-box,
+#tagcloud-box
+{
+    background-color:       #131313;
+    border-color:           #363636;
+    border-style:           solid;
+}
