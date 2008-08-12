@@ -13,17 +13,54 @@ Purpose of this file is to provide decoration, such as:
 */
 
 a
-    {
+{
     color:              #88D9F3;
     text-decoration:    none;
-    }
+}
 
 a:hover
-    {
+{
     text-decoration:    underline;
+}
+
+    a.tag1
+    {
+        font-size:          1.5em;
+        line-height:        1.25em;
     }
 
-body {
+    a.tag2
+    {
+        font-size:          1.4em;
+        line-height:        1.2em;
+    }
+
+    a.tag3
+    {
+        font-size:          1.3em;
+        line-height:        1.15em;
+    }
+
+    a.tag4
+    {
+        font-size:          1.2em;
+        line-height:        1.25em;
+    }
+
+    a.tag5
+    {
+        font-size:          1.1em;
+        line-height:        1.05em;
+    }
+
+    a.tag6
+    {
+        font-size:          1em;
+        line-height:        1em;
+    }
+
+body
+{
     background-color:   #000000;
     color:              #E5E5E5;
     font-size:          12px;
@@ -62,20 +99,20 @@ h1
 
 h2
 {
-    font-size:          1.25em;
-    line-height:        1.125em;
+    font-size:          1.4em;
+    line-height:        1.2em;
 }
 
 h3
 {
-    font-size:          1.125em;
-    line-height:        1.0625em;
+    font-size:          1.3em;
+    line-height:        1.15em;
 }
 
 input
 {
-    background-color:                  #E5E5E5;
-    color:       #131313;
+    background-color:       #E5E5E5;
+    color:                  #131313;
     border-color:           #363636;
     border-style:           solid;
 }
@@ -113,6 +150,11 @@ ol#results
             font-weight:            bold;
         }
 
+p
+{
+   line-height:        1.4em;
+}
+
 q:before
 {
     content:        open-quote;
@@ -132,22 +174,22 @@ ul#queries
     {
         font-size:          1.5em;
         line-height:        1.25em;
-        text-transform:         uppercase;
+        text-transform:     uppercase;
     }
 
     ul#queries li#important
     {
-        list-style-image:url(/images/tango/16x16/emblems/emblem-important.png)
+        list-style-image:   url(/images/tango/16x16/emblems/emblem-important.png)
     }
 
     ul#queries li#new
     {
-        list-style-image:url(/images/tango/16x16/actions/document-new.png)
+        list-style-image:   url(/images/tango/16x16/actions/document-new.png)
     }
 
     ul#queries li#popular
     {
-        list-style-image:url(/images/tango/16x16/emblems/emblem-favorite.png)
+        list-style-image:   url(/images/tango/16x16/emblems/emblem-favorite.png)
     }
 
         ul#queries li a
@@ -165,10 +207,10 @@ ul#queries
     font-family:            monospace;
 }
 
-#heading-box,
-#login-box,
-#search-box,
-#tagcloud-box
+#heading,
+#login,
+#search,
+#tagcloud
 {
     background-color:       #131313;
     border-color:           #363636;

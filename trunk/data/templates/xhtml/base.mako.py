@@ -1,7 +1,7 @@
 from mako import runtime, filters, cache
 UNDEFINED = runtime.UNDEFINED
 _magic_number = 2
-_modified_time = 1218437120.3345709
+_modified_time = 1218555872.226696
 _template_filename=u'/home/nils/src/yolanda/trunk/yolanda/templates/xhtml/base.mako'
 _template_uri=u'/xhtml/base.mako'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -28,7 +28,7 @@ def render_body(context,**pageargs):
         context.write(u'"\n    />\n\n    <title>\n        Yolanda - ')
         # SOURCE LINE 106
         context.write(unicode(self.title()))
-        context.write(u'\n    </title>\n\n</head>\n\n<body>\n\n    <div id="heading-box">\n        <h1>\n            ')
+        context.write(u'\n    </title>\n\n</head>\n\n<body>\n\n    <div id="heading">\n        <h1>\n            ')
         # SOURCE LINE 115
         context.write(unicode(self.heading()))
         context.write(u'\n        </h1>\n    </div>\n\n    ')
@@ -36,10 +36,10 @@ def render_body(context,**pageargs):
         context.write(unicode(self.search()))
         context.write(u'\n\n    ')
         # SOURCE LINE 121
-        context.write(unicode(self.tagcloud()))
+        context.write(unicode(self.login()))
         context.write(u'\n\n    ')
         # SOURCE LINE 123
-        context.write(unicode(self.login()))
+        context.write(unicode(self.tagcloud()))
         context.write(u'\n\n    ')
         # SOURCE LINE 125
         context.write(unicode(self.body()))
@@ -69,7 +69,7 @@ def render_search(context):
     try:
         h = context.get('h', UNDEFINED)
         # SOURCE LINE 5
-        context.write(u'\n    <div id="search-box">\n\n        ')
+        context.write(u'\n    <div id="search">\n\n        ')
         # SOURCE LINE 8
         context.write(unicode(h.form(h.url_for('search_results'), method='get')))
         context.write(u'\n\n            ')
@@ -91,7 +91,7 @@ def render_tagcloud(context):
     context.caller_stack.push_frame()
     try:
         # SOURCE LINE 55
-        context.write(u'\n    <div id="tagcloud-box">\n\n        <h1>Tag cloud</h1>\n\n        <a class="tag4+">Proin</a>\n        <a class="tag16+">lectus</a>\n        <a class="tag4+">orci</a>\n        <a class="tag4+">venenatis</a>\n        <a class="tag16+">pharetra</a>\n        <a class="tag4+">egestas</a>\n        <a class="tag16+">id</a>\n        <a class="tag4+">tincidunt</a>\n        <a class="tag16+">vel</a>\n        <a class="tag16+">eros</a>\n        <a class="tag4+">Integer</a>\n        <a class="tag4+">risus</a>\n        <a class="tag4+">velit</a>\n        <a class="tag16+">facilisis</a>\n        <a class="tag16+">eget</a>\n        <a class="tag4+">viverra</a>\n        <a class="tag4+">et</a>\n        <a class="tag4+">leo</a>\n        <a class="tag16+">Suspendisse</a>\n        <a class="tag16+">potenti</a>\n        <a class="tag16+">Phasellus</a>\n        <a class="tag16+">auctor</a>\n        <a class="tag16+">enim</a>\n        <a class="tag4+">eget</a>\n        <a class="tag16g+">sem</a>\n\n    </div>\n')
+        context.write(u'\n    <div id="tagcloud">\n\n        <h1>Popular tags</h1>\n\n        <a href="" class="tag6">Proin</a>\n        <a href="" class="tag5">lectus</a>\n        <a href="" class="tag2">orci</a>\n        <a href="" class="tag6">venenatis</a>\n        <a href="" class="tag5">pharetra</a>\n        <a href="" class="tag6">egestas</a>\n        <a href="" class="tag1">id</a>\n        <a href="" class="tag6">tincidunt</a>\n        <a href="" class="tag5">vel</a>\n        <a href="" class="tag3">eros</a>\n        <a href="" class="tag6">Integer</a>\n        <a href="" class="tag6">risus</a>\n        <a href="" class="tag6">velit</a>\n        <a href="" class="tag2">facilisis</a>\n        <a href="" class="tag4">eget</a>\n        <a href="" class="tag5">viverra</a>\n        <a href="" class="tag6">et</a>\n        <a href="" class="tag6">leo</a>\n        <a href="" class="tag1">Suspendisse</a>\n        <a href="" class="tag3">potenti</a>\n        <a href="" class="tag5">Phasellus</a>\n        <a href="" class="tag4">auctor</a>\n        <a href="" class="tag6">enim</a>\n        <a href="" class="tag3">eget</a>\n        <a href="" class="tag4">sem</a>\n\n    </div>\n')
         return ''
     finally:
         context.caller_stack.pop_frame()
@@ -102,7 +102,7 @@ def render_login(context):
     try:
         h = context.get('h', UNDEFINED)
         # SOURCE LINE 40
-        context.write(u'\n    <div id="login-box">\n\n        <h1>Login to upload videos</h1>\n\n        ')
+        context.write(u'\n    <div id="login">\n\n        <h1>To upload videos, login.</h1>\n\n        ')
         # SOURCE LINE 45
         context.write(unicode(h.form(h.url_for('account_login'), method='post')))
         context.write(u'\n\n            ')

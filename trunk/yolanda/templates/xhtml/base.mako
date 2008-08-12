@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%def name="search()">
-    <div id="search-box">
+    <div id="search">
 
         ${h.form(h.url_for('search_results'), method='get')}
 
@@ -38,9 +38,9 @@
 </%def>
 
 <%def name="login()">
-    <div id="login-box">
+    <div id="login">
 
-        <h1>Login to upload videos</h1>
+        <h1>To upload videos, login.</h1>
 
         ${h.form(h.url_for('account_login'), method='post')}
 
@@ -53,35 +53,35 @@
 </%def>
 
 <%def name="tagcloud()">
-    <div id="tagcloud-box">
+    <div id="tagcloud">
 
-        <h1>Tag cloud</h1>
+        <h1>Popular tags</h1>
 
-        <a class="tag4+">Proin</a>
-        <a class="tag16+">lectus</a>
-        <a class="tag4+">orci</a>
-        <a class="tag4+">venenatis</a>
-        <a class="tag16+">pharetra</a>
-        <a class="tag4+">egestas</a>
-        <a class="tag16+">id</a>
-        <a class="tag4+">tincidunt</a>
-        <a class="tag16+">vel</a>
-        <a class="tag16+">eros</a>
-        <a class="tag4+">Integer</a>
-        <a class="tag4+">risus</a>
-        <a class="tag4+">velit</a>
-        <a class="tag16+">facilisis</a>
-        <a class="tag16+">eget</a>
-        <a class="tag4+">viverra</a>
-        <a class="tag4+">et</a>
-        <a class="tag4+">leo</a>
-        <a class="tag16+">Suspendisse</a>
-        <a class="tag16+">potenti</a>
-        <a class="tag16+">Phasellus</a>
-        <a class="tag16+">auctor</a>
-        <a class="tag16+">enim</a>
-        <a class="tag4+">eget</a>
-        <a class="tag16g+">sem</a>
+        <a href="" class="tag6">Proin</a>
+        <a href="" class="tag5">lectus</a>
+        <a href="" class="tag2">orci</a>
+        <a href="" class="tag6">venenatis</a>
+        <a href="" class="tag5">pharetra</a>
+        <a href="" class="tag6">egestas</a>
+        <a href="" class="tag1">id</a>
+        <a href="" class="tag6">tincidunt</a>
+        <a href="" class="tag5">vel</a>
+        <a href="" class="tag3">eros</a>
+        <a href="" class="tag6">Integer</a>
+        <a href="" class="tag6">risus</a>
+        <a href="" class="tag6">velit</a>
+        <a href="" class="tag2">facilisis</a>
+        <a href="" class="tag4">eget</a>
+        <a href="" class="tag5">viverra</a>
+        <a href="" class="tag6">et</a>
+        <a href="" class="tag6">leo</a>
+        <a href="" class="tag1">Suspendisse</a>
+        <a href="" class="tag3">potenti</a>
+        <a href="" class="tag5">Phasellus</a>
+        <a href="" class="tag4">auctor</a>
+        <a href="" class="tag6">enim</a>
+        <a href="" class="tag3">eget</a>
+        <a href="" class="tag4">sem</a>
 
     </div>
 </%def>
@@ -110,7 +110,7 @@
 
 <body>
 
-    <div id="heading-box">
+    <div id="heading">
         <h1>
             ${self.heading()}
         </h1>
@@ -118,9 +118,9 @@
 
     ${self.search()}
 
-    ${self.tagcloud()}
-
     ${self.login()}
+
+    ${self.tagcloud()}
 
     ${self.body()}
 

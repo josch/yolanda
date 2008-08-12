@@ -5,7 +5,7 @@
 </%def>
 
 <%def name="heading()">
-    9001 results for "${c.query}":
+    There are over 9000 videos matching "${c.query}".
 </%def>
 
 <%def name="results_listing(results)">

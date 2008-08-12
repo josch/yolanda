@@ -1,7 +1,7 @@
 from mako import runtime, filters, cache
 UNDEFINED = runtime.UNDEFINED
 _magic_number = 2
-_modified_time = 1218464716.3410029
+_modified_time = 1218555558.912719
 _template_filename='/home/nils/src/yolanda/trunk/yolanda/templates/xhtml/results.mako'
 _template_uri='/xhtml/results.mako'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -80,10 +80,10 @@ def render_heading(context):
     try:
         c = context.get('c', UNDEFINED)
         # SOURCE LINE 7
-        context.write(u'\n    9001 results for "')
+        context.write(u'\n    There are over 9000 videos matching "')
         # SOURCE LINE 8
         context.write(unicode(c.query))
-        context.write(u'":\n')
+        context.write(u'".\n')
         return ''
     finally:
         context.caller_stack.pop_frame()
