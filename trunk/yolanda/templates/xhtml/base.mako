@@ -42,7 +42,7 @@
 
         <h1>To upload videos, login.</h1>
 
-        ${h.form(h.url_for('account_login'), method='post')}
+        ${h.form(h.url_for('account/login'), method='post')}
 
             ${h.text_field('username')}
             ${h.submit('Login (OpenID)')}
