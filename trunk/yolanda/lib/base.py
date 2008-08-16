@@ -20,6 +20,7 @@ class BaseController(WSGIController):
         # WSGIController.__call__ dispatches to the Controller method
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
+        response.headers['Content-type'] = "application/xml"
         return WSGIController.__call__(self, environ, start_response)
 
 # Include the '_' function in the public names
