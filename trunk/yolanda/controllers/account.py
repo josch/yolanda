@@ -15,11 +15,11 @@ class AccountController(BaseController):
         self.consumer = Consumer(self.openid_session, None)
         openid = request.params.get('username', None)
         if openid is None:
-            return render('/login/form.mako')
+            return "invalid openid"
         try:
             authrequest = self.consumer.begin(openid)
         except DiscoveryFailure, e:
-            return render('/login/form.mako')
+            return "invalid openid"
             
         redirecturl = authrequest.redirectURL(
             h.url_for('',qualified=True),
@@ -41,11 +41,10 @@ class AccountController(BaseController):
             session.clear()
             return redirect_to('/index')
         else:
-            return redirect_to('/login')
+            return "openid auth error"
 
     def logout(self):
-        c.title = 'logged out'
         session.clear()
         session.save()
-        return render('/login/logout.mako')
+        return redirect_to('/index')
 
