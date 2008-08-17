@@ -11,7 +11,9 @@ from pylons.i18n import _, ungettext, N_
 from pylons.templating import render
 
 import yolanda.lib.helpers as h
+import yolanda.lib.utils as u
 import yolanda.model as model
+import os
 
 class BaseController(WSGIController):
 
@@ -21,7 +23,10 @@ class BaseController(WSGIController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
         response.headers['Content-type'] = "application/xml"
-        return WSGIController.__call__(self, environ, start_response)
+        try:
+            return WSGIController.__call__(self, environ, start_response)
+        finally:
+            Session.remove()
 
 # Include the '_' function in the public names
 __all__ = [__name for __name in locals().keys() if not __name.startswith('_') \
