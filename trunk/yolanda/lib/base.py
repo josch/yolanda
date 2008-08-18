@@ -23,10 +23,7 @@ class BaseController(WSGIController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
         response.headers['Content-type'] = "application/xml"
-        try:
-            return WSGIController.__call__(self, environ, start_response)
-        finally:
-            Session.remove()
+        return WSGIController.__call__(self, environ, start_response)
 
 # Include the '_' function in the public names
 __all__ = [__name for __name in locals().keys() if not __name.startswith('_') \

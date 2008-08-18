@@ -8,7 +8,7 @@ import yolanda.lib.helpers
 from yolanda.config.routing import make_map
 
 from sqlalchemy import engine_from_config
-from yolanda.model import init_model
+from yolanda import model
 
 def load_environment(global_conf, app_conf):
     """Configure the Pylons environment via the ``pylons.config``
@@ -36,4 +36,6 @@ def load_environment(global_conf, app_conf):
     # any Pylons config options)
     
     engine = engine_from_config(config, 'sqlalchemy.')
-    init_model(engine)
+    model.metadata.bind = engine
+    model.metadata.bind.echo = True
+    model.Session.bind = engine
