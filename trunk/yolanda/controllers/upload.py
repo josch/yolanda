@@ -21,6 +21,7 @@ class UploadController(BaseController):
             return "not a valid video"
         
         #check if file is duplicate
+        upload.file.seek(0)
         sha256 = hashlib.sha256(upload.file.read(1024*1024)).hexdigest()
         
         if model.Video.query.filter_by(sha256=sha256).count():
@@ -29,13 +30,17 @@ class UploadController(BaseController):
         video = model.Video(title=request.params['title'],sha256=sha256)
         model.session.commit()
         
-        permanent_file = open(os.path.join(config['cache.dir'], str(video.id)), 'w')
+        temp_file = open(os.path.join(config['cache.dir'], str(video.id)), 'w')
         upload.file.seek(0)
-        u.copyfileobj(upload.file, permanent_file)
+        u.copyfileobj(upload.file, temp_file)
         upload.file.close()
-        permanent_file.close()
+        temp_file.close()
         
-        videoencode = encode.Encode(os.path.join(config['cache.dir'], str(video.id)))
+        #here begins the later daemon's work
+        videoencode = encode.Encode(
+            os.path.join(config['cache.dir'], str(video.id)),
+            os.path.join(config['pylons.paths']['static_files'], "videos", str(video.id)))
         videoencode.run()
+        os.unlink(os.path.join(config['cache.dir'], str(video.id)))
         
         return 'Successfully uploaded: %s'%video.query.all()

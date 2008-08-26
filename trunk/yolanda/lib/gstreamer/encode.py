@@ -36,7 +36,7 @@ class Encode:
     def _build_pipeline(self):
         self.player = gst.Pipeline("player")
         source = gst.element_factory_make("filesrc", "file-source")
-        source.set_property("location", self.filename)
+        source.set_property("location", self.source)
         decodebin = gst.element_factory_make("decodebin", "decodebin")
         decodebin.connect("pad-added", self.decodebin_callback)
         audioconvert = gst.element_factory_make("audioconvert", "audioconvert")
@@ -61,7 +61,7 @@ class Encode:
         queuev = gst.element_factory_make("queue", "queuev")
         muxer = gst.element_factory_make("oggmux", "muxer")
         filesink = gst.element_factory_make("filesink", "filesink")
-        filesink.set_property("location", self.filename+".ogg")
+        filesink.set_property("location", self.destination)
         
         self.player.add(source, decodebin, ffmpeg, muxer, filesink, videorate,
             videoscale, audioconvert, vorbisenc, theoraenc, queuea, queuev,
@@ -80,11 +80,12 @@ class Encode:
         bus.connect("message", self.on_message)
         self.player.set_state(gst.STATE_PLAYING)
     
-    def __init__(self, filename, videoquality=16, quick=True, sharpness=2,
+    def __init__(self, source, destination, videoquality=16, quick=True, sharpness=2,
                  video=True, audio=True, audioquality=0.1):
-        if not os.path.isfile(filename):
+        if not os.path.isfile(source):
             raise IOError, "cannot read file"
-        self.filename = filename
+        self.source = source
+        self.destination = destination
         if not video and not audio:
             raise AttributeError, "must contain video or audio"
         self.video = bool(video)
@@ -132,7 +133,7 @@ def main(args):
         print 'usage: %s file' % args[0]
         return 2
 
-    encode = Encode(args[1])
+    encode = Encode(args[1], args[1]+".ogg")
     encode.run()
 
 if __name__ == '__main__':
