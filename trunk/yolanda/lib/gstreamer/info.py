@@ -151,8 +151,9 @@ class Info(Discoverer):
         The function returns wether or not the discovering was successful.
         """
         self.mainloop.run()
+        #only return true if source is a valid video file
         return self.finished and self.mimetype and \
-               (self.is_video or self.is_audio)
+               self.is_video and self.videorate.num/self.videorate.denom
         
     def _discovered(self, discoverer, ismedia):
         """When we discover something - quit main loop"""

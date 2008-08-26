@@ -4,3 +4,4 @@ class Video(Entity):
     using_options(tablename='videos')
 
     title = Field(Unicode(255))
+    sha256 = Field(String(64))

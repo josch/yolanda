@@ -35,5 +35,7 @@ def load_environment(global_conf, app_conf):
     # CONFIGURATION OPTIONS HERE (note: all config options will override
     # any Pylons config options)
     
+    config['pylons.response_options']['content_type'] = "application/xhtml+xml"
+    
     model.metadata.bind = engine_from_config(config, 'sqlalchemy.')
     model.metadata.bind.echo = True

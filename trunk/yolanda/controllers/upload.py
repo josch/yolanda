@@ -1,8 +1,9 @@
 import logging
 
 from yolanda.lib.base import *
-from yolanda.lib.gstreamer import info, snapshot
+from yolanda.lib.gstreamer import info, snapshot, encode
 import os
+import hashlib
 
 log = logging.getLogger(__name__)
 
@@ -12,20 +13,29 @@ class UploadController(BaseController):
         return render('/xhtml/upload.mako')
     
     def upload(self):
-        myfile = request.params['file']
-        permanent_file = open(os.path.join(myfile.filename.lstrip(os.sep)),'w')
-
-        #u.copyfileobj(myfile.file, permanent_file)
+        upload = request.params['file']
         
-        foo=model.Video(title=u"foooooo")
+        #check if file is video
+        videoinfo = info.Info(upload.file)
+        if not videoinfo.get_info():
+            return "not a valid video"
+        
+        #check if file is duplicate
+        sha256 = hashlib.sha256(upload.file.read(1024*1024)).hexdigest()
+        
+        if model.Video.query.filter_by(sha256=sha256).count():
+            return "duplicate"
+        
+        video = model.Video(title=request.params['title'],sha256=sha256)
         model.session.commit()
         
-        videoinfo = info.Info(myfile.file)
-        videoinfo.get_info()
-        print videoinfo.print_info()
-        
-        myfile.file.close()
+        permanent_file = open(os.path.join(config['cache.dir'], str(video.id)), 'w')
+        upload.file.seek(0)
+        u.copyfileobj(upload.file, permanent_file)
+        upload.file.close()
         permanent_file.close()
-
-        return 'Successfully uploaded: %s'%""
-
+        
+        videoencode = encode.Encode(os.path.join(config['cache.dir'], str(video.id)))
+        videoencode.run()
+        
+        return 'Successfully uploaded: %s'%video.query.all()
