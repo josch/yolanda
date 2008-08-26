@@ -1,7 +1,7 @@
 import elixir
 
 # replace the elixir session with our own
-Session = elixir.session(autoflush=True, transactional=True)
+session = elixir.session
 
 # use the elixir metadata
 metadata = elixir.metadata

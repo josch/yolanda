@@ -13,7 +13,6 @@ from pylons.templating import render
 import yolanda.lib.helpers as h
 import yolanda.lib.utils as u
 import yolanda.model as model
-import os
 
 class BaseController(WSGIController):
 
@@ -22,7 +21,7 @@ class BaseController(WSGIController):
         # WSGIController.__call__ dispatches to the Controller method
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
-        response.headers['Content-type'] = "application/xml"
+        response.headers['Content-type'] = "application/xhtml+xml"
         return WSGIController.__call__(self, environ, start_response)
 
 # Include the '_' function in the public names
