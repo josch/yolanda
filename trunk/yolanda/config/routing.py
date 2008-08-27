@@ -38,7 +38,9 @@ def make_map():
 
     map.connect('video_page', 'video/:id/:title', controller='video', _filter=video_expand)
     # map.connect('video_file', 'video/:id.ogv', controller='video', action='file' _filter=video_expand)
-
+    
+    map.connect('download_page', 'download/:id/:title', controller='download', action="download")
+    
     # everything else
     map.connect(':controller/:action/:id')
     # map.connect('*url', controller='template', action='view')

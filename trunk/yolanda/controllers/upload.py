@@ -27,9 +27,11 @@ class UploadController(BaseController):
         if model.Video.query.filter_by(sha256=sha256).count():
             return "duplicate"
         
+        #set up database entry
         video = model.Video(title=request.params['title'],sha256=sha256)
         model.session.commit()
         
+        #copy file to temp destination
         temp_file = open(os.path.join(config['cache.dir'], str(video.id)), 'w')
         upload.file.seek(0)
         u.copyfileobj(upload.file, temp_file)
