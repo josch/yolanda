@@ -15,11 +15,15 @@ class AccountController(BaseController):
         self.consumer = Consumer(self.openid_session, None)
         openid = request.params.get('username', None)
         if openid is None:
-            return "invalid openid"
+            # invalid openid
+            c.error = "invalid openid"
+            return render('/xhtml/index.mako')
         try:
             authrequest = self.consumer.begin(openid)
         except DiscoveryFailure, e:
-            return "invalid openid"
+            # invalid openid
+            c.error = "invalid openid"
+            return render('/xhtml/index.mako')
             
         redirecturl = authrequest.redirectURL(
             h.url_for('',qualified=True),

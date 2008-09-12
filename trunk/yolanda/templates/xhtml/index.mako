@@ -6,6 +6,7 @@
 
 <%def name="heading()">
     Welcome to Yolanda, a place for people who hate Adobe Flash.
+    ${request.headers.get('REFERER')}
 </%def>
 
 <h1>An introduction to Yolanda</h1>

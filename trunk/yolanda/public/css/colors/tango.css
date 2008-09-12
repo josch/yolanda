@@ -194,8 +194,33 @@ ul#queries
 
         ul#queries li a
         {
-            color:                  #FFD95A;
+            color:              #FFD95A;
         }
+
+/* classes */
+
+.messagebox
+{
+    
+}
+
+    .messagebox.error
+    {
+        /* "Scarlet Red 1" + 30 luminosity */
+        background-color:   #f46060;
+    }
+
+    .messagebox.information
+    {
+        /* "Chameleon 1" + 30 luminosity */
+        background-color:   #a9ec68;
+    }
+
+    .messagebox.warning
+    {
+        /* "Orange 1" */
+        background-color:   #fcaf3e;
+    }
 
 /* ids */
 

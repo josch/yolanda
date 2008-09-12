@@ -52,6 +52,29 @@
     </div>
 </%def>
 
+<%def name="messagebox()">
+
+%if c.error:
+    <div class="messagebox error">
+        ${c.error}
+    </div>
+%endif
+
+%if c.information:
+    <div class="messagebox information">
+        ${c.information}
+    </div>
+%endif
+
+%if c.warning:
+    <div class="messagebox warning">
+        ${c.warning}
+    </div>
+%endif
+
+</%def>
+
+
 <%def name="tagcloud()">
     <div id="tagcloud">
 
@@ -121,6 +144,8 @@
     ${self.login()}
 
     ${self.tagcloud()}
+
+    ${self.messagebox()}
 
     ${self.body()}
 
