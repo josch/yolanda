@@ -9,104 +9,17 @@ Purpose of this file is to provide decoration, such as:
     - colors
     - images (background, list bullets etc.)
     - generated content
-    - text attributes
 */
 
 a
 {
     color:              #88D9F3;
-    text-decoration:    none;
 }
-
-a:hover
-{
-    text-decoration:    underline;
-}
-
-    a.tag1
-    {
-        font-size:          1.5em;
-        line-height:        1.25em;
-    }
-
-    a.tag2
-    {
-        font-size:          1.4em;
-        line-height:        1.2em;
-    }
-
-    a.tag3
-    {
-        font-size:          1.3em;
-        line-height:        1.15em;
-    }
-
-    a.tag4
-    {
-        font-size:          1.2em;
-        line-height:        1.25em;
-    }
-
-    a.tag5
-    {
-        font-size:          1.1em;
-        line-height:        1.05em;
-    }
-
-    a.tag6
-    {
-        font-size:          1em;
-        line-height:        1em;
-    }
 
 body
 {
     background-color:   #000000;
     color:              #E5E5E5;
-    font-size:          12px;
-    font-family:        sans-serif;
-}
-
-blockquote:before
-{
-    content:            open-quote;
-    font-size:          2em;
-    margin-left:        7.5em;
-}
-
-blockquote:after
-{
-    content:            close-quote;
-    font-size:          2em;
-    margin-right:       7.5em;
-}
-
-code
-{
-    font-family:        monospace;
-}
-
-em
-{
-    font-style:         italic;
-}
-
-h1
-{
-    font-size:          1.5em;
-    line-height:        1.25em;
-}
-
-h2
-{
-    font-size:          1.4em;
-    line-height:        1.2em;
-}
-
-h3
-{
-    font-size:          1.3em;
-    line-height:        1.15em;
 }
 
 input
@@ -150,32 +63,10 @@ ol#results
             font-weight:            bold;
         }
 
-p
-{
-   line-height:        1.4em;
-}
-
-q:before
-{
-    content:        open-quote;
-}
-
-q:after
-{
-    content:        close-quote;
-}
-
 ul#queries
 {
     list-style-position:    inside;
 }
-
-    ul#queries li
-    {
-        font-size:          1.5em;
-        line-height:        1.25em;
-        text-transform:     uppercase;
-    }
 
     ul#queries li#important
     {
@@ -199,27 +90,36 @@ ul#queries
 
 /* classes */
 
-.messagebox
+#messagebox
 {
-    
+    border-color:       #363636;
+    border-style:       solid;
 }
 
-    .messagebox.error
+    #messagebox.error
     {
-        /* "Scarlet Red 1" + 30 luminosity */
-        background-color:   #f46060;
+        /* "Scarlet Red 1" */
+        background-color:   #ef2929;
+        color:              #ffffff;
     }
 
-    .messagebox.information
+    #messagebox.information
     {
-        /* "Chameleon 1" + 30 luminosity */
-        background-color:   #a9ec68;
+        /* "Chameleon 1" */
+        background-color:   #8ae234;
+        color:              #131313;
     }
 
-    .messagebox.warning
+    #messagebox.warning
     {
         /* "Orange 1" */
         background-color:   #fcaf3e;
+        color:              #131313;
+    }
+
+    #messagebox #message
+    {
+        font-size:              1.4em;
     }
 
 /* ids */

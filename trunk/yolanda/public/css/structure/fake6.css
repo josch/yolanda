@@ -117,14 +117,17 @@ ul
 
     ul#queries
     {
-        padding-left:       0.5em;    
+        padding-left:       0.5em;
     }
 
 /* classes */
 
-.messagebox
+#messagebox
 {
-    margin-right:             28em;
+    border-width:           1px;
+    margin-right:           28em !important;
+    padding:                1em;
+    text-align:             center;
 }
 
 /* ids */

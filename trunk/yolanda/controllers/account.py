@@ -7,24 +7,23 @@ log = logging.getLogger(__name__)
 class AccountController(BaseController):
     def __before__(self):
         self.openid_session = session.get("openid_session", {})
-    
+
     # @validate(schema=something, form='login')
     def login(self):
         #FIXME: do not operate in stateless mode - replace store with local
         # openid store (app global) to make login faster with less overhead
         self.consumer = Consumer(self.openid_session, None)
         openid = request.params.get('username', None)
-        if openid is None:
-            # invalid openid
-            c.error = "invalid openid"
-            return render('/xhtml/index.mako')
         try:
             authrequest = self.consumer.begin(openid)
         except DiscoveryFailure, e:
             # invalid openid
-            c.error = "invalid openid"
+            c.message = {
+                        'type': 'error',
+                        'text': 'You were not logged on due to entering an invalid OpenID.'
+                        }
             return render('/xhtml/index.mako')
-            
+
         redirecturl = authrequest.redirectURL(
             h.url_for('',qualified=True),
             return_to=h.url_for('/account/verified',qualified=True),

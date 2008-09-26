@@ -40,8 +40,6 @@
 <%def name="login()">
     <div id="login">
 
-        <h1>To upload videos, login.</h1>
-
         ${h.form(h.url_for('account/login'), method='post')}
 
             ${h.text_field('username')}
@@ -54,21 +52,11 @@
 
 <%def name="messagebox()">
 
-%if c.error:
-    <div class="messagebox error">
-        ${c.error}
-    </div>
-%endif
-
-%if c.information:
-    <div class="messagebox information">
-        ${c.information}
-    </div>
-%endif
-
-%if c.warning:
-    <div class="messagebox warning">
-        ${c.warning}
+%if c.message:
+    <div id="messagebox" class="${c.message['type']}">
+        <span id="message">
+            ${c.message['text']}
+        </span>
     </div>
 %endif
 
@@ -133,6 +121,12 @@
 
 <body>
 
+    <div id="header">
+        <img src="${h.url_for('/images/logo.png')}" alt="Yolanda logo"/>
+    </div>
+
+    ${self.login()}
+
     <div id="heading">
         <h1>
             ${self.heading()}
@@ -140,8 +134,6 @@
     </div>
 
     ${self.search()}
-
-    ${self.login()}
 
     ${self.tagcloud()}
 
