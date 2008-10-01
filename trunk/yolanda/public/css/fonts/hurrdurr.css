@@ -83,6 +83,13 @@ em
     font-style:         italic;
 }
 
+h1,
+h2,
+h3
+{
+    text-align:         center;
+}
+
 h1
 {
     font-size:          1.5em;

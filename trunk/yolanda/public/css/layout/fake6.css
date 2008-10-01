@@ -1,5 +1,5 @@
 /*
-Yolanda default structure stylesheet
+Yolanda default layout stylesheet
 (c) 2007-2008 Nils Dagsson Moskopp
 
 This file is licensed under the WTF Public License.
@@ -27,24 +27,17 @@ form
 
 h1
 {
-    margin-bottom:      0.33em; /* roughly 0.5em of relative to base */
+    margin-bottom:      0.33em; /* roughly 0.5em relative to base */
 }
 
 h2
 {
-    margin-bottom:      0.35em; /* roughly 0.5em of relative to base */
+    margin-bottom:      0.35em; /* roughly 0.5em relative to base */
 }
 
 h3
 {
-    margin-bottom:      0.38em; /* roughly 0.5em of relative to base */
-}
-
-h1,
-h2,
-h3
-{
-    text-align:         center;
+    margin-bottom:      0.38em; /* roughly 0.5em relative to base */
 }
 
 input
@@ -152,7 +145,6 @@ ul
 #search,
 #tagcloud
 {
-    float:                  right;
     width:                  25em;
     padding-bottom:         0.5em;
 }
