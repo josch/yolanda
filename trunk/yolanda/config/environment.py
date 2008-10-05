@@ -36,6 +36,10 @@ def load_environment(global_conf, app_conf):
     # any Pylons config options)
     
     config['pylons.response_options']['content_type'] = "application/xhtml+xml"
-    
+    # FIXME: this is generally wrong for other XML content
+
     model.metadata.bind = engine_from_config(config, 'sqlalchemy.')
     model.metadata.bind.echo = True
+
+    # better safe than sorry - everything should be utf-8
+    tmpl_options['mako.input_encoding'] = 'utf-8'
