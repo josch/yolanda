@@ -11,4 +11,5 @@ class Globals(object):
         initialization and is available during requests via the 'g'
         variable
         """
+        self.appname = "Application Name"
         pass
