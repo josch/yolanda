@@ -137,3 +137,22 @@ ul
         line-height:        1.25em;
         text-transform:     uppercase;
     }
+
+#copyright
+{
+    font-family:            monospace;
+}
+
+    #messagebox #message
+    {
+        font-size:              1.4em;
+    }
+
+#header,
+#heading,
+#login,
+#search,
+#tagcloud
+{
+    text-align:             justify;
+}

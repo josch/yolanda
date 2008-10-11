@@ -11,5 +11,8 @@ class Globals(object):
         initialization and is available during requests via the 'g'
         variable
         """
-        self.appname = "Application Name"
+        self.application_name = "Yolanda"
+        self.platform_name = "Demo Application"
+        self.platform_slogan = "Welcome to Demo Application, a video CMS without a slogan."
+        self.developers = ("Nils Dagsson Moskopp", "Johannes Schauer")
         pass

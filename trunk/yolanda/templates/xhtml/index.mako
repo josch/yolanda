@@ -5,7 +5,7 @@
 </%def>
 
 <%def name="heading()">
-    Welcome to Yolanda, a video CMS missing a proper slogan.
+    ${g.platform_slogan}
 </%def>
 
 <h1>An introduction to Yolanda</h1>

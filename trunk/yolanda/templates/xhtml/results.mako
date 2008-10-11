@@ -13,7 +13,7 @@
     % for result in c.results:
         <li>
             <a href="${h.url_for('video_page', video=result)}">
-                <img src="${result['thumbnail']}" alt='thumbnail for "${result['title']}"'/>
+                <img src="${h.url_for('/images/404.png')}" alt='thumbnail for "${result['title']}"'/>
             </a>
             <br />
             <a href="${h.url_for('video_page', video=result)}" class="title">

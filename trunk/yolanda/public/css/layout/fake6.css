@@ -68,15 +68,12 @@ ol
     ol#results
     {
     /* compensate for list element margin */
-        margin-left:            -1em;
         text-align:             center;
     }
 
         ol#results li
         {
             display:            inline-block;
-            margin-left:        1em;
-            margin-bottom:      1em;
             width:              216px;
         }
 
@@ -113,7 +110,39 @@ ul
         padding-left:       0.5em;
     }
 
-/* classes */
+#video
+{
+    display:                block;
+    margin:                 auto;
+}
+
+#video,
+#copyright,
+#header,
+#heading,
+#login,
+#search,
+#tagcloud
+{
+    border-width:           1px;
+    margin-bottom:          1em;
+}
+
+#copyright,
+#header,
+#heading,
+#login,
+#search,
+#tagcloud
+{
+    padding:                1em;
+}
+
+#header
+{
+    height:                 3em;
+    padding-bottom:         0.5em;
+}
 
 #messagebox
 {
@@ -121,23 +150,6 @@ ul
     margin-right:           28em !important;
     padding:                1em;
     text-align:             center;
-}
-
-/* ids */
-
-/* sidebar stuff */
-
-#copyright,
-#heading,
-#login,
-#search,
-#tagcloud
-{
-    border-width:           1px;
-    clear:                  right;
-    margin-bottom:          1em;
-    padding:                1em;
-    text-align:             justify;
 }
 
 #heading,
@@ -149,7 +161,8 @@ ul
     padding-bottom:         0.5em;
 }
 
-#results
+#content,
+#header
 {
     margin-right:           28em;
 }

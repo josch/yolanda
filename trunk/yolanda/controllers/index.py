@@ -8,3 +8,4 @@ class IndexController(BaseController):
 
     def index(self):
         return render('/xhtml/index.mako')
+

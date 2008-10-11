@@ -8,6 +8,8 @@ Purpose of this file is to import reset, decoration and structure stylesheets.
 */
 
 @import "reset.css";
+@import "colors/debug.css";
 @import "colors/tango.css";
 @import "fonts/hurrdurr.css";
-@import "structure/fake6.css";
+@import "layout/fake6.css";
+@import "flow/fake6.css";

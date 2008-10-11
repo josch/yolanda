@@ -12,7 +12,7 @@ class VideoController(BaseController):
                     'description': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam sapien mauris, venenatis at, fermentum at, tempus eu, urna.' ,
                     'preview': h.url_for('/images/404.png')
                     }
-        return 'show a video html page'
+        return render('/xhtml/video.mako')
 
     def file(self):
         return 'serve video'

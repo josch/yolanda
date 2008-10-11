@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<!-- XHTML 5, baby ! -->
 
 <%def name="search()">
     <div id="search">
@@ -121,11 +121,17 @@
 
 <body>
 
-    <div id="header">
-        <img src="${h.url_for('/images/logo.png')}" alt="Yolanda logo"/>
-    </div>
-
     ${self.login()}
+
+    ${self.search()}
+
+    ${self.tagcloud()}
+
+    <div id="header">
+        <h1>
+            <img src="${h.url_for('logo')}" alt="${g.platform_name} logo"/>
+        </h1>
+    </div>
 
     <div id="heading">
         <h1>
@@ -133,18 +139,18 @@
         </h1>
     </div>
 
-    ${self.search()}
-
-    ${self.tagcloud()}
-
     ${self.messagebox()}
 
-    ${self.body()}
+    <div id="content">
+
+        ${self.body()}
+
+    </div>
 
     <div id="copyright">
-        <em>Yolanda</em> Copyright &copy; 2007, 2008 <em>The Yolanda Developers</em> &ndash;
-        This program comes with <em>absolutely no warranty</em>; for details <a href="${h.url_for('license')}">click here</a>.
-        This is <em>free software</em>, and you are welcome to redistribute it
+        ${g.platform_name} is realized using <em>${g.application_name}</em> Copyright © 2007, 2008 ${g.developers} –
+        ${g.application_name} comes with <em>absolutely no warranty</em>; for details <a href="${h.url_for('license')}">click here</a>.
+        ${g.application_name} is <em>free software</em>, and you are welcome to redistribute it
         under certain conditions; <a href="${h.url_for('license')}">click here</a> for details.
         To view the source code, <a href="">click here</a>. Report bugs <a href="">here</a>.
     </div>
@@ -152,8 +158,8 @@
     <ul id="badges">
 
         <li class="badge">
-            <a href="http://validator.w3.org/">
-                <img alt="XHTML 1.1 logo" src="${h.url_for('images/badges/xhtml 1.1.png')}" />
+            <a href="">
+                <img alt="XHTML 5" src="${h.url_for('images/badges/xhtml5.png')}" />
             </a>
         </li>
 
