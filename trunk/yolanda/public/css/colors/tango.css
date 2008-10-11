@@ -97,9 +97,15 @@ ul#queries
     border-style:           dotted;
 }
 
+#header
+{
+    background-image:       url(/images/logo.png);
+    background-position:    0.5em center;
+    background-repeat:      no-repeat;
+}
+
 #video,
 #header,
-#heading,
 #login,
 #search,
 #tagcloud
