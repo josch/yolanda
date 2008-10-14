@@ -64,6 +64,11 @@
 
 
 <%def name="tagcloud()">
+
+    <a href="#content" style="display:none;">
+        Skip tagcloud.
+    </a>
+
     <div id="tagcloud">
 
         <h1>Popular tags</h1>
@@ -121,6 +126,10 @@
 
 <body>
 
+    <a href="#content" style="display:none;">
+        Skip menu.
+    </a>
+
     ${self.login()}
 
     ${self.search()}
@@ -128,12 +137,6 @@
     ${self.tagcloud()}
 
     <div id="header">
-        <h1>
-            <img src="${h.url_for('logo')}" alt="${g.platform_name} logo"/>
-        </h1>
-    </div>
-
-    <div id="heading">
         <h1>
             ${self.heading()}
         </h1>

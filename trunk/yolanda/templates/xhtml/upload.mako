@@ -5,7 +5,7 @@
 </%def>
 
 <%def name="heading()">
-    Upload Video
+    upload video
 </%def>
 
 

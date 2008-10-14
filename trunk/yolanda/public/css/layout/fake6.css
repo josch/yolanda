@@ -152,6 +152,12 @@ ul
     text-align:             center;
 }
 
+    #content #messagebox
+    {
+        margin-right:           0em !important;
+        border-width:           0px;
+    }
+
 #heading,
 #login,
 #search,
