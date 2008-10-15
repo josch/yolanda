@@ -22,12 +22,13 @@ body
     color:              #E5E5E5;
 }
 
-input
+input,
+textarea
 {
     background-color:       #E5E5E5;
-    color:                  #131313;
     border-color:           #363636;
     border-style:           solid;
+    color:                  #131313;
 }
 
     input#query

@@ -5,6 +5,8 @@
 <%def name="search()">
     <div id="search">
 
+        <h1>Search</h1>
+
         ${h.form(h.url_for('search_results'), method='get')}
 
             ${h.text_field('query')}
@@ -40,6 +42,8 @@
 <%def name="login()">
     <div id="login">
 
+        <h1>Login</h1>
+
         ${h.form(h.url_for('account/login'), method='post')}
 
             ${h.text_field('username')}
@@ -54,9 +58,8 @@
 
 %if c.message:
     <div id="messagebox" class="${c.message['type']}">
-        <span id="message">
-            ${c.message['text']}
-        </span>
+        <h1>Message (${c.message['type']})</h1>
+        <span id="message">${c.message['text']}</span>
     </div>
 %endif
 
@@ -71,7 +74,7 @@
 
     <div id="tagcloud">
 
-        <h1>Popular tags</h1>
+        <h1>Tagcloud</h1>
 
         <a href="" class="tag6">Proin</a>
         <a href="" class="tag5">lectus</a>

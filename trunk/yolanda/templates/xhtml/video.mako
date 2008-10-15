@@ -16,6 +16,7 @@
 >
 
     <div id="messagebox" class="error">
+        <h1>Message (error)</h1>
         <span id="message">
             Your browser does not support the &lt;video&gt; element.
 <!--
@@ -26,10 +27,48 @@
 
 </video>
 
-<div id="download">
+<div id="downloads">
+    <h1>Downloads</h1>
     <a href="">Download (http)</a>
     <a href="">Download (bittorrent)</a>
 </div>
+
+<h1>Embedding</h1>
+
+<table id="embed">
+    <tr>
+        <td>
+            HTML 4.01
+        </td>
+        <td>
+            <code>&lt;object data="http://example.org/download/foobar/" type="video/ogg"&gt;&lt;/object&gt;</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            XHTML 1.1
+        </td>
+        <td>
+            <code>&lt;object data="http://example.org/download/foobar/" type="video/ogg"/&gt;</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            HTML 5
+        </td>
+        <td>
+            <code>&lt;video src="http://example.org/download/foobar/"&gt;&lt;/video&gt;</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            XHTML 5
+        </td>
+        <td>
+            <code>&lt;video src="http://example.org/download/foobar/"/&gt;</code>
+        </td>
+    </tr>
+</table>
 
 <!--
 <img
