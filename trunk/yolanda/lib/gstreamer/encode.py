@@ -30,8 +30,7 @@ import gst
 
 class Encode:
     """
-    Encode will allow you to convert all your media that gstreamer is
-    capable of playing into an ogg/vorbis/theora file
+    Converts media files gstreamer can play to Ogg Theora + Vorbis.
     """
     def _build_pipeline(self):
         self.player = gst.Pipeline("player")
@@ -83,22 +82,22 @@ class Encode:
     def __init__(self, source, destination, videoquality=16, quick=True, sharpness=2,
                  video=True, audio=True, audioquality=0.1):
         if not os.path.isfile(source):
-            raise IOError, "cannot read file"
+            raise IOError, "input file does not exist"
         self.source = source
         self.destination = destination
         if not video and not audio:
-            raise AttributeError, "must contain video or audio"
+            raise AttributeError, "input file does not contain video or audio"
         self.video = bool(video)
         self.audio = bool(audio)
         if not 1 <= int(videoquality) <= 63:
-            raise ValueError, "videoquality ranges from 1-63"
+            raise ValueError, "videoquality out of range 1-63"
         self.videoquality=int(videoquality)
         self.quick = bool(quick)
         if not 0 <= int(sharpness) <= 2:
-            raise ValueError, "sharpness ranges from 0-2"
+            raise ValueError, "sharpness ouf of range 0-2"
         self.sharpness = int(sharpness)
         if not 0 <= float(audioquality) <= 1.0:
-            raise ValueError, "audioquality ranges from 0.0-1.0"
+            raise ValueError, "audioquality out of range 0.0-1.0"
         self.audioquality = float(audioquality)
         
         self.failed = False
@@ -106,6 +105,9 @@ class Encode:
         self.mainloop = gobject.MainLoop()
         
     def run(self):
+        """
+        Starts the actual encoding process.
+        """
         self.mainloop.run()
         return not self.failed
     
@@ -133,7 +135,7 @@ def main(args):
         print 'usage: %s file' % args[0]
         return 2
 
-    encode = Encode(args[1], args[1]+".ogg")
+    encode = Encode(args[1], args[1]+".ogv")
     encode.run()
 
 if __name__ == '__main__':
