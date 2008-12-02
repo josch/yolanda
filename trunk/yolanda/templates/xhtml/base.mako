@@ -3,16 +3,17 @@
 <!-- XHTML 5, baby ! -->
 
 <%def name="search()">
+
     <div id="search">
 
         <h1>Search</h1>
 
-        ${h.form(h.url_for('search_results'), method='get')}
+        <form action="(h.url_for('search_results'))}" method="get">
 
-            ${h.text_field('query')}
-            ${h.submit('Search Videos')}
+            <input id="query" name="query" type="text"/>
+            <input type="submit" value="Search"/>
 
-        ${h.end_form()}
+        </form>
 
         <ul id="queries">
 
@@ -44,12 +45,13 @@
 
         <h1>Login</h1>
 
-        ${h.form(h.url_for('account/login'), method='post')}
+        <form action="${h.url_for('account/login')}" 
+method="post">
 
-            ${h.text_field('username')}
-            ${h.submit('Login (OpenID)')}
+            <input id="username" name="username" type="url"/>
+            <input type="submit" value="Login (OpenID)"/>
 
-        ${h.end_form()}
+        </form>
 
     </div>
 </%def>
@@ -105,6 +107,17 @@
     </div>
 </%def>
 
+<%def name="upload()">
+
+    <div id="upload">
+
+        <h1>Upload</h1>
+        <a href="${h.url_for('upload')}">Upload</a>
+
+    </div>
+
+</%def>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -133,7 +146,12 @@
         Skip menu.
     </a>
 
+<%doc>
+    login will be implemented later on
     ${self.login()}
+</%doc>
+
+    ${self.upload()}
 
     ${self.search()}
 

@@ -49,8 +49,8 @@
         <li id="language">
             <label for="language">language</label>
             <select name="language">
-                <option value="de">German</option>
-                <option value="en">English</option>
+                <option value="deu">German</option>
+                <option value="eng">English</option>
             </select>
         </li>
 
@@ -60,11 +60,11 @@
         </li>
 
         <li>
-            <div id="contributor" repeat="template">
-                <label for="contributor">Contributor</label>
+            <span id="contributor" repeat="template">
+                <label for="contributor.[contributor]">Contributor</label>
                 <input name="contributor.[contributor]" type="text"/>
                 <button type="remove">Remove</button>
-            </div>
+            </span>
             <button type="add" template="contributor">Add contributor</button>
         </li>
 
