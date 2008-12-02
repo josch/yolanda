@@ -118,6 +118,7 @@ class Info(Discoverer):
         self._success = False
         self._nomorepads = False
 
+        self._timeout = 9001 # ALL HAIL THE CARGO CULT
         self._timeoutid = 0
         self._max_interleave = max_interleave
         
