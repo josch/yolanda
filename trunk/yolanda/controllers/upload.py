@@ -18,9 +18,12 @@ import logging
 
 from yolanda.lib.base import *
 from yolanda.lib.gstreamer import info, snapshot, encode
+
 import os
 import hashlib
 import threading
+
+from datetime import datetime, timedelta
 
 log = logging.getLogger(__name__)
 
@@ -52,8 +55,48 @@ class UploadController(BaseController):
 #                        }
 #            return render('/xhtml/upload.mako')
 
+        # TODO: set up safeguards against omitted / wrong data
+
         # set up database entry
-        video = model.Video(title=request.params['title'],sha256=sha256)
+        video = model.Video(
+
+            # Dublin Core terms
+            dc_title = request.params['title'],
+            dc_creator = request.params['creator'],
+            dc_subject = request.params['subject'],
+
+            dc_abstract = request.params['abstract'],
+
+            # TODO: enable several contributors
+            dc_contributor = '',
+
+            dc_created = '',
+            dc_valid = '',
+            dc_available = '',
+            dc_issued = '',
+            dc_modified = '',
+            dc_dateAccepted = '',
+            dc_dateCopyrighted = '',
+            dc_dateSubmitted = datetime.today().isoformat(),
+
+            dc_identifier = '',
+            dc_source = '',
+            dc_language = request.params['language'],
+
+            dc_extent = timedelta(0), # TODO: insert videolength
+
+            dc_spatial = request.params['spatial'],
+            dc_temporal = request.params['temporal'],
+
+            dc_rightsHolder = '',
+
+            # Creative Commons properties
+            cc_commercial = (request.params['commercial'] == 'commercial'),
+            cc_sharealike = (request.params['modification'] == 'sharealike'),
+            cc_derivatives = (request.params['modification'] != 'noderivatives'),
+
+            sha256=sha256
+            )
         model.session.commit()
 
         # copy file to temporary destination
