@@ -44,6 +44,7 @@ form ol
 {
     display:            inline-block;
     text-align:         center;
+    width:              100%;
 }
 
     form li
@@ -58,21 +59,26 @@ form ol
             width:              15em !important;
         }
 
+        form li input[type="radio"]
+        {
+            width:              1em !important;
+        }
+
         form li label
         {
             display:                inline-block;
             margin:                 0.5em;
-            width:                  15em;
+            width:                  15em !important;
         }
 
         form li fieldset
         {
-            border:             none;
-            margin-bottom:      0.5em;
-            margin-right:       0px;        
-            margin-left:        0px;
-            margin-top:         0.5em;
-            padding:            0px;
+            border:                 none;
+            display:                inline-block;
+            margin-bottom:          0.5em;
+            margin-top:             0.5em;
+            padding:                0px;
+            width:                  30em !important;
         }
 
         form li fieldset label
@@ -86,7 +92,6 @@ form ol
         }
 
 input,
-fieldset,
 textarea
 {
     padding:            0.5em;
@@ -169,7 +174,8 @@ ul
 #heading,
 #login,
 #search,
-#tagcloud
+#tagcloud,
+#upload
 {
     border-width:           1px;
     margin-bottom:          1em;
@@ -180,7 +186,8 @@ ul
 #heading,
 #login,
 #search,
-#tagcloud
+#tagcloud,
+#upload
 {
     padding:                1em;
 }
@@ -208,16 +215,18 @@ ul
 #heading,
 #login,
 #search,
-#tagcloud
+#tagcloud,
+#upload
 {
     width:                  25em;
-    padding-bottom:         0.5em;
+    /*padding-bottom:         0.5em;*/
 }
 
 #login h1,
 #messagebox h1,
 #search h1,
-#tagcloud h1
+#tagcloud h1,
+#upload h1
 {
     display:                none;
 }

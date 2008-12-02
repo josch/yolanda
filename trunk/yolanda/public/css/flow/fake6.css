@@ -20,7 +20,8 @@ Purpose of this file is to provide the flow of the elements, such as:
 
 #login,
 #search,
-#tagcloud
+#tagcloud,
+#upload
 {
     clear:                  right;
     float:                  right;
