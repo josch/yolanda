@@ -8,7 +8,6 @@ class SearchController(BaseController):
 
     def results(self):
 
-        # maybe c.query could / should be a dictionary ?
         c.query     =   request.params['query']
 
         # c.results dummy

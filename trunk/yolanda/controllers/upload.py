@@ -109,9 +109,10 @@ class UploadController(BaseController):
         # define stuff
         videosource=os.path.join(config['cache.dir'], str(video.id))
         videodestination=os.path.join(config['pylons.paths']['static_files'], "videos", str(video.id))
+        imagedestination=os.path.join(config['pylons.paths']['static_files'], "video-stills", str(video.id))
 
-        # start encoding in background
-        threading.Thread(target=self.bgencode, args=(videosource, videodestination)).start()
+        # start encoding unt snapshot threads in background
+        threading.Thread(target=self.bgencode, args=(videosource, videodestination, imagedestination)).start()
 
         # return 'Successfully uploaded: %s'%video.query.all()
         c.message = {
@@ -121,7 +122,9 @@ class UploadController(BaseController):
         c.message['text']='Your file was successfully uploaded to "%s".'%videodestination
         return render('/xhtml/index.mako')
 
-    def bgencode(self, source, destination):
+    def bgencode(self, source, destination, snapshotdestination):
+        videosnapshot = snapshot.Snapshot(source).get_snapshot()
+        videosnapshot.save(snapshotdestination, "JPEG")
         videoencode = encode.Encode(source,destination)
         videoencode.run()
         os.unlink(source)
