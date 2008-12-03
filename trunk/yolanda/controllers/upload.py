@@ -111,7 +111,7 @@ class UploadController(BaseController):
         videodestination=os.path.join(config['pylons.paths']['static_files'], "videos", str(video.id))
         imagedestination=os.path.join(config['pylons.paths']['static_files'], "video-stills", str(video.id))
 
-        # start encoding unt snapshot threads in background
+        # start encoding thread in background
         threading.Thread(target=self.bgencode, args=(videosource, videodestination, imagedestination)).start()
 
         # return 'Successfully uploaded: %s'%video.query.all()
