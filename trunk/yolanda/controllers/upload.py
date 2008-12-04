@@ -1,4 +1,4 @@
-## <one line to give the program's name and a brief idea of what it does.>
+## Yolanda, a video CMS for the web
 ## Copyright (C) 2007, 2008 Nils Dagsson Moskopp, Johannes Schauer
 
 ## This program is free software: you can redistribute it and/or modify
@@ -70,23 +70,25 @@ class UploadController(BaseController):
             # TODO: enable several contributors
             dc_contributor = '',
 
-            dc_created = '',
-            dc_valid = '',
-            dc_available = '',
-            dc_issued = '',
-            dc_modified = '',
-            dc_dateAccepted = '',
-            dc_dateCopyrighted = '',
-            dc_dateSubmitted = datetime.today().isoformat(),
+            # TODO: insert real data
+            dc_created = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+            dc_valid = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+            dc_available = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+            dc_issued = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+            dc_modified = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+            dc_dateAccepted = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+            dc_dateCopyrighted = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+            dc_dateSubmitted = datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 
             dc_identifier = '',
             dc_source = '',
             dc_language = request.params['language'],
 
-            dc_extent = timedelta(0), # TODO: insert videolength
+            # TODO: insert videolength
+            dc_extent = timedelta(0),
 
             dc_spatial = request.params['spatial'],
-            dc_temporal = request.params['temporal'],
+            dc_temporal = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
 
             dc_rightsHolder = '',
 
@@ -108,11 +110,12 @@ class UploadController(BaseController):
 
         # define stuff
         videosource=os.path.join(config['cache.dir'], str(video.id))
-        videodestination=os.path.join(config['pylons.paths']['static_files'], "videos", str(video.id))
-        imagedestination=os.path.join(config['pylons.paths']['static_files'], "video-stills", str(video.id))
+        videodestination=os.path.join(config['pylons.paths']['static_files'], config['directory_videos'], str(video.id))
+        snapshotdestination=os.path.join(config['pylons.paths']['static_files'], config['directory_video-stills'], str(video.id))
+        thumbnaildestination=os.path.join(config['pylons.paths']['static_files'], config['directory_video-thumbnails'], str(video.id))
 
         # start encoding thread in background
-        threading.Thread(target=self.bgencode, args=(videosource, videodestination, imagedestination)).start()
+        threading.Thread(target=self.bgencode, args=(videosource, videodestination, snapshotdestination, thumbnaildestination)).start()
 
         # return 'Successfully uploaded: %s'%video.query.all()
         c.message = {
@@ -122,9 +125,11 @@ class UploadController(BaseController):
         c.message['text']='Your file was successfully uploaded to "%s".'%videodestination
         return render('/xhtml/index.mako')
 
-    def bgencode(self, source, destination, snapshotdestination):
+    def bgencode(self, source, destination, snapshotdestination, thumbnaildestination):
         videosnapshot = snapshot.Snapshot(source).get_snapshot()
-        videosnapshot.save(snapshotdestination, "JPEG")
+        videosnapshot.save(snapshotdestination, 'JPEG')
+        videosnapshot.thumbnail((300,150))
+        videosnapshot.save(thumbnaildestination, 'JPEG')
         videoencode = encode.Encode(source,destination)
         videoencode.run()
         os.unlink(source)

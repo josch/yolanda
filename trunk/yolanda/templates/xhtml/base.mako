@@ -8,7 +8,7 @@
 
         <h1>Search</h1>
 
-        <form action="(h.url_for('search_results'))}" method="get">
+        <form action="${h.url_for('search_results')}" method="get">
 
             <input id="query" name="query" type="text"/>
             <input type="submit" value="Search"/>

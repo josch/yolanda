@@ -23,8 +23,8 @@ class Video(Entity):
     dc_dateCopyrighted = Field(DateTime)
     dc_dateSubmitted = Field(DateTime)
 
-    dc_identifier = Field(Unicode(255))
-    dc_source = Field(Unicode(255))
+    dc_identifier = Field(Unicode(255)) # URI
+    dc_source = Field(Unicode(255)) # URI
     dc_language = Field(Unicode(3)) # see ISO 639-3
 
     dc_extent = Field(Interval)

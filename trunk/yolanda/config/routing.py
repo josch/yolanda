@@ -32,14 +32,14 @@ def make_map():
 
         video = kargs.pop('video')
         kargs['id'] = video['id']
-        kargs['title'] = video['title']
+        kargs['dc_title'] = video['dc_title']
 
         return kargs
 
-    map.connect('video_page', 'video/:id/:title', controller='video', _filter=video_expand)
+    map.connect('video_page', 'video/:id/:dc_title', controller='video', _filter=video_expand)
     # map.connect('video_file', 'video/:id.ogv', controller='video', action='file' _filter=video_expand)
     
-    map.connect('download_page', 'download/:id/:title', controller='download', action="download")
+    map.connect('download_page', 'download/:id/:dc_title', controller='download', action="download")
     
     # everything else
     map.connect(':controller/:action/:id')

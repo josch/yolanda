@@ -5,7 +5,7 @@
 </%def>
 
 <%def name="heading()">
-    There are over 9000 videos matching "${c.query}".
+    There are ${len(c.results)} videos matching "${c.query}".
 </%def>
 
 <%def name="results_listing(results)">
@@ -13,11 +13,12 @@
     % for result in c.results:
         <li>
             <a href="${h.url_for('video_page', video=result)}">
-                <img src="${h.url_for('/images/404.png')}" alt='thumbnail for "${result['title']}"'/>
+
+                <img src="${result['thumbnail']}" alt='thumbnail for "${result['dc_title']}"'/>
             </a>
             <br />
             <a href="${h.url_for('video_page', video=result)}" class="title">
-                ${result['title']}
+                ${result['dc_title']}
             </a>
         </li>
     % endfor

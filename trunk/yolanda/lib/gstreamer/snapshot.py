@@ -55,10 +55,9 @@ class Snapshot:
             #get current buffer's capabilities
             caps = buffer.get_caps ()
             #we are interested in it's dimension
-            h, w = caps[0]['height'], caps[0]['width']
+            height, width = caps[0]['height'], caps[0]['width']
             #using PIL we grab the image in raw RGB mode from the buffer data
-            im = Image.frombuffer('RGB', (w, h), buffer.data,
-                                  'raw', 'RGB', 0, 1)
+            im = Image.frombuffer('RGB', (width, height), buffer.data,'raw', 'RGB', 0, 1)
             #here we check the standard variance of a grayscale version of the
             #current frame against the BORING_IMAGE_VARIANCE
             if ImageStat.Stat(ImageOps.grayscale(im)).var[0] > \
