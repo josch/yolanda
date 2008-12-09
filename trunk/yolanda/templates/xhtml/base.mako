@@ -15,6 +15,7 @@
 
         </form>
 
+<!--
         <ul id="queries">
 
             <li id="important">
@@ -36,6 +37,7 @@
             </li>
 
         </ul>
+-->
 
     </div>
 </%def>
@@ -78,41 +80,104 @@ method="post">
 
         <h1>Tagcloud</h1>
 
-        <a href="" class="tag6">Proin</a>
-        <a href="" class="tag5">lectus</a>
-        <a href="" class="tag2">orci</a>
-        <a href="" class="tag6">venenatis</a>
-        <a href="" class="tag5">pharetra</a>
-        <a href="" class="tag6">egestas</a>
-        <a href="" class="tag1">id</a>
-        <a href="" class="tag6">tincidunt</a>
-        <a href="" class="tag5">vel</a>
-        <a href="" class="tag3">eros</a>
-        <a href="" class="tag6">Integer</a>
-        <a href="" class="tag6">risus</a>
-        <a href="" class="tag6">velit</a>
-        <a href="" class="tag2">facilisis</a>
-        <a href="" class="tag4">eget</a>
-        <a href="" class="tag5">viverra</a>
-        <a href="" class="tag6">et</a>
-        <a href="" class="tag6">leo</a>
-        <a href="" class="tag1">Suspendisse</a>
-        <a href="" class="tag3">potenti</a>
-        <a href="" class="tag5">Phasellus</a>
-        <a href="" class="tag4">auctor</a>
-        <a href="" class="tag6">enim</a>
-        <a href="" class="tag3">eget</a>
-        <a href="" class="tag4">sem</a>
+            <ul>
+                <li>
+                    <a href="" class="tag6">Proin</a>
+                </li>
+                <li>
+                    <a href="" class="tag5">lectus</a>
+                </li>
+                <li>
+                    <a href="" class="tag2">orci</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">venenatis</a>
+                </li>
+                <li>
+                    <a href="" class="tag5">pharetra</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">egestas</a>
+                </li>
+                <li>
+                    <a href="" class="tag1">id</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">tincidunt</a>
+                </li>
+                <li>
+                    <a href="" class="tag5">vel</a>
+                </li>
+                <li>
+                    <a href="" class="tag3">eros</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">Integer</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">risus</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">velit</a>
+                </li>
+                <li>
+                    <a href="" class="tag2">facilisis</a>
+                </li>
+                <li>
+                    <a href="" class="tag4">eget</a>
+                </li>
+                <li>
+                    <a href="" class="tag5">viverra</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">et</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">leo</a>
+                </li>
+                <li>
+                    <a href="" class="tag1">Suspendisse</a>
+                </li>
+                <li>
+                    <a href="" class="tag3">potenti</a>
+                </li>
+                <li>
+                    <a href="" class="tag5">Phasellus</a>
+                </li>
+                <li>
+                    <a href="" class="tag4">auctor</a>
+                </li>
+                <li>
+                    <a href="" class="tag6">enim</a>
+                </li>
+                <li>
+                    <a href="" class="tag3">eget</a>
+                </li>
+                <li>
+                    <a href="" class="tag4">sem</a>
+                </li>
+            </ul>
 
     </div>
 </%def>
 
-<%def name="upload()">
+<%def name="account_actions()">
 
-    <div id="upload">
+    <div id="account-actions">
 
-        <h1>Upload</h1>
-        <a href="${h.url_for('upload')}">Upload</a>
+        <h1>Account actions</h1>
+
+        <ul>
+            <li id="upload">
+                <a href="${h.url_for('upload')}">Upload</a>
+            </li>
+            <li id="settings">
+                <a href="${h.url_for('account-settings')}">Settings</a>
+            </li>
+            <li id="logout">
+                <a href="${h.url_for('logout')}">Logout</a>
+            </li>
+        </ul>
 
     </div>
 
@@ -151,19 +216,19 @@ method="post">
     ${self.login()}
 </%doc>
 
-    ${self.upload()}
-
-    ${self.search()}
-
-    ${self.tagcloud()}
-
     <div id="header">
         <h1>
             ${self.heading()}
         </h1>
     </div>
 
+    ${self.search()}
+
+    ${self.account_actions()}
+
     ${self.messagebox()}
+
+    ${self.tagcloud()}
 
     <div id="content">
 
@@ -172,11 +237,13 @@ method="post">
     </div>
 
     <div id="copyright">
+        <p>
         ${g.platform_name} is realized using <em>${g.application_name}</em> Copyright © 2007, 2008 ${g.developers} –
         ${g.application_name} comes with <em>absolutely no warranty</em>; for details <a href="${h.url_for('license')}">click here</a>.
         ${g.application_name} is <em>free software</em>, and you are welcome to redistribute it
         under certain conditions; <a href="${h.url_for('license')}">click here</a> for details.
         To view the source code, <a href="">click here</a>. Report bugs <a href="">here</a>.
+        </p>
     </div>
 
     <ul id="badges">
