@@ -5,6 +5,10 @@ from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, DiscoveryFailur
 log = logging.getLogger(__name__)
 
 class AccountController(BaseController):
+
+    def index(self):
+        return render('/xhtml/account.mako')
+
     def __before__(self):
         self.openid_session = session.get("openid_session", {})
 
