@@ -13,6 +13,6 @@ class Globals(object):
         """
         self.application_name = "Yolanda"
         self.platform_name = "Demo Application"
-        self.platform_slogan = "Welcome to Demo Application, a video CMS without a slogan."
+        self.platform_slogan = "Welcome to Demo Application !"
         self.developers = ("Nils Dagsson Moskopp", "Johannes Schauer")
         pass
