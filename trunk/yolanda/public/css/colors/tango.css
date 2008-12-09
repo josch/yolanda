@@ -11,111 +11,104 @@ Purpose of this file is to provide decoration, such as:
     - generated content
 */
 
+/* elements */
+
 a
 {
-    color:              #88D9F3;
+    color:              #204a87;
+}
+
+a:hover
+{
+    background-color:   #204a87;
+    color:              #ffffff;
 }
 
 body
 {
-    background-color:   #000000;
-    color:              #E5E5E5;
+    background-color:   #ffffff;
+    color:              #000000;
 }
 
-input,
-textarea
+/*
+div
 {
-    background-color:       #E5E5E5;
     border-color:           #363636;
     border-style:           solid;
-    color:                  #131313;
+}
+*/
+
+/* ids */
+
+input#query,
+input#username
+{
+    padding-left:           24px;
+    background-position:    4px center;
 }
 
-    input#query
-    {
-        background-image:       url(/images/tango/16x16/actions/system-search.png);
-        background-position:    0.5em center;
-        background-repeat:      no-repeat;
-    }
+input#query
+{
+    background-image:       url(/images/tango/16x16/actions/system-search.png);
+    background-repeat:      no-repeat;
+}
 
-    input#username
-    {
-        background-image:       url(/images/openid-icon.png);
-        background-position:    0.5em center;
-        background-repeat:      no-repeat;
-    }
+input#username
+{
+    background-image:       url(/images/openid-icon.png);
+    background-repeat:      no-repeat;
+}
 
-ol#results
+#results
 {
 }
 
-    ol#results li
+    #results li img
     {
+        border-color:           #363636;
+        border-style:           solid;
     }
 
-        ol#results li img
-        {
-            border-color:           #363636;
-            border-style:           solid;
-        }
+    #results li a.title
+    {
+        font-weight:            bold;
+    }
 
-        ol#results li a.title
-        {
-            font-weight:            bold;
-        }
-
-ul#queries
+#queries,
+#account-actions
 {
     list-style-position:    inside;
 }
 
-    ul#queries li#important
+    #queries li#important
     {
-        list-style-image:   url(/images/tango/16x16/emblems/emblem-important.png)
+        list-style-image:   url(/images/tango/16x16/emblems/emblem-important.png);
     }
 
-    ul#queries li#new
+    #queries li#new
     {
-        list-style-image:   url(/images/tango/16x16/actions/document-new.png)
+        list-style-image:   url(/images/tango/16x16/actions/document-new.png);
     }
 
-    ul#queries li#popular
+    #queries li#popular
     {
-        list-style-image:   url(/images/tango/16x16/emblems/emblem-favorite.png)
+        list-style-image:   url(/images/tango/16x16/emblems/emblem-favorite.png);
     }
 
-        ul#queries li a
-        {
-            color:              #FFD95A;
-        }
+    #account-actions li#logout a:after
+    {
+        content:            url(/images/tango/16x16/actions/system-log-out.png);
+    }
 
-/* ids */
+    #account-actions li#settings a:after
+    {
+        content:            url(/images/tango/16x16/categories/preferences-system.png);
+    }
 
-#copyright
-{
-    background-color:       #131313;
-    border-color:           #363636;
-    border-style:           dotted;
-}
-
-#header
-{
-    background-image:       url(/images/logo.png);
-    background-position:    0.5em center;
-    background-repeat:      no-repeat;
-}
-
-#video,
-#header,
-#login,
-#search,
-#tagcloud,
-#upload
-{
-    background-color:       #131313;
-    border-color:           #363636;
-    border-style:           solid;
-}
+    #account-actions li#upload a:after
+    {
+        content:            url(/images/tango/16x16/actions/go-up.png);
+    }
 
 #messagebox
 {

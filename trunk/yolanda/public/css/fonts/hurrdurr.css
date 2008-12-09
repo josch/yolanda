@@ -12,11 +12,6 @@ a
     text-decoration:    none;
 }
 
-a:hover
-{
-    text-decoration:    underline;
-}
-
     a.tag1
     {
         font-size:          1.5em;
@@ -70,7 +65,7 @@ blockquote:after
 *,
 body
 {
-    font-size:          10pt;
+    font-size:          12px;
     font-family:        sans-serif;
 }
 
@@ -88,30 +83,31 @@ h1,
 h2,
 h3
 {
-    text-align:         center;
+    text-align:         left;
+    line-height:        1.5em;
 }
 
 h1
 {
     font-size:          1.5em;
-    line-height:        1.25em;
+/*    line-height:        1.25em;*/
 }
 
 h2
 {
     font-size:          1.4em;
-    line-height:        1.2em;
+/*    line-height:        1.2em;*/
 }
 
 h3
 {
     font-size:          1.3em;
-    line-height:        1.15em;
+/*    line-height:        1.15em;*/
 }
 
 p
 {
-   line-height:        1.4em;
+   line-height:        1.5em;
 }
 
 q
@@ -139,6 +135,17 @@ ul
         text-transform:     uppercase;
     }
 
+#queries,
+#account-actions
+{
+    text-align:             left;
+}
+
+    #account-actions li a:after
+    {
+        vertical-align:         sub;
+    }
+
 #copyright
 {
     font-family:            monospace;
@@ -156,4 +163,9 @@ ul
 #tagcloud
 {
     text-align:             justify;
+}
+
+#tagcloud
+{
+    text-transform:         uppercase;
 }

@@ -1,0 +1,32 @@
+/*
+Yolanda default flow stylesheet
+(c) 2007-2008 Nils Dagsson Moskopp
+
+This file is licensed under the WTF Public License.
+
+Purpose of this file is to provide the flow of the elements, such as:
+    - float
+    - clear
+*/
+
+#copyright
+{
+    clear:                  both;
+}
+
+#search,
+#account-actions,
+#tagcloud
+{
+    float:                  right;
+}
+
+#account-actions
+{
+    direction:              rtl;
+}
+
+#tagcloud
+{
+    clear:                  right;
+}
