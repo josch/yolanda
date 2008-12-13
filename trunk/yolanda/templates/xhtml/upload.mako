@@ -14,59 +14,53 @@
     method="POST"
 >
 
-    <ol>
+    <div>
+        <label for="dc_title">title</label>
+        <input name="dc_title" type="text"/>
+    </div>
 
-        <li id="title">
-            <label for="title">title</label>
-            <input name="title" type="text"/>
-        </li>
+    <div>
+        <label for="dc_alternative">alternative title</label>
+            <input name="dc_alternative" type="text"/>
+    </div>
 
-        <li id="alternative">
-            <label for="alternative">alternative title</label>
-            <input name="alternative" type="text"/>
-        </li>
+    <div>
+        <label for="dc_abstract">abstract</label>
+            <textarea name="dc_abstract"/>
+    </div>
 
-        <li id="abstract">
-            <label for="abstract">abstract</label>
-            <textarea name="abstract"/>
-        </li>
+    <div>
+        <label for="dc_spatial">spatial</label>
+        <input name="dc_spatial" type="text"/>
+    </div>
 
-        <li id="spatial">
-            <label for="spatial">spatial</label>
-            <input name="spatial" type="text"/>
-        </li>
+    <div>
+        <label for="dc_subject">keywords (tags), delimited by commas</label>
+        <input name="dc_subject" type="text"/>
+    </div>
 
-        <li id="subject">
-            <label for="subject">subject</label>
-            <input name="subject" type="text"/>
-        </li>
+    <div>
+        <label for="dc_temporal">temporal</label>
+        <input name="dc_temporal" type="datetime"/>
+    </div>
 
-        <li id="temporal">
-            <label for="temporal">temporal</label>
-            <input name="temporal" type="datetime"/>
-        </li>
+    <div>
+        <label for="dc_language">language</label>
+        <select name="dc_language">
+            <option value="deu">German</option>
+            <option value="eng">English</option>
+        </select>
+    </div>
 
-        <li id="language">
-            <label for="language">language</label>
-            <select name="language">
-                <option value="deu">German</option>
-                <option value="eng">English</option>
-            </select>
-        </li>
+    <div>
+        <label for="dc_creator">creator</label>
+        <input name="dc_creator" type="text"/>
+    </div>
 
-        <li>
-            <label for="creator">creator</label>
-            <input id="creator" name="creator" type="text"/>
-        </li>
-
-        <li>
-            <span id="contributor" repeat="template">
-                <label for="contributor.[contributor]">Contributor</label>
-                <input name="contributor.[contributor]" type="text"/>
-                <button type="remove">Remove</button>
-            </span>
-            <button type="add" template="contributor">Add contributor</button>
-        </li>
+    <div>
+        <label for="dc_contributor">contributors, delimited by commas</label>
+        <input name="dc_contributor" type="text"/>
+    </div>
 
 <!--
 $video->appendChild( getElementDC( "contributor", "xsd:normalizedString") );
@@ -83,51 +77,45 @@ $video->appendChild( getElementDC( "rightsHolder", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "source", "xsd:normalizedString") );
 $video->appendChild( getElementDC( "license", "xsd:normalizedString") );
 -->
-        <li>
-            <fieldset>
-                <legend>
-                    Remix ?
-                </legend>
-                <label for="remix">
-                    <input id="remix" type="radio" name="modification" value="remix" />
-                    remix
-                </label>
-                <label for="sharealike">
-                    <input id="sharealike" type="radio" name="modification" value="sharealike" />
-                    sharealike
-                </label>
-                <label for="noderivatives">
-                    <input id="noderivatives" type="radio" name="modification" value="noderivatives" />
-                    noderivatives
-                </label>
-            </fieldset>
-        </li>
+    <fieldset>
+        <legend>
+            Remix ?
+        </legend>
+        <label for="cc_remix">
+            <input id="cc_remix" type="radio" name="modification" value="remix" />
+            remix
+        </label>
+        <label for="cc_sharealike">
+            <input id="cc_sharealike" type="radio" name="modification" value="sharealike" />
+            sharealike
+        </label>
+        <label for="cc_noderivatives">
+            <input id="cc_noderivatives" type="radio" name="modification" value="noderivatives" />
+            noderivatives
+        </label>
+    </fieldset>
 
-        <li>
-            <fieldset>
-                <legend>
-                    Commercial ?
-                </legend>
-                <label for="commercial">
-                    <input id="commercial" type="radio" name="commercial" value="commercial" />
-                    commercial
-                </label>
-                <label for="noncommercial">
-                    <input id="noncommercial" type="radio" name="commercial" value="noncommercial" />
-                    noncommercial
-                </label>
-            </fieldset>
-        </li>
+    <fieldset>
+        <legend>
+            Commercial ?
+        </legend>
+        <label for="cc_commercial">
+            <input id="cc_commercial" type="radio" name="commercial" value="commercial" />
+            commercial
+        </label>
+        <label for="cc_noncommercial">
+            <input id="cc_noncommercial" type="radio" name="commercial" value="noncommercial" />
+            noncommercial
+        </label>
+    </fieldset>
 
-        <li>
-            <label for="file">file</label>
-            <input id="file" name="file" type="file"/>
-        </li>
+    <div>
+        <label for="file">file</label>
+        <input id="file" name="file" type="file"/>
+    </div>
 
-        <li>
-            <input name="commit" type="submit" value="Upload"/>
-        </li>
-
-    </ol>
+    <div>
+        <input name="commit" type="submit" value="Upload"/>
+    </div>
 
 </form>

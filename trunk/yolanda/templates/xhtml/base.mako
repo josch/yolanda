@@ -62,8 +62,8 @@ method="post">
 
 %if c.message:
     <div id="messagebox" class="${c.message['type']}">
-        <h1>Message (${c.message['type']})</h1>
-        <span id="message">${c.message['text']}</span>
+        <h1>${c.message['type']}</h1>
+        <strong>${c.message['text']}</strong>
     </div>
 %endif
 
@@ -216,19 +216,19 @@ method="post">
     ${self.login()}
 </%doc>
 
+    ${self.search()}
+
+    ${self.account_actions()}
+
+    ${self.tagcloud()}
+
     <div id="header">
         <h1>
             ${self.heading()}
         </h1>
     </div>
 
-    ${self.search()}
-
-    ${self.account_actions()}
-
     ${self.messagebox()}
-
-    ${self.tagcloud()}
 
     <div id="content">
 
@@ -242,7 +242,7 @@ method="post">
         ${g.application_name} comes with <em>absolutely no warranty</em>; for details <a href="${h.url_for('license')}">click here</a>.
         ${g.application_name} is <em>free software</em>, and you are welcome to redistribute it
         under certain conditions; <a href="${h.url_for('license')}">click here</a> for details.
-        To view the source code, <a href="">click here</a>. Report bugs <a href="">here</a>.
+        To view the source code, <a href="">click here</a>.
         </p>
     </div>
 
