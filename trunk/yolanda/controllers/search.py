@@ -32,6 +32,7 @@ class SearchController(BaseController):
         raw_results.extend(model.Video.query.filter_by(dc_title=c.query).all())
         raw_results.extend(model.Video.query.filter(model.Video.dc_creator.has(name=c.query)).all())
         raw_results.extend(model.Video.query.filter(model.Video.dc_contributor.any(name=c.query)).all())
+        raw_results.extend(model.Video.query.filter(model.Video.dc_subject.any(name=c.query)).all())
 
         if not raw_results:
             c.message = {
