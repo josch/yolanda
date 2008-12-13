@@ -27,13 +27,18 @@ class SearchController(BaseController):
 
         c.query = request.params['query']
 
-        raw_results = model.Video.query.filter_by(dc_title=c.query).all()
+        # extremely simple search
+        raw_results = []
+        raw_results.extend(model.Video.query.filter_by(dc_title=c.query).all())
+        raw_results.extend(model.Video.query.filter(model.Video.dc_creator.has(name=c.query)).all())
+        raw_results.extend(model.Video.query.filter(model.Video.dc_contributor.any(name=c.query)).all())
 
         if not raw_results:
             c.message = {
-                'type': 'warning'
+                'type': 'warning',
+                'text': 'No results for query "%s".' % c.query
             }
-            c.message['text']='No results for query "%s".' % c.query
+#            c.message['text']='No results for query "%s".' % c.query
             return render('/xhtml/results.mako')
 
         c.results = []

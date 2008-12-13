@@ -3,16 +3,14 @@ from elixir import *
 class Video(Entity):
     using_options(tablename='videos')
 
-    # Important: Keep this in sync with upload.py !
-
     # Dublin Core terms
     dc_title = Field(Unicode(255))
-    dc_creator = Field(Unicode(255))
-    dc_subject = Field(UnicodeText)
+    dc_creator = ManyToOne('DC_Creator')
+    dc_subject = ManyToMany('DC_Subject')
 
     dc_abstract = Field(UnicodeText)
 
-    dc_contributor = Field(Unicode(255))
+    dc_contributor = ManyToMany('DC_Contributor')
 
     dc_created = Field(DateTime)
     dc_valid = Field(DateTime)
@@ -41,3 +39,19 @@ class Video(Entity):
 
     # everything else
     sha256 = Field(String(64))
+
+# Dublin Core terms
+
+class DC_Creator(Entity):
+    name = Field(Unicode(255))
+    videos = OneToMany('Video')
+
+class DC_Subject(Entity):
+    name = Field(Unicode(32))
+    videos = ManyToMany('Video')
+
+class DC_Contributor(Entity):
+    name = Field(Unicode(255))
+    videos = ManyToMany('Video')
+
+

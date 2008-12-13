@@ -7,6 +7,10 @@ log = logging.getLogger(__name__)
 class AccountController(BaseController):
 
     def index(self):
+        c.message = {
+                    'type': 'warning',
+                    'text': 'Your username will be saved indefinitely.'
+                    }
         return render('/xhtml/account.mako')
 
     def __before__(self):
@@ -17,16 +21,16 @@ class AccountController(BaseController):
         #FIXME: do not operate in stateless mode - replace store with local
         # openid store (app global) to make login faster with less overhead
         self.consumer = Consumer(self.openid_session, None)
-        openid = request.params.get('username', None)
+        openid = request.params.get('openid_identifier', None)
         try:
             authrequest = self.consumer.begin(openid)
         except DiscoveryFailure, e:
             # invalid openid
             c.message = {
                         'type': 'error',
-                        'text': 'You were not logged on due to entering an invalid OpenID.'
+                        'text': 'You were not logged on due to the given OpenID being invalid.'
                         }
-            return render('/xhtml/index.mako')
+            return render('/xhtml/account.mako')
 
         redirecturl = authrequest.redirectURL(
             h.url_for('',qualified=True),

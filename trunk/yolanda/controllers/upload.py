@@ -58,17 +58,18 @@ class UploadController(BaseController):
         # TODO: set up safeguards against omitted / wrong data
 
         # set up database entry
+
         video = model.Video(
 
             # Dublin Core terms
-            dc_title = request.params['title'],
-            dc_creator = request.params['creator'],
-            dc_subject = request.params['subject'],
+            dc_title = request.params['dc_title'],
+            dc_subject = [model.DC_Subject(name=subject.lstrip()) for subject in  request.params['dc_subject'].split(',')],
+            dc_creator = model.DC_Creator(name = request.params['dc_creator']),
 
-            dc_abstract = request.params['abstract'],
+            dc_abstract = request.params['dc_abstract'],
 
             # TODO: enable several contributors
-            dc_contributor = '',
+            dc_contributor = [model.DC_Contributor(name=contributor.lstrip()) for contributor in  request.params['dc_contributor'].split(',')],
 
             # TODO: insert real data
             dc_created = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
@@ -82,23 +83,24 @@ class UploadController(BaseController):
 
             dc_identifier = '',
             dc_source = '',
-            dc_language = request.params['language'],
+            dc_language = request.params['dc_language'],
 
             # TODO: insert videolength
             dc_extent = timedelta(0),
 
-            dc_spatial = request.params['spatial'],
+            dc_spatial = request.params['dc_spatial'],
             dc_temporal = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
 
             dc_rightsHolder = '',
 
             # Creative Commons properties
-            cc_commercial = (request.params['commercial'] == 'commercial'),
-            cc_sharealike = (request.params['modification'] == 'sharealike'),
-            cc_derivatives = (request.params['modification'] != 'noderivatives'),
+            cc_commercial = (request.params['commercial'] == 'cc_commercial'),
+            cc_sharealike = (request.params['modification'] == 'cc_sharealike'),
+            cc_derivatives = (request.params['modification'] != 'cc_noderivatives'),
 
             sha256=sha256
             )
+
         model.session.commit()
 
         # copy file to temporary destination
