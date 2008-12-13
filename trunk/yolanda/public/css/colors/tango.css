@@ -40,6 +40,14 @@ div
 
 /* ids */
 
+#header,
+#copyright
+{
+    background-color:       #eeeeec;
+    border-color:           #babdb6;
+    border-style:           solid;
+}
+
 input#query,
 input#username
 {
@@ -55,7 +63,7 @@ input#query
 
 input#username
 {
-    background-image:       url(/images/openid-icon.png);
+    background-image:       url(/images/openid/openid-16x16.png);
     background-repeat:      no-repeat;
 }
 
@@ -112,27 +120,26 @@ input#username
 
 #messagebox
 {
-    border-color:       #363636;
     border-style:       solid;
 }
 
     #messagebox.error
     {
-        /* "Scarlet Red 1" */
-        background-color:   #ef2929;
+        background-color:   #ef2929;    /* "Scarlet Red 1" */
+        border-color:       #a40000;    /* "Scarlet Red 3" */
         color:              #ffffff;
     }
 
     #messagebox.information
     {
-        /* "Chameleon 1" */
-        background-color:   #8ae234;
+        background-color:   #8ae234;    /* "Chameleon 1" */
+        border-color:       #4e9a06;    /* "Chameleon 3" */
         color:              #131313;
     }
 
     #messagebox.warning
     {
-        /* "Orange 1" */
-        background-color:   #fcaf3e;
+        background-color:   #fcaf3e;    /* "Orange 1" */
+        border-color:       #ce5c00;    /* "Orange 3" */
         color:              #131313;
     }

@@ -44,33 +44,37 @@ textarea
         width:              9.5em;
     }
 
-ol
+label
 {
+    display:            block;
 }
 
-    ol#results
+
+/* ids */
+
+#results
+{
+/* compensate for list element margin */
+    text-align:             center;
+}
+
+    #results li
     {
-    /* compensate for list element margin */
-        text-align:             center;
+        display:            inline-block;
+        width:              216px;
     }
 
-        ol#results li
+        #results li img
         {
-            display:            inline-block;
-            width:              216px;
+            border-width:       1px;
         }
 
-            ol#results li img
-            {
-                border-width:       1px;
-            }
-
-            ol#results li a.title
-            {
-                display:        block;
-                height:         1em;
-                overflow:       hidden;
-            }
+        #results li a.title
+        {
+            display:        block;
+            height:         1em;
+            overflow:       hidden;
+        }
 
 ul
 {
@@ -100,9 +104,16 @@ ul
     margin:                 auto;
 }
 
+#copyright,
+#header
+{
+    border-width:           1px;
+}
+
 #messagebox
 {
     border-width:           1px;
+    margin:                 1em;
     padding:                1em;
     text-align:             center;
 }
@@ -114,13 +125,9 @@ ul
     }
 
 #search,
-#account-actions,
-#tagcloud
+#account-actions
 {
-    margin:                 0;
-    padding-left:           0;
-    position:               relative;
-    top:                    -3.75em;
+    padding-left:               0;
 }
 
     #account-actions li,
@@ -147,7 +154,7 @@ ul
 }
 
 #login h1,
-#messagebox h1,
+/*#messagebox h1,*/
 #search h1,
 #tagcloud h1,
 #account-actions h1
@@ -155,8 +162,28 @@ ul
     display:                none;
 }
 
-#content,
+#content
+{
+    padding-right:          0;
+    padding-top:            0;
+}
+
 #messagebox
 {
-    margin-right:           21em;
+    margin-right:           21.5em;
+}
+
+#messagebox h1
+{
+    display:                inline;
+}
+
+#messagebox h1:after
+{
+    content:                ":";
+}
+
+.privacy
+{
+    padding:                0em;
 }

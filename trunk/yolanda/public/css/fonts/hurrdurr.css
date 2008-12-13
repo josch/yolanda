@@ -116,13 +116,18 @@ q
 
     q:before
     {
-        content:        open-quote;
+        content:            open-quote;
     }
 
     q:after
     {
-        content:        close-quote;
+        content:            close-quote;
     }
+
+strong
+{
+    font-weight:        bold;
+}
 
 ul
 {
@@ -151,11 +156,6 @@ ul
     font-family:            monospace;
 }
 
-    #messagebox #message
-    {
-        font-size:              1.4em;
-    }
-
 #header,
 #heading,
 #login,
@@ -165,7 +165,18 @@ ul
     text-align:             justify;
 }
 
+#messagebox h1
+{
+    font-size:              1em;
+    text-transform:         capitalize;
+}
+
 #tagcloud
 {
     text-transform:         uppercase;
+}
+
+.privacy
+{
+text-align:             center;
 }
