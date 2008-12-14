@@ -81,10 +81,10 @@ method="post">
         <h1>Tagcloud</h1>
 
             <ul>
-            % for tag in c.tagcloud:
+            % for name, count in c.tagcloud.items():
 
                 <li>
-                    <a href="" class="tag4">${tag.name}</a>
+                    <a href="" class="tag4">${name} ${count}</a>
                 </li>
 
             % endfor
