@@ -63,6 +63,7 @@ class UploadController(BaseController):
 
             # Dublin Core terms
             dc_title = request.params['dc_title'],
+            dc_alternative = request.params['dc_title'],
             dc_subject = [model.DC_Subject(name=subject.lstrip()) for subject in  request.params['dc_subject'].split(',')],
             dc_creator = model.DC_Creator(name = request.params['dc_creator']),
 

@@ -81,81 +81,13 @@ method="post">
         <h1>Tagcloud</h1>
 
             <ul>
+            % for tag in c.tagcloud:
+
                 <li>
-                    <a href="" class="tag6">Proin</a>
+                    <a href="" class="tag4">${tag.name}</a>
                 </li>
-                <li>
-                    <a href="" class="tag5">lectus</a>
-                </li>
-                <li>
-                    <a href="" class="tag2">orci</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">venenatis</a>
-                </li>
-                <li>
-                    <a href="" class="tag5">pharetra</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">egestas</a>
-                </li>
-                <li>
-                    <a href="" class="tag1">id</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">tincidunt</a>
-                </li>
-                <li>
-                    <a href="" class="tag5">vel</a>
-                </li>
-                <li>
-                    <a href="" class="tag3">eros</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">Integer</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">risus</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">velit</a>
-                </li>
-                <li>
-                    <a href="" class="tag2">facilisis</a>
-                </li>
-                <li>
-                    <a href="" class="tag4">eget</a>
-                </li>
-                <li>
-                    <a href="" class="tag5">viverra</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">et</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">leo</a>
-                </li>
-                <li>
-                    <a href="" class="tag1">Suspendisse</a>
-                </li>
-                <li>
-                    <a href="" class="tag3">potenti</a>
-                </li>
-                <li>
-                    <a href="" class="tag5">Phasellus</a>
-                </li>
-                <li>
-                    <a href="" class="tag4">auctor</a>
-                </li>
-                <li>
-                    <a href="" class="tag6">enim</a>
-                </li>
-                <li>
-                    <a href="" class="tag3">eget</a>
-                </li>
-                <li>
-                    <a href="" class="tag4">sem</a>
-                </li>
+
+            % endfor
             </ul>
 
     </div>

@@ -40,7 +40,7 @@
     </div>
 
     <div>
-        <label for="dc_temporal">temporal</label>
+        <label for="dc_temporal">time the document describes (YYYY-MM-DD HH:MM:SS)</label>
         <input name="dc_temporal" type="datetime"/>
     </div>
 

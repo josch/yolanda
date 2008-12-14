@@ -61,15 +61,21 @@ label
     #results li
     {
         display:            inline-block;
-        width:              216px;
     }
 
         #results li img
         {
             border-width:       1px;
+            display:            block;
+            opacity:            0.8;
         }
 
-        #results li a.title
+        #results li img:hover
+        {
+            opacity:            1;
+        }
+
+        #results li .title
         {
             display:        block;
             height:         1em;

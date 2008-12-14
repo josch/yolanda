@@ -5,6 +5,7 @@ class Video(Entity):
 
     # Dublin Core terms
     dc_title = Field(Unicode(255))
+    dc_alternative = Field(Unicode(255))
     dc_creator = ManyToOne('DC_Creator')
     dc_subject = ManyToMany('DC_Subject')
 

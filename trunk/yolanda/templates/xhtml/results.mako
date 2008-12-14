@@ -13,12 +13,10 @@
     % for result in c.results:
         <li>
             <a href="${h.url_for('video_page', video=result)}">
-
                 <img src="${result['thumbnail']}" alt='thumbnail for "${result['dc_title']}"'/>
-            </a>
-            <br />
-            <a href="${h.url_for('video_page', video=result)}" class="title">
-                ${result['dc_title']}
+                <span class="title">
+                    ${result['dc_title']}
+                </span>
             </a>
         </li>
     % endfor
