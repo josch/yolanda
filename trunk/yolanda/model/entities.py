@@ -1,4 +1,5 @@
 from elixir import *
+from sqlalchemy import UniqueConstraint
 
 class Video(Entity):
     using_options(tablename='videos')
@@ -44,15 +45,15 @@ class Video(Entity):
 # Dublin Core terms
 
 class DC_Creator(Entity):
-    name = Field(Unicode(255))
+    name = Field(Unicode(255), unique = True)
     videos = OneToMany('Video')
 
 class DC_Subject(Entity):
-    name = Field(Unicode(32))
+    name = Field(Unicode(32), unique = True)
     videos = ManyToMany('Video')
 
 class DC_Contributor(Entity):
-    name = Field(Unicode(255))
+    name = Field(Unicode(255), unique = True)
     videos = ManyToMany('Video')
 
 
