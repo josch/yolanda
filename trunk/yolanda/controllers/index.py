@@ -8,13 +8,7 @@ class IndexController(BaseController):
 
     def index(self):
 
-        tags = {}
-        for tag in model.DC_Subject.query.all():
-            if tag.name in tags.keys():
-                tags[tag.name]+=1
-            else:
-                tags[tag.name] = 1
-        c.tagcloud = tags
+        # TODO: write elixir devs a mail to see how this works un-hackish
 
         return render('/xhtml/index.mako')
 

@@ -2,7 +2,7 @@ from elixir import *
 from sqlalchemy import UniqueConstraint
 
 class Video(Entity):
-    using_options(tablename='videos')
+#    using_options(tablename='videos')
 
     # Dublin Core terms
     dc_title = Field(Unicode(255))
@@ -45,15 +45,23 @@ class Video(Entity):
 # Dublin Core terms
 
 class DC_Creator(Entity):
-    name = Field(Unicode(255), unique = True)
+    name = Field(Unicode(255), primary_key = True)
     videos = OneToMany('Video')
 
+    def __repr__(self):
+        return '<Creator "%s">' % self.name
+
 class DC_Subject(Entity):
-    name = Field(Unicode(32), unique = True)
+    name = Field(Unicode(32), primary_key = True)
     videos = ManyToMany('Video')
+
+    def __repr__(self):
+        return '<Tag "%s">' % self.name
 
 class DC_Contributor(Entity):
-    name = Field(Unicode(255), unique = True)
+    name = Field(Unicode(255), primary_key = True)
     videos = ManyToMany('Video')
 
+    def __repr__(self):
+        return '<Contributor "%s">' % self.name
 

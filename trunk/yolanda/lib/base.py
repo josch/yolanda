@@ -23,6 +23,18 @@ class BaseController(WSGIController):
         # available in environ['pylons.routes_dict']
         return WSGIController.__call__(self, environ, start_response)
 
+    def __before__(self):
+
+        tags = {}
+        for tag in model.DC_Subject.query.all():
+            if tag.name in tags.keys():
+                tags[tag.name]+=1
+            else:
+                tags[tag.name] = 1
+        c.tagcloud = tags
+
+        print "__before__ %s" % tags
+
 # Include the '_' function in the public names
 __all__ = [__name for __name in locals().keys() if not __name.startswith('_') \
            or __name == '_']

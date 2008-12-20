@@ -59,18 +59,23 @@ class UploadController(BaseController):
 
         # set up database entry
 
+        raise RuntimeError
+
         video = model.Video(
 
             # Dublin Core terms
             dc_title = request.params['dc_title'],
             dc_alternative = request.params['dc_title'],
-            dc_subject = [model.DC_Subject(name=subject.lstrip()) for subject in  request.params['dc_subject'].split(',')],
-            dc_creator = model.DC_Creator(name = request.params['dc_creator']),
+
+            dc_subject = [model.DC_Subject(name=u'lol'), model.DC_Subject(name=u'wut')],
+#            dc_subject = self.getsubjects(),
+#            dc_creator = model.DC_Creator(name = request.params['dc_creator']),
 
             dc_abstract = request.params['dc_abstract'],
 
             # TODO: enable several contributors
-            dc_contributor = [model.DC_Contributor(name=contributor.lstrip()) for contributor in  request.params['dc_contributor'].split(',')],
+#            dc_contributor = [model.DC_Contributor(name=contributor.lstrip()) for contributor in  request.params['dc_contributor'].split(',')],
+#            dc_contributor = [model.DC_Contributor(name=u'lol'), model.DC_Contributor(name=u'wut')],
 
             # TODO: insert real data
             dc_created = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
@@ -136,3 +141,13 @@ class UploadController(BaseController):
         videoencode = encode.Encode(source,destination)
         videoencode.run()
         os.unlink(source)
+
+    def getsubjects(self):
+        dc_subject = []
+        for subject in  request.params['dc_subject'].split(','):
+            s = model.DC_Subject.get_by(name=subject.lstrip())
+            if s:
+                dc_subject.append(s)
+            else:
+                dc_subject.append(model.DC_Subject(name=subject.lstrip()))
+        return dc_subject
