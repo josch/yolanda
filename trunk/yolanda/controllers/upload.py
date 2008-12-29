@@ -59,7 +59,7 @@ class UploadController(BaseController):
 
         # set up database entry
 
-        raise RuntimeError
+#        raise RuntimeError
 
         video = model.Video(
 
@@ -67,8 +67,8 @@ class UploadController(BaseController):
             dc_title = request.params['dc_title'],
             dc_alternative = request.params['dc_title'],
 
-            dc_subject = [model.DC_Subject(name=u'lol'), model.DC_Subject(name=u'wut')],
-#            dc_subject = self.getsubjects(),
+#            dc_subject = [model.DC_Subject(name=u'lol'), model.DC_Subject(name=u'wut')],
+            dc_subject = self.getsubjects(),
 #            dc_creator = model.DC_Creator(name = request.params['dc_creator']),
 
             dc_abstract = request.params['dc_abstract'],
