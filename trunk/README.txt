@@ -17,3 +17,6 @@ Tweak the config file as appropriate and then setup the application::
     paster setup-app config.ini
 
 Then you are ready to go.
+
+Resetting the database can be accomplished by deleting the database.sql file and 
+running the setup command again.
