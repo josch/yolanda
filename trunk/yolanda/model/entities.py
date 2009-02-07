@@ -6,31 +6,31 @@ class Video(Entity):
 
     # Dublin Core terms
     dc_title = Field(Unicode(255))
-    dc_alternative = Field(Unicode(255))
+#    dc_alternative = Field(Unicode(255))
     dc_creator = ManyToOne('DC_Creator')
     dc_subject = ManyToMany('DC_Subject')
 
     dc_abstract = Field(UnicodeText)
 
-    dc_contributor = ManyToMany('DC_Contributor')
+#    dc_contributor = ManyToMany('DC_Contributor')
 
-    dc_created = Field(DateTime)
-    dc_valid = Field(DateTime)
-    dc_available = Field(DateTime)
-    dc_issued = Field(DateTime)
-    dc_modified = Field(DateTime)
-    dc_dateAccepted = Field(DateTime)
-    dc_dateCopyrighted = Field(DateTime)
-    dc_dateSubmitted = Field(DateTime)
+#    dc_created = Field(DateTime)
+#    dc_valid = Field(DateTime)
+#    dc_available = Field(DateTime)
+#    dc_issued = Field(DateTime)
+#    dc_modified = Field(DateTime)
+#    dc_dateAccepted = Field(DateTime)
+#    dc_dateCopyrighted = Field(DateTime)
+#    dc_dateSubmitted = Field(DateTime)
 
-    dc_identifier = Field(Unicode(255)) # URI
-    dc_source = Field(Unicode(255)) # URI
-    dc_language = Field(Unicode(3)) # see ISO 639-3
+#    dc_identifier = Field(Unicode(255)) # URI
+#    dc_source = Field(Unicode(255)) # URI
+#    dc_language = Field(Unicode(3)) # see ISO 639-3
 
     dc_extent = Field(Interval)
 
-    dc_spatial = Field(Unicode(255))
-    dc_temporal = Field(DateTime)
+#    dc_spatial = Field(Unicode(255))
+#    dc_temporal = Field(DateTime)
 
     dc_rightsHolder = Field(Unicode(255))
 
@@ -58,10 +58,10 @@ class DC_Subject(Entity):
     def __repr__(self):
         return '<Tag "%s">' % self.name
 
-class DC_Contributor(Entity):
-    name = Field(Unicode(255), primary_key = True)
-    videos = ManyToMany('Video')
+#class DC_Contributor(Entity):
+#    name = Field(Unicode(255), primary_key = True)
+#    videos = ManyToMany('Video')
 
-    def __repr__(self):
-        return '<Contributor "%s">' % self.name
+#    def __repr__(self):
+#        return '<Contributor "%s">' % self.name
 

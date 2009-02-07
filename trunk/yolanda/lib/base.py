@@ -25,15 +25,9 @@ class BaseController(WSGIController):
 
     def __before__(self):
 
-        tags = {}
+        c.tagcloud = {}
         for tag in model.DC_Subject.query.all():
-            if tag.name in tags.keys():
-                tags[tag.name]+=1
-            else:
-                tags[tag.name] = 1
-        c.tagcloud = tags
-
-        print "__before__ %s" % tags
+            c.tagcloud[tag.name] = tag.videos.__len__()
 
 # Include the '_' function in the public names
 __all__ = [__name for __name in locals().keys() if not __name.startswith('_') \

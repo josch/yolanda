@@ -103,12 +103,14 @@ method="post">
             <li id="upload">
                 <a href="${h.url_for('upload')}">Upload</a>
             </li>
+<!--
             <li id="settings">
                 <a href="${h.url_for('account-settings')}">Settings</a>
             </li>
             <li id="logout">
                 <a href="${h.url_for('logout')}">Logout</a>
             </li>
+-->
         </ul>
 
     </div>

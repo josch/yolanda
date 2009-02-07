@@ -48,12 +48,12 @@ class UploadController(BaseController):
         upload.file.seek(0)
         sha256 = hashlib.sha256(upload.file.read(1024*1024)).hexdigest()
 
-#        if model.Video.query.filter_by(sha256=sha256).count():
-#            c.message = {
-#                        'type': 'error',
-#                        'text': 'Your file was already uploaded. Go away.'
-#                        }
-#            return render('/xhtml/upload.mako')
+        if model.Video.query.filter_by(sha256=sha256).count():
+            c.message = {
+                        'type': 'error',
+                        'text': 'Your file was already uploaded. Go away.'
+                        }
+            return render('/xhtml/upload.mako')
 
         # TODO: set up safeguards against omitted / wrong data
 
@@ -65,7 +65,7 @@ class UploadController(BaseController):
 
             # Dublin Core terms
             dc_title = request.params['dc_title'],
-            dc_alternative = request.params['dc_title'],
+#            dc_alternative = request.params['dc_title'],
 
 #            dc_subject = [model.DC_Subject(name=u'lol'), model.DC_Subject(name=u'wut')],
             dc_subject = self.getsubjects(),
@@ -78,24 +78,24 @@ class UploadController(BaseController):
 #            dc_contributor = [model.DC_Contributor(name=u'lol'), model.DC_Contributor(name=u'wut')],
 
             # TODO: insert real data
-            dc_created = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
-            dc_valid = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
-            dc_available = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
-            dc_issued = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
-            dc_modified = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
-            dc_dateAccepted = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
-            dc_dateCopyrighted = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
-            dc_dateSubmitted = datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_created = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_valid = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_available = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_issued = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_modified = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_dateAccepted = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_dateCopyrighted = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_dateSubmitted = datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 
-            dc_identifier = '',
-            dc_source = '',
-            dc_language = request.params['dc_language'],
+#            dc_identifier = '',
+#            dc_source = '',
+#            dc_language = request.params['dc_language'],
 
             # TODO: insert videolength
             dc_extent = timedelta(0),
 
-            dc_spatial = request.params['dc_spatial'],
-            dc_temporal = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
+#            dc_spatial = request.params['dc_spatial'],
+#            dc_temporal = datetime(9999,9,9).strftime("%Y-%m-%d %H:%M:%S"),
 
             dc_rightsHolder = '',
 
